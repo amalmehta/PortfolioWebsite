@@ -1,0 +1,142 @@
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --text: #1c1b19;
+  --muted: #5f5c55;
+  --faint: #8b877e;
+  --line: #e6e2d9;
+  --accent: #2f5d8a;
+  --accent-soft: #e7eef6;
+  --warm: #a5532a;
+  --warm-soft: #f8ebe2;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141412;
+    --surface: #1c1c1a;
+    --text: #ecebe6;
+    --muted: #a8a59c;
+    --faint: #7d7a72;
+    --line: #2d2c29;
+    --accent: #8db6dd;
+    --accent-soft: #1f2a35;
+    --warm: #e39a6f;
+    --warm-soft: #2e221b;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 640px) { .wrap { padding: 0 32px; } }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; height: 3.5rem; }
+.nav-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--text); }
+.nav-links { display: flex; gap: 1.25rem; font-size: 0.92rem; }
+.nav-links a { color: var(--muted); }
+.nav-links a:hover { color: var(--text); }
+
+/* Hero */
+.hero { padding: 4.5rem 16px 2.5rem; }
+@media (min-width: 640px) { .hero { padding: 6.5rem 32px 3rem; } }
+.hero h1 {
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 4.2rem); line-height: 1.05; letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+}
+.hero { display: flex; flex-direction: column; gap: 1.5rem; }
+.portrait { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); background: #fff; }
+@media (min-width: 820px) {
+  .hero { flex-direction: row-reverse; justify-content: space-between; align-items: center; gap: 3rem; }
+  .portrait { width: 220px; height: 220px; flex-shrink: 0; }
+}
+.lede { font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.4; max-width: 38ch; margin: 0 0 1rem; }
+.hero-sub { color: var(--muted); max-width: 52ch; margin: 0 0 1.75rem; }
+.contact { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.95rem; }
+
+/* Sections */
+.section { padding-top: 4rem; padding-bottom: 2rem; }
+.section-title {
+  font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--faint);
+  margin: 0 0 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
+}
+h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-height: 1.25; margin: 0 0 0.6rem; }
+
+/* Projects */
+.project { display: grid; gap: 1rem; margin-bottom: 3.25rem; }
+@media (min-width: 820px) {
+  .project { grid-template-columns: 0.85fr 1fr; gap: 2rem; align-items: center; }
+}
+.shot { margin: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+.project-text p { margin: 0 0 0.6rem; }
+.project-text h3 { font-size: 1.35rem; margin-bottom: 0.35rem; }
+.tags { font-size: 0.85rem; color: var(--faint); }
+.links { font-size: 0.95rem; font-weight: 500; }
+
+/* Research */
+.role { display: grid; gap: 0.25rem; padding: 1.75rem 0; border-top: 1px solid var(--line); max-width: 860px; }
+.role:first-of-type { border-top: 0; padding-top: 0; }
+@media (min-width: 720px) { .role { grid-template-columns: 9rem 1fr; gap: 2rem; } }
+.role h3 { font-size: 1.3rem; margin-bottom: 0.15rem; }
+.when { margin: 0.3rem 0 0; font-size: 0.9rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+.where { margin: 0 0 0.7rem; font-size: 0.92rem; color: var(--muted); }
+.role p { margin-top: 0; }
+.role .tags { margin-bottom: 0; }
+.more { color: var(--muted); margin-top: 1.5rem; }
+
+/* Footer */
+.footer { padding-top: 2rem; padding-bottom: 3rem; margin-top: 2rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--faint); }
+.footer p { margin: 0; }
+.shot.contain img { object-fit: contain; object-position: center; background: #fcfcfa; }
+
+/* Colour accents */
+.hero { position: relative; }
+.hero::before {
+  content: ""; position: absolute; inset: 0 -20vw; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(40rem 22rem at 85% 35%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
+    radial-gradient(34rem 20rem at 10% 10%, color-mix(in srgb, var(--warm) 14%, transparent), transparent 70%);
+}
+main { overflow-x: clip; }
+.portrait { border: 0; box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--accent), 0 0 0 9px var(--bg), 0 0 0 11px color-mix(in srgb, var(--warm) 70%, transparent); }
+.section-title { color: var(--warm); display: flex; align-items: center; gap: 0.6rem; }
+.section-title::before { content: ""; width: 1.4rem; height: 3px; border-radius: 2px; background: var(--warm); }
+.when { color: var(--accent); font-weight: 500; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tags.pubs { display: block; }
+.chip { font-size: 0.78rem; line-height: 1.5; padding: 0.1rem 0.55rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.project .chip { background: var(--warm-soft); color: var(--warm); }
+.credit { font-size: 0.75rem; color: var(--faint); }
+.shot { transition: border-color 0.2s, transform 0.2s; }
+.project:hover .shot { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); transform: translateY(-2px); }
+.nav-name::before { content: ""; display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--warm); margin-right: 0.5rem; vertical-align: middle; }
+.outside { padding-top: 1rem; color: var(--muted); font-size: 0.95rem; }
+.outside strong { color: var(--text); font-weight: 600; }
