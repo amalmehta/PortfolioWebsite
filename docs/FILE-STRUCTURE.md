@@ -5,11 +5,10 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 ```
 index.html                    The whole site: intro, research & work, projects
 styles.css                    Layout, typography, light and dark colours, blog styles
-writing/                      The blog: index.html lists posts, one HTML page per post
+_archive/                     Archived blog (not published; see its README)
 images/                       Project screenshots shown on the site (JPEG)
   portrait.jpg                Pencil-sketch portrait in the intro
   og.png                      Link-preview image (1200×630)
-  writing/                    Figures used in the blog posts
   neural-signal-ml.jpg
   alphago-lite.jpg
   drone-bench.jpg

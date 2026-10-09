@@ -1,6 +1,6 @@
 # Portfolio Website
 
-My personal website: research, six selected projects and short writing about them, on one clean page.
+My personal website: research and six selected projects, on one clean page.
 
 **Live:** [amalmehta.github.io/PortfolioWebsite](https://amalmehta.github.io/PortfolioWebsite/)
 

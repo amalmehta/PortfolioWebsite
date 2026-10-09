@@ -32,9 +32,9 @@ sips -s format jpeg -s formatOptions 80 --resampleWidth 1400 shot.png --out imag
 
 Cards crop images to a 16:10 frame from the top left. For a wide chart that shouldn't be cropped, add `contain` to its figure: `<figure class="shot contain">`.
 
-## Writing
+## Writing (archived)
 
-Each post is a static page in `writing/` (copy an existing one to start a new post). Add the post to the list in `writing/index.html` and to the Writing section of `index.html`, and update the Older/Newer links at the bottom of its neighbours. Post figures live in `images/writing/`.
+The blog is archived in `_archive/` and not published. Follow `_archive/README.md` to bring it back.
 
 ## Portrait
 
