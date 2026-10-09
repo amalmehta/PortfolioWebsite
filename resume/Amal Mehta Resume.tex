@@ -1,6 +1,6 @@
 % Resume linked from the website.
 \documentclass[10pt]{article}
-\usepackage[margin=0.45in]{geometry}
+\usepackage[margin=0.5in]{geometry}
 \usepackage{fontspec}\setmainfont{Times New Roman}
 \usepackage{enumitem}
 \usepackage{titlesec}
@@ -12,74 +12,72 @@
 \setlist[itemize]{leftmargin=1.2em,itemsep=0.5pt,topsep=1pt,parsep=0pt}
 \newcommand{\role}[4]{\textbf{#1}\hfill\textbf{#2}\\\textit{#3}\hfill\textit{#4}}
 
-\begin{document}\fontsize{9.6}{11.0}\selectfont
+\begin{document}\fontsize{9.8}{11.4}\selectfont
 
 \begin{center}
 {\LARGE\bfseries Amal Mehta}\\[3pt]
-San Francisco, CA \quad$\cdot$\quad \href{mailto:amal.mehta@gmail.com}{amal.mehta@gmail.com} \quad$\cdot$\quad \href{https://amalmehta.github.io/PortfolioWebsite/}{amalmehta.github.io/PortfolioWebsite} \quad$\cdot$\quad \href{https://www.linkedin.com/in/amal-mehta-264413a9/}{linkedin.com/in/amal-mehta-264413a9}
+SF Bay Area \quad$\cdot$\quad \href{mailto:amal.mehta@gmail.com}{amal.mehta@gmail.com} \quad$\cdot$\quad \href{https://amalmehta.github.io/PortfolioWebsite/}{amalmehta.github.io/PortfolioWebsite} \quad$\cdot$\quad \href{https://www.linkedin.com/in/amal-mehta-264413a9/}{linkedin.com/in/amal-mehta-264413a9}
 \end{center}
 
-ML research engineer focused on models that adapt under distribution shift (meta-RL, sim-to-real transfer, policies deployed on physical robots), driven by a long-standing interest in how the brain learns; prior neuroimaging research at UCSF.
+Research engineer with four years of applied deep learning across the stack: generative models and vision (GANs, CNN segmentation, detection) and deep RL and meta-RL, from data pipelines and multi-GPU training to policies deployed on physical robots. Prior neuroimaging research at UCSF; long-standing interest in how the brain learns.
 
 \section*{Experience}
 
 \role{Independent ML \& Robotics Research}{Sept 2025 -- Present}{Self-directed projects; details at \href{https://amalmehta.github.io/PortfolioWebsite/}{amalmehta.github.io/PortfolioWebsite}}{San Francisco Bay Area}
 \begin{itemize}
-\item \textbf{Neural decoding:} decoded 2D hand velocity from 152 motor and premotor cortex neurons (NLB MC\_Maze); GRU decoder reached R\textsuperscript{2} 0.75 on held-out trials vs.\ 0.55 for a Kalman filter.
-\item \textbf{Neuroimaging Platform:} Mac app that loads 3D brain MRI, segments gray matter, white matter and CSF voxel by voxel, and places EEG electrodes on the head model.
-\item \textbf{Autonomous Driving Sim:} browser self-driving stack covering perception, prediction, planning and control, with a learned speed policy gated by a safety validator; tested on 60 drives with every failure traced to its cause.
-\item \textbf{Sport Analyzer:} real-time 3D pose estimation from a webcam to measure running stride, lifts and swings; scores a user's movement against a single reference rep.
-\item \textbf{Sensorimotor AI Journal Club, Redwood Center for Theoretical Neuroscience, UC Berkeley:} member.
+\item \textbf{Neural decoding:} 2D hand velocity from motor/premotor cortex spikes (NLB MC\_Maze); GRU decoder outperformed a Kalman filter on held-out trials (R\textsuperscript{2} 0.75 vs.\ 0.55).
+\item \textbf{Post-training:} SFT then GRPO on a small transformer policy in a key-and-door gridworld maze; GRPO lifted held-out success from 71\% to 85\%, where RL from scratch failed.
+\item \textbf{Neuroimaging:} macOS tool for 3D brain MRI; gray/white matter and CSF segmentation, plus EEG electrode placement.
+\item \textbf{Pose estimation:} real-time sport technique analysis on MediaPipe 3D pose from a webcam; scores reps against one reference rep.
+\item Member, Sensorimotor AI journal club, Redwood Center for Theoretical Neuroscience, UC Berkeley.
 \end{itemize}
 
 \role{Deep Learning Scientist}{Sept 2021 -- Aug 2025}{PhysicsAI (DARPA-funded)}{Pacifica, CA (remote)}
 \begin{itemize}
 \item Formulated synthetic-data generation as RL: policies (TD3, PPO, DDPG) set image-generator parameters, rewarded by detector performance on real drone imagery, closing the sim-to-real gap without hand-tuned rendering.
-\item Built a PEARL meta-RL agent (probabilistic task embeddings over TD3) for few-shot adaptation across generator task distributions.
-\item Implemented domain adaptation from scratch to hold detector performance in the low-real-label, high-synthetic-data regime; built GAN-based synthesis pipelines (DCGAN, InfoGAN, FineGAN) producing training data for detection models.
+\item Built a PEARL meta-RL agent (probabilistic task embeddings over TD3) for fast few-shot adaptation across generator tasks.
+\item Implemented domain adaptation from scratch to hold detector performance in the low-real-label, high-synthetic-data regime.
+\item Built GAN-based synthesis pipelines (DCGAN, InfoGAN, FineGAN) producing training data for downstream detection models.
 \end{itemize}
 
-\role{Deep RL Researcher}{Aug 2023 -- Mar 2024}{Hybrid Robotics Lab, Mechanical Engineering, UC Berkeley}{Berkeley, CA}
+\role{Deep RL Researcher}{Aug 2023 -- Mar 2024}{Hybrid Robotics Lab, UC Berkeley --- adv.\ Prof.\ Koushil Sreenath}{Berkeley, CA}
 \begin{itemize}
 \item Trained a single multi-stage PPO policy in IsaacGym for a Unitree Go1 quadruped to track, approach, and shoot a soccer ball at a target, replacing the multi-policy hierarchical framework used in prior work; $\sim$60\% kicking accuracy on hardware.
-\item Designed the stage-transition reward machinery and CPG-based gait tracking; prototyped RLPD (SAC with prior data) to fine-tune the sim-trained policy on real robot data.
+\item Designed the three-stage reward and transition machinery and CPG-based gait tracking; prototyped RLPD (SAC with prior data) to fine-tune the sim-trained policy on real robot data.
 \end{itemize}
 
 \role{Research Assistant}{June 2020 -- Dec 2022}{Video \& Image Processing Lab, BAIR --- adv.\ Prof.\ Avideh Zakhor}{UC Berkeley}
 \begin{itemize}
-\item Developed a deep CNN segmentation pipeline for invasive melanoma in large-scale histopathological images; published at SPIE Medical Imaging 2023 and presented at USCAP Annual Meeting 2022 (Stowell-Orbison Award Poster Session).
+\item Developed a deep CNN segmentation pipeline for invasive melanoma in large-scale histopathological images; published at SPIE Medical Imaging 2023; Stowell-Orbison Award Poster Session at USCAP 2022.
 \end{itemize}
 
 \role{Researcher}{June 2020 -- Aug 2020}{Abbasi-Asl Lab, UCSF --- adv.\ Prof.\ Reza Abbasi-Asl}{San Francisco, CA}
 \begin{itemize}
-\item Built empirical mode decomposition (EMD) pipelines for 2D and 3D brain image registration on volumetric neuroimaging data.
+\item Built empirical mode decomposition (EMD) pipelines for 2D and 3D brain image registration.
 \end{itemize}
 
 \section*{Education}
 
 \role{University of California, Berkeley}{Aug 2017 -- Aug 2021}{B.A.\ Computer Science --- Regents Scholar}{Berkeley, CA}
-\begin{itemize}
-\item Few-shot imitation learning: RL\textsuperscript{2} from scratch and inverse soft Q-learning in Meta-World, benchmarked vs.\ iMAML and BC.
-\end{itemize}
 
-\role{Stanford University}{Aug 2021 -- May 2023}{Graduate Certificates --- Autonomous Systems \& Artificial Intelligence}{}
+\role{Stanford University}{Aug 2021 -- May 2023}{Graduate coursework (non-degree) --- Autonomous Systems \& Artificial Intelligence}{}
 \begin{itemize}
 \item CS231N (Deep Learning for Vision), CS330 (Meta-Learning), AA271A/B (Autonomy I \& II), AA273 (State Estimation).
+\item CS330 project: few-shot imitation learning; implemented RL\textsuperscript{2} and inverse soft Q-learning in Meta-World.
 \end{itemize}
 
 \section*{Technical Skills}
 \begin{tabular}{@{}p{0.9in}l}
 \textbf{Languages} & Python, C++, C \\
-\textbf{ML / RL} & PyTorch, TensorFlow, stable-baselines3, Gym, Meta-World, IsaacGym, ONNX, OpenCV \\
-\textbf{Robotics} & ROS, Unitree Go1, CPG gait control, Kalman filtering, 3D pose estimation \\
+\textbf{ML / RL} & PyTorch, TensorFlow, stable-baselines3, Gym, Meta-World, IsaacGym, OpenCV \\
+\textbf{Robotics} & ROS, Unitree Go1, CPG gait control, Kalman filtering \\
 \textbf{Tools} & Git, GitHub Actions CI, Linux, Docker, CUDA/multi-GPU, W\&B, TensorBoard \\
 \end{tabular}
 
 \section*{Publications}
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
 \item Shah, A., \textbf{Mehta, A.}, Wang, M., Neumann, N., McCalmont, T., Zakhor, A. ``Deep Learning Segmentation for Invasive Melanoma.'' \textit{SPIE Medical Imaging}, 2023.
-\item Neumann, N., Wang, M., \textbf{Mehta, A.}, et al. ``Quantifying Invasive Melanoma Volume by Deep Learning Segmentation at the Pixel-Level.'' \textit{Stowell-Orbison Award Poster Session, USCAP Annual Meeting}, 2022.
-\item \textbf{Mehta, A.}, Asthana, S., Chowdhary, P., Cappi, J., Nakamura, T. ``Contract Information Extraction Using Watson NLP and Human-in-the-Loop.'' \textit{INFORMS Annual Meeting}, 2021.
+\item Neumann, N., Wang, M., \textbf{Mehta, A.}, et al. ``Quantifying Invasive Melanoma Volume by Deep Learning Segmentation at the Pixel-Level.'' \textit{USCAP Annual Meeting}, 2022.
 \end{enumerate}
 
 \end{document}
