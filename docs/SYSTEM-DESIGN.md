@@ -26,6 +26,7 @@ flowchart LR
 |---|---|
 | `index.html` | All content. A sticky header, a short intro with contact links, five research/work entries laid out as a timeline (dates on the left, a two-sentence summary and a tags line), then six project cards, and a one-line "Outside work" note above the footer. |
 | `styles.css` | Typography (Newsreader serif for headings, Inter for body), a 1040 px column, a two-column project layout above 820 px that stacks on phones, and colour tokens that switch with the system's dark mode: a blue accent (dates, research chips, links) and a terracotta one (section labels, project chips), plus a faint two-colour wash behind the intro. Accent text on its chip background is at least 4.5:1 contrast in both themes. |
+| `writing/` | The blog. `index.html` lists every post with date, reading time and topic; each post is its own static page with a byline, figures, and links to the previous and next post. The main page shows the same list in its Writing section. |
 | `images/portrait.jpg` | The intro portrait: a pencil sketch beside the name on desktop, above it on phones. |
 | `images/` | One screenshot per project, taken from each project's own repo. |
 | `resume/` | LaTeX source and the PDF it builds. |

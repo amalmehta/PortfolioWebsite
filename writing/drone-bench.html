@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Measuring the sim-to-real gap before the drone shows up · Amal Mehta</title>
+  <meta name="description" content="A test bench that flies the same course in simulation and on hardware, then reports how far apart they are.">
+  <meta name="author" content="Amal Mehta">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/writing/drone-bench.html">
+  <meta property="og:title" content="Measuring the sim-to-real gap before the drone shows up">
+  <meta property="og:description" content="A test bench that flies the same course in simulation and on hardware, then reports how far apart they are.">
+  <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og.png">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="nav-name" href="../index.html">Amal Mehta</a>
+      <div class="nav-links">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Writing</a>
+        <a href="../resume/Amal%20Mehta%20Resume.pdf">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+      <p class="post-back"><a href="index.html">← All writing</a></p>
+      <header class="post-head">
+        <p class="post-kicker">Sim-to-real</p>
+        <h1>Measuring the sim-to-real gap before the drone shows up</h1>
+        <p class="post-dek">A test bench that flies the same course in simulation and on hardware, then reports how far apart they are.</p>
+        <p class="post-meta">Amal Mehta · <time datetime="2026-10-09">October 9, 2026</time> · 2 min read</p>
+      </header>
+      <div class="post-body">
+<p>Every robot learning project hits the same question eventually. It works in simulation. Does it work on the real thing?</p>
+
+<p>Usually the answer is a video of the one good run. I wanted a number instead. So I built a bench that flies one course with several pilots, in simulation and on a small Crazyflie quadcopter, and writes a report on how far apart the two are.</p>
+
+<h2>The course and the pilots</h2>
+
+<p>The course is a one-metre square at 0.6 m, with one corner raised to 0.9 m. Small enough to fly indoors over a textured floor, which the drone's downward optical-flow sensor uses to know where it is.</p>
+
+<p>Three pilots fly it:</p>
+
+<p><strong>A classical controller.</strong> Hand-tuned, no learning. The baseline.</p>
+
+<p><strong>A residual policy.</strong> The classical controller plus a small learned correction on top.</p>
+
+<p><strong>A meta-learned policy.</strong> Trained across many slightly different drones, so it can adapt to a new one fast. Before its run it flies a short warm-up, ten four-second exploratory flights, then takes one adaptation step.</p>
+
+<figure>
+  <img src="../images/drone-bench.jpg" alt="The square course seen from above, flown by each pilot in simulation and on the stand-in drone" width="1400" height="445">
+  <figcaption>The course from above. Blue is simulation, orange is the stand-in drone.</figcaption>
+</figure>
+
+<h2>Before the real drone</h2>
+
+<p>The hardware isn't flown yet. So first I tested the bench itself against a stand-in: the same simulator made deliberately wrong. Heavier, one weak motor, 30 ms of lag, dropped packets, and a position estimate that drifts. The mismatch values are guesses, not measurements. If the bench can't tell those two apart, it won't tell me anything about the real drone either.</p>
+
+<figure>
+  <img src="../images/writing/drone-rmse.jpg" alt="Tracking error for each pilot in simulation and on the stand-in drone" width="830" height="465">
+  <figcaption>Tracking error in centimetres. The target is a real-world error within 1.5× of simulation.</figcaption>
+</figure>
+
+<p>The classical controller got 2.4 times worse on the stand-in, 2.8 cm to 6.9 cm. The residual policy was the most accurate in both worlds, but still doubled, 1.0 cm to 2.2 cm. The meta-learned policy barely moved, 3.4 cm to 3.5 cm.</p>
+
+<p>That last one is the trade I find interesting. Training for robustness costs a little accuracy on the exact model. It's worse than the residual policy in simulation. But it's the only pilot that stayed inside the target when the world changed.</p>
+
+<h2>What I'm careful about</h2>
+
+<p>The error is measured against the drone's own idea of where it is. On the real Crazyflie that comes from the floor sensor, so if that estimate slowly drifts, these numbers won't show it. The report says so.</p>
+
+<p>And none of this is a real flight yet. The point of the bench is that when the hardware runs happen, the comparison is already set up, and the result is a number instead of a video.</p>
+      </div>
+    </article>
+  <nav class="post-nav" aria-label="More posts">
+    <a class="prev" href="alphago-lite.html"><span>Older</span>A Go engine that taught itself on my laptop</a>
+    <a class="next" href="robot-soccer.html"><span>Newer</span>Teaching a robot dog to take a shot</a>
+  </nav>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Contact me</a> · <a href="mailto:amal.mehta@gmail.com">amal.mehta@gmail.com</a> · <a href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reading movement out of 152 neurons · Amal Mehta</title>
+  <meta name="description" content="Decoding a monkey&#x27;s hand movement from motor-cortex spikes, and the ways I almost fooled myself.">
+  <meta name="author" content="Amal Mehta">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/writing/neural-decoding.html">
+  <meta property="og:title" content="Reading movement out of 152 neurons">
+  <meta property="og:description" content="Decoding a monkey&#x27;s hand movement from motor-cortex spikes, and the ways I almost fooled myself.">
+  <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og.png">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="nav-name" href="../index.html">Amal Mehta</a>
+      <div class="nav-links">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Writing</a>
+        <a href="../resume/Amal%20Mehta%20Resume.pdf">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+      <p class="post-back"><a href="index.html">← All writing</a></p>
+      <header class="post-head">
+        <p class="post-kicker">Neural decoding</p>
+        <h1>Reading movement out of 152 neurons</h1>
+        <p class="post-dek">Decoding a monkey&#x27;s hand movement from motor-cortex spikes, and the ways I almost fooled myself.</p>
+        <p class="post-meta">Amal Mehta · <time datetime="2026-10-09">October 9, 2026</time> · 3 min read</p>
+      </header>
+      <div class="post-body">
+<p>I wanted to know what it actually takes to read movement out of a brain.</p>
+
+<p>So I took a public recording from the Neural Latents Benchmark: 152 neurons in a monkey's motor and premotor cortex, recorded while it reached around a maze 250 times. The job is simple to say. Look at the spikes, predict where the hand is going.</p>
+
+<figure>
+  <img src="../images/neural-signal-ml.jpg" alt="True reach paths next to paths rebuilt from spikes by a Kalman filter and a GRU" width="1400" height="512">
+  <figcaption>Reach paths on trials the models never saw. Left: what the hand did. Middle and right: what each decoder rebuilt from spikes alone.</figcaption>
+</figure>
+
+<h2>Two decoders</h2>
+
+<p>The classic answer is a Kalman filter. It assumes two straight lines: the hand moves smoothly from one moment to the next, and each neuron's firing is a linear function of where the hand is and how fast it's going. Every 50 ms it predicts where the hand should be, then lets the new spikes correct the guess.</p>
+
+<p>The other is a small recurrent network, a GRU with 128 units. It reads the spikes one bin at a time and keeps its own memory of the reach. It can learn things the Kalman filter can't, like "this reach has started, and it's a curved one".</p>
+
+<p>The Kalman filter got an R² of 0.55. The GRU got 0.75. That gap was the easy part.</p>
+
+<figure>
+  <img src="../images/writing/spikes-r2.jpg" alt="Bar chart: GRU R² well above the Kalman filter under both test splits" width="701" height="378">
+  <figcaption>Hand-velocity R² with 95% confidence intervals. The GRU wins under both ways of holding out data.</figcaption>
+</figure>
+
+<h2>Not fooling myself</h2>
+
+<p>The hard part was making sure the numbers meant something.</p>
+
+<p><strong>Splits.</strong> Neighbouring moments in a recording look alike. Shuffle them randomly into train and test and the model gets to peek. So test trials come in contiguous blocks, and the GRU still wins: 0.80 against 0.56.</p>
+
+<p><strong>The baseline.</strong> My first Kalman filter scored 0.28. Wider bins and tracking position and acceleration, the way the original papers did it, got it to 0.55. A weak baseline makes any model look good, so it was worth getting right. I also made those fixes after seeing a validation score, which I say in the write-up.</p>
+
+<p><strong>Tests that catch real bugs.</strong> I built fake neurons with known tuning and checked the decoder could recover the hand. It couldn't: R² of −18. The Kalman update was inverting a matrix that's singular for one of the state terms. The synthetic test found it before any real number did.</p>
+
+<h2>The result I didn't expect</h2>
+
+<p>I ran the same comparison on EEG: nine people imagining moving a hand, their feet or tongue, decoded from 22 scalp electrodes. A well-known CNN, EEGNet, against a classic spatial filter, CSP + LDA.</p>
+
+<figure>
+  <img src="../images/writing/eeg-accuracy.jpg" alt="Per-subject accuracy bars for CSP + LDA and EEGNet on two test protocols" width="1139" height="433">
+  <figcaption>Four-class accuracy per person, tested on a different day (left) and on a person the model never saw (right). Chance is 25%.</figcaption>
+</figure>
+
+<p>The neural network didn't win. 62.3% against 63.9% on a new day, 43.2% against 44.3% on a new person, no significant difference. Who you're decoding mattered far more than which method: some people sit near 80% either way, others near 30%.</p>
+
+<p>I like that result. With a few hundred trials per person, the old method already captures the signal. The network earned its keep on the spikes, where there's more to learn.</p>
+
+<h2>What this isn't</h2>
+
+<p>Everything here is offline. I decode recordings and score them against what happened. In a real brain-computer interface the person sees the cursor and adapts to the decoder's mistakes, and offline scores don't predict that well. The spike data is also one monkey on one day. This is a careful baseline study, not the state of the art.</p>
+
+<p>But I understand the pieces now, and I know where the traps are.</p>
+      </div>
+    </article>
+  <nav class="post-nav" aria-label="More posts">
+    <a class="prev" href="robot-soccer.html"><span>Older</span>Teaching a robot dog to take a shot</a>
+    <span></span>
+  </nav>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Contact me</a> · <a href="mailto:amal.mehta@gmail.com">amal.mehta@gmail.com</a> · <a href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></p>
+  </footer>
+</body>
+</html>

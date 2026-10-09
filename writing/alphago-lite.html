@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Go engine that taught itself on my laptop · Amal Mehta</title>
+  <meta name="description" content="The AlphaGo Zero recipe, scaled down to 9×9 and one CPU: 7,040 games against itself.">
+  <meta name="author" content="Amal Mehta">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/writing/alphago-lite.html">
+  <meta property="og:title" content="A Go engine that taught itself on my laptop">
+  <meta property="og:description" content="The AlphaGo Zero recipe, scaled down to 9×9 and one CPU: 7,040 games against itself.">
+  <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og.png">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="nav-name" href="../index.html">Amal Mehta</a>
+      <div class="nav-links">
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Writing</a>
+        <a href="../resume/Amal%20Mehta%20Resume.pdf">Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+      <p class="post-back"><a href="index.html">← All writing</a></p>
+      <header class="post-head">
+        <p class="post-kicker">Self-play RL</p>
+        <h1>A Go engine that taught itself on my laptop</h1>
+        <p class="post-dek">The AlphaGo Zero recipe, scaled down to 9×9 and one CPU: 7,040 games against itself.</p>
+        <p class="post-meta">Amal Mehta · <time datetime="2026-10-09">October 9, 2026</time> · 2 min read</p>
+      </header>
+      <div class="post-body">
+<p>AlphaGo Zero learned Go with no human games at all. It played itself, learned from those games, and played itself again. I wanted to see how much of that idea survives on one laptop.</p>
+
+<p>Not much compute, so a smaller board: 9×9 instead of 19×19. Same recipe.</p>
+
+<h2>The loop</h2>
+
+<p>There are three steps, repeated.</p>
+
+<p><strong>Play.</strong> The current network plays against itself. Before a move it runs a tree search, up to 160 imagined lines of play, guided by the network's own guesses about good moves and who's winning.</p>
+
+<p><strong>Learn.</strong> The network trains on those games. It learns to predict the moves the search picked and the game's final result. The search is a bit smarter than the raw network, so the network keeps chasing a slightly better version of itself.</p>
+
+<p><strong>Check.</strong> The new network plays 40 games against the previous one. The result goes into a running score, so I can see whether it's actually getting stronger.</p>
+
+<figure>
+  <img src="../images/alphago-lite.jpg" alt="AlphaGo Lite mid-game, with the moves it is considering shown on the board" width="1400" height="925">
+  <figcaption>Playing against it. The numbers on the board are the moves it's weighing and how often its search visited each one.</figcaption>
+</figure>
+
+<h2>What 11 hours buys</h2>
+
+<p>44 generations. 7,040 games against itself. About 11 hours on an 8-core laptop CPU, spread over four sittings.</p>
+
+<figure>
+  <img src="../images/writing/alphago-training.jpg" alt="Generation 44 win rates against earlier generations, and training loss falling over generations" width="1650" height="540">
+  <figcaption>Left: the final network against its earlier selves. Right: training loss by generation.</figcaption>
+</figure>
+
+<p>The final version beat a random network with search 79 games out of 80. It beat the first version I released 78 out of 80, the second 59 out of 80, and a version from just five generations earlier 46 out of 80. Still improving, but the steps get smaller.</p>
+
+<h2>What went wrong</h2>
+
+<p>One of the training sittings stalled for two hours and produced nothing. Now, if a step returns nothing for 40 minutes, the workers restart and try again. It's a boring fix, and the one I'm happiest about.</p>
+
+<p>The other lesson was about honesty. The loss curve looks great early, then flattens. The only way to know if the engine is actually getting stronger is to make it play its older selves. Every claim above comes from those games, not the curve.</p>
+
+<h2>Try it</h2>
+
+<p>It runs as a Mac app and in the browser, with the same network in both. You can <a href="https://amalmehta.github.io/AlphaGoLite/">play it here</a> and watch what it's thinking. It is not AlphaGo.</p>
+      </div>
+    </article>
+  <nav class="post-nav" aria-label="More posts">
+    <span></span>
+    <a class="next" href="drone-bench.html"><span>Newer</span>Measuring the sim-to-real gap before the drone shows up</a>
+  </nav>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Contact me</a> · <a href="mailto:amal.mehta@gmail.com">amal.mehta@gmail.com</a> · <a href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></p>
+  </footer>
+</body>
+</html>
