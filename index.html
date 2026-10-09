@@ -36,7 +36,7 @@
       <div class="hero-text">
       <h1>Amal Mehta</h1>
       <p class="lede">Research engineer in reinforcement learning and sensorimotor AI: agents that see, act and learn from experience, trained in simulation and made to hold up on real robots.</p>
-      <p class="hero-sub">I work on learning when labels are scarce, adapting fast to new settings, and closing the gap between simulation and the real world. Based in San Francisco.</p>
+      <p class="hero-sub">I work on learning when labels are scarce, adapting fast to new settings, and closing the gap between simulation and the real world. Based in the San Francisco Bay Area.</p>
       <ul class="contact">
         <li><a href="https://reachouts.me/?u=amal">Contact me</a></li>
         <li><a href="mailto:amal.mehta@gmail.com">amal.mehta@gmail.com</a></li>
@@ -73,7 +73,7 @@
         <p class="when">2023 – 2024</p>
         <div>
           <h3>Deep RL Researcher · Hybrid Robotics Lab</h3>
-          <p class="where">UC Berkeley · a robot dog that learns to shoot a soccer ball</p>
+          <p class="where">UC Berkeley · Prof. Koushil Sreenath · a robot dog that learns to shoot a soccer ball</p>
           <p>Trained one RL policy that takes a Unitree Go1 through the whole task (walk to the ball, kick it at a target, stay balanced) in place of a separate policy per skill. On the real robot it hit the target about 60% of the time.</p>
           <p class="tags"><span class="chip">PPO</span><span class="chip">IsaacGym</span><span class="chip">Multi-stage rewards</span><span class="chip">Sim-to-real</span><span class="chip">RLPD</span></p>
         </div>
@@ -111,6 +111,15 @@
           <h3>Neural Signal ML</h3>
           <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter.</p>
           <p class="tags"><span class="chip">Neural decoding</span><span class="chip">Motor cortex</span><span class="chip">Kalman filter vs GRU</span><span class="chip">PyTorch</span></p>
+        </div>
+      </article>
+
+      <article class="project">
+        <figure class="shot"><img src="images/post-training.jpg" alt="Post Training Lab: test success rising from 71% after SFT to 85% after GRPO, with four policies racing on the same maze" loading="lazy" width="1200" height="1080"></figure>
+        <div class="project-text">
+          <h3>Post Training Lab</h3>
+          <p>A 59k-parameter transformer learns a key-and-door maze in two stages: supervised fine-tuning on demos from a planner with a bad habit, then GRPO against a verifiable reward. GRPO lifts held-out success from 71% to 85%; RL from scratch on the same budget reaches 1%.</p>
+          <p class="tags"><span class="chip">Post-training</span><span class="chip">SFT → GRPO</span><span class="chip">Transformers</span><span class="chip">PyTorch</span></p>
         </div>
       </article>
 

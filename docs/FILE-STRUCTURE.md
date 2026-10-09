@@ -10,6 +10,7 @@ images/                       Project screenshots shown on the site (JPEG)
   portrait.jpg                Pencil-sketch portrait in the intro
   og.png                      Link-preview image (1200×630)
   neural-signal-ml.jpg
+  post-training.jpg
   alphago-lite.jpg
   drone-bench.jpg
   driving-sim.jpg
