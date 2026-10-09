@@ -44,7 +44,7 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 ## Key decisions
 
 - **Plain HTML over a framework or site generator.** One page with seven cards doesn't need one, and anyone can edit it. The cost is that repeated card markup is copied by hand.
-- **No code links for private projects.** Six of the seven projects are in private repos or have no remote yet, so their cards have a write-up and screenshot only. AlphaGo Lite links to its live in-browser demo.
+- **No code links for private projects.** Most projects are in private repos, so their cards have a write-up and screenshot only. Neural Signal ML links to its public repo, and AlphaGo Lite to its live in-browser demo.
 - **Plain-language project descriptions.** Each card says what the project does and why it's interesting before naming techniques; the techniques go in the small tags line.
 - **Resume built from source.** The resume PDF is built from LaTeX in `resume/`, so it can be edited and rebuilt in one step. It lists email, LinkedIn and this site, and no phone number.
 - **Link preview.** Open Graph tags and `images/og.png` (a 1200×630 render of the intro) give a title, summary and image when the link is pasted into email, Slack or an applicant tracker.
