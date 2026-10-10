@@ -17,7 +17,7 @@ Then visit <http://localhost:8000>. Opening `index.html` directly also works.
 Everything visible lives in `index.html`:
 
 - **Intro**: the `<section class="hero">` block at the top.
-- **Projects**: one `<article class="project">` per project, with a screenshot, a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
+- **Projects**: one `<article class="project">` per project, with a looping clip (its screenshot as poster), a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
 - **Research & work**: one `<article class="role">` per role.
 
 Colours, fonts and spacing are in `styles.css`. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
@@ -31,6 +31,24 @@ sips -s format jpeg -s formatOptions 80 --resampleWidth 1400 shot.png --out imag
 ```
 
 Cards crop images to a 16:10 frame from the top left. For a wide chart that shouldn't be cropped, add `contain` to its figure: `<figure class="shot contain">`.
+
+## Clips
+
+Each project card and three research entries have a looping clip in `assets/media/`, with a poster image shown before it plays (and instead of it with no JavaScript or reduced motion on). `assets/media/README.md` lists every file and what it should show. To replace one, save the new clip under the same name.
+
+Keep each clip under 2 MB: about 5–8 seconds, 960 px wide, no audio. With [ffmpeg](https://ffmpeg.org) (`brew install ffmpeg`):
+
+```bash
+ffmpeg -i input.mov -t 8 -an -vf "scale=960:-2,fps=24" -c:v libx264 -crf 28 -preset slow -pix_fmt yuv420p -movflags +faststart assets/media/name.mp4
+```
+
+Raise `-crf` (30–32) or shorten `-t` if it's still over 2 MB. To turn a GIF into a clip, use the same command with the `.gif` as input. A research poster is a 1280×720 still from its clip:
+
+```bash
+ffmpeg -ss 1 -i assets/media/name.mp4 -frames:v 1 -vf "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720" -q:v 4 assets/media/name-poster.jpg
+```
+
+The tests fail if a clip or poster is over 2 MB or a poster's size doesn't match the `width`/`height` on its `<video>`.
 
 ## Writing (archived)
 

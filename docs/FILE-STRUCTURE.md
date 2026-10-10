@@ -6,8 +6,11 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 index.html                    The whole site: intro, research & work, projects
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, blog styles
+media.js                      Lazy-loads and plays the looping clips
 _archive/                     Archived blog (not published; see its README)
-images/                       Project screenshots shown on the site (JPEG)
+assets/media/                 Looping clips (MP4) and research posters; placeholders for now
+  README.md                   Which files to supply, and what each should show
+images/                       Project screenshots, also the clips' posters (JPEG)
   portrait.jpg                Pencil-sketch portrait in the intro
   og.png                      Link-preview image (1200×630)
   apple-touch-icon.png        Home-screen icon (180×180)
