@@ -44,7 +44,7 @@ Cards crop images to a 16:10 frame from the top left. For a wide chart that shou
 
 ## Clips
 
-Each project card and three research entries have a looping clip in `assets/media/`, with a poster image shown before it plays (and instead of it with no JavaScript or reduced motion on). `assets/media/README.md` lists every file and what it should show. To replace one, save the new clip under the same name.
+Each project card has a looping clip in `assets/media/`, with a poster image shown before it plays (and instead of it with no JavaScript or reduced motion on). `assets/media/README.md` lists every file and what it should show. To replace one, save the new clip under the same name.
 
 Keep each clip under 2 MB: about 5–8 seconds, 960 px wide, no audio. With [ffmpeg](https://ffmpeg.org) (`brew install ffmpeg`):
 
@@ -52,13 +52,13 @@ Keep each clip under 2 MB: about 5–8 seconds, 960 px wide, no audio. With [ffm
 ffmpeg -i input.mov -t 8 -an -vf "scale=960:-2,fps=24" -c:v libx264 -crf 28 -preset slow -pix_fmt yuv420p -movflags +faststart assets/media/name.mp4
 ```
 
-Raise `-crf` (30–32) or shorten `-t` if it's still over 2 MB. To turn a GIF into a clip, use the same command with the `.gif` as input. A research poster is a 1280×720 still from its clip:
-
-```bash
-ffmpeg -ss 1 -i assets/media/name.mp4 -frames:v 1 -vf "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720" -q:v 4 assets/media/name-poster.jpg
-```
+Raise `-crf` (30–32) or shorten `-t` if it's still over 2 MB. To turn a GIF into a clip, use the same command with the `.gif` as input.
 
 The tests fail if a clip or poster is over 2 MB or a poster's size doesn't match the `width`/`height` on its `<video>`.
+
+## Research drawings
+
+PhysicsAI, Hybrid Robotics Lab, the Video & Image Processing Lab and the Abbasi-Asl Lab each show a drawing (`images/physicsai.svg`, `robot-soccer.svg`, `vip-lab.svg`, `brain-emd.svg`), not a photo or clip. They're illustrations, not real results: the detection scores, settings, tumour outline and decomposition layers in them are made up. `tools/draw-research-art.py` draws all four; edit it and run `python3 tools/draw-research-art.py` to redraw them.
 
 ## Writing (archived)
 

@@ -29,7 +29,7 @@ class Page(HTMLParser):
         self.links = []  # (tag, attr, value)
         self.imgs = []  # attrs dict per <img>
         self.videos = []  # attrs dict per <video>, plus "sources": [data-src/src]
-        self.roles = []  # (title, has_video) per <article class="role">
+        self.roles = []  # (title, has_media) per <article class="role">
         self._role = None
         self.metas = {}  # property/name -> content
         self.projects = []  # one dict per <article class="project">
@@ -69,12 +69,12 @@ class Page(HTMLParser):
             if tag == "p" and not classes:
                 self._project["text"] = True
         if tag == "article" and "role" in classes:
-            self._role = {"title": "", "video": False}
+            self._role = {"title": "", "media": False}
         if self._role is not None:
             if tag == "h3":
                 self._in_h3 = True
-            if tag == "video":
-                self._role["video"] = True
+            if tag in ("img", "video"):
+                self._role["media"] = True
 
     def handle_endtag(self, tag):
         if tag == "h3":
@@ -102,8 +102,12 @@ def parse(path):
 
 
 def image_size(path):
-    """(width, height) of a PNG or baseline/progressive JPEG."""
+    """(width, height) of a PNG, baseline/progressive JPEG, or SVG with width/height."""
     data = path.read_bytes()
+    if path.suffix == ".svg":
+        m = re.search(rb'<svg[^>]*\swidth="(\d+)"[^>]*\sheight="(\d+)"', data)
+        if m:
+            return int(m.group(1)), int(m.group(2))
     if data[:8] == b"\x89PNG\r\n\x1a\n":
         return struct.unpack(">II", data[16:24])
     if data[:2] == b"\xff\xd8":
@@ -203,8 +207,8 @@ class ImagesTest(unittest.TestCase):
 
 class MediaTest(unittest.TestCase):
     REQUIRED = ("autoplay", "muted", "loop", "playsinline")
-    # Research entries that must carry a clip (matched on their heading).
-    RESEARCH = ("PhysicsAI", "Hybrid Robotics Lab", "Video & Image Processing Lab")
+    # Research entries that must carry an image or clip (matched on their heading).
+    RESEARCH = ("PhysicsAI", "Hybrid Robotics Lab", "Video & Image Processing Lab", "Abbasi-Asl Lab")
 
     def test_videos_are_silent_inline_loops(self):
         self.assertTrue(PAGE.videos)
@@ -241,10 +245,10 @@ class MediaTest(unittest.TestCase):
         self.assertEqual(big, [], "re-encode these to under 2 MB (see docs/INSTRUCTIONS.md)")
 
     def test_research_entries_have_media(self):
-        with_video = {r["title"] for r in PAGE.roles if r["video"]}
+        with_media = {r["title"] for r in PAGE.roles if r["media"]}
         for name in self.RESEARCH:
             with self.subTest(entry=name):
-                self.assertTrue(any(name in title for title in with_video))
+                self.assertTrue(any(name in title for title in with_media))
 
 
 class ProjectsTest(unittest.TestCase):

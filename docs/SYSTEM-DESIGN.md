@@ -28,8 +28,8 @@ flowchart LR
 | `styles.css` | Typography (Newsreader serif for headings, Inter for body), a 1040 px column, a two-column project layout above 820 px that stacks on phones, and colour tokens that switch with the system's dark mode: a blue accent (dates, research chips, links) and a terracotta one (section labels, project chips), plus a faint two-colour wash behind the intro. Accent text on its chip background is at least 4.5:1 contrast in both themes. |
 | `_archive/` | The blog, archived. Pages skips folders starting with `_`, so it's kept in the repo but not published. `_archive/README.md` says how to restore it. |
 | `images/portrait.jpg` | The intro portrait: a pencil sketch beside the name on desktop, above it on phones. |
-| `images/` | One screenshot per project, taken from each project's own repo. Each is also its project clip's poster. |
-| `assets/media/` | A short looping MP4 per project card and per media research entry (PhysicsAI, Hybrid Robotics Lab, Video & Image Processing Lab), plus posters for the research ones. Placeholders until real clips are supplied; see its README. |
+| `images/` | One screenshot per project, taken from each project's own repo. Each is also its project clip's poster. The four lab entries show SVG drawings (`physicsai.svg`, `robot-soccer.svg`, `vip-lab.svg`, `brain-emd.svg`) drawn by `tools/draw-research-art.py`. |
+| `assets/media/` | A short looping MP4 per project card. Placeholders until real clips are supplied; see its README. |
 | `media.js` | Lazy-loads the clips: each `<source>` holds its file in `data-src`, and the script fills in `src` when the clip is within 200 px of the screen, pauses clips scrolled away, and lets a click pause or resume one. With no JavaScript or with reduced motion on, the poster shows instead. |
 | `resume/` | LaTeX source and the PDF it builds. |
 
@@ -55,11 +55,12 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 - **Site and resume list the same projects.** The resume points to this site for details, so every project on it has a card here. Interests outside work sit in a one-line note at the bottom, not the work timeline.
 - The Neuroimaging Platform screenshot shows the MNI ICBM152 template, credited on the card as its README does.
 - **Clips as muted MP4 loops, not GIFs.** `<video autoplay muted loop playsinline preload="none">` with a poster is a fraction of a GIF's size and plays inline on phones. Clips are lazy-loaded by a small script because `autoplay` would otherwise start downloading every clip on page load. The posters themselves still load with the page (browsers don't lazy-load posters); they're the same JPEGs the cards used before.
+- **Drawings for the research entries.** There's no footage to show from past lab work, and stock photos either showed other people or weren't the real robot, so each research entry has an original drawing in the site's colours. The numbers and outlines in them are illustrative, not results.
 - **Follows the system's light/dark setting** with no manual toggle, to keep the page minimal.
 
 ## How it's tested
 
-Automatically, with `python3 -m unittest discover tests` (standard library only; see [Instructions](INSTRUCTIONS.md#run-the-tests)). The tests check that every local link, image and anchor resolves, nothing links into `_archive/`, each image's and poster's `width`/`height` match the file, every clip is a muted inline loop with a poster that waits for `media.js`, every clip and poster is under 2 MB, all seven project cards and the three named research entries have a media slot, text and chip colours reach 4.5:1 contrast in both themes, and the resume has no phone number and is one page (the PDF check runs when `pypdf` is installed).
+Automatically, with `python3 -m unittest discover tests` (standard library only; see [Instructions](INSTRUCTIONS.md#run-the-tests)). The tests check that every local link, image and anchor resolves, nothing links into `_archive/`, each image's and poster's `width`/`height` match the file, every clip is a muted inline loop with a poster that waits for `media.js`, every clip and poster is under 2 MB, all seven project cards and the four named research entries have an image or clip, text and chip colours reach 4.5:1 contrast in both themes, and the resume has no phone number and is one page (the PDF check runs when `pypdf` is installed).
 
 Also by hand, with a headless browser (Playwright) against a local server:
 
@@ -72,7 +73,7 @@ Also by hand, with a headless browser (Playwright) against a local server:
 
 - Fonts come from Google Fonts; offline or blocked, the page falls back to Georgia and the system sans-serif.
 - Screenshots and clips go stale as the projects change; refresh them by hand.
-- Every clip is a placeholder until real media is supplied (listed in `assets/media/README.md`).
+- Every project clip is a placeholder until real media is supplied (listed in `assets/media/README.md`).
 - Neural Signal ML shows only its finished spike-decoding results; its EEGNet run isn't done, so no EEGNet numbers appear. The card quotes the same R² as its figure (benchmark split).
 - The Sim to Real Drone Bench image comes from its stand-in drone, since no real Crazyflie flight has been flown yet; the card says so.
 - The resume build uses an absolute path to a macOS system font, so it rebuilds on a Mac only.
