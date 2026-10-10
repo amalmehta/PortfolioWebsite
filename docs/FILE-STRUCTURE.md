@@ -24,6 +24,8 @@ images/                       Project screenshots, also the clips' posters (JPEG
 resume/
   Amal Mehta Resume.tex       Resume source (latest resume, no phone number)
   Amal Mehta Resume.pdf       Built resume, linked from the site
+tests/
+  test_site.py                 Automated checks: links, images, media, cards, contrast, resume
 docs/
   INSTRUCTIONS.md             Preview, edit, rebuild the resume, publish
   SYSTEM-DESIGN.md            Architecture, decisions, testing, limits

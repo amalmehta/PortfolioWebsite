@@ -12,6 +12,16 @@ python3 -m http.server 8000
 
 Then visit <http://localhost:8000>. Opening `index.html` directly also works.
 
+## Run the tests
+
+From the repo root, with no installs:
+
+```bash
+python3 -m unittest discover tests
+```
+
+The resume PDF check is skipped unless `pypdf` is installed. Run the tests before pushing.
+
 ## Edit content
 
 Everything visible lives in `index.html`:

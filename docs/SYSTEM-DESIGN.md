@@ -59,7 +59,9 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 
 ## How it's tested
 
-By hand, with a headless browser (Playwright) against a local server:
+Automatically, with `python3 -m unittest discover tests` (standard library only; see [Instructions](INSTRUCTIONS.md#run-the-tests)). The tests check that every local link, image and anchor resolves, nothing links into `_archive/`, each image's and poster's `width`/`height` match the file, every clip is a muted inline loop with a poster that waits for `media.js`, every clip and poster is under 2 MB, all seven project cards and the three named research entries have a media slot, text and chip colours reach 4.5:1 contrast in both themes, and the resume has no phone number and is one page (the PDF check runs when `pypdf` is installed).
+
+Also by hand, with a headless browser (Playwright) against a local server:
 
 - every image loads;
 - no horizontal scroll at 390 px (phone) or 1280 px (desktop);
