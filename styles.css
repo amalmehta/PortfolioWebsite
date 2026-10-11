@@ -187,3 +187,4 @@ picture { display: contents; }
 .thought p { margin: 0 0 0.5rem; }
 .thought .when { margin: 0; font-size: 0.85rem; }
 .thought-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
+.role .tags + .tags { margin-top: 0.6rem; }
