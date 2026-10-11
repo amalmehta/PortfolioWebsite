@@ -190,6 +190,7 @@ def contrast(fg, bg):
 
 
 PAGE = parse(INDEX)
+THINKING = ROOT / "thinking.html"
 
 
 class LinksTest(unittest.TestCase):
@@ -325,6 +326,20 @@ class MusingsTest(unittest.TestCase):
 
     def test_linked_from_nav(self):
         self.assertIn(("a", "href", "#musings"), PAGE.links)
+
+
+class ThinkingPageTest(unittest.TestCase):
+    """thinking.html: a page of its own, linked from the profile."""
+
+    def test_linked_from_profile(self):
+        self.assertIn("thinking.html", [v for _, _, v in PAGE.links])
+
+    def test_local_links_resolve(self):
+        page = parse(THINKING)
+        missing = [v for _, _, v in page.links
+                   if local_target(v) is not None and not local_target(v).is_file()]
+        self.assertEqual(missing, [])
+        self.assertIn("index.html", [v for _, _, v in page.links])
 
 
 class ColoursTest(unittest.TestCase):
