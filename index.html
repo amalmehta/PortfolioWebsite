@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="media.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -34,7 +35,7 @@
 
   <main id="top">
     <section class="wrap hero">
-      <img class="portrait" src="images/portrait.jpg" alt="Pencil-sketch portrait of Amal Mehta" width="480" height="480">
+      <picture><source type="image/avif" srcset="images/portrait-240.avif 240w, images/portrait-480.avif 480w" sizes="(min-width: 820px) 220px, 120px"><source type="image/webp" srcset="images/portrait-240.webp 240w, images/portrait-480.webp 480w" sizes="(min-width: 820px) 220px, 120px"><img class="portrait" src="images/portrait.jpg" alt="Pencil-sketch portrait of Amal Mehta" width="480" height="480"></picture>
       <div class="hero-text">
       <h1>Amal Mehta</h1>
       <p class="lede">Research engineer in reinforcement learning and sensorimotor AI: agents that see, act and learn from experience, trained in simulation and made to hold up on real robots.</p>
@@ -67,6 +68,7 @@
           <h3>Deep Learning Scientist · PhysicsAI</h3>
           <p class="where">DARPA-funded · remote</p>
           <p>Turned synthetic-data generation into an RL problem: agents tuned an image generator and were rewarded by how well the resulting detector worked on real drone imagery, closing the sim-to-real gap without hand-tuned rendering.</p>
+          <figure class="shot"><img src="images/physicsai.svg" alt="Drawing: a drone’s camera looks down on a city block with cars boxed by a detector, beside the generator settings an RL agent tunes and its rising reward" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">TD3</span><span class="chip">PPO</span><span class="chip">DDPG</span><span class="chip">PEARL meta-RL</span><span class="chip">Domain adaptation</span><span class="chip">GANs</span></p>
         </div>
       </article>
@@ -76,7 +78,8 @@
         <div>
           <h3>Deep RL Researcher · Hybrid Robotics Lab</h3>
           <p class="where">UC Berkeley · Prof. Koushil Sreenath · a robot dog that learns to shoot a soccer ball</p>
-          <p>Trained one RL policy that takes a Unitree Go1 through the whole task (walk to the ball, kick it at a target, stay balanced) in place of a separate policy per skill. On the real robot it hit the target about 60% of the time.</p>
+          <p>Trained one RL policy that takes a Unitree Go1 through the whole task (walk to the ball, kick it at a target, stay balanced) in place of a separate policy per skill. On the real robot it hit the target about 60% of the time. Took graduate classes in RL and control theory at Berkeley alongside, to deepen the research.</p>
+          <figure class="shot"><img src="images/robot-soccer.svg" alt="Drawing: a four-legged robot dog kicks a soccer ball along an arc into a target in a goal, on a simulation grid" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">PPO</span><span class="chip">IsaacGym</span><span class="chip">Multi-stage rewards</span><span class="chip">Sim-to-real</span><span class="chip">RLPD</span></p>
         </div>
       </article>
@@ -87,6 +90,7 @@
           <h3>Research Assistant · Video &amp; Image Processing Lab</h3>
           <p class="where">BAIR, UC Berkeley · Prof. Avideh Zakhor</p>
           <p>Built a deep-learning pipeline that outlines invasive melanoma pixel by pixel in very large tissue images, to help pathologists measure how far a cancer has spread.</p>
+          <figure class="shot"><img src="images/vip-lab.svg" alt="Drawing: a whole-slide tissue image with the predicted melanoma region outlined, and a zoomed-in square showing the tumour boundary cell by cell" loading="lazy" width="1280" height="720"></figure>
           <p class="tags pubs">Published: <em>SPIE Medical Imaging</em> 2023 · <em>USCAP</em> 2022, Stowell-Orbison Award Poster Session</p>
         </div>
       </article>
@@ -97,6 +101,7 @@
           <h3>Researcher · Abbasi-Asl Lab, UCSF</h3>
           <p class="where">UC San Francisco · Prof. Reza Abbasi-Asl</p>
           <p>Built pipelines that line up 2D and 3D brain scans so they can be compared, extending empirical mode decomposition from flat signals to full volumes.</p>
+          <figure class="shot"><img src="images/brain-emd.svg" alt="Drawing: a moving brain scan warped onto a fixed one along a deformation grid, and the same slice split by empirical mode decomposition into layers from fine detail to a smooth residue" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">Brain image registration</span><span class="chip">Signal decomposition</span></p>
         </div>
       </article>
@@ -108,7 +113,7 @@
       <h2 class="section-title">Selected projects</h2>
 
       <article class="project">
-        <figure class="shot contain"><img src="images/neural-signal-ml.jpg" alt="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)" loading="lazy" width="1400" height="512"></figure>
+        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/neural-signal-ml.jpg" width="1400" height="512" aria-label="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)"><source data-src="assets/media/neural-signal-ml.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Neural Signal ML</h3>
           <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter.</p>
@@ -118,7 +123,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><img src="images/post-training.jpg" alt="Post Training Lab: test success rising from 71% after SFT to 85% after GRPO, with four policies racing on the same maze" loading="lazy" width="1200" height="1080"></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/post-training.jpg" width="1200" height="1080" aria-label="Post Training Lab: test success rising from 71% after SFT to 85% after GRPO, with four policies racing on the same maze"><source data-src="assets/media/post-training.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a key-and-door maze in two stages: supervised fine-tuning on demos from a planner with a bad habit, then GRPO against a verifiable reward. GRPO lifts held-out success from 71% to 85%; RL from scratch on the same budget reaches 1%.</p>
@@ -127,7 +132,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><img src="images/alphago-lite.jpg" alt="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board" loading="lazy" width="1400" height="925"></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/alphago-lite.jpg" width="1400" height="925" aria-label="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board"><source data-src="assets/media/alphago-lite.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>AlphaGo Lite</h3>
           <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
@@ -137,7 +142,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot contain"><img src="images/drone-bench.jpg" alt="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy" loading="lazy" width="1400" height="445"></figure>
+        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/drone-bench.jpg" width="1400" height="444" aria-label="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy"><source data-src="assets/media/drone-bench.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Sim to Real Drone Bench</h3>
           <p>Flies one course with a classical controller and RL policies, including a meta-learned one, and measures the sim-to-real gap. Built for a Crazyflie; so far it’s been tested against a deliberately mismatched simulated drone.</p>
@@ -146,7 +151,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><img src="images/driving-sim.jpg" alt="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path" loading="lazy" width="1400" height="875"></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/driving-sim.jpg" width="1400" height="875" aria-label="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path"><source data-src="assets/media/driving-sim.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
           <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. Tested on 60 drives, with every failure traced to its cause.</p>
@@ -158,7 +163,7 @@
 
 
       <article class="project">
-        <figure class="shot"><img src="images/neuroimaging.jpg" alt="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp" loading="lazy" width="1400" height="982"></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/neuroimaging.jpg" width="1400" height="982" aria-label="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp"><source data-src="assets/media/neuroimaging.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Neuroimaging Platform</h3>
           <p>A Mac app that opens 3D brain MRI scans, separates gray matter, white matter and fluid voxel by voxel, and places EEG electrodes on the head.</p>
@@ -168,7 +173,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><img src="images/sport-analyzer.jpg" alt="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics" loading="lazy" width="1400" height="640"></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/sport-analyzer.jpg" width="1400" height="640" aria-label="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics"><source data-src="assets/media/sport-analyzer.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Sport Analyzer</h3>
           <p>Strava for technique: tracks your body in 3D from a webcam and measures running stride, lifts, swings and shots. Ghost Coach learns a new movement from one example rep and scores yours against it.</p>
