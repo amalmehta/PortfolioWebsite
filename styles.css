@@ -181,3 +181,21 @@ main { overflow-x: clip; }
 .shot.contain video { object-fit: contain; object-position: center; background: #fcfcfa; }
 .role .shot { aspect-ratio: 16 / 9; max-width: 460px; margin: 0.2rem 0 0.9rem; }
 .role .shot img, .role .shot video { object-position: center; }
+
+/* Musings: short notes in three groups, side by side on wide screens */
+.musings { display: grid; gap: 1.25rem; }
+@media (min-width: 820px) { .musings { grid-template-columns: repeat(3, 1fr); } }
+.musing-group { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem 1.25rem 0.4rem; }
+.musing-group h3 { font-size: 1.3rem; margin: 0 0 0.15rem; }
+.musing-blurb { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--muted); }
+.musing { border-top: 1px solid var(--line); padding: 0.9rem 0; }
+.musing .when { margin: 0; font-size: 0.82rem; }
+.musing h4 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; line-height: 1.3; margin: 0.2rem 0 0.35rem; }
+.musing p:last-child { margin: 0; font-size: 0.95rem; }
+.musing-empty { border-top: 1px dashed var(--line); padding: 0.9rem 0; margin: 0; font-size: 0.92rem; font-style: italic; color: var(--muted); }
+.nav-name, .nav-links a { white-space: nowrap; }
+/* Phones: Research starts right below the intro, so its nav link gives way to Musings. */
+@media (max-width: 420px) {
+  .nav-links { gap: 1rem; }
+  .nav-links a[href="#research"], .nav-links .file { display: none; }
+}

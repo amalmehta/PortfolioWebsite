@@ -269,6 +269,16 @@ class ProjectsTest(unittest.TestCase):
         self.assertEqual(len(titles), len(set(titles)), titles)
 
 
+class MusingsTest(unittest.TestCase):
+    def test_three_groups(self):
+        for group in ("adventure", "life", "discovery"):
+            with self.subTest(group=group):
+                self.assertIn("musings-" + group, PAGE.ids)
+
+    def test_linked_from_nav(self):
+        self.assertIn(("a", "href", "#musings"), PAGE.links)
+
+
 class ColoursTest(unittest.TestCase):
     PAIRS = [
         ("accent", "accent-soft"),  # research chips
