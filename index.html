@@ -17,11 +17,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Fonts load without blocking the first paint; the fallbacks in styles.css show until they arrive. -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Inter:wght@400;500;600&amp;display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Inter:wght@400;500;600&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Inter:wght@400;500;600&amp;display=swap"></noscript>
   <link rel="stylesheet" href="styles.css">
   <script src="media.js" defer></script>
 </head>
 <body>
+  <a class="skip" href="#top">Skip to content</a>
   <header class="site-header">
     <nav class="wrap nav">
       <a class="nav-name" href="#top">Amal Mehta</a>
@@ -29,14 +33,14 @@
         <a href="#research">Research</a>
         <a href="#projects">Projects</a>
         <a href="#musings">Musings</a>
-        <a href="resume/Amal%20Mehta%20Resume.pdf">Resume</a>
+        <a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">Resume <span class="file">PDF</span></a>
       </div>
     </nav>
   </header>
 
   <main id="top">
     <section class="wrap hero">
-      <picture><source type="image/avif" srcset="images/portrait-240.avif 240w, images/portrait-480.avif 480w" sizes="(min-width: 820px) 220px, 120px"><source type="image/webp" srcset="images/portrait-240.webp 240w, images/portrait-480.webp 480w" sizes="(min-width: 820px) 220px, 120px"><img class="portrait" src="images/portrait.jpg" alt="Pencil-sketch portrait of Amal Mehta" width="480" height="480"></picture>
+      <picture><source type="image/avif" srcset="images/portrait-240.avif 240w, images/portrait-480.avif 480w" sizes="(min-width: 820px) 220px, 120px"><source type="image/webp" srcset="images/portrait-240.webp 240w, images/portrait-480.webp 480w" sizes="(min-width: 820px) 220px, 120px"><img class="portrait" src="images/portrait.jpg" fetchpriority="high" alt="Pencil-sketch portrait of Amal Mehta" width="480" height="480"></picture>
       <div class="hero-text">
       <h1>Amal Mehta</h1>
       <p class="lede">Research engineer in reinforcement learning and sensorimotor AI: agents that see, act and learn from experience, trained in simulation and made to hold up on real robots.</p>
@@ -45,7 +49,7 @@
         <li><a href="https://reachouts.me/?u=amal">Contact me</a></li>
         <li><a href="mailto:amal.mehta@gmail.com">amal.mehta@gmail.com</a></li>
         <li><a href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></li>
-        <li><a href="resume/Amal%20Mehta%20Resume.pdf">Resume (PDF)</a></li>
+        <li><a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">Resume (PDF, 92 KB)</a></li>
       </ul>
       </div>
     </section>
@@ -107,14 +111,14 @@
         </div>
       </article>
 
-      <p class="more">Education and skills are in the <a href="resume/Amal%20Mehta%20Resume.pdf">resume</a>.</p>
+      <p class="more">Education and skills are in the <a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">resume (PDF, 92 KB)</a>.</p>
     </section>
 
     <section id="projects" class="wrap section">
       <h2 class="section-title">Selected projects</h2>
 
       <article class="project">
-        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/neural-signal-ml.jpg" width="1400" height="512" aria-label="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)"><source data-src="assets/media/neural-signal-ml.mp4" type="video/mp4"></video></figure>
+        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/neural-signal-ml-960.webp" width="960" height="351" aria-label="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)"><source data-src="assets/media/neural-signal-ml.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Neural Signal ML</h3>
           <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter.</p>
@@ -124,7 +128,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/post-training.jpg" width="1200" height="1080" aria-label="Post Training Lab: test success rising from 71% after SFT to 85% after GRPO, with four policies racing on the same maze"><source data-src="assets/media/post-training.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/post-training-960.webp" width="960" height="864" aria-label="Post Training Lab: test success rising from 71% after SFT to 85% after GRPO, with four policies racing on the same maze"><source data-src="assets/media/post-training.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a key-and-door maze in two stages: supervised fine-tuning on demos from a planner with a bad habit, then GRPO against a verifiable reward. GRPO lifts held-out success from 71% to 85%; RL from scratch on the same budget reaches 1%.</p>
@@ -133,7 +137,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/alphago-lite.jpg" width="1400" height="925" aria-label="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board"><source data-src="assets/media/alphago-lite.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/alphago-lite-960.webp" width="960" height="634" aria-label="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board"><source data-src="assets/media/alphago-lite.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>AlphaGo Lite</h3>
           <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
@@ -143,7 +147,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/drone-bench.jpg" width="1400" height="444" aria-label="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy"><source data-src="assets/media/drone-bench.mp4" type="video/mp4"></video></figure>
+        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/drone-bench-960.webp" width="960" height="304" aria-label="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy"><source data-src="assets/media/drone-bench.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Sim to Real Drone Bench</h3>
           <p>Flies one course with a classical controller and RL policies, including a meta-learned one, and measures the sim-to-real gap. Built for a Crazyflie; so far it’s been tested against a deliberately mismatched simulated drone.</p>
@@ -152,7 +156,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/driving-sim.jpg" width="1400" height="875" aria-label="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path"><source data-src="assets/media/driving-sim.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/driving-sim-960.webp" width="960" height="600" aria-label="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path"><source data-src="assets/media/driving-sim.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
           <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. Tested on 60 drives, with every failure traced to its cause.</p>
@@ -164,7 +168,7 @@
 
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/neuroimaging.jpg" width="1400" height="982" aria-label="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp"><source data-src="assets/media/neuroimaging.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/neuroimaging-960.webp" width="960" height="673" aria-label="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp"><source data-src="assets/media/neuroimaging.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Neuroimaging Platform</h3>
           <p>A Mac app that opens 3D brain MRI scans, separates gray matter, white matter and fluid voxel by voxel, and places EEG electrodes on the head.</p>
@@ -174,7 +178,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/sport-analyzer.jpg" width="1400" height="640" aria-label="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics"><source data-src="assets/media/sport-analyzer.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/sport-analyzer-960.webp" width="960" height="439" aria-label="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics"><source data-src="assets/media/sport-analyzer.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Sport Analyzer</h3>
           <p>Strava for technique: tracks your body in 3D from a webcam and measures running stride, lifts, swings and shots. Ghost Coach learns a new movement from one example rep and scores yours against it.</p>
@@ -224,11 +228,11 @@
         </div>
       </div>
     </section>
-  </main>
 
-  <section class="wrap outside">
-    <p><strong>Outside work:</strong> competed in soccer tournaments, completed Ironman-distance triathlons, and climbed high mountains. Also traveled across Europe, Asia and the US East Coast, exploring their history, art and architecture to understand the world better.</p>
-  </section>
+    <section class="wrap outside">
+      <p><strong>Outside work:</strong> competed in soccer tournaments, completed Ironman-distance triathlons, and climbed high mountains. Also traveled across Europe, Asia and the US East Coast, exploring their history, art and architecture to understand the world better.</p>
+    </section>
+  </main>
 
   <footer class="wrap footer">
     <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Contact me</a> · <a href="mailto:amal.mehta@gmail.com">amal.mehta@gmail.com</a> · <a href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></p>

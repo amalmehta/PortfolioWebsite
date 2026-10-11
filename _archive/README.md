@@ -11,3 +11,4 @@ The blog, taken off the site for now. GitHub Pages doesn't publish folders that 
 1. Move `writing/` back to the site root and `images/writing/` back to `images/writing/`.
 2. Paste `writing-section.html` into `index.html` just before `</main>`.
 3. Add `<a href="#writing">Writing</a>` to the nav after Projects.
+4. The blog styles now live in `writing/writing.css` (the posts link it). For the Writing section on the main page, add `<link rel="stylesheet" href="writing/writing.css">` to `index.html` after `styles.css`.
