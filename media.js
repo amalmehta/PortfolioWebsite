@@ -1,7 +1,7 @@
 // Looping clips in .shot figures. Each <source> starts as data-src, so nothing
-// downloads until the clip is near the screen; clips pause when scrolled away
-// and a click pauses or resumes one. Without JavaScript, or with reduced motion
-// turned on, the poster image stays.
+// downloads until the clip is near the screen; clips pause when scrolled away,
+// and a click (or Enter/Space when focused) pauses or resumes one. Without
+// JavaScript, or with reduced motion turned on, the poster image stays.
 (function () {
   var videos = document.querySelectorAll(".shot video");
   if (!videos.length || !("IntersectionObserver" in window)) return;
@@ -32,15 +32,25 @@
     });
   }, { rootMargin: "200px 0px" });
 
+  function toggle(video) {
+    if (video.paused) {
+      delete video.dataset.userPaused;
+      play(video);
+    } else {
+      video.dataset.userPaused = "1";
+      video.pause();
+    }
+  }
+
   videos.forEach(function (video) {
     observer.observe(video);
-    video.addEventListener("click", function () {
-      if (video.paused) {
-        delete video.dataset.userPaused;
-        play(video);
-      } else {
-        video.dataset.userPaused = "1";
-        video.pause();
+    // Focusable, so keyboard users can pause a clip with Enter or Space too.
+    video.tabIndex = 0;
+    video.addEventListener("click", function () { toggle(video); });
+    video.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle(video);
       }
     });
   });

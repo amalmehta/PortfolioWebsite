@@ -32,6 +32,10 @@ class Page(HTMLParser):
         self.roles = []  # (title, has_media) per <article class="role">
         self._role = None
         self.metas = {}  # property/name -> content
+        self.pictures = []  # (img attrs, [srcset candidate URLs]) per <picture>
+        self._picture = None
+        self.resume_links = []  # visible text of each link to the resume PDF
+        self._resume_link = None
         self.projects = []  # one dict per <article class="project">
         self._project = None
         self._depth = 0
@@ -46,6 +50,14 @@ class Page(HTMLParser):
                 self.links.append((tag, attr, a[attr]))
         if tag == "img":
             self.imgs.append(a)
+            if self._picture is not None:
+                self.pictures.append((a, self._picture))
+        if tag == "picture":
+            self._picture = []
+        if tag == "source" and self._picture is not None and a.get("srcset"):
+            self._picture += [c.split()[0] for c in a["srcset"].split(",")]
+        if tag == "a" and local_target(a.get("href", "")) == RESUME_PDF:
+            self._resume_link = ""
         if tag == "video":
             self.videos.append(dict(a, sources=[]))
         if tag == "source" and self.videos:
@@ -79,6 +91,11 @@ class Page(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "h3":
             self._in_h3 = False
+        if tag == "picture":
+            self._picture = None
+        if tag == "a" and self._resume_link is not None:
+            self.resume_links.append(" ".join(self._resume_link.split()))
+            self._resume_link = None
         if self._role is not None and tag == "article":
             self.roles.append(self._role)
             self._role = None
@@ -89,6 +106,8 @@ class Page(HTMLParser):
                 self._project = None
 
     def handle_data(self, data):
+        if self._resume_link is not None:
+            self._resume_link += data
         if self._in_h3 and self._project is not None:
             self._project["title"] += data
         if self._in_h3 and self._role is not None:
@@ -102,8 +121,23 @@ def parse(path):
 
 
 def image_size(path):
-    """(width, height) of a PNG, baseline/progressive JPEG, or SVG with width/height."""
+    """(width, height) of a PNG, baseline/progressive JPEG, WebP, AVIF, or SVG with width/height."""
     data = path.read_bytes()
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        chunk = data[12:16]
+        if chunk == b"VP8 ":
+            w, h = struct.unpack("<HH", data[26:30])
+            return w & 0x3FFF, h & 0x3FFF
+        if chunk == b"VP8L":
+            b = int.from_bytes(data[21:25], "little")
+            return (b & 0x3FFF) + 1, ((b >> 14) & 0x3FFF) + 1
+        if chunk == b"VP8X":
+            return (int.from_bytes(data[24:27], "little") + 1,
+                    int.from_bytes(data[27:30], "little") + 1)
+    if data[4:12] in (b"ftypavif", b"ftypavis"):
+        at = data.find(b"ispe")
+        if at > 0:
+            return struct.unpack(">II", data[at + 8:at + 16])
     if path.suffix == ".svg":
         m = re.search(rb'<svg[^>]*\swidth="(\d+)"[^>]*\sheight="(\d+)"', data)
         if m:
@@ -205,6 +239,20 @@ class ImagesTest(unittest.TestCase):
                 self.assertEqual((int(img["width"]), int(img["height"])), actual)
 
 
+    def test_picture_variants_exist_with_same_shape(self):
+        # Each AVIF/WebP in a <picture> must exist and keep the fallback's
+        # aspect ratio, or the browser would show a squashed image.
+        self.assertTrue(PAGE.pictures)
+        for img, candidates in PAGE.pictures:
+            ratio = int(img["width"]) / int(img["height"])
+            for url in candidates:
+                with self.subTest(src=url):
+                    path = local_target(url)
+                    self.assertTrue(path.is_file(), url)
+                    w, h = image_size(path)
+                    self.assertAlmostEqual(w / h, ratio, delta=0.01)
+
+
 class MediaTest(unittest.TestCase):
     REQUIRED = ("autoplay", "muted", "loop", "playsinline")
     # Research entries that must carry an image or clip (matched on their heading).
@@ -286,6 +334,8 @@ class ColoursTest(unittest.TestCase):
         ("text", "bg"),
         ("muted", "bg"),
         ("accent", "bg"),           # links and dates
+        ("faint", "bg"),            # tags, credits, publication line
+        ("faint", "surface"),
     ]
 
     def test_text_contrast_in_both_themes(self):
@@ -310,6 +360,20 @@ PHONE = re.compile(r"(\+?\d[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}")
 class ResumeTest(unittest.TestCase):
     def test_source_has_no_phone_number(self):
         self.assertIsNone(PHONE.search(RESUME_TEX.read_text(encoding="utf-8")))
+
+    def test_links_say_pdf_and_size(self):
+        # Every resume link says it opens a PDF; the ones in the page body also
+        # give its size, which must match the file (rebuild the PDF -> update).
+        size_kb = round(RESUME_PDF.stat().st_size / 1000)
+        self.assertTrue(PAGE.resume_links)
+        for text in PAGE.resume_links:
+            with self.subTest(link=text):
+                self.assertIn("PDF", text)
+        sized = [t for t in PAGE.resume_links if re.search(r"\d+ KB", t)]
+        self.assertGreaterEqual(len(sized), 2, PAGE.resume_links)
+        for text in sized:
+            with self.subTest(link=text):
+                self.assertIn("%d KB" % size_kb, text)
 
     def test_pdf_is_one_page_without_phone_number(self):
         try:

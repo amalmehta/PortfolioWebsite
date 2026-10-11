@@ -1,10 +1,14 @@
 #!/bin/zsh
-# Builds the AVIF and WebP copies the page serves, at a few widths, from the
-# JPEGs in images/. Needs sips (macOS), avifenc (libavif) and cwebp (libwebp):
-#   brew install libavif webp
-# Run from the repo root after adding or replacing a screenshot:
-#   tools/make-images.sh            # every image
+# Builds the compressed copies the page actually serves from the full-size
+# JPEGs in images/ (the JPEGs stay as the originals and the no-AVIF/WebP fallback):
+#   portrait.jpg  -> portrait-240/-480 .avif and .webp (the <picture> srcset)
+#   <project>.jpg -> <project>-960.webp                (the <video> poster)
+# Needs sips (macOS), avifenc and cwebp:  brew install libavif webp
+# Run from the repo root after adding or replacing an image:
+#   tools/make-images.sh                     # every image
 #   tools/make-images.sh images/drone-bench.jpg
+# Then set the poster's width/height on its <video> to the new file's size
+# (the tests check they match).
 set -euo pipefail
 tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
 
@@ -13,13 +17,15 @@ files=("$@")
 
 for src in $files; do
   name=${src:t:r}
-  full=$(sips -g pixelWidth "$src" | awk '/pixelWidth/{print $2}')
-  if [[ $name == portrait ]]; then widths=(240 480); else widths=(480 800 1400); fi
-  for w in $widths; do
-    (( w > full )) && w=$full
-    sips -s format png --resampleWidth $w "$src" --out "$tmp/$name.png" >/dev/null
-    avifenc -q 60 -s 4 "$tmp/$name.png" "images/$name-$w.avif" >/dev/null
-    cwebp -quiet -q 78 -m 6 "$tmp/$name.png" -o "images/$name-$w.webp"
-  done
-  echo "$src -> ${widths[*]}"
+  if [[ $name == portrait ]]; then
+    for w in 240 480; do
+      sips -s format png --resampleWidth $w "$src" --out "$tmp/$name.png" >/dev/null
+      avifenc -q 60 -s 4 "$tmp/$name.png" "images/$name-$w.avif" >/dev/null
+      cwebp -quiet -q 80 -m 6 "$tmp/$name.png" -o "images/$name-$w.webp"
+    done
+  else
+    sips -s format png --resampleWidth 960 "$src" --out "$tmp/$name.png" >/dev/null
+    cwebp -quiet -q 80 -m 6 "$tmp/$name.png" -o "images/$name-960.webp"
+  fi
+  echo "$src: $(ls images/$name-*.* | tr '\n' ' ')"
 done
