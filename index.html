@@ -137,6 +137,15 @@
       </article>
 
       <article class="project">
+        <figure class="shot"><img src="images/reward-hack-zoo.svg" alt="Drawing: over training, proxy reward keeps climbing while the true score falls, with the step where hacking starts marked; below, the five environments" loading="lazy" width="1400" height="875"></figure>
+        <div class="project-text">
+          <h3>Reward Hack Zoo</h3>
+          <p>Five tiny post-training environments, each with a naive reward a model can game: length bias, sycophancy, test special-casing, keyword stuffing and self-grading. A 135M-parameter model is trained on each with RL and rejection-sampling SFT, and plots mark the step where the reward it chases pulls away from the score that actually matters. Runs in progress.</p>
+          <p class="tags"><span class="chip">Reward hacking</span><span class="chip">Post-training</span><span class="chip">GRPO</span><span class="chip">Evals</span></p>
+        </div>
+      </article>
+
+      <article class="project">
         <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/alphago-lite-960.webp" width="960" height="634" aria-label="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board"><source data-src="assets/media/alphago-lite.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>AlphaGo Lite</h3>

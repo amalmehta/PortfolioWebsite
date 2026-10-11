@@ -27,7 +27,7 @@ resume/
   Amal Mehta Resume.pdf       Built resume, linked from the site
 tools/
   make-images.sh              Builds AVIF/WebP copies of the JPEGs in images/
-  draw-research-art.py        Draws the four research-entry SVGs in images/
+  draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
 tests/
   test_site.py                 Automated checks: links, images, media, cards, contrast, resume
 docs/

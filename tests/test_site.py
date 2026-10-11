@@ -301,8 +301,8 @@ class MediaTest(unittest.TestCase):
 
 
 class ProjectsTest(unittest.TestCase):
-    def test_seven_projects(self):
-        self.assertEqual(len(PAGE.projects), 7, [p["title"] for p in PAGE.projects])
+    def test_eight_projects(self):
+        self.assertEqual(len(PAGE.projects), 8, [p["title"] for p in PAGE.projects])
 
     def test_each_card_is_complete(self):
         for p in PAGE.projects:
@@ -311,7 +311,11 @@ class ProjectsTest(unittest.TestCase):
                 self.assertIsNotNone(p["media"], "media slot")
                 self.assertTrue(p["text"], "description")
                 self.assertGreater(p["chips"], 0, "tags")
-                self.assertEqual(p["media"].get("preload"), "none", "lazy media")
+                media = p["media"]
+                if "loading" in media:  # a still image
+                    self.assertEqual(media["loading"], "lazy", "lazy media")
+                else:  # a clip
+                    self.assertEqual(media.get("preload"), "none", "lazy media")
 
     def test_titles_are_unique(self):
         titles = [p["title"].strip() for p in PAGE.projects]

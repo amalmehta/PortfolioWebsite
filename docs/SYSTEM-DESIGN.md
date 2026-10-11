@@ -24,12 +24,12 @@ flowchart LR
 
 | Part | Job |
 |---|---|
-| `index.html` | All content. A sticky header, a short intro with contact links, five research/work entries laid out as a timeline (dates on the left, a two-sentence summary and a tags line), then seven project cards, a Musings section of short dated notes in three groups (Adventure, Life, Discovery), and a one-line "Outside work" note above the footer. |
+| `index.html` | All content. A sticky header, a short intro with contact links, five research/work entries laid out as a timeline (dates on the left, a two-sentence summary and a tags line), then eight project cards, a Musings section of short dated notes in three groups (Adventure, Life, Discovery), and a one-line "Outside work" note above the footer. |
 | `thinking.html` | "Things I'm thinking about": a separate page of numbered open questions, sharing the header, footer and stylesheet. Linked below Musings and in the footer of the profile page. |
 | `styles.css` | Typography (Newsreader serif for headings, Inter for body), a 1040 px column, a two-column project layout above 820 px that stacks on phones, and colour tokens that switch with the system's dark mode: a blue accent (dates, research chips, links) and a terracotta one (section labels, project chips), plus a faint two-colour wash behind the intro. Accent text on its chip background is at least 4.5:1 contrast in both themes. |
 | `_archive/` | The blog, archived. Pages skips folders starting with `_`, so it's kept in the repo but not published. `_archive/README.md` says how to restore it. |
 | `images/portrait.jpg` | The intro portrait: a pencil sketch beside the name on desktop, above it on phones. |
-| `images/` | One screenshot per project, taken from each project's own repo. Each is also its project clip's poster. The four lab entries show SVG drawings (`physicsai.svg`, `robot-soccer.svg`, `vip-lab.svg`, `brain-emd.svg`) drawn by `tools/draw-research-art.py`. |
+| `images/` | One screenshot per project, taken from each project's own repo. Each is also its project clip's poster. The four lab entries and the Reward Hack Zoo card show SVG drawings (`physicsai.svg`, `robot-soccer.svg`, `vip-lab.svg`, `brain-emd.svg`, `reward-hack-zoo.svg`) drawn by `tools/draw-research-art.py`; Reward Hack Zoo has no clip or results yet. |
 | `assets/media/` | A short looping MP4 per project card. Placeholders until real clips are supplied; see its README. |
 | `media.js` | Lazy-loads the clips: each `<source>` holds its file in `data-src`, and the script fills in `src` when the clip is within 200 px of the screen, pauses clips scrolled away, and lets a click pause or resume one. With no JavaScript or with reduced motion on, the poster shows instead. |
 | `resume/` | LaTeX source and the PDF it builds. |
@@ -46,7 +46,7 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 
 ## Key decisions
 
-- **Plain HTML over a framework or site generator.** One page with seven cards doesn't need one, and anyone can edit it. The cost is that repeated card markup is copied by hand.
+- **Plain HTML over a framework or site generator.** One page with eight cards doesn't need one, and anyone can edit it. The cost is that repeated card markup is copied by hand.
 - **No code links for private projects.** Most projects are in private repos, so their cards have a write-up and screenshot only. Neural Signal ML links to its public repo, and AlphaGo Lite to its live in-browser demo.
 - **Plain-language project descriptions.** Each card says what the project does and why it's interesting before naming techniques; the techniques go in the small tags line.
 - **Resume built from source.** The resume PDF is built from LaTeX in `resume/`, so it can be edited and rebuilt in one step. It lists email, LinkedIn and this site, and no phone number.
@@ -61,7 +61,7 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 
 ## How it's tested
 
-Automatically, with `python3 -m unittest discover tests` (standard library only; see [Instructions](INSTRUCTIONS.md#run-the-tests)). The tests check that every local link, image and anchor resolves, nothing links into `_archive/`, each image's and poster's `width`/`height` match the file, every clip is a muted inline loop with a poster that waits for `media.js`, every clip and poster is under 2 MB, all seven project cards and the four named research entries have an image or clip, text and chip colours reach 4.5:1 contrast in both themes, and the resume has no phone number and is one page (the PDF check runs when `pypdf` is installed).
+Automatically, with `python3 -m unittest discover tests` (standard library only; see [Instructions](INSTRUCTIONS.md#run-the-tests)). The tests check that every local link, image and anchor resolves, nothing links into `_archive/`, each image's and poster's `width`/`height` match the file, every clip is a muted inline loop with a poster that waits for `media.js`, every clip and poster is under 2 MB, all eight project cards and the four named research entries have an image or clip, text and chip colours reach 4.5:1 contrast in both themes, and the resume has no phone number and is one page (the PDF check runs when `pypdf` is installed).
 
 Also by hand, with a headless browser (Playwright) against a local server:
 
