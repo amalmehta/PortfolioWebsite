@@ -4,6 +4,7 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 
 ```
 index.html                    The whole site: intro, research & work, projects, musings
+thinking.html                 "Things I'm thinking about": its own page, linked from the profile
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, blog styles
 media.js                      Lazy-loads and plays the looping clips

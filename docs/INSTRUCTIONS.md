@@ -30,6 +30,7 @@ Everything visible lives in `index.html`:
 - **Projects**: one `<article class="project">` per project, with a looping clip (its screenshot as poster), a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
 - **Research & work**: one `<article class="role">` per role.
 - **Musings**: the `<section id="musings">` block after Projects, with three groups: Adventure, Life and Discovery. To add a note, copy the commented-out `<article class="musing">` template inside its group, fill in the date, title and a few sentences, and put it above older notes. Delete the group's "First note coming soon." line once its first note is in.
+- **Things I'm thinking about**: its own page, `thinking.html`, linked below Musings and in the footer. To add a thought, copy the commented-out `<li class="thought">` template, fill in the question, a few sentences and the date, and put it above older ones (they number themselves). Delete "First thought coming soon." once the first one is in.
 
 Colours, fonts and spacing are in `styles.css`. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
 
