@@ -11,6 +11,7 @@ favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, blog styles
 media.js                      Lazy-loads and plays the looping clips
 _archive/                     Archived blog (not published; see its README)
+_drafts/                      Unpublished drafts (Pages skips _ folders); values.md holds draft values
 assets/media/                 Looping project clips (MP4); placeholders for now
   README.md                   Which files to supply, and what each should show
 images/                       Project screenshots (also the clips' posters) and research drawings (SVG)

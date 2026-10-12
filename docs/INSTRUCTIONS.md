@@ -32,7 +32,7 @@ Everything visible lives in `index.html`:
 - **Musings**: the `<section id="musings">` block after Projects, with three groups: Adventure, Life and Discovery. To add a note, copy the commented-out `<article class="musing">` template inside its group, fill in the date, title and a few sentences, and put it above older notes. Delete the group's "First note coming soon." line once its first note is in.
 - **Things I'm thinking about**: its own page, `thinking.html`, linked below Musings and in the footer. To add a thought, copy the commented-out `<li class="thought">` template, fill in the question, a few sentences and the date, and put it above older ones (they number themselves). Delete "First thought coming soon." once the first one is in.
 - **Photos**: its own page, `photos.html`, linked below Musings and in the footer. See [Add a photo](#add-a-photo).
-- **Values & inspiration**: its own page, `values.html`, linked only from the footer ("Values"). Edit the numbered values directly; for inspiration, copy the commented-out `<li class="inspo-item">` template and delete "Coming soon." once the first one is in.
+- **Values & inspiration**: its own page, `values.html`, linked only from the footer ("Values"). Each section (Values, Inspiration, Things I care about) has a commented-out template to copy; delete that section's "Coming soon." once its first entry is in.
 
 Colours, fonts and spacing are in `styles.css`. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
 
