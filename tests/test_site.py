@@ -361,6 +361,19 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 
+class ValuesPageTest(unittest.TestCase):
+    """values.html: linked quietly from the footer, not the header."""
+
+    def test_linked_from_profile_footer(self):
+        self.assertIn("values.html", [v for _, _, v in PAGE.links])
+
+    def test_local_links_resolve(self):
+        page = parse(ROOT / "values.html")
+        missing = [v for _, _, v in page.links
+                   if local_target(v) is not None and not local_target(v).is_file()]
+        self.assertEqual(missing, [])
+
+
 class ColoursTest(unittest.TestCase):
     PAIRS = [
         ("accent", "accent-soft"),  # research chips

@@ -201,3 +201,15 @@ picture { display: contents; }
 .photos-empty { grid-column: 1 / -1; margin: 0; padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .wishlist { margin-top: 3.5rem; }
 .wishlist-note { margin: -1.25rem 0 1.5rem; color: var(--muted); font-size: 0.92rem; }
+
+/* Values & inspiration: its own page (values.html), linked quietly from the footer */
+.footer a.quiet { color: var(--muted); text-decoration-color: var(--line); }
+.values { list-style: none; padding: 0; margin: 0 0 3rem; counter-reset: value; }
+.value { counter-increment: value; position: relative; padding: 0 0 1.25rem 2.75rem; margin-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
+.value::before { content: counter(value, decimal-leading-zero); position: absolute; left: 0; top: 0.15rem; font-family: var(--serif); font-size: 1.05rem; color: var(--warm); }
+.value h2 { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; margin: 0 0 0.3rem; }
+.value p { margin: 0; color: var(--muted); }
+.inspo { list-style: none; padding: 0; margin: 0; }
+.inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+.inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
+.inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
