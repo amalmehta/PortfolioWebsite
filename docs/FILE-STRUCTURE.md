@@ -29,6 +29,7 @@ resume/
 tools/
   make-images.sh              Builds AVIF/WebP copies of the JPEGs in images/
   draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
+  draw-places.py              Draws the "Places I'd like to go" SVGs in images/places/
 tests/
   test_site.py                 Automated checks: links, images, media, cards, contrast, resume
 docs/

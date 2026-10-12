@@ -81,6 +81,8 @@ mkdir -p images/photos && sips -Z 1600 -s format png ~/Pictures/IMG_1234.HEIC --
 
 Then copy the commented-out `<figure class="photo">` template in `photos.html`. Fill in the file name, alt text (what the photo shows), the place and year, and one line about the moment, and put it above older photos. Set `width` and `height` to the new file's size (`sips -g pixelWidth -g pixelHeight images/photos/place-year.webp`); the tests check they match. Delete "Photos coming soon." once the first photo is in.
 
+Below your photos, **Places I’d like to go** shows drawings (not photos) of one iconic spot per place, in `images/places/`. `tools/draw-places.py` draws them; edit it and run `python3 tools/draw-places.py` to redraw.
+
 ## Rebuild the resume
 
 The resume PDF is built from `resume/Amal Mehta Resume.tex` with [Tectonic](https://tectonic-typesetting.github.io/) and the macOS Times New Roman font:
