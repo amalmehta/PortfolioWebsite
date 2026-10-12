@@ -188,3 +188,16 @@ picture { display: contents; }
 .thought .when { margin: 0; font-size: 0.85rem; }
 .thought-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .role .tags + .tags { margin-top: 0.6rem; }
+
+/* Photos: its own page (photos.html), a grid of captioned photos */
+.photos-page { max-width: 1040px; }
+.photos { display: grid; gap: 1.5rem; }
+@media (min-width: 640px) { .photos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .photos { grid-template-columns: repeat(3, 1fr); } }
+.photo { margin: 0; }
+.photo img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); }
+.photo figcaption { margin-top: 0.55rem; font-size: 0.92rem; color: var(--muted); line-height: 1.45; }
+.photo figcaption strong { display: block; color: var(--text); font-weight: 600; }
+.photos-empty { grid-column: 1 / -1; margin: 0; padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
+.wishlist { margin-top: 3.5rem; }
+.wishlist-note { margin: -1.25rem 0 1.5rem; color: var(--muted); font-size: 0.92rem; }

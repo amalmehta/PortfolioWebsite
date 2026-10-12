@@ -31,6 +31,7 @@ Everything visible lives in `index.html`:
 - **Research & work**: one `<article class="role">` per role.
 - **Musings**: the `<section id="musings">` block after Projects, with three groups: Adventure, Life and Discovery. To add a note, copy the commented-out `<article class="musing">` template inside its group, fill in the date, title and a few sentences, and put it above older notes. Delete the group's "First note coming soon." line once its first note is in.
 - **Things I'm thinking about**: its own page, `thinking.html`, linked below Musings and in the footer. To add a thought, copy the commented-out `<li class="thought">` template, fill in the question, a few sentences and the date, and put it above older ones (they number themselves). Delete "First thought coming soon." once the first one is in.
+- **Photos**: its own page, `photos.html`, linked below Musings and in the footer. See [Add a photo](#add-a-photo).
 
 Colours, fonts and spacing are in `styles.css`. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
 
@@ -69,6 +70,18 @@ The blog is archived in `_archive/` and not published. Follow `_archive/README.m
 ## Portrait
 
 `images/portrait.jpg` is a 480 px square; the page crops it to a circle. To replace it, save a new square image there. Leave white space around the head so the circle doesn't clip it.
+
+## Add a photo
+
+Photos live in `images/photos/` as WebP, at most 1600 px on the long side. Converting with `cwebp` drops the photo's location and camera data, so GPS coordinates aren't published. From the repo root (works with JPEG and HEIC):
+
+```bash
+mkdir -p images/photos && sips -Z 1600 -s format png ~/Pictures/IMG_1234.HEIC --out /tmp/photo.png && cwebp -q 80 -metadata none /tmp/photo.png -o images/photos/place-year.webp
+```
+
+Then copy the commented-out `<figure class="photo">` template in `photos.html`. Fill in the file name, alt text (what the photo shows), the place and year, and one line about the moment, and put it above older photos. Set `width` and `height` to the new file's size (`sips -g pixelWidth -g pixelHeight images/photos/place-year.webp`); the tests check they match. Delete "Photos coming soon." once the first photo is in.
+
+Below your photos, **Places I’d like to go** shows drawings (not photos) of one iconic spot per place, in `images/places/`. `tools/draw-places.py` draws them; edit it and run `python3 tools/draw-places.py` to redraw.
 
 ## Rebuild the resume
 

@@ -332,18 +332,33 @@ class MusingsTest(unittest.TestCase):
         self.assertIn(("a", "href", "#musings"), PAGE.links)
 
 
-class ThinkingPageTest(unittest.TestCase):
-    """thinking.html: a page of its own, linked from the profile."""
+class SubpagesTest(unittest.TestCase):
+    """thinking.html and photos.html: pages of their own, linked from the profile."""
+    PAGES = (THINKING, ROOT / "photos.html")
 
     def test_linked_from_profile(self):
-        self.assertIn("thinking.html", [v for _, _, v in PAGE.links])
+        profile_links = [v for _, _, v in PAGE.links]
+        for path in self.PAGES:
+            with self.subTest(page=path.name):
+                self.assertIn(path.name, profile_links)
 
     def test_local_links_resolve(self):
-        page = parse(THINKING)
-        missing = [v for _, _, v in page.links
-                   if local_target(v) is not None and not local_target(v).is_file()]
-        self.assertEqual(missing, [])
-        self.assertIn("index.html", [v for _, _, v in page.links])
+        for path in self.PAGES:
+            with self.subTest(page=path.name):
+                page = parse(path)
+                missing = [v for _, _, v in page.links
+                           if local_target(v) is not None and not local_target(v).is_file()]
+                self.assertEqual(missing, [])
+                self.assertIn("index.html", [v for _, _, v in page.links])
+
+    def test_photos_have_alt_and_size(self):
+        # Each photo needs alt text and its real width/height, so the grid
+        # doesn't jump as photos load.
+        for img in parse(ROOT / "photos.html").imgs:
+            with self.subTest(src=img["src"]):
+                self.assertTrue((img.get("alt") or "").strip(), "alt text")
+                self.assertEqual(img.get("loading"), "lazy")
+                self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 
 class ColoursTest(unittest.TestCase):

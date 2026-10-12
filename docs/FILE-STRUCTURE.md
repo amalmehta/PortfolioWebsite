@@ -5,6 +5,7 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 ```
 index.html                    The whole site: intro, research & work, projects, musings
 thinking.html                 "Things I'm thinking about": its own page, linked from the profile
+photos.html                   Photos from travels: its own page, linked from the profile
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, blog styles
 media.js                      Lazy-loads and plays the looping clips
@@ -28,6 +29,7 @@ resume/
 tools/
   make-images.sh              Builds AVIF/WebP copies of the JPEGs in images/
   draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
+  draw-places.py              Draws the "Places I'd like to go" SVGs in images/places/
 tests/
   test_site.py                 Automated checks: links, images, media, cards, contrast, resume
 docs/
