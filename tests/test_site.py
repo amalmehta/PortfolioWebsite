@@ -429,15 +429,15 @@ class ResumeTest(unittest.TestCase):
         self.assertIsNone(PHONE.search(RESUME_TEX.read_text(encoding="utf-8")))
 
     def test_links_say_pdf_and_size(self):
-        # Every resume link says it opens a PDF; the one in the intro also
-        # gives its size, which must match the file (rebuild the PDF -> update).
+        # Every resume link says it opens a PDF; the ones in the page body also
+        # give its size, which must match the file (rebuild the PDF -> update).
         size_kb = round(RESUME_PDF.stat().st_size / 1000)
         self.assertTrue(PAGE.resume_links)
         for text in PAGE.resume_links:
             with self.subTest(link=text):
                 self.assertIn("PDF", text)
         sized = [t for t in PAGE.resume_links if re.search(r"\d+ KB", t)]
-        self.assertGreaterEqual(len(sized), 1, PAGE.resume_links)
+        self.assertGreaterEqual(len(sized), 2, PAGE.resume_links)
         for text in sized:
             with self.subTest(link=text):
                 self.assertIn("%d KB" % size_kb, text)

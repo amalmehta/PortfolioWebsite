@@ -58,7 +58,8 @@
         <div>
           <h3>Independent ML &amp; Robotics Research</h3>
           <p class="where">San Francisco Bay Area</p>
-          <p>Building and evaluating learning systems end to end; some of the projects are below. Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience.</p>
+          <p>Building and evaluating learning systems end to end: decoding hand movement from motor-cortex spikes, post-training a small transformer with GRPO, testing how well RL and meta-learned drone policies transfer from simulation, and training a Go engine from scratch by self-play. Some of these projects are below. Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience.</p>
+          <p class="tags"><span class="chip">Neural decoding</span><span class="chip">GRPO</span><span class="chip">Sim-to-real</span><span class="chip">Meta-learning</span><span class="chip">Self-play RL</span></p>
         </div>
       </article>
 
@@ -78,8 +79,8 @@
         <p class="when">2023 – 2024</p>
         <div>
           <h3>Deep RL Researcher · Hybrid Robotics Lab</h3>
-          <p class="where">UC Berkeley · Prof. Koushil Sreenath</p>
-          <p>Trained one RL policy that takes a Unitree Go1 through the whole task (walk to the ball, kick it at a target, stay balanced) in place of a separate policy per skill. On the real robot it hit the target about 60% of the time.</p>
+          <p class="where">UC Berkeley · Prof. Koushil Sreenath · a robot dog that learns to shoot a soccer ball</p>
+          <p>Trained one RL policy that takes a Unitree Go1 through the whole task (walk to the ball, kick it at a target, stay balanced) in place of a separate policy per skill. On the real robot it hit the target about 60% of the time. Took graduate classes in RL and control theory alongside.</p>
           <figure class="shot"><img src="images/robot-soccer.svg" alt="Drawing: a four-legged robot dog kicks a soccer ball along an arc into a target in a goal, on a simulation grid" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">PPO</span><span class="chip">IsaacGym</span><span class="chip">Multi-stage rewards</span><span class="chip">Sim-to-real</span><span class="chip">RLPD</span></p>
           <p class="links"><a href="papers/robot-soccer-thesis.pdf" type="application/pdf">Thesis (PDF, 6.3 MB) →</a></p>
@@ -109,7 +110,7 @@
         </div>
       </article>
 
-      <p class="more">B.A. in Computer Science from UC Berkeley, focused on robotics and linear system theory, with Regents, merit and leadership awards.</p>
+      <p class="more">B.A. in Computer Science from UC Berkeley, focused on robotics and linear system theory, with Regents, merit and leadership awards. Education and skills are in the <a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">resume (PDF, 93 KB)</a>.</p>
     </section>
 
     <section id="projects" class="wrap section">
@@ -120,7 +121,7 @@
         <div class="project-text">
           <h3>Neural Signal ML</h3>
           <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter.</p>
-          <p class="tags"><span class="chip">Neural decoding</span><span class="chip">Motor cortex</span><span class="chip">Kalman filter vs GRU</span></p>
+          <p class="tags"><span class="chip">Neural decoding</span><span class="chip">Motor cortex</span><span class="chip">Kalman filter vs GRU</span><span class="chip">PyTorch</span></p>
           <p class="links"><a href="https://github.com/amalmehta/NeuralSignalML">Code and write-up →</a></p>
         </div>
       </article>
@@ -130,7 +131,7 @@
         <div class="project-text">
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a key-and-door maze in two stages: supervised fine-tuning on demos from a planner with a bad habit, then GRPO against a verifiable reward. GRPO lifts held-out success from 71% to 85%; RL from scratch on the same budget reaches 1%.</p>
-          <p class="tags"><span class="chip">Post-training</span><span class="chip">SFT → GRPO</span><span class="chip">Transformers</span></p>
+          <p class="tags"><span class="chip">Post-training</span><span class="chip">SFT → GRPO</span><span class="chip">Transformers</span><span class="chip">PyTorch</span></p>
         </div>
       </article>
 
@@ -148,7 +149,7 @@
         <div class="project-text">
           <h3>AlphaGo Lite</h3>
           <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
-          <p class="tags"><span class="chip">Self-play RL</span><span class="chip">Monte Carlo tree search</span></p>
+          <p class="tags"><span class="chip">Self-play RL</span><span class="chip">Monte Carlo tree search</span><span class="chip">PyTorch</span></p>
           <p class="links"><a href="https://amalmehta.github.io/AlphaGoLite/">Play it in your browser →</a></p>
         </div>
       </article>
