@@ -175,7 +175,7 @@ picture { display: contents; }
 .nav-name, .nav-links a { white-space: nowrap; }
 /* Phones: Research starts right below the intro, so its nav link gives way to the others. */
 @media (max-width: 420px) {
-  .nav-links { gap: 1rem; }
+  .nav-links { gap: 0.8rem; }
   .nav-links a[href="#research"], .nav-links .file { display: none; }
 }
 

@@ -34,7 +34,7 @@ Everything visible lives in `index.html`:
 - **Things I'm thinking about**: its own page, `thinking.html`, linked in the footer. To add a thought, copy the commented-out `<li class="thought">` template, fill in the question, a few sentences and the date, and put it above older ones (they number themselves). Delete "First thought coming soon." once the first one is in.
 - **Photos**: its own page, `photos.html`, linked in the footer. See [Add a photo](#add-a-photo).
 - **Values & inspiration**: its own page, `values.html`, linked only from the footer ("Values"). Each section (Values, Inspiration, Things I care about) has a commented-out template to copy; delete that section's "Coming soon." once its first entry is in.
-- **Fan of**: its own page, `fan.html`, linked in the header of every page. Teams, People and Things work the same way as the Values page: copy the commented-out template, and delete "Coming soon." once the first entry is in.
+- **Interests**: its own page, `interests.html`, linked in the header of every page. Fan of, Hobbies and Curious about work the same way as the Values page: copy the commented-out template, and delete "Coming soon." once the first entry is in.
 
 Colours, fonts and spacing are in `styles.css`. The fonts are self-hosted: the `@font-face` rules at the top of `styles.css` point at `fonts/`, and each page preloads the two Latin files. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
 

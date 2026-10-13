@@ -28,7 +28,7 @@ flowchart LR
 | `thinking.html` | "Things I'm thinking about": a separate page of numbered open questions, sharing the header, footer and stylesheet. Linked in the footer of the profile page. |
 | `photos.html` | Photos from travels: a separate page with a grid of captioned photos (place and year, plus a line about the moment), one column on phones up to three on wide screens. Photos live in `images/photos/` as WebP with location data stripped. Below them, "Places I'd like to go" shows six original drawings of an iconic spot from each place (`images/places/`, drawn by `tools/draw-places.py`), labelled as drawings. Linked in the footer of the profile page. |
 | `values.html` | Values & inspiration: three lists, Values (numbered), Inspiration and Things I care about, each empty until filled in. Linked only from the footer, as a muted "Values" link, so it's there for those who look without competing with the work. |
-| `fan.html` | Fan of: three lists, Teams, People and Things, each empty until filled in, using the Values page's styles. Linked in the header of every page; on phones the header keeps Fan of and Resume and drops the links you can reach by scrolling or through Profile. |
+| `interests.html` | Interests: three lists, Fan of, Hobbies and Curious about, each empty until filled in, using the Values page's styles. Linked in the header of every page; on phones the header keeps Interests and Resume and drops the links you can reach by scrolling or through Profile. |
 | `papers/` | PDFs linked from the site: the Hybrid Robotics Lab thesis, the melanoma paper and the two school project reports. |
 | `styles.css` | Typography (Newsreader serif for headings, Inter for body), a 1040 px column, a two-column project layout above 820 px that stacks on phones, and colour tokens that switch with the system's dark mode: a blue accent (dates, research chips, links) and a terracotta one (section labels, project chips), plus a faint two-colour wash behind the intro. Accent text on its chip background is at least 4.5:1 contrast in both themes. |
 | `_archive/` | The blog, archived. Pages skips folders starting with `_`, so it's kept in the repo but not published. `_archive/README.md` says how to restore it. |
@@ -40,7 +40,7 @@ flowchart LR
 
 ## Main flows
 
-- **Visiting**: the browser loads the HTML, the stylesheet and the fonts; images below the fold load lazily. The header links jump to `#research` and `#projects` and open Fan of and the resume, with `#musings` added back once Musings has a note (on phones the Research link is hidden so the header fits on one line; that section starts right below the intro). Research comes first: it's the strongest evidence on the page.
+- **Visiting**: the browser loads the HTML, the stylesheet and the fonts; images below the fold load lazily. The header links jump to `#research` and `#projects` and open Interests and the resume, with `#musings` added back once Musings has a note (on phones the Research link is hidden so the header fits on one line; that section starts right below the intro). Research comes first: it's the strongest evidence on the page.
 - **Updating**: edit `index.html` or swap an image, preview with a local server, push. Pages redeploys.
 - **Resume**: edit the `.tex`, rebuild with Tectonic, commit the PDF.
 

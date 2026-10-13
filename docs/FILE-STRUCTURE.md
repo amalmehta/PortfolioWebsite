@@ -7,7 +7,7 @@ index.html                    The whole site: intro, research & work, projects, 
 thinking.html                 "Things I'm thinking about": its own page, linked from the profile
 photos.html                   Photos from travels: its own page, linked from the profile
 values.html                   Values & inspiration: its own page, linked quietly from the footer
-fan.html                      Fan of: teams, people and things, linked in the header of every page
+interests.html                Interests: fan of, hobbies, curious about; linked in the header of every page
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
 media.js                      Lazy-loads and plays the looping clips
