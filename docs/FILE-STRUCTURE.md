@@ -3,10 +3,11 @@
 Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System design](SYSTEM-DESIGN.md)
 
 ```
-index.html                    The whole site: intro, research & work, projects, musings
+index.html                    The whole site: intro, research & work, projects, writeups, musings (hidden for now)
 thinking.html                 "Things I'm thinking about": its own page, linked from the profile
 photos.html                   Photos from travels: its own page, linked from the profile
 values.html                   Values & inspiration: its own page, linked quietly from the footer
+interests.html                Interests: fan of, hobbies, curious about; linked in the header of every page
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
 media.js                      Lazy-loads and plays the looping clips
@@ -21,6 +22,7 @@ images/                       Project screenshots, the clips' WebP posters, and 
   apple-touch-icon.png        Home-screen icon (180×180)
   <project>.jpg               Full-size screenshot per project (the source for its poster)
   <project>-960.webp          960 px poster shown on the card before its clip plays
+papers/                       PDFs linked from the site: the robot soccer thesis, melanoma paper and school reports
 resume/
   Amal Mehta Resume.tex       Resume source (latest resume, no phone number)
   Amal Mehta Resume.pdf       Built resume, linked from the site
