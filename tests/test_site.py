@@ -371,6 +371,14 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual(missing, [])
                 self.assertIn("index.html", [v for _, _, v in page.links])
 
+    def test_skier_opens_pong(self):
+        # The hidden game: a skier button on the Hokkaido drawing, hidden until
+        # pong.js (loaded by the page) shows it and wires it up.
+        html = (ROOT / "photos.html").read_text(encoding="utf-8")
+        self.assertRegex(html, r'<button type="button" class="skier" aria-label="[^"]+" hidden>')
+        self.assertIn('<script src="pong.js" defer></script>', html)
+        self.assertTrue((ROOT / "pong.js").is_file())
+
     def test_photos_have_alt_and_size(self):
         # Each photo needs alt text and its real width/height, so the grid
         # doesn't jump as photos load.
