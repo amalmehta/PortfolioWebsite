@@ -34,15 +34,18 @@ Everything visible lives in `index.html`:
 - **Photos**: its own page, `photos.html`, linked below Musings and in the footer. See [Add a photo](#add-a-photo).
 - **Values & inspiration**: its own page, `values.html`, linked only from the footer ("Values"). Each section (Values, Inspiration, Things I care about) has a commented-out template to copy; delete that section's "Coming soon." once its first entry is in.
 
-Colours, fonts and spacing are in `styles.css`. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
+Colours, fonts and spacing are in `styles.css`. The fonts are self-hosted: the `@font-face` rules at the top of `styles.css` point at `fonts/`, and each page preloads the two Latin files. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
 
 ## Screenshots
 
-Project images live in `images/`, saved as JPEG about 1400 px wide to keep the page light:
+Project screenshots live in `images/` as JPEG about 1400 px wide. The page shows a 960 px WebP copy as each clip's poster, built from the JPEG:
 
 ```bash
 sips -s format jpeg -s formatOptions 80 --resampleWidth 1400 shot.png --out images/name.jpg
+tools/make-images.sh images/name.jpg
 ```
+
+Then set the `poster` on the card's `<video>` to `images/name-960.webp` and its `width`/`height` to that file's size (the tests check they match). `make-images.sh` needs `brew install libavif webp`.
 
 Cards crop images to a 16:10 frame from the top left. For a wide chart that shouldn't be cropped, add `contain` to its figure: `<figure class="shot contain">`.
 

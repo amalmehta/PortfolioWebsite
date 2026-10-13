@@ -12,12 +12,12 @@ flowchart LR
         H[index.html<br/>content]
         C[styles.css<br/>layout + light/dark]
         I[images/<br/>project screenshots]
+        F[fonts/<br/>Newsreader + Inter]
         R[resume/*.pdf]
         T[resume/*.tex] -->|tectonic, by hand| R
     end
     Repo -->|push| GP[GitHub Pages]
     GP --> V((Visitor's browser))
-    GF[Google Fonts<br/>Newsreader + Inter] --> V
 ```
 
 ## Components
@@ -74,7 +74,7 @@ Also by hand, with a headless browser (Playwright) against a local server:
 
 ## Known limits
 
-- Fonts come from Google Fonts; offline or blocked, the page falls back to Georgia and the system sans-serif.
+- Fonts are self-hosted in `fonts/` (Latin and Latin Extended subsets of the variable Newsreader and Inter, SIL Open Font License). Characters outside those subsets fall back to Georgia and the system sans-serif.
 - Screenshots and clips go stale as the projects change; refresh them by hand.
 - Every project clip is a placeholder until real media is supplied (listed in `assets/media/README.md`).
 - Neural Signal ML shows only its finished spike-decoding results; its EEGNet run isn't done, so no EEGNet numbers appear. The card quotes the same R² as its figure (benchmark split).
