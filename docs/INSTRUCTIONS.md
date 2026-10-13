@@ -49,7 +49,7 @@ tools/make-images.sh images/name.jpg
 
 Then set the `poster` on the card's `<video>` to `images/name-960.webp` and its `width`/`height` to that file's size (the tests check they match). `make-images.sh` needs `brew install libavif webp`.
 
-Cards crop images to a 16:10 frame from the top left. For a wide chart that shouldn't be cropped, add `contain` to its figure: `<figure class="shot contain">`.
+Cards crop images to a 16:10 frame from the top left. For a wide chart that shouldn't be cropped, add `contain` to its figure: `<figure class="shot contain">`. For a wide screenshot whose useful part is on the right, add `crop-right` instead.
 
 ## Clips
 

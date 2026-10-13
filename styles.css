@@ -107,6 +107,8 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .shot img, .shot video { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
 .shot video { cursor: pointer; }
 .shot.contain img, .shot.contain video { object-fit: contain; object-position: center; background: #fcfcfa; }
+/* For a wide screenshot whose useful part is on the right */
+.shot.crop-right img, .shot.crop-right video { object-position: top right; }
 .project-text p { margin: 0 0 0.6rem; }
 .project-text h3 { font-size: 1.35rem; margin-bottom: 0.35rem; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.85rem; color: var(--faint); }
