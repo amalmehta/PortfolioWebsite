@@ -1,6 +1,6 @@
 % Resume linked from the website.
 \documentclass[10pt]{article}
-\usepackage[margin=0.5in]{geometry}
+\usepackage[margin=0.5in,vmargin=0.4in]{geometry}
 \usepackage{fontspec}\setmainfont{Times New Roman}
 \usepackage{enumitem}
 \usepackage{titlesec}
@@ -27,6 +27,7 @@ Research engineer with four years of applied deep learning across the stack: gen
 \begin{itemize}
 \item \textbf{Neural decoding:} 2D hand velocity from motor/premotor cortex spikes (NLB MC\_Maze); GRU decoder outperformed a Kalman filter on held-out trials (R\textsuperscript{2} 0.75 vs.\ 0.55).
 \item \textbf{Post-training:} SFT then GRPO on a small transformer policy in a key-and-door gridworld maze; GRPO lifted held-out success from 71\% to 85\%, where RL from scratch failed.
+\item \textbf{Self-play RL:} 9$\times$9 Go engine trained from scratch with the AlphaGo Zero recipe; 7,040 self-play games in $\sim$11 h on a laptop.
 \item \textbf{Neuroimaging:} macOS tool for 3D brain MRI; gray/white matter and CSF segmentation, plus EEG electrode placement.
 \item \textbf{Pose estimation:} real-time sport technique analysis on MediaPipe 3D pose from a webcam; scores reps against one reference rep.
 \item Member, Sensorimotor AI journal club, Redwood Center for Theoretical Neuroscience, UC Berkeley.
@@ -60,8 +61,8 @@ Research engineer with four years of applied deep learning across the stack: gen
 
 \role{University of California, Berkeley}{Aug 2017 -- Aug 2021}{B.A.\ Computer Science --- Regents Scholar}{Berkeley, CA}
 \begin{itemize}
-\item Focused on robotics and linear system theory.
-\item Awarded Regents, merit, and leadership awards.
+\item Focused on robotics and linear system theory; Regents, merit, and leadership awards.
+\item CS285 (Deep RL) project: iterative retraining of PPO agents against adversarial policies.
 \end{itemize}
 
 \role{Stanford University}{Aug 2021 -- May 2023}{Graduate coursework (non-degree) --- Autonomous Systems \& Artificial Intelligence}{}
