@@ -343,8 +343,13 @@ class MusingsTest(unittest.TestCase):
             with self.subTest(group=group):
                 self.assertIn("musings-" + group, PAGE.ids)
 
-    def test_linked_from_nav(self):
-        self.assertIn(("a", "href", "#musings"), PAGE.links)
+    def test_hidden_until_first_note(self):
+        # Shown and linked from the nav once it has a note; hidden and unlinked before.
+        html = re.sub(r"<!--.*?-->", "", INDEX.read_text(encoding="utf-8"), flags=re.S)
+        has_notes = re.search(r'class="musing"', html) is not None
+        hidden = re.search(r'<section id="musings"[^>]*\bhidden\b', html) is not None
+        linked = ("a", "href", "#musings") in PAGE.links
+        self.assertEqual((hidden, linked), (not has_notes, has_notes))
 
 
 class SubpagesTest(unittest.TestCase):
@@ -424,15 +429,15 @@ class ResumeTest(unittest.TestCase):
         self.assertIsNone(PHONE.search(RESUME_TEX.read_text(encoding="utf-8")))
 
     def test_links_say_pdf_and_size(self):
-        # Every resume link says it opens a PDF; the ones in the page body also
-        # give its size, which must match the file (rebuild the PDF -> update).
+        # Every resume link says it opens a PDF; the one in the intro also
+        # gives its size, which must match the file (rebuild the PDF -> update).
         size_kb = round(RESUME_PDF.stat().st_size / 1000)
         self.assertTrue(PAGE.resume_links)
         for text in PAGE.resume_links:
             with self.subTest(link=text):
                 self.assertIn("PDF", text)
         sized = [t for t in PAGE.resume_links if re.search(r"\d+ KB", t)]
-        self.assertGreaterEqual(len(sized), 2, PAGE.resume_links)
+        self.assertGreaterEqual(len(sized), 1, PAGE.resume_links)
         for text in sized:
             with self.subTest(link=text):
                 self.assertIn("%d KB" % size_kb, text)
