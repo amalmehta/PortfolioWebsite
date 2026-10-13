@@ -38,11 +38,14 @@ Colours, fonts and spacing are in `styles.css`. The fonts are self-hosted: the `
 
 ## Screenshots
 
-Project images live in `images/`, saved as JPEG about 1400 px wide to keep the page light:
+Project screenshots live in `images/` as JPEG about 1400 px wide. The page shows a 960 px WebP copy as each clip's poster, built from the JPEG:
 
 ```bash
 sips -s format jpeg -s formatOptions 80 --resampleWidth 1400 shot.png --out images/name.jpg
+tools/make-images.sh images/name.jpg
 ```
+
+Then set the `poster` on the card's `<video>` to `images/name-960.webp` and its `width`/`height` to that file's size (the tests check they match). `make-images.sh` needs `brew install libavif webp`.
 
 Cards crop images to a 16:10 frame from the top left. For a wide chart that shouldn't be cropped, add `contain` to its figure: `<figure class="shot contain">`.
 
