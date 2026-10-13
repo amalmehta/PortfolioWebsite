@@ -34,7 +34,7 @@ Everything visible lives in `index.html`:
 - **Photos**: its own page, `photos.html`, linked below Musings and in the footer. See [Add a photo](#add-a-photo).
 - **Values & inspiration**: its own page, `values.html`, linked only from the footer ("Values"). Each section (Values, Inspiration, Things I care about) has a commented-out template to copy; delete that section's "Coming soon." once its first entry is in.
 
-Colours, fonts and spacing are in `styles.css`. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
+Colours, fonts and spacing are in `styles.css`. The fonts are self-hosted: the `@font-face` rules at the top of `styles.css` point at `fonts/`, and each page preloads the two Latin files. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
 
 ## Screenshots
 

@@ -194,6 +194,21 @@ THINKING = ROOT / "thinking.html"
 
 
 class LinksTest(unittest.TestCase):
+    def test_fonts_are_self_hosted(self):
+        # No third-party font servers; every @font-face file and preload exists.
+        for page in sorted(ROOT.glob("*.html")):
+            with self.subTest(page=page.name):
+                self.assertNotIn("fonts.googleapis.com", page.read_text(encoding="utf-8"))
+        css = STYLES.read_text(encoding="utf-8")
+        faces = re.findall(r'@font-face[^}]*url\("([^"]+)"\)', css)
+        self.assertTrue(faces)
+        preloads = [v for tag, attr, v in PAGE.links if v.endswith(".woff2")]
+        self.assertTrue(preloads, "the Latin fonts should be preloaded")
+        for url in faces + preloads:
+            with self.subTest(font=url):
+                self.assertTrue((ROOT / url).is_file(), url)
+        self.assertTrue(set(preloads) <= set(faces), "preloading a file no @font-face uses")
+
     def test_local_files_exist(self):
         missing = [v for _, _, v in PAGE.links
                    if local_target(v) is not None and not local_target(v).is_file()]
