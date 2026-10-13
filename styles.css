@@ -219,7 +219,8 @@ picture { display: contents; }
 .inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
 .inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .inspo + .section-title { margin-top: 3rem; }
-.travel { margin: 0; }
+.page-link { margin: 0; }
+.page-link + .section-title { margin-top: 3rem; }
 
 /* Hidden game: a skier on the Hokkaido drawing opens Pong (pong.js) */
 .slope { position: relative; }
