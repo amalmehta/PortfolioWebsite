@@ -23,7 +23,7 @@ images/                       Project screenshots, the clips' WebP posters, and 
   apple-touch-icon.png        Home-screen icon (180×180)
   <project>.jpg               Full-size screenshot per project (the source for its poster)
   <project>-960.webp          960 px poster shown on the card before its clip plays
-papers/                       PDFs linked from the site: the robot soccer thesis, melanoma paper and school reports
+papers/                       PDFs linked from the site: the robot soccer thesis and school reports
 resume/
   Amal Mehta Resume.tex       Resume source (latest resume, no phone number)
   Amal Mehta Resume.pdf       Built resume, linked from the site
