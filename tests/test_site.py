@@ -352,6 +352,25 @@ class MusingsTest(unittest.TestCase):
         self.assertEqual((hidden, linked), (not has_notes, has_notes))
 
 
+class SkillsTest(unittest.TestCase):
+    def test_lists_every_resume_skill(self):
+        # The site's skills list is the most current one; the resume's Technical
+        # Skills must be a subset of it.
+        import html as htmllib
+        page = INDEX.read_text(encoding="utf-8")
+        section = page[page.index('<section id="skills"'):]
+        section = section[:section.index("</section>")]
+        chips = {htmllib.unescape(c) for c in re.findall(r'<span class="chip">([^<]+)</span>', section)}
+        tex = RESUME_TEX.read_text(encoding="utf-8")
+        table = tex[tex.index(r"\section*{Technical Skills}"):tex.index(r"\end{tabular}")]
+        resume = {s.strip().replace("\\&", "&") for row in re.findall(r"& (.+?) \\\\", table) for s in row.split(",")}
+        self.assertTrue(resume)
+        self.assertEqual(sorted(resume - chips), [])
+
+    def test_says_when_updated(self):
+        self.assertRegex(INDEX.read_text(encoding="utf-8"), r'class="skills-updated">[^<]*<time datetime="\d{4}-\d{2}">')
+
+
 class SubpagesTest(unittest.TestCase):
     """thinking.html and photos.html: pages of their own, linked from the profile."""
     PAGES = (THINKING, ROOT / "photos.html")
