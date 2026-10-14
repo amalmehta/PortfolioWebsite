@@ -127,6 +127,14 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .role .tags { margin-bottom: 0; }
 .more { color: var(--muted); margin-top: 1.5rem; }
 
+/* Skills: one row per group, the group name on the left on wide screens */
+.skills-updated { margin: -1.25rem 0 1.5rem; font-size: 0.85rem; color: var(--faint); }
+.skill-row { display: grid; gap: 0.4rem; padding: 0.9rem 0; border-top: 1px solid var(--line); max-width: 860px; }
+.skill-row:first-child { border-top: 0; padding-top: 0; }
+@media (min-width: 720px) { .skill-row { grid-template-columns: 9rem 1fr; gap: 2rem; align-items: baseline; } }
+.skill-row h3 { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 0; }
+.skill-row .tags { margin: 0; }
+
 /* Footer */
 .footer { padding-top: 2rem; padding-bottom: 3rem; margin-top: 2rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--faint); }
 .footer p { margin: 0; }

@@ -3,7 +3,7 @@
 Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System design](SYSTEM-DESIGN.md)
 
 ```
-index.html                    The whole site: intro, research & work, projects, writeups, musings (hidden for now)
+index.html                    The whole site: intro, research & work, projects, writeups, skills, musings (hidden for now)
 thinking.html                 "Things I'm thinking about": its own page, linked from the profile
 photos.html                   Photos from travels: its own page, linked from the profile
 values.html                   Values & inspiration: its own page, linked quietly from the footer
