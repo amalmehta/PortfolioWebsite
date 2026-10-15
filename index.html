@@ -82,6 +82,7 @@
           <h3>Deep RL Researcher · Hybrid Robotics Lab</h3>
           <p class="where">UC Berkeley · Prof. Koushil Sreenath · a robot dog that learns to shoot a soccer ball</p>
           <p>Trained one RL policy that takes a Unitree Go1 through the whole task (walk to the ball, kick it at a target, stay balanced) in place of a separate policy per skill. On the real robot it hit the target about 60% of the time. Took graduate classes in RL and control theory alongside.</p>
+          <p>The policy is PPO, trained in IsaacGym on a three-stage reward: reach the ball, kick it, then wait to see whether it scores. A reward gradient, a stage flag and masked inputs (the ball and goal positions are zeroed until they matter) let one network move between stages smoothly, and CPG-based gait tracking kept its walking steady. Also prototyped RLPD, SAC that learns from prior data, to fine-tune the simulation-trained policy on real robot runs and narrow the gap to hardware.</p>
           <figure class="shot"><img src="images/robot-soccer.svg" alt="Drawing: a four-legged robot dog kicks a soccer ball along an arc into a target in a goal, on a simulation grid" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">PPO</span><span class="chip">IsaacGym</span><span class="chip">Multi-stage rewards</span><span class="chip">Sim-to-real</span><span class="chip">RLPD</span></p>
           <p class="links"><a href="papers/robot-soccer-thesis.pdf" type="application/pdf">Thesis (PDF, 6.3 MB) →</a></p>
@@ -231,7 +232,7 @@
       <div class="skills">
         <div class="skill-row">
           <h3>Languages</h3>
-          <p class="tags"><span class="chip">Python</span><span class="chip">C++</span><span class="chip">C</span></p>
+          <p class="tags"><span class="chip">Python</span><span class="chip">C++</span><span class="chip">C</span><span class="chip">Swift</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span></p>
         </div>
         <div class="skill-row">
           <h3>ML &amp; RL</h3>
@@ -242,12 +243,16 @@
           <p class="tags"><span class="chip">PPO, SAC, TD3</span><span class="chip">SFT → GRPO</span><span class="chip">Meta-RL (MAML, PEARL)</span><span class="chip">MCTS self-play</span><span class="chip">GANs</span><span class="chip">Segmentation</span><span class="chip">Domain adaptation</span></p>
         </div>
         <div class="skill-row">
+          <h3>Product &amp; apps</h3>
+          <p class="tags"><span class="chip">SwiftUI</span><span class="chip">AppKit</span><span class="chip">SceneKit</span><span class="chip">SwiftData</span><span class="chip">Core ML</span><span class="chip">Electron</span><span class="chip">Three.js</span><span class="chip">Next.js</span><span class="chip">React</span><span class="chip">Tailwind CSS</span><span class="chip">SQLite</span><span class="chip">Claude API</span></p>
+        </div>
+        <div class="skill-row">
           <h3>Robotics</h3>
           <p class="tags"><span class="chip">ROS</span><span class="chip">Unitree Go1</span><span class="chip">Crazyflie</span><span class="chip">CPG gait control</span><span class="chip">Kalman filtering</span><span class="chip">Sim-to-real</span></p>
         </div>
         <div class="skill-row">
           <h3>Tools</h3>
-          <p class="tags"><span class="chip">Git</span><span class="chip">GitHub Actions CI</span><span class="chip">Linux</span><span class="chip">Docker</span><span class="chip">CUDA/multi-GPU</span><span class="chip">W&amp;B</span><span class="chip">TensorBoard</span></p>
+          <p class="tags"><span class="chip">Git</span><span class="chip">GitHub Actions CI</span><span class="chip">Linux</span><span class="chip">Docker</span><span class="chip">CUDA/multi-GPU</span><span class="chip">W&amp;B</span><span class="chip">TensorBoard</span><span class="chip">XCTest</span><span class="chip">Vitest</span><span class="chip">Playwright</span></p>
         </div>
       </div>
     </section>
