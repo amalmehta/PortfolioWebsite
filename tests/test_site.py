@@ -415,6 +415,17 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 
+class ArtSectionTest(unittest.TestCase):
+    def test_hidden_until_first_piece(self):
+        # Live interests' "My art" shows only once it has a piece.
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
+        section = html[html.index('<section class="art"'):]
+        section = section[:section.index("</section>")]
+        has_pieces = 'class="photo"' in section
+        hidden = re.match(r'<section class="art"[^>]*\bhidden\b', section) is not None
+        self.assertEqual(hidden, not has_pieces)
+
+
 class ValuesPageTest(unittest.TestCase):
     """values.html: linked quietly from the profile footer once it has entries."""
 
