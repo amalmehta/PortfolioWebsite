@@ -316,7 +316,13 @@ class MediaTest(unittest.TestCase):
 
 
 class ProjectsTest(unittest.TestCase):
-    def test_eleven_projects(self):
+    def test_eight_projects_and_three_products(self):
+        # Cards are split across two sections: Selected projects and Products.
+        html = INDEX.read_text(encoding="utf-8")
+        def cards(section_id):
+            sec = html[html.index(f'<section id="{section_id}"'):]
+            return sec[:sec.index("</section>")].count('<article class="project">')
+        self.assertEqual((cards("projects"), cards("products")), (8, 3))
         self.assertEqual(len(PAGE.projects), 11, [p["title"] for p in PAGE.projects])
 
     def test_each_card_is_complete(self):
