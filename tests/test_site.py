@@ -406,11 +406,12 @@ class SubpagesTest(unittest.TestCase):
 
     def test_photos_have_alt_and_size(self):
         # Each photo needs alt text and its real width/height, so the grid
-        # doesn't jump as photos load.
-        for img in parse(ROOT / "photos.html").imgs:
+        # doesn't jump as photos load. The first two are on screen when the
+        # page opens, so they load right away; the rest wait (lazy).
+        for i, img in enumerate(parse(ROOT / "photos.html").imgs):
             with self.subTest(src=img["src"]):
                 self.assertTrue((img.get("alt") or "").strip(), "alt text")
-                self.assertEqual(img.get("loading"), "lazy")
+                self.assertEqual(img.get("loading"), None if i < 2 else "lazy")
                 self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 

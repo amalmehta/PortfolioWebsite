@@ -8,6 +8,7 @@ thinking.html                 "Things I'm thinking about": its own page, linked 
 photos.html                   Travel: places I'd like to go, then photos; linked from Interests and the footer
 values.html                   Values & inspiration: its own page, unlinked until it has entries
 interests.html                Interests: fan of, hobbies, curious about; linked in the header of every page
+404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
 media.js                      Lazy-loads and plays the looping clips
