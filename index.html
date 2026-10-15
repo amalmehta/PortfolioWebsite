@@ -68,7 +68,8 @@
         <div>
           <h3>Deep Learning Scientist · PhysicsAI</h3>
           <p class="where">DARPA-funded · remote</p>
-          <p>Turned synthetic-data generation into an RL problem: agents tuned an image generator and were rewarded by how well the resulting detector worked on real drone imagery, closing the sim-to-real gap without hand-tuned rendering.</p>
+          <p>Turned synthetic-data generation into an RL problem: agents (TD3, PPO, DDPG) tuned an image generator’s settings and were rewarded by how well the resulting detector worked on real drone imagery, closing the sim-to-real gap without hand-tuned rendering.</p>
+          <p>Built a PEARL meta-RL agent that learns a probabilistic embedding of each generator task, so it adapts to a new one in a few tries. Also implemented domain adaptation from scratch to keep the detector accurate with few real labels and plenty of synthetic data, and built GAN pipelines (DCGAN, InfoGAN, FineGAN) that produced its training images.</p>
           <figure class="shot"><img src="images/physicsai.svg" alt="Drawing: a drone’s camera looks down on a city block with cars boxed by a detector, beside the generator settings an RL agent tunes and its rising reward" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">TD3</span><span class="chip">PPO</span><span class="chip">DDPG</span><span class="chip">PEARL meta-RL</span><span class="chip">Domain adaptation</span><span class="chip">GANs</span></p>
           <p class="tags pubs">Award: team recognized as the top group in the nation for its reinforcement-learning work</p>
