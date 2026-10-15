@@ -275,7 +275,7 @@ class MediaTest(unittest.TestCase):
     RESEARCH = ("PhysicsAI", "Hybrid Robotics Lab", "Video & Image Processing Lab", "Abbasi-Asl Lab")
 
     def test_videos_are_silent_inline_loops(self):
-        self.assertTrue(PAGE.videos)
+        # Cards show stills until real clips exist; any clip added must follow these rules.
         for v in PAGE.videos:
             with self.subTest(poster=v.get("poster")):
                 for attr in self.REQUIRED:

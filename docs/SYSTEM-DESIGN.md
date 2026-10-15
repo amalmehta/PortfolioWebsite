@@ -4,7 +4,7 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [File s
 
 ## Overview
 
-A single static page: one HTML file, one stylesheet, a small script for the looping clips, a folder of screenshots and clips, and a resume PDF. GitHub Pages serves it as-is. There is no build step or framework.
+A single static page: one HTML file, one stylesheet, a small script for looping clips (unused until a card has one), a folder of screenshots, and a resume PDF. GitHub Pages serves it as-is. There is no build step or framework.
 
 ```mermaid
 flowchart LR
@@ -35,7 +35,7 @@ flowchart LR
 | `_archive/` | The blog, archived. Pages skips folders starting with `_`, so it's kept in the repo but not published. `_archive/README.md` says how to restore it. |
 | `images/portrait.jpg` | The intro portrait: a pencil sketch beside the name on desktop, above it on phones. |
 | `images/` | One screenshot per project, taken from each project's own repo. Each is also its project clip's poster. The four lab entries and the Reward Hack Zoo card show SVG drawings (`physicsai.svg`, `robot-soccer.svg`, `vip-lab.svg`, `brain-emd.svg`, `reward-hack-zoo.svg`) drawn by `tools/draw-research-art.py`; Reward Hack Zoo has no clip or results yet. |
-| `assets/media/` | A short looping MP4 per project card. Placeholders until real clips are supplied; see its README. |
+| `assets/media/` | Where real project clips go once recorded; see its README. The placeholder loops were removed, since a looped screenshot looked the same as the still but cost 65–200 KB each. |
 | `media.js` | Lazy-loads the clips: each `<source>` holds its file in `data-src`, and the script fills in `src` when the clip is within 200 px of the screen, pauses clips scrolled away, and lets a click pause or resume one. With no JavaScript or with reduced motion on, the poster shows instead. |
 | `resume/` | LaTeX source and the PDF it builds. |
 
@@ -79,7 +79,7 @@ Also by hand, with a headless browser (Playwright) against a local server:
 
 - Fonts are self-hosted in `fonts/` (Latin and Latin Extended subsets of the variable Newsreader and Inter, SIL Open Font License). Characters outside those subsets fall back to Georgia and the system sans-serif.
 - Screenshots and clips go stale as the projects change; refresh them by hand.
-- Every project clip is a placeholder until real media is supplied (listed in `assets/media/README.md`).
+- No project has a real clip yet; cards show their screenshot until one is recorded (listed in `assets/media/README.md`).
 - Neural Signal ML shows only its finished spike-decoding results; its EEGNet run isn't done, so no EEGNet numbers appear. The card quotes the same R² as its figure (benchmark split).
 - The Sim to Real Drone Bench image comes from its stand-in drone, since no real Crazyflie flight has been flown yet; the card says so.
 - The resume build uses an absolute path to a macOS system font, so it rebuilds on a Mac only.

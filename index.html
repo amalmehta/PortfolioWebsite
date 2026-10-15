@@ -41,7 +41,7 @@
       <div class="hero-text">
       <h1>Amal Mehta</h1>
       <p class="lede">Research engineer in reinforcement learning and sensorimotor AI: agents that see, act and learn from experience, trained in simulation and made to hold up on real robots.</p>
-      <p class="hero-sub">Four years of applied deep learning, from generative models and vision to robot control. I work on learning when labels are scarce and adapting fast to new settings. Based in the San Francisco Bay Area.</p>
+      <p class="hero-sub">Six years of applied deep learning, from generative models and vision to robot control. I work on learning when labels are scarce and adapting fast to new settings. Based in the San Francisco Bay Area.</p>
       <p class="hello">Hi! I’d love to chat :) <a href="https://reachouts.me/?u=amal">Get in touch →</a></p>
       <ul class="contact">
         <li><a href="mailto:amal.mehta@gmail.com">amal.mehta@gmail.com</a></li>
@@ -121,17 +121,17 @@
       <h2 class="section-title">Selected projects</h2>
 
       <article class="project">
-        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/neural-signal-ml-960.webp" width="960" height="351" aria-label="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)"><source data-src="assets/media/neural-signal-ml.mp4" type="video/mp4"></video></figure>
+        <figure class="shot contain"><img src="images/neural-signal-ml-960.webp" alt="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)" loading="lazy" width="960" height="351"></figure>
         <div class="project-text">
           <h3>Neural Signal ML</h3>
-          <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter.</p>
-          <p class="tags"><span class="chip">Neural decoding</span><span class="chip">Motor cortex</span><span class="chip">Kalman filter vs GRU</span><span class="chip">PyTorch</span></p>
+          <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter. It also decodes imagined movements from EEG, where a classic CSP + LDA model (63.9% on a held-out day) edges out EEGNet (62.3%), and comes with a Mac app for viewing the recordings.</p>
+          <p class="tags"><span class="chip">Neural decoding</span><span class="chip">Motor cortex</span><span class="chip">EEG</span><span class="chip">Kalman filter vs GRU</span><span class="chip">PyTorch</span></p>
           <p class="links"><a href="https://github.com/amalmehta/NeuralSignalML">Code and write-up →</a></p>
         </div>
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/post-training-960.webp" width="960" height="778" aria-label="Post Training Lab: held-out success rising from 70% after SFT to 80% after GRPO and 81% after DPO, averaged over 3 seeds, above a four-policy maze race"><source data-src="assets/media/post-training.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><img src="images/post-training-960.webp" alt="Post Training Lab: held-out success rising from 70% after SFT to 80% after GRPO and 81% after DPO, averaged over 3 seeds, above a four-policy maze race" loading="lazy" width="960" height="778"></figure>
         <div class="project-text">
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a key-and-door maze: supervised fine-tuning on demos from a planner with a bad habit, then two ways to fix it, GRPO (online RL on a verifiable reward) and DPO (offline preferences). Averaged over 3 seeds, GRPO lifts held-out success from 70% to 80% and DPO to 81%; RL from scratch on the same budget reaches 0%, and a run with a subtly wrong reward games it down to 7%.</p>
@@ -150,7 +150,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/alphago-lite-960.webp" width="960" height="634" aria-label="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board"><source data-src="assets/media/alphago-lite.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board" loading="lazy" width="960" height="634"></figure>
         <div class="project-text">
           <h3>AlphaGo Lite</h3>
           <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
@@ -160,7 +160,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot contain"><video autoplay muted loop playsinline preload="none" poster="images/drone-bench-960.webp" width="960" height="304" aria-label="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy"><source data-src="assets/media/drone-bench.mp4" type="video/mp4"></video></figure>
+        <figure class="shot contain"><img src="images/drone-bench-960.webp" alt="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy" loading="lazy" width="960" height="304"></figure>
         <div class="project-text">
           <h3>Sim to Real Drone Bench</h3>
           <p>Flies one course with a classical controller and RL policies, including a meta-learned one, and measures the sim-to-real gap. Built for a Crazyflie; so far it’s been tested against a deliberately mismatched simulated drone.</p>
@@ -169,7 +169,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/driving-sim-960.webp" width="960" height="600" aria-label="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path"><source data-src="assets/media/driving-sim.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path" loading="lazy" width="960" height="600"></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
           <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations.</p>
@@ -181,17 +181,17 @@
 
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/neuroimaging-960.webp" width="960" height="673" aria-label="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp"><source data-src="assets/media/neuroimaging.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><img src="images/neuroimaging-960.webp" alt="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp" loading="lazy" width="960" height="673"></figure>
         <div class="project-text">
           <h3>Neuroimaging Platform</h3>
-          <p>A Mac app that opens 3D brain MRI scans, separates gray matter, white matter and fluid voxel by voxel, and places EEG electrodes on the head.</p>
+          <p>A Mac app that opens 3D brain MRI scans, separates gray matter, white matter and fluid voxel by voxel, and places EEG electrodes on the head. It also runs research methods from UCSF: segmentation stability, stable pattern discovery and follow-up atrophy maps.</p>
           <p class="tags"><span class="chip">Medical imaging</span><span class="chip">Segmentation</span><span class="chip">Mac app</span></p>
           <p class="credit">Scan: MNI ICBM152 template © McConnell Brain Imaging Centre, MNI</p>
         </div>
       </article>
 
       <article class="project">
-        <figure class="shot crop-right"><video autoplay muted loop playsinline preload="none" poster="images/sport-analyzer-960.webp" width="960" height="439" aria-label="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics"><source data-src="assets/media/sport-analyzer.mp4" type="video/mp4"></video></figure>
+        <figure class="shot crop-right"><img src="images/sport-analyzer-960.webp" alt="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics" loading="lazy" width="960" height="439"></figure>
         <div class="project-text">
           <h3>Sport Analyzer</h3>
           <p>Strava for technique: tracks your body in 3D from a webcam and measures running stride, lifts, swings and shots. Ghost Coach learns a new movement from one example rep and scores yours against it.</p>
