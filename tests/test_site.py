@@ -415,10 +415,13 @@ class SubpagesTest(unittest.TestCase):
 
 
 class ValuesPageTest(unittest.TestCase):
-    """values.html: linked quietly from the footer, not the header."""
+    """values.html: linked quietly from the profile footer once it has entries."""
 
-    def test_linked_from_profile_footer(self):
-        self.assertIn("values.html", [v for _, _, v in PAGE.links])
+    def test_linked_only_once_filled(self):
+        # While every list still says "Coming soon", nothing links to it.
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
+        has_entries = 'class="value"' in html or 'class="inspo-item"' in html
+        self.assertEqual("values.html" in [v for _, _, v in PAGE.links], has_entries)
 
     def test_local_links_resolve(self):
         page = parse(ROOT / "values.html")
