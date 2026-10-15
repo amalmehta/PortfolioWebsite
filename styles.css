@@ -234,7 +234,52 @@ picture { display: contents; }
 .inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
 .inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
 .inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
-.inspo + .section-title { margin-top: 3rem; }
+.inspo + .section-title, .tiles + .section-title { margin-top: 3rem; }
+/* Live interests: hobbies as tiles */
+.tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+/* The first tile spans two columns, so seven tiles fill even rows of four (or two). */
+@media (min-width: 440px) { .tile:first-child { grid-column: span 2; } }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s; }
+.tile:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); transform: translateY(-2px); }
+.tile-icon { display: block; width: 36px; height: 36px; padding: 7px; margin-bottom: 0.75rem; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+  fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tile:nth-child(even) .tile-icon { background: var(--warm-soft); color: var(--warm); }
+/* Icons: a soft fill under the line drawing, and a small motion of their own on hover */
+.tile-icon .fill { fill: currentColor; stroke: none; opacity: 0.2; }
+.tile-icon .solid { fill: currentColor; stroke: none; }
+.tile-icon * { transform-box: view-box; }
+.tile-icon .orbit { transform-origin: 12px 12px; }
+.tile-icon .play { transform-origin: 12.5px 14px; }
+.tile-icon .swing { transform-origin: 4.5px 18.5px; }
+.tile-icon .write { stroke-dasharray: 11; stroke-dashoffset: 0; }
+.tile-icon .page { transform-origin: 12px 12px; }
+.tile-icon .trail { stroke-dasharray: 1.4 2.4; }
+.tile-icon { transition: transform 0.25s; }
+.tile:hover .tile-icon { transform: translateY(-1px) scale(1.06); }
+.tile:hover .orbit { animation: tile-orbit 2.4s linear infinite; }
+.tile:hover .play { animation: tile-pulse 0.9s ease-in-out infinite; }
+.tile:hover .swing { animation: tile-swing 0.7s ease-in-out infinite; }
+.tile:hover .write { animation: tile-write 1.4s ease-in-out infinite; }
+.tile:hover .page { animation: tile-page 1.6s ease-in-out infinite; }
+.tile:hover .steam { animation: tile-steam 1.4s ease-in-out infinite; }
+.tile:hover .bounce { animation: tile-bounce 0.9s ease-in-out infinite; }
+.tile:hover .trail { animation: tile-trail 1s linear infinite; }
+@keyframes tile-orbit { to { transform: rotate(360deg); } }
+@keyframes tile-pulse { 50% { transform: scale(1.18); } }
+@keyframes tile-swing { 0%, 100% { transform: rotate(0); } 45% { transform: rotate(-18deg); } 70% { transform: rotate(4deg); } }
+@keyframes tile-write { 0% { stroke-dashoffset: 11; } 60%, 100% { stroke-dashoffset: 0; } }
+@keyframes tile-page { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.82); } }
+@keyframes tile-steam { 0% { transform: translateY(1px); opacity: 0.2; } 50% { opacity: 1; } 100% { transform: translateY(-2px); opacity: 0; } }
+@keyframes tile-bounce { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-2.5px); } 60% { transform: translateY(0.5px); } }
+@keyframes tile-trail { to { stroke-dashoffset: -3.8; } }
+/* The tiles arrive one after another when the page opens */
+.tile { animation: tile-in 0.5s ease both; }
+.tile:nth-child(2) { animation-delay: 0.05s; } .tile:nth-child(3) { animation-delay: 0.1s; } .tile:nth-child(4) { animation-delay: 0.15s; }
+.tile:nth-child(5) { animation-delay: 0.2s; } .tile:nth-child(6) { animation-delay: 0.25s; } .tile:nth-child(7) { animation-delay: 0.3s; } .tile:nth-child(8) { animation-delay: 0.35s; }
+@keyframes tile-in { from { opacity: 0; transform: translateY(8px); } }
+.tile h3 { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; line-height: 1.3; margin: 0 0 0.3rem; }
+.tile p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--muted); }
+
 .page-link { margin: 0; }
 .page-link + .section-title, .art + .section-title { margin-top: 3rem; }
 .inspo + .art { margin-top: 3rem; }
@@ -263,3 +308,7 @@ picture { display: contents; }
 .pong-close { border: 0; background: none; color: var(--muted); font-size: 1.6rem; line-height: 1; cursor: pointer; padding: 0 0.25rem; }
 .pong canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; border: 1px solid var(--line); border-radius: 8px; touch-action: none; cursor: none; }
 .pong-help { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .tile, .tile-icon, .tile-icon * { animation: none !important; transition: none !important; }
+  .tile:hover, .tile:hover .tile-icon { transform: none; }
+}
