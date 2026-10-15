@@ -131,11 +131,11 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/post-training-960.webp" width="960" height="864" aria-label="Post Training Lab: test success rising from 71% after SFT to 85% after GRPO, with four policies racing on the same maze"><source data-src="assets/media/post-training.mp4" type="video/mp4"></video></figure>
+        <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/post-training-960.webp" width="960" height="778" aria-label="Post Training Lab: held-out success rising from 70% after SFT to 80% after GRPO and 81% after DPO, averaged over 3 seeds, above a four-policy maze race"><source data-src="assets/media/post-training.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Post Training Lab</h3>
-          <p>A 59k-parameter transformer learns a key-and-door maze in two stages: supervised fine-tuning on demos from a planner with a bad habit, then GRPO against a verifiable reward. GRPO lifts held-out success from 71% to 85%; RL from scratch on the same budget reaches 1%.</p>
-          <p class="tags"><span class="chip">Post-training</span><span class="chip">SFT → GRPO</span><span class="chip">Transformers</span><span class="chip">PyTorch</span></p>
+          <p>A 59k-parameter transformer learns a key-and-door maze: supervised fine-tuning on demos from a planner with a bad habit, then two ways to fix it, GRPO (online RL on a verifiable reward) and DPO (offline preferences). Averaged over 3 seeds, GRPO lifts held-out success from 70% to 80% and DPO to 81%; RL from scratch on the same budget reaches 0%, and a run with a subtly wrong reward games it down to 7%.</p>
+          <p class="tags"><span class="chip">Post-training</span><span class="chip">SFT → GRPO</span><span class="chip">DPO</span><span class="chip">Transformers</span><span class="chip">PyTorch</span></p>
           <p class="links"><a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up →</a></p>
         </div>
       </article>
@@ -172,7 +172,7 @@
         <figure class="shot"><video autoplay muted loop playsinline preload="none" poster="images/driving-sim-960.webp" width="960" height="600" aria-label="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path"><source data-src="assets/media/driving-sim.mp4" type="video/mp4"></video></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
-          <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. Tested on 60 drives, with every failure traced to its cause.</p>
+          <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations.</p>
           <p class="tags"><span class="chip">Perception</span><span class="chip">Planning</span><span class="chip">RL with a safety validator</span></p>
         </div>
       </article>
@@ -275,7 +275,7 @@
         </div>
         <div class="skill-row">
           <h3>Methods</h3>
-          <p class="tags"><span class="chip">PPO, SAC, TD3</span><span class="chip">SFT → GRPO</span><span class="chip">Meta-RL (MAML, PEARL)</span><span class="chip">MCTS self-play</span><span class="chip">GANs</span><span class="chip">Segmentation</span><span class="chip">Domain adaptation</span></p>
+          <p class="tags"><span class="chip">PPO, SAC, TD3</span><span class="chip">SFT, GRPO, DPO</span><span class="chip">Meta-RL (MAML, PEARL)</span><span class="chip">MCTS self-play</span><span class="chip">GANs</span><span class="chip">Segmentation</span><span class="chip">Domain adaptation</span></p>
         </div>
         <div class="skill-row">
           <h3>Product &amp; apps</h3>
@@ -283,7 +283,7 @@
         </div>
         <div class="skill-row">
           <h3>Robotics</h3>
-          <p class="tags"><span class="chip">ROS</span><span class="chip">Unitree Go1</span><span class="chip">Crazyflie</span><span class="chip">CPG gait control</span><span class="chip">Kalman filtering</span><span class="chip">Sim-to-real</span><span class="chip">Gazebo</span><span class="chip">RealSense</span></p>
+          <p class="tags"><span class="chip">ROS</span><span class="chip">Unitree Go1</span><span class="chip">CPG gait control</span><span class="chip">Kalman filtering</span><span class="chip">Sim-to-real</span><span class="chip">Gazebo</span><span class="chip">RealSense</span></p>
         </div>
         <div class="skill-row">
           <h3>Tools</h3>
