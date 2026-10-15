@@ -183,11 +183,13 @@ picture { display: contents; }
 .musing p:last-child { margin: 0; font-size: 0.95rem; }
 .musing-empty { border-top: 1px dashed var(--line); padding: 0.9rem 0; margin: 0; font-size: 0.92rem; font-style: italic; color: var(--muted); }
 .nav-name, .nav-links a { white-space: nowrap; }
-/* Phones: Research starts right below the intro, so its nav link gives way to the others. */
-@media (max-width: 420px) {
+/* Narrow screens: there's room for three links. Research starts right below the intro
+   and Products right after Projects, so those links give way to the others. */
+@media (max-width: 600px) {
   .nav-links { gap: 0.8rem; }
-  .nav-links a[href="#research"], .nav-links .file { display: none; }
+  .nav-links a[href="#research"], .nav-links a[href$="#products"], .nav-links .file { display: none; }
 }
+@media (max-width: 380px) { .nav-links { gap: 0.6rem; } }
 
 /* Things I'm thinking about: its own page (thinking.html) */
 .page { padding-top: 3.5rem; padding-bottom: 2rem; max-width: 760px; }
