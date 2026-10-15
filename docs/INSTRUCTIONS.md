@@ -28,6 +28,7 @@ Everything visible lives in `index.html`:
 
 - **Intro**: the `<section class="hero">` block at the top.
 - **Projects**: one `<article class="project">` per project, with a looping clip (its screenshot as poster), a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
+- **Products**: the `<section id="products">` block after Projects, with the same `<article class="project">` cards, for builds that could be real products.
 - **Research & work**: one `<article class="role">` per role.
 - **Selected writeups**: the `<section id="writeups">` block after Projects, laid out like Research & work. Each entry links its report in `papers/`; the link text gives the file's size (e.g. "Report (PDF, 3.1 MB)"), so update it if the PDF changes.
 - **Skills**: the `<section id="skills">` block after Selected writeups, the most current list of skills, one row per group. Add a skill as a `<span class="chip">` in its row and update the date in the "updated" line. The resume's Technical Skills must stay a subset: the tests fail if a resume skill is missing here.
