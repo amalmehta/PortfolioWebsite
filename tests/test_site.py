@@ -415,6 +415,36 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 
+class MediaLogTest(unittest.TestCase):
+    """Live interests' Listening, reading, watching list, which log.js turns into a timeline."""
+
+    def section(self):
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
+        s = html[html.index('<section class="log"'):]
+        return s[:s.index("</section>")]
+
+    def test_hidden_until_first_entry(self):
+        s = self.section()
+        has_items = 'class="log-item"' in s
+        hidden = re.match(r'<section class="log"[^>]*\bhidden\b', s) is not None
+        self.assertEqual(hidden, not has_items)
+
+    def test_entries_are_well_formed(self):
+        for li in re.findall(r'<li class="log-item"[^>]*>', self.section()):
+            with self.subTest(item=li):
+                kind = re.search(r'data-kind="([^"]+)"', li)
+                start = re.search(r'data-start="(\d{4}-\d{2})"', li)
+                end = re.search(r'data-end="(\d{4}-\d{2})"', li)
+                self.assertIn(kind and kind.group(1), ("listening", "reading", "watching"))
+                self.assertIsNotNone(start, "data-start as YYYY-MM")
+                if end:
+                    self.assertGreaterEqual(end.group(1), start.group(1), "ends before it starts")
+
+    def test_timeline_script_is_loaded(self):
+        self.assertIn('<script src="log.js" defer></script>', (ROOT / "interests.html").read_text(encoding="utf-8"))
+        self.assertTrue((ROOT / "log.js").is_file())
+
+
 class ArtSectionTest(unittest.TestCase):
     def test_hidden_until_first_piece(self):
         # Live interests' "My art" shows only once it has a piece.
