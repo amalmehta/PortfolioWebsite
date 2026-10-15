@@ -27,7 +27,7 @@ The resume PDF check is skipped unless `pypdf` is installed. Run the tests befor
 Everything visible lives in `index.html`:
 
 - **Intro**: the `<section class="hero">` block at the top.
-- **Projects**: one `<article class="project">` per project, with a looping clip (its screenshot as poster), a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
+- **Projects**: one `<article class="project">` per project, with its screenshot (or a looping clip, once one is recorded), a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
 - **Products**: the `<section id="products">` block after Projects, with the same `<article class="project">` cards, for builds that could be real products.
 - **Research & work**: one `<article class="role">` per role.
 - **Selected writeups**: the `<section id="writeups">` block after Projects, laid out like Research & work. Each entry links its report in `papers/`; the link text gives the file's size (e.g. "Report (PDF, 3.1 MB)"), so update it if the PDF changes.
@@ -55,7 +55,13 @@ Cards crop images to a 16:10 frame from the top left. For a wide chart that shou
 
 ## Clips
 
-Each project card has a looping clip in `assets/media/`, with a poster image shown before it plays (and instead of it with no JavaScript or reduced motion on). `assets/media/README.md` lists every file and what it should show. To replace one, save the new clip under the same name.
+Project cards show their screenshot until a real clip is recorded. To add one, save it in `assets/media/`, then swap the card's `<img>` for a clip that uses the same image as its poster:
+
+```html
+<video autoplay muted loop playsinline preload="none" poster="images/name-960.webp" width="960" height="600" aria-label="What the clip shows"><source data-src="assets/media/name.mp4" type="video/mp4"></video>
+```
+
+`media.js` (already on the page) loads it when it scrolls near and plays it; the poster shows instead with no JavaScript or reduced motion on. `assets/media/README.md` lists every file and what it should show. To replace one, save the new clip under the same name.
 
 Keep each clip under 2 MB: about 5–8 seconds, 960 px wide, no audio. With [ffmpeg](https://ffmpeg.org) (`brew install ffmpeg`):
 

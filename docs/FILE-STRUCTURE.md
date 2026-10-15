@@ -11,19 +11,19 @@ interests.html                Interests: fan of, hobbies, curious about; linked 
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
-media.js                      Lazy-loads and plays the looping clips
+media.js                      Lazy-loads and plays looping clips, once any card has one
 pong.js                       Hidden Pong game behind the skier on the Hokkaido drawing (photos.html)
 fonts/                        Self-hosted Newsreader and Inter (WOFF2) and their OFL licences
 _archive/                     Archived blog (not published; see its README)
 _drafts/                      Unpublished drafts (Pages skips _ folders); values.md holds draft values
-assets/media/                 Looping project clips (MP4); placeholders for now
+assets/media/                 Looping project clips (MP4) once recorded; empty for now
   README.md                   Which files to supply, and what each should show
-images/                       Project screenshots, the clips' WebP posters, and research drawings (SVG)
+images/                       Project screenshots (and their WebP copies the cards show) and research drawings (SVG)
   portrait.jpg                Pencil-sketch portrait in the intro (served as portrait-240/-480 AVIF and WebP)
   og.png                      Link-preview image (1200×630)
   apple-touch-icon.png        Home-screen icon (180×180)
   <project>.jpg               Full-size screenshot per project (the source for its poster)
-  <project>-960.webp          960 px poster shown on the card before its clip plays
+  <project>-960.webp          960 px copy shown on the card (the poster, once it has a clip)
 papers/                       PDFs linked from the site: the robot soccer thesis and school reports
 resume/
   Amal Mehta Resume.tex       Resume source (latest resume, no phone number)
