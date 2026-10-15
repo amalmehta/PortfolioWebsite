@@ -234,25 +234,7 @@ picture { display: contents; }
 .inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
 .inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
 .inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
-.inspo + .section-title, .tiles + .section-title, .log + .section-title { margin-top: 3rem; }
-.tiles + .log { margin-top: 3rem; }
-/* Listening, reading, watching: a timeline (drawn by log.js) over the list it's drawn from */
-.log-note { margin: -1.25rem 0 1.25rem; color: var(--muted); font-size: 0.92rem; }
-.log-timeline { margin-bottom: 1.25rem; }
-.log-svg { display: block; overflow: visible; }
-.log-tick { font: 0.72rem var(--sans); fill: var(--faint); }
-.log-lane { font: 600 0.8rem var(--sans); fill: var(--text); }
-.log-label { font: 500 0.74rem var(--sans); fill: var(--bg); pointer-events: none; }  /* the bars are dark in light mode and light in dark mode */
-.log-label.outside { font-weight: 600; }
-.log-bar rect { transition: opacity 0.2s; }
-.log-bar:hover rect { opacity: 1; }
-.log-now { stroke: var(--warm); stroke-width: 1.5; stroke-dasharray: 3 3; }
-.log-now-label { font: 600 0.7rem var(--sans); fill: var(--warm); }
-.log-list { list-style: none; padding: 0; margin: 0; }
-.log-item { padding: 0.55rem 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
-.log-kind { display: inline-block; min-width: 5.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--faint); }
-.log-title { color: var(--text); font-weight: 600; }
-.log-by::before { content: "· "; }
+.inspo + .section-title, .tiles + .section-title { margin-top: 3rem; }
 /* Live interests: hobbies as tiles */
 .tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
 /* The first tile spans two columns, so seven tiles fill even rows of four (or two). */
