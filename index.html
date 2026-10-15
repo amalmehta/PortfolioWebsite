@@ -131,7 +131,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><img src="images/post-training-960.webp" alt="Post Training Lab: held-out success rising from 70% after SFT to 80% after GRPO and 81% after DPO, averaged over 3 seeds, above a four-policy maze race" loading="lazy" width="960" height="778"></figure>
+        <figure class="shot"><img src="images/post-training-960.webp" alt="Post Training Lab: results averaged over 3 seeds: held-out success from 70% to 80% with GRPO and to 81% with DPO, 63% to 74% on harder mazes, and 7% for the reward hacker" loading="lazy" width="960" height="778"></figure>
         <div class="project-text">
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a key-and-door maze: supervised fine-tuning on demos from a planner with a bad habit, then two ways to fix it, GRPO (online RL on a verifiable reward) and DPO (offline preferences). Averaged over 3 seeds, GRPO lifts held-out success from 70% to 80% and DPO to 81%; RL from scratch on the same budget reaches 0%, and a run with a subtly wrong reward games it down to 7%.</p>
@@ -150,7 +150,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board mid-game, with the engine’s search shown on the board" loading="lazy" width="960" height="634"></figure>
+        <figure class="shot"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></figure>
         <div class="project-text">
           <h3>AlphaGo Lite</h3>
           <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
@@ -169,7 +169,7 @@
       </article>
 
       <article class="project">
-        <figure class="shot"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a city scene with a lidar point cloud, tracked objects, predicted paths and the car’s chosen path" loading="lazy" width="960" height="600"></figure>
+        <figure class="shot"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a chase view of the car on a city street with lidar points, boxes around tracked vehicles and its planned path, beside live stats for each stage of the stack and the RL speed policy’s learning curve" loading="lazy" width="960" height="600"></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
           <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations.</p>
