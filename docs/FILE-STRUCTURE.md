@@ -6,7 +6,7 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 index.html                    The whole site: intro, research & work, projects, writeups, skills, musings (hidden for now)
 thinking.html                 "Things I'm thinking about": its own page, linked from the profile
 photos.html                   Photos from travels: its own page, linked from the profile
-values.html                   Values & inspiration: its own page, linked quietly from the footer
+values.html                   Values & inspiration: its own page, unlinked until it has entries
 interests.html                Interests: fan of, hobbies, curious about; linked in the header of every page
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
