@@ -24,7 +24,7 @@ flowchart LR
 
 | Part | Job |
 |---|---|
-| `index.html` | All content. A sticky header, a short intro with contact links, five research/work entries laid out as a timeline (dates on the left, a two-sentence summary and a tags line), then eight project cards, two selected writeups (school project reports) in the same timeline layout, each linking its report in `papers/`, a dated Skills list (a superset of the resume's, checked by the tests), a Musings section of short dated notes in three groups (Adventure, Life, Discovery), hidden until its first note, and a one-line "Outside work" note above the footer. |
+| `index.html` | All content. A sticky header, a short intro with contact links, five research/work entries laid out as a timeline (dates on the left, a two-sentence summary and a tags line), then eleven project cards (the last three product builds), two selected writeups (school project reports) in the same timeline layout, each linking its report in `papers/`, a dated Skills list (a superset of the resume's, checked by the tests), a Musings section of short dated notes in three groups (Adventure, Life, Discovery), hidden until its first note, and a one-line "Outside work" note above the footer. |
 | `thinking.html` | "Things I'm thinking about": a separate page of numbered open questions, sharing the header, footer and stylesheet. Linked from the Interests page and the footer of the profile page. |
 | `photos.html` | Photos from travels: a separate page with a grid of captioned photos (place and year, plus a line about the moment), one column on phones up to three on wide screens. Photos live in `images/photos/` as WebP with location data stripped. Below them, "Places I'd like to go" shows six original drawings of an iconic spot from each place (`images/places/`, drawn by `tools/draw-places.py`), labelled as drawings. Linked from the Interests page and the footer of the profile page. |
 | `pong.js` | A hidden Pong game. On the Photos page, a small skier glides down the Hokkaido drawing (it stands still with reduced motion); clicking it opens a dialog with a canvas game against the mountain, first to 5, played with the mouse, touch or arrow keys. Physics runs on a fixed 120 Hz clock and drawing blends the last two steps, so it moves the same at any frame rate; paddle hits are checked along the ball's path, so a fast ball can't slip through. The skier stays hidden without JavaScript. |
@@ -51,7 +51,7 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 
 ## Key decisions
 
-- **Plain HTML over a framework or site generator.** One page with eight cards doesn't need one, and anyone can edit it. The cost is that repeated card markup is copied by hand.
+- **Plain HTML over a framework or site generator.** One page with eleven cards doesn't need one, and anyone can edit it. The cost is that repeated card markup is copied by hand.
 - **No code links for private projects.** Most projects are in private repos, so their cards have a write-up and screenshot only. Neural Signal ML links to its public repo, and AlphaGo Lite to its live in-browser demo.
 - **Plain-language project descriptions.** Each card says what the project does and why it's interesting before naming techniques; the techniques go in the small tags line.
 - **Resume built from source.** The resume PDF is built from LaTeX in `resume/`, so it can be edited and rebuilt in one step. It lists email, LinkedIn and this site, and no phone number.
@@ -66,7 +66,7 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 
 ## How it's tested
 
-Automatically, with `python3 -m unittest discover tests` (standard library only; see [Instructions](INSTRUCTIONS.md#run-the-tests)). The tests check that every local link, image and anchor resolves, nothing links into `_archive/`, each image's and poster's `width`/`height` match the file, every clip is a muted inline loop with a poster that waits for `media.js`, every clip and poster is under 2 MB, all eight project cards and the four named research entries have an image or clip, text and chip colours reach 4.5:1 contrast in both themes, and the resume has no phone number and is one page (the PDF check runs when `pypdf` is installed).
+Automatically, with `python3 -m unittest discover tests` (standard library only; see [Instructions](INSTRUCTIONS.md#run-the-tests)). The tests check that every local link, image and anchor resolves, nothing links into `_archive/`, each image's and poster's `width`/`height` match the file, every clip is a muted inline loop with a poster that waits for `media.js`, every clip and poster is under 2 MB, all eleven project cards and the four named research entries have an image or clip, text and chip colours reach 4.5:1 contrast in both themes, and the resume has no phone number and is one page (the PDF check runs when `pypdf` is installed).
 
 Also by hand, with a headless browser (Playwright) against a local server:
 

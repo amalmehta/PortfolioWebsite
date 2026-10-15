@@ -316,8 +316,8 @@ class MediaTest(unittest.TestCase):
 
 
 class ProjectsTest(unittest.TestCase):
-    def test_eight_projects(self):
-        self.assertEqual(len(PAGE.projects), 8, [p["title"] for p in PAGE.projects])
+    def test_eleven_projects(self):
+        self.assertEqual(len(PAGE.projects), 11, [p["title"] for p in PAGE.projects])
 
     def test_each_card_is_complete(self):
         for p in PAGE.projects:
