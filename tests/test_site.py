@@ -417,7 +417,7 @@ class SubpagesTest(unittest.TestCase):
     def test_messi_replay_is_wired(self):
         # The profile's other hidden extra: "soccer tournaments" opens messi.js's replay.
         html = INDEX.read_text(encoding="utf-8")
-        self.assertIn('<button type="button" class="messi-egg" hidden>soccer tournaments</button>', html)
+        self.assertRegex(html, r'<button type="button" class="messi-egg" aria-label="soccer tournaments \(opens a replay[^"]*\)" hidden>soccer tournaments</button>')
         self.assertIn('<span class="messi-plain">soccer tournaments</span>', html)
         self.assertIn('<script src="messi.js" defer></script>', html)
         self.assertTrue((ROOT / "messi.js").is_file())
@@ -514,6 +514,20 @@ class ColoursTest(unittest.TestCase):
 
 
 PHONE = re.compile(r"(\+?\d[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}")
+
+
+class PapersTest(unittest.TestCase):
+    def test_link_sizes_match_files(self):
+        # "(PDF, 374 KB)" / "(PDF, 1.2 MB)" on each papers/ link matches the file.
+        html = INDEX.read_text(encoding="utf-8")
+        links = re.findall(r'<a href="(papers/[^"]+\.pdf)"[^>]*>[^<]*\(PDF, ([\d.]+) (KB|MB)\)', html)
+        self.assertTrue(links)
+        for href, num, unit in links:
+            with self.subTest(pdf=href):
+                size = (ROOT / href).stat().st_size
+                shown = f"{round(size / 1000)}" if unit == "KB" else f"{size / 1e6:.1f}"
+                self.assertEqual(num, shown)
+                self.assertEqual(unit, "KB" if size < 1e6 else "MB")
 
 
 class ResumeTest(unittest.TestCase):
