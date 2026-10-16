@@ -331,7 +331,7 @@ class ProjectsTest(unittest.TestCase):
         html = INDEX.read_text(encoding="utf-8")
         def cards(section_id):
             sec = html[html.index(f'<section id="{section_id}"'):]
-            return sec[:sec.index("</section>")].count('<article class="project">')
+            return len(re.findall(r'<article class="project"[ >]', sec[:sec.index("</section>")]))
         self.assertEqual((cards("projects"), cards("products")), (8, 3))
         self.assertEqual(len(PAGE.projects), 11, [p["title"] for p in PAGE.projects])
 
@@ -476,6 +476,10 @@ class ValuesPageTest(unittest.TestCase):
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
         has_entries = 'class="value"' in html or 'class="inspo-item"' in html
         self.assertEqual("values.html" in [v for _, _, v in PAGE.links], has_entries)
+        if not has_entries:  # no other page links to it either
+            for other in ("thinking.html", "photos.html", "interests.html"):
+                with self.subTest(page=other):
+                    self.assertNotIn("values.html", [v for _, _, v in parse(ROOT / other).links])
         # ...and search engines are asked to skip it until then.
         self.assertEqual('<meta name="robots" content="noindex">' in html, not has_entries)
 
