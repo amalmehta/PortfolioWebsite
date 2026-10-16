@@ -55,6 +55,10 @@ Then point the card's `<img>` at `images/name-960.webp` and set its `width`/`hei
 
 Each public page has its own 1200×630 preview image: `images/og.png` (profile), `og-interests.png`, `og-travel.png` and `og-thinking.png`. When the top of a page changes, recapture its image: serve a copy of the site whose `styles.css` has its dark-mode block switched off and whose page hides `.site-header`, then screenshot it with headless Chrome (`--headless=new --window-size=1200,630 --screenshot=…`).
 
+## Email address
+
+The address is never written into a page in full, so bots can't harvest it: each link is `<a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a>`, and `email.js` (loaded on every page) turns it into a real mailto link. The tests fail if the full address appears in any page.
+
 ## Hidden extras
 
 Two easter eggs, both wired up by the tests: the skier on the Travel page's Hokkaido drawing opens Pong (`pong.js`), and "soccer tournaments" in the profile's Outside work opens a replay inspired by Messi's 2011 solo goal at the Bernabéu (`messi.js`). Without JavaScript both stay invisible: the skier is hidden and the words are plain text.

@@ -265,6 +265,18 @@ class SearchTest(unittest.TestCase):
         self.assertTrue((ROOT / data["image"][len(SITE_URL):]).is_file())
 
 
+class EmailTest(unittest.TestCase):
+    def test_address_is_not_in_the_raw_pages(self):
+        # Bots reading the HTML shouldn't find the address; email.js builds it for visitors.
+        for page in sorted(ROOT.glob("*.html")):
+            with self.subTest(page=page.name):
+                html = page.read_text(encoding="utf-8")
+                self.assertNotIn("amal.mehta@gmail.com", html)
+                if 'class="email"' in html:
+                    self.assertRegex(html, r'<script src="(https://amalmehta\.github\.io/PortfolioWebsite/)?email\.js" defer></script>')
+        self.assertTrue((ROOT / "email.js").is_file())
+
+
 class ImagesTest(unittest.TestCase):
     def test_every_image_has_alt_text(self):
         no_alt = [i["src"] for i in PAGE.imgs if not (i.get("alt") or "").strip()]

@@ -354,3 +354,34 @@ picture { display: contents; }
   .tile, .tile-icon, .tile-icon * { animation: none !important; transition: none !important; }
   .tile:hover, .tile:hover .tile-icon { transform: none; }
 }
+
+/* Print: a few tidy pages instead of a long screen layout. Hide the chrome and the
+   pictures, use print-sized type, keep dates beside each entry, and don't split an
+   entry or card across pages. */
+@media print {
+  @page { margin: 14mm 15mm; }
+  html { font-size: 10pt; }
+  body { font-size: 10pt; line-height: 1.45; background: #fff; color: #000; }
+  .site-header, .skip, .hero::before, .shot, .portrait, picture, dialog, .pong, .hello { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .hero { display: block; padding: 0 0 0.6rem; }
+  .hero h1 { font-size: 22pt; margin: 0 0 0.3rem; }
+  .lede { font-size: 11.5pt; max-width: none; margin-bottom: 0.3rem; }
+  .hero-sub { max-width: none; margin-bottom: 0.4rem; }
+  .contact { gap: 0.2rem 1.2rem; font-size: 9pt; }
+  .section { padding-top: 0.9rem; padding-bottom: 0.2rem; }
+  .section-title { margin-bottom: 0.6rem; padding-bottom: 0.3rem; font-size: 8pt; }
+  .role { grid-template-columns: 6.5rem 1fr; gap: 0 1.2rem; padding: 0.55rem 0; break-inside: avoid; }
+  .role h3, .project-text h3 { font-size: 11pt; margin-bottom: 0.1rem; }
+  .project { display: block; margin-bottom: 0.7rem; break-inside: avoid; }
+  .skill-row { grid-template-columns: 6.5rem 1fr; gap: 0 1.2rem; padding: 0.3rem 0; break-inside: avoid; }
+  .chip { padding: 0; background: none !important; color: #333 !important; font-size: 8.5pt; }
+  .chip + .chip::before { content: "· "; color: #999; }
+  .tags { gap: 0 0.35rem; }
+  .links, .more { font-size: 9pt; }
+  a { color: #000; text-decoration: none; }
+  .outside { padding-top: 0.4rem; font-size: 9.5pt; break-inside: avoid; }
+  .footer { margin-top: 0.6rem; padding: 0.4rem 0 0; }
+  h2, h3 { break-after: avoid; }
+}
+
