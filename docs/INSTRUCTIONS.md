@@ -20,7 +20,7 @@ From the repo root, with no installs:
 python3 -m unittest discover tests
 ```
 
-Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing.
+Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing. GitHub also runs them on every pull request and push to `main` (`.github/workflows/tests.yml`), and shows the result on the PR.
 
 ## Edit content
 

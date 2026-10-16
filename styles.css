@@ -383,5 +383,15 @@ picture { display: contents; }
   .outside { padding-top: 0.4rem; font-size: 9.5pt; break-inside: avoid; }
   .footer { margin-top: 0.6rem; padding: 0.4rem 0 0; }
   h2, h3 { break-after: avoid; }
+  /* The tiles fade in on screen; on paper they'd be caught invisible, so no motion */
+  .tile, .tile-icon, .tile-icon * { animation: none !important; transition: none !important; }
+  .tiles { gap: 0.5rem; }
+  .tile { padding: 0.6rem 0.7rem; break-inside: avoid; }
+  .wishlist-note { margin: 0 0 0.6rem; }
+  .photo { break-inside: avoid; }
+  /* Links are dead ends on paper, so print where they go */
+  .links a[href^="http"]::after, .contact a[href^="http"]::after, .page-link a[href^="http"]::after { content: " — " attr(href); }
+  .links a[href^="papers/"]::after, .contact a[href^="resume/"]::after { content: " — amalmehta.github.io/PortfolioWebsite/" attr(href); }
+  .links, .contact { overflow-wrap: anywhere; }
 }
 
