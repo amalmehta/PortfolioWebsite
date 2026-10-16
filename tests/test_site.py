@@ -414,6 +414,10 @@ class SkillsTest(unittest.TestCase):
         self.assertTrue(resume)
         self.assertEqual(sorted(resume - chips), [])
 
+    def test_live_interests_says_when_updated(self):
+        html = (ROOT / "interests.html").read_text(encoding="utf-8")
+        self.assertRegex(html, r'class="page-updated">[^<]*<time datetime="\d{4}-\d{2}">')
+
     def test_says_when_updated(self):
         self.assertRegex(INDEX.read_text(encoding="utf-8"), r'class="skills-updated">[^<]*<time datetime="\d{4}-\d{2}">')
 
