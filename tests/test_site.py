@@ -415,6 +415,30 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 
+class BooksTest(unittest.TestCase):
+    """Live interests' Books I'm reading: cards with an optional star rating."""
+
+    def section(self):
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
+        s = html[html.index('<section class="books"'):]
+        return s[:s.index("</section>")]
+
+    def test_hidden_until_first_book(self):
+        s = self.section()
+        hidden = re.match(r'<section class="books"[^>]*\bhidden\b', s) is not None
+        self.assertEqual(hidden, 'class="book"' not in s)
+
+    def test_star_ratings_are_consistent(self):
+        # data-stars, the --stars fill and the spoken label all say the same 0-5 rating.
+        for tag in re.findall(r'<p class="stars"[^>]*>', self.section()):
+            with self.subTest(stars=tag):
+                value = re.search(r'data-stars="([\d.]+)"', tag).group(1)
+                n = float(value)
+                self.assertTrue(0 <= n <= 5 and (n * 2).is_integer(), "0-5 in halves")
+                self.assertIn("--stars: " + value, tag)
+                self.assertIn('aria-label="' + value + ' out of 5 stars"', tag)
+
+
 class ArtSectionTest(unittest.TestCase):
     def test_hidden_until_first_piece(self):
         # Live interests' "My art" shows only once it has a piece.
