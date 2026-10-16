@@ -1,5 +1,5 @@
 # Once a week (and on demand from the Actions tab): checks every external link on the site,
-# and that the Skills list's "updated" date is under six months old. Either failing fails
+# and that the Skills list's and Live interests' "updated" dates are under six months old. Either failing fails
 # the run, and GitHub emails the repo owner.
 name: Links
 on:
@@ -15,6 +15,6 @@ jobs:
         with:
           python-version: "3.12"
       - run: python tools/check-links.py
-      - name: Skills list is recent
+      - name: Kept-current dates are recent
         if: always()
         run: python tools/check-staleness.py
