@@ -369,7 +369,7 @@ class SkillsTest(unittest.TestCase):
         chips = {htmllib.unescape(c) for c in re.findall(r'<span class="chip">([^<]+)</span>', section)}
         tex = RESUME_TEX.read_text(encoding="utf-8")
         table = tex[tex.index(r"\section*{Technical Skills}"):tex.index(r"\end{tabular}")]
-        resume = {s.strip().replace("\\&", "&") for row in re.findall(r"& (.+?) \\\\", table) for s in row.split(",")}
+        resume = {s.strip().replace("\\&", "&") for row in re.findall(r"& (.+?) \\\\", table) for s in re.split(r",(?![^()]*\))", row)}  # commas inside (…) belong to one skill
         self.assertTrue(resume)
         self.assertEqual(sorted(resume - chips), [])
 
