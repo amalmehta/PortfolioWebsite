@@ -261,9 +261,9 @@ picture { display: contents; }
   background: linear-gradient(90deg, var(--warm) calc(var(--stars, 0) / 5 * 100%), var(--line) 0); -webkit-background-clip: text; background-clip: text; color: transparent; }
 @media (prefers-reduced-motion: reduce) { .book { transition: none; } .book:hover { transform: none; } }
 /* Live interests: hobbies as tiles */
-.tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-/* The first tile spans two columns, so seven tiles fill even rows of four (or two). */
-@media (min-width: 440px) { .tile:first-child, .tiles.pair .tile { grid-column: span 2; } }
+.tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+/* Three across on desktop, two on tablets, one on phones; a pair sits two across */
+.tiles.pair { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .tile-icon .think { transform-origin: 12px 12px; }
 .tile-icon .antenna { transform-origin: 12px 6.5px; }
 .tile-icon .eyes { transform-origin: 12px 11.5px; }
