@@ -294,6 +294,9 @@ class MediaTest(unittest.TestCase):
                     self.assertTrue(src.endswith(".mp4"), src)
                     self.assertTrue(src.startswith("assets/media/"), src)
         self.assertTrue((ROOT / "media.js").is_file())
+        # media.js loads only when there's a clip to play.
+        loaded = '<script src="media.js" defer></script>' in INDEX.read_text(encoding="utf-8")
+        self.assertEqual(loaded, bool(PAGE.videos))
 
     def test_poster_size_matches_declared(self):
         for v in PAGE.videos:

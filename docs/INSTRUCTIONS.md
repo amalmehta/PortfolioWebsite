@@ -61,7 +61,7 @@ Project cards show their screenshot until a real clip is recorded. To add one, s
 <video autoplay muted loop playsinline preload="none" poster="images/name-960.webp" width="960" height="600" aria-label="What the clip shows"><source data-src="assets/media/name.mp4" type="video/mp4"></video>
 ```
 
-`media.js` (already on the page) loads it when it scrolls near and plays it; the poster shows instead with no JavaScript or reduced motion on. `assets/media/README.md` lists every file and what it should show. To replace one, save the new clip under the same name.
+Also add `<script src="media.js" defer></script>` to the `<head>` (it's left off while there are no clips; the tests check the two go together). `media.js` loads each clip when it scrolls near and plays it; the poster shows instead with no JavaScript or reduced motion on. `assets/media/README.md` lists every file and what it should show. To replace one, save the new clip under the same name.
 
 Keep each clip under 2 MB: about 5–8 seconds, 960 px wide, no audio. With [ffmpeg](https://ffmpeg.org) (`brew install ffmpeg`):
 

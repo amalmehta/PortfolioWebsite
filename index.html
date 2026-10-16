@@ -18,7 +18,6 @@
   <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <script src="media.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#top">Skip to content</a>
@@ -144,7 +143,7 @@
         <figure class="shot"><img src="images/reward-hack-zoo.svg" alt="Drawing: over training, proxy reward keeps climbing while the true score falls, with the step where hacking starts marked; below, the five environments" loading="lazy" width="1400" height="875"></figure>
         <div class="project-text">
           <h3>Reward Hack Zoo</h3>
-          <p>Five tiny post-training environments, each with a naive reward a model can game: length bias, sycophancy, test special-casing, keyword stuffing and self-grading. A 135M-parameter model is trained on each with RL and rejection-sampling SFT, and plots mark the step where the reward it chases pulls away from the score that actually matters. Runs in progress.</p>
+          <p>Five tiny post-training environments, each with a naive reward a model can game: length bias, sycophancy, test special-casing, keyword stuffing and self-grading. A 135M-parameter model is trained on each with RL and rejection-sampling SFT, to mark the step where the reward it chases pulls away from the score that actually matters. Early runs are in for three of the five, and the first plot, for length bias, is done.</p>
           <p class="tags"><span class="chip">Reward hacking</span><span class="chip">Post-training</span><span class="chip">GRPO</span><span class="chip">Evals</span></p>
         </div>
       </article>

@@ -11,7 +11,7 @@ interests.html                Interests: fan of, hobbies, curious about; linked 
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
-media.js                      Lazy-loads and plays looping clips, once any card has one
+media.js                      Lazy-loads and plays looping clips; on the page only once a card has one
 pong.js                       Hidden Pong game behind the skier on the Hokkaido drawing (photos.html)
 fonts/                        Self-hosted Newsreader and Inter (WOFF2) and their OFL licences
 _archive/                     Archived blog (not published; see its README)
