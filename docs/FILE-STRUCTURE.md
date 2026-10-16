@@ -36,6 +36,7 @@ tools/
   make-images.sh              Builds the WebP posters and portrait AVIF/WebP from the JPEGs in images/
   draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
   draw-places.py              Draws the "Places I'd like to go" SVGs in images/places/
+.github/workflows/tests.yml    Runs the tests on GitHub for every push to main and every pull request
 tests/
   test_site.py                 Automated checks: links, images, cards, contrast, skills, hidden sections, previews, PDFs, resume
 docs/
