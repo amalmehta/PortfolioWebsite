@@ -552,14 +552,24 @@ class ResumeTest(unittest.TestCase):
             with self.subTest(link=text):
                 self.assertIn("%d KB" % size_kb, text)
 
-    def test_pdf_is_one_page_without_phone_number(self):
-        try:
-            from pypdf import PdfReader
-        except ImportError:
-            self.skipTest("pypdf not installed (pip install pypdf)")
-        reader = PdfReader(str(RESUME_PDF))
-        self.assertEqual(len(reader.pages), 1)
-        self.assertIsNone(PHONE.search(reader.pages[0].extract_text()))
+    def test_pdf_is_one_page(self):
+        # Counted with the standard library: the page tree may sit in compressed
+        # object streams, so inflate every Flate stream and look for /Type /Pages.
+        # (The phone-number rule is checked on the LaTeX source above.)
+        import zlib
+        data = RESUME_PDF.read_bytes()
+        chunks = [data]
+        for m in re.finditer(rb"/FlateDecode.*?stream\r?\n", data, re.S):
+            start = m.end(); end = data.find(b"endstream", start)
+            try:
+                chunks.append(zlib.decompress(data[start:end]))
+            except zlib.error:
+                pass
+        counts = [int(c) for chunk in chunks
+                  for c in re.findall(rb"/Type\s*/Pages\b[^>]*?/Count\s+(\d+)|/Count\s+(\d+)[^>]*?/Type\s*/Pages\b", chunk)
+                  for c in c if c]
+        self.assertTrue(counts, "no page tree found")
+        self.assertEqual(max(counts), 1, "the resume should fit on one page")
 
 
 if __name__ == "__main__":

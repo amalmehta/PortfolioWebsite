@@ -267,9 +267,9 @@ picture { display: contents; }
 .tile-icon .think { transform-origin: 12px 12px; }
 .tile-icon .antenna { transform-origin: 12px 6.5px; }
 .tile-icon .eyes { transform-origin: 12px 11.5px; }
-.tile:hover .think { animation: tile-pulse 1.4s ease-in-out infinite; }
-.tile:hover .antenna { animation: tile-swing 1s ease-in-out infinite; }
-.tile:hover .eyes { animation: tile-blink 2.2s ease-in-out infinite; }
+.tile:hover .think, .tile.is-live .think { animation: tile-pulse 1.4s ease-in-out infinite; }
+.tile:hover .antenna, .tile.is-live .antenna { animation: tile-swing 1s ease-in-out infinite; }
+.tile:hover .eyes, .tile.is-live .eyes { animation: tile-blink 2.2s ease-in-out infinite; }
 @keyframes tile-blink { 0%, 44%, 52%, 100% { transform: scaleY(1); } 48% { transform: scaleY(0.1); } }
 .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s; }
 .tile:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); transform: translateY(-2px); }
@@ -287,15 +287,15 @@ picture { display: contents; }
 .tile-icon .page { transform-origin: 12px 12px; }
 .tile-icon .trail { stroke-dasharray: 1.4 2.4; }
 .tile-icon { transition: transform 0.25s; }
-.tile:hover .tile-icon { transform: translateY(-1px) scale(1.06); }
-.tile:hover .orbit { animation: tile-orbit 2.4s linear infinite; }
-.tile:hover .play { animation: tile-pulse 0.9s ease-in-out infinite; }
-.tile:hover .swing { animation: tile-swing 0.7s ease-in-out infinite; }
-.tile:hover .write { animation: tile-write 1.4s ease-in-out infinite; }
-.tile:hover .page { animation: tile-page 1.6s ease-in-out infinite; }
-.tile:hover .steam { animation: tile-steam 1.4s ease-in-out infinite; }
-.tile:hover .bounce { animation: tile-bounce 0.9s ease-in-out infinite; }
-.tile:hover .trail { animation: tile-trail 1s linear infinite; }
+.tile:hover .tile-icon, .tile.is-live .tile-icon { transform: translateY(-1px) scale(1.06); }
+.tile:hover .orbit, .tile.is-live .orbit { animation: tile-orbit 2.4s linear infinite; }
+.tile:hover .play, .tile.is-live .play { animation: tile-pulse 0.9s ease-in-out infinite; }
+.tile:hover .swing, .tile.is-live .swing { animation: tile-swing 0.7s ease-in-out infinite; }
+.tile:hover .write, .tile.is-live .write { animation: tile-write 1.4s ease-in-out infinite; }
+.tile:hover .page, .tile.is-live .page { animation: tile-page 1.6s ease-in-out infinite; }
+.tile:hover .steam, .tile.is-live .steam { animation: tile-steam 1.4s ease-in-out infinite; }
+.tile:hover .bounce, .tile.is-live .bounce { animation: tile-bounce 0.9s ease-in-out infinite; }
+.tile:hover .trail, .tile.is-live .trail { animation: tile-trail 1s linear infinite; }
 @keyframes tile-orbit { to { transform: rotate(360deg); } }
 @keyframes tile-pulse { 50% { transform: scale(1.18); } }
 @keyframes tile-swing { 0%, 100% { transform: rotate(0); } 45% { transform: rotate(-18deg); } 70% { transform: rotate(4deg); } }

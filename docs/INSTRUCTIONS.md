@@ -20,11 +20,11 @@ From the repo root, with no installs:
 python3 -m unittest discover tests
 ```
 
-The resume PDF check is skipped unless `pypdf` is installed. Run the tests before pushing.
+Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing.
 
 ## Edit content
 
-Everything visible lives in `index.html`:
+The profile lives in `index.html`; the other pages each have their own file:
 
 - **Intro**: the `<section class="hero">` block at the top.
 - **Projects**: one `<article class="project">` per project, with its screenshot (or a looping clip, once one is recorded), a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
@@ -32,24 +32,32 @@ Everything visible lives in `index.html`:
 - **Research & work**: one `<article class="role">` per role.
 - **Selected writeups**: the `<section id="writeups">` block after Projects, laid out like Research & work. Each entry links its report in `papers/`; the link text gives the file's size (e.g. "Report (PDF, 707 KB)"; the tests check it matches the file). To shrink a large PDF without visible loss: `gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -sOutputFile=small.pdf big.pdf`.
 - **Skills**: the `<section id="skills">` block after Selected writeups, the most current list of skills, one row per group. Add a skill as a `<span class="chip">` in its row and update the date in the "updated" line. The resume's Technical Skills must stay a subset: the tests fail if a resume skill is missing here.
-- **Musings**: the `<section id="musings">` block after Selected writeups, hidden until its first note: when you add one, delete `hidden` from the section and put `<a href="#musings">Musings</a>` back in the header (`index.html#musings` on the other pages). It has three groups: Adventure, Life and Discovery. To add a note, copy the commented-out `<article class="musing">` template inside its group, fill in the date, title and a few sentences, and put it above older notes. Delete the group's "First note coming soon." line once its first note is in.
+- **Musings**: the `<section id="musings">` block after Skills, hidden until its first note: when you add one, delete `hidden` from the section and put `<a href="#musings">Musings</a>` back in the header (`index.html#musings` on the other pages). It has three groups: Adventure, Life and Discovery. To add a note, copy the commented-out `<article class="musing">` template inside its group, fill in the date, title and a few sentences, and put it above older notes. Delete the group's "First note coming soon." line once its first note is in.
 - **Things I'm thinking about**: its own page, `thinking.html`, linked from the Interests page and the footer. To add a thought, copy the commented-out `<li class="thought">` template, fill in the question, a few sentences and the date, and put it above older ones (they number themselves). Delete "First thought coming soon." once the first one is in.
 - **Travel**: its own page, `photos.html`, linked from the Interests page and the footer ("Travel"). Places I'd like to go comes first, then a Photos section. See [Add a photo](#add-a-photo). A skier on the Hokkaido drawing in Places I'd like to go is a hidden button that opens Pong (`pong.js`).
 - **Values & inspiration**: its own page, `values.html`. It isn't linked while every section says "Coming soon": once you add the first entry, remove its `<meta name="robots" content="noindex">` and put `· <a class="quiet" href="values.html">Values</a>` back at the end of the profile footer (the tests check the two stay in step). Each section (Values, Inspiration, Things I care about) has a commented-out template to copy; delete that section's "Coming soon." once its first entry is in.
-- **Live interests**: its own page, `interests.html`, linked in the header of every page as "Interests". Only current interests belong here: remove an entry when it stops being one. A **Books I'm reading** section waits hidden below Hobbies: copy the commented-out `<article class="book">` card for each book, set `--hue` (the drawn cover's colour, 0–360), the status line, and once you've read it the stars (`data-stars`, `--stars` and the `aria-label` all take the same 0–5 rating, halves allowed) and a line of review. Then delete `hidden`. The tests check the three star values agree. A **My art** section waits hidden below Curious about: put images in `images/art/` as WebP, copy the commented-out `<figure class="photo">` template, and delete `hidden` from the section once the first piece is in (the tests check the two stay in step). It ends with links to Things I'm thinking about (Ideas) and the Photos page (Travel). Hobbies and Curious about work the same way as the Values page: copy the commented-out template, and delete "Coming soon." once the first entry is in.
+- **Live interests**: its own page, `interests.html`, linked in the header of every page as "Interests". Only current interests belong here: remove an entry when it stops being one. A **Books I'm reading** section waits hidden below Hobbies: copy the commented-out `<article class="book">` card for each book, set `--hue` (the drawn cover's colour, 0–360), the status line, and once you've read it the stars (`data-stars`, `--stars` and the `aria-label` all take the same 0–5 rating, halves allowed) and a line of review. Then delete `hidden`. The tests check the three star values agree. A **My art** section waits hidden below Curious about: put images in `images/art/` as WebP, copy the commented-out `<figure class="photo">` template, and delete `hidden` from the section once the first piece is in (the tests check the two stay in step). It ends with links to Things I'm thinking about (Ideas) and the Travel page. Hobbies and Curious about are tiles: copy the commented-out `<li class="tile">` template (the icon is any 24×24 line drawing, optional). To make a tile link somewhere, wrap its title as `<a class="tile-link" href="…">`; the whole tile becomes clickable and gets an arrow. `tiles.js` plays each icon's motion once on scroll-in and on tap.
 
 Colours, fonts and spacing are in `styles.css`. The fonts are self-hosted: the `@font-face` rules at the top of `styles.css` point at `fonts/`, and each page preloads the two Latin files. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode.
 
 ## Screenshots
 
-Project screenshots live in `images/` as JPEG about 1400 px wide. The page shows a 960 px WebP copy as each clip's poster, built from the JPEG:
+Project screenshots live in `images/` as JPEG about 1400 px wide. The cards show a 960 px WebP copy, built from the JPEG:
 
 ```bash
 sips -s format jpeg -s formatOptions 80 --resampleWidth 1400 shot.png --out images/name.jpg
 tools/make-images.sh images/name.jpg
 ```
 
-Then set the `poster` on the card's `<video>` to `images/name-960.webp` and its `width`/`height` to that file's size (the tests check they match). `make-images.sh` needs `brew install libavif webp`.
+Then point the card's `<img>` at `images/name-960.webp` and set its `width`/`height` to that file's size (the tests check they match). `make-images.sh` needs `brew install libavif webp`.
+
+## Link previews
+
+Each public page has its own 1200×630 preview image: `images/og.png` (profile), `og-interests.png`, `og-travel.png` and `og-thinking.png`. When the top of a page changes, recapture its image: serve a copy of the site whose `styles.css` has its dark-mode block switched off and whose page hides `.site-header`, then screenshot it with headless Chrome (`--headless=new --window-size=1200,630 --screenshot=…`).
+
+## Hidden extras
+
+Two easter eggs, both wired up by the tests: the skier on the Travel page's Hokkaido drawing opens Pong (`pong.js`), and "soccer tournaments" in the profile's Outside work opens a replay inspired by Messi's 2011 solo goal at the Bernabéu (`messi.js`). Without JavaScript both stay invisible: the skier is hidden and the words are plain text.
 
 Cards crop images to a 16:10 frame from the top left. For a wide chart that shouldn't be cropped, add `contain` to its figure: `<figure class="shot contain">`. For a wide screenshot whose useful part is on the right, add `crop-right` instead.
 
