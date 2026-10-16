@@ -20,7 +20,7 @@ From the repo root, with no installs:
 python3 -m unittest discover tests
 ```
 
-Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing. GitHub also runs them on every pull request and push to `main` (`.github/workflows/tests.yml`), and shows the result on the PR.
+Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing. GitHub also runs them on every pull request and push to `main` (`.github/workflows/tests.yml`), and shows the result on the PR; `main` only accepts a merge once they pass. A second workflow checks every external link each Monday (or run it yourself: `python3 tools/check-links.py`), and Dependabot opens a PR when a workflow's actions need updating.
 
 ## Edit content
 

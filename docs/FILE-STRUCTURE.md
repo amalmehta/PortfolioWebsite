@@ -36,7 +36,10 @@ tools/
   make-images.sh              Builds the WebP posters and portrait AVIF/WebP from the JPEGs in images/
   draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
   draw-places.py              Draws the "Places I'd like to go" SVGs in images/places/
+  check-links.py              Checks the site's external links (run weekly on GitHub)
 .github/workflows/tests.yml    Runs the tests on GitHub for every push to main and every pull request
+.github/workflows/links.yml    Checks every external link weekly (Mondays) and on demand
+.github/dependabot.yml         Opens PRs when the workflows' actions have new versions
 tests/
   test_site.py                 Automated checks: links, images, cards, contrast, skills, hidden sections, previews, PDFs, resume
 docs/
