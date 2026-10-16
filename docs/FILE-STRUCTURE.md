@@ -13,6 +13,7 @@ favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
 media.js                      Lazy-loads and plays looping clips; on the page only once a card has one
 messi.js                      Hidden replay of Messi's 2011 solo goal at the Bernabéu, behind "soccer tournaments" on the profile
+email.js                      Turns the bot-proofed "name [at] domain" email links back into real ones
 tiles.js                      Plays the Live interests tile icons once on scroll-in and on tap (phones have no hover)
 pong.js                       Hidden Pong game behind the skier on the Hokkaido drawing (photos.html)
 fonts/                        Self-hosted Newsreader and Inter (WOFF2) and their OFL licences
