@@ -469,6 +469,8 @@ class ValuesPageTest(unittest.TestCase):
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
         has_entries = 'class="value"' in html or 'class="inspo-item"' in html
         self.assertEqual("values.html" in [v for _, _, v in PAGE.links], has_entries)
+        # ...and search engines are asked to skip it until then.
+        self.assertEqual('<meta name="robots" content="noindex">' in html, not has_entries)
 
     def test_local_links_resolve(self):
         page = parse(ROOT / "values.html")
