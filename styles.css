@@ -144,7 +144,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .messi-egg { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 .messi-egg:hover { color: var(--accent); }
 .messi { width: min(720px, calc(100vw - 32px)); }
-.messi canvas { cursor: default; aspect-ratio: 672 / 576; }
+.pong.messi canvas { cursor: default; aspect-ratio: 672 / 576; width: auto; max-width: 100%; max-height: 70vh; margin-inline: auto; }  /* its own shape, not Pong's 16:10, and short enough to fit */
 .messi-foot { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
 .messi-foot .pong-help { margin: 0; }
 .messi-again { flex-shrink: 0; font: 600 0.85rem var(--sans); color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
