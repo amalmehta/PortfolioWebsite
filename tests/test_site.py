@@ -230,13 +230,20 @@ class LinksTest(unittest.TestCase):
         self.assertTrue(resume, "no link to the resume PDF")
 
     def test_link_preview_image_matches_repo(self):
-        og = PAGE.metas.get("og:image", "")
-        self.assertTrue(og.startswith(SITE_URL), og)
-        path = ROOT / og[len(SITE_URL):]
-        self.assertTrue(path.is_file(), path)
-        self.assertEqual(image_size(path), (1200, 630))
-        self.assertEqual(PAGE.metas.get("og:image:width"), "1200")
-        self.assertEqual(PAGE.metas.get("og:image:height"), "630")
+        # Every page's link-preview image exists at 1200x630; each public page has its own.
+        seen = {}
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html"):
+            with self.subTest(page=name):
+                page = parse(ROOT / name)
+                og = page.metas.get("og:image", "")
+                self.assertTrue(og.startswith(SITE_URL), og)
+                path = ROOT / og[len(SITE_URL):]
+                self.assertTrue(path.is_file(), path)
+                self.assertEqual(image_size(path), (1200, 630))
+                self.assertEqual(page.metas.get("og:image:width"), "1200")
+                self.assertEqual(page.metas.get("og:image:height"), "630")
+                seen[name] = og
+        self.assertEqual(len(set(seen.values())), len(seen), seen)
 
 
 class ImagesTest(unittest.TestCase):

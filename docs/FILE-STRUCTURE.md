@@ -21,7 +21,8 @@ assets/media/                 Looping project clips (MP4) once recorded; empty f
   README.md                   Which files to supply, and what each should show
 images/                       Project screenshots (and their WebP copies the cards show) and research drawings (SVG)
   portrait.jpg                Pencil-sketch portrait in the intro (served as portrait-240/-480 AVIF and WebP)
-  og.png                      Link-preview image (1200×630)
+  og.png                      Link-preview image for the profile (1200×630)
+  og-interests.png, og-travel.png, og-thinking.png   Link previews for the other pages
   apple-touch-icon.png        Home-screen icon (180×180)
   <project>.jpg               Full-size screenshot per project (the source for its poster)
   <project>-960.webp          960 px copy shown on the card (the poster, once it has a clip)
