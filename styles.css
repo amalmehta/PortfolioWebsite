@@ -264,7 +264,14 @@ picture { display: contents; }
 /* Live interests: hobbies as tiles */
 .tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
 /* The first tile spans two columns, so seven tiles fill even rows of four (or two). */
-@media (min-width: 440px) { .tile:first-child { grid-column: span 2; } }
+@media (min-width: 440px) { .tile:first-child, .tiles.pair .tile { grid-column: span 2; } }
+.tile-icon .think { transform-origin: 12px 12px; }
+.tile-icon .antenna { transform-origin: 12px 6.5px; }
+.tile-icon .eyes { transform-origin: 12px 11.5px; }
+.tile:hover .think { animation: tile-pulse 1.4s ease-in-out infinite; }
+.tile:hover .antenna { animation: tile-swing 1s ease-in-out infinite; }
+.tile:hover .eyes { animation: tile-blink 2.2s ease-in-out infinite; }
+@keyframes tile-blink { 0%, 44%, 52%, 100% { transform: scaleY(1); } 48% { transform: scaleY(0.1); } }
 .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s; }
 .tile:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); transform: translateY(-2px); }
 .tile-icon { display: block; width: 36px; height: 36px; padding: 7px; margin-bottom: 0.75rem; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
