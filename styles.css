@@ -295,6 +295,15 @@ picture { display: contents; }
 .tile:nth-child(5) { animation-delay: 0.2s; } .tile:nth-child(6) { animation-delay: 0.25s; } .tile:nth-child(7) { animation-delay: 0.3s; } .tile:nth-child(8) { animation-delay: 0.35s; }
 @keyframes tile-in { from { opacity: 0; transform: translateY(8px); } }
 .tile h3 { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; line-height: 1.3; margin: 0 0 0.3rem; }
+/* A tile with somewhere to go: its title is the link, and the whole tile is clickable */
+.tile { position: relative; }
+.tile-link { color: inherit; }
+.tile-link::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+.tile-link:hover { text-decoration: none; }
+.tile:has(.tile-link) h3::after { content: " →"; color: var(--accent); transition: margin 0.2s; }
+.tile:has(.tile-link):hover h3::after { margin-left: 0.2rem; }
+.tile-link:focus-visible { outline: none; }
+.tile:has(.tile-link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 .tile p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--muted); }
 
 .page-link { margin: 0; }
