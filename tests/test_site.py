@@ -246,6 +246,25 @@ class LinksTest(unittest.TestCase):
         self.assertEqual(len(set(seen.values())), len(seen), seen)
 
 
+class SearchTest(unittest.TestCase):
+    def test_each_page_names_its_canonical_address(self):
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html"):
+            with self.subTest(page=name):
+                html = (ROOT / name).read_text(encoding="utf-8")
+                canon = re.search(r'<link rel="canonical" href="([^"]+)">', html)
+                og = re.search(r'<meta property="og:url" content="([^"]+)">', html)
+                self.assertTrue(canon and og, "canonical and og:url")
+                self.assertEqual(canon.group(1), og.group(1))
+
+    def test_profile_describes_the_person(self):
+        import json
+        html = INDEX.read_text(encoding="utf-8")
+        data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1))
+        self.assertEqual((data["@type"], data["name"]), ("Person", "Amal Mehta"))
+        self.assertIn("https://www.linkedin.com/in/amal-mehta-264413a9/", data["sameAs"])
+        self.assertTrue((ROOT / data["image"][len(SITE_URL):]).is_file())
+
+
 class ImagesTest(unittest.TestCase):
     def test_every_image_has_alt_text(self):
         no_alt = [i["src"] for i in PAGE.imgs if not (i.get("alt") or "").strip()]

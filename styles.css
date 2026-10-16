@@ -204,6 +204,7 @@ picture { display: contents; }
   .nav-links a[href="#research"], .nav-links a[href$="#products"], .nav-links .file { display: none; }
 }
 @media (max-width: 380px) { .nav-links { gap: 0.6rem; } }
+@media (max-width: 360px) { .nav-name { font-size: 1.02rem; } .nav-links { gap: 0.5rem; font-size: 0.86rem; } }  /* 320 px phones */
 
 /* Things I'm thinking about: its own page (thinking.html) */
 .page { padding-top: 3.5rem; padding-bottom: 2rem; max-width: 760px; }
