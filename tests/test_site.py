@@ -407,6 +407,14 @@ class SubpagesTest(unittest.TestCase):
         self.assertIn('<script src="pong.js" defer></script>', html)
         self.assertTrue((ROOT / "pong.js").is_file())
 
+    def test_messi_replay_is_wired(self):
+        # The profile's other hidden extra: "soccer tournaments" opens messi.js's replay.
+        html = INDEX.read_text(encoding="utf-8")
+        self.assertIn('<button type="button" class="messi-egg" hidden>soccer tournaments</button>', html)
+        self.assertIn('<span class="messi-plain">soccer tournaments</span>', html)
+        self.assertIn('<script src="messi.js" defer></script>', html)
+        self.assertTrue((ROOT / "messi.js").is_file())
+
     def test_photos_have_alt_and_size(self):
         # Each photo needs alt text and its real width/height, so the grid
         # doesn't jump as photos load. The first two are on screen when the
