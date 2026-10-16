@@ -140,6 +140,15 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
   .contact a, .hello a, .links a, .footer a, .page-link a, .more a, .outside a { display: inline-block; padding-block: 0.25rem; }
 }
 
+/* Hidden replay: "soccer tournaments" in Outside work opens it (messi.js); it looks like plain text */
+.messi-egg { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.messi-egg:hover { color: var(--accent); }
+.messi { width: min(720px, calc(100vw - 32px)); }
+.messi canvas { cursor: default; aspect-ratio: 672 / 576; }
+.messi-foot { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
+.messi-foot .pong-help { margin: 0; }
+.messi-again { flex-shrink: 0; font: 600 0.85rem var(--sans); color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
+
 /* Footer */
 .footer { padding-top: 2rem; padding-bottom: 3rem; margin-top: 2rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--faint); }
 .footer p { margin: 0; }
