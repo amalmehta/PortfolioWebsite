@@ -20,14 +20,14 @@ From the repo root, with no installs:
 python3 -m unittest discover tests
 ```
 
-Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing. GitHub also runs them on every pull request and push to `main` (`.github/workflows/tests.yml`), and shows the result on the PR; `main` only accepts a merge once they pass. A second workflow checks every external link each Monday (or run it yourself: `python3 tools/check-links.py`), and Dependabot opens a PR when a workflow's actions need updating.
+Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing. GitHub also runs them on every pull request and push to `main` (`.github/workflows/tests.yml`), and shows the result on the PR; `main` only accepts a merge once they pass. A second workflow checks every external link each Monday, and that the Skills list's "updated" date is under six months old (or run them yourself: `python3 tools/check-links.py`, `python3 tools/check-staleness.py`), and Dependabot opens a PR when a workflow's actions need updating.
 
 ## Edit content
 
 The profile lives in `index.html`; the other pages each have their own file:
 
 - **Intro**: the `<section class="hero">` block at the top.
-- **Projects**: one `<article class="project">` per project, with its screenshot (or a looping clip, once one is recorded), a heading, a description, a line of tags and an optional link. Copy one to add a project, or delete one to remove it.
+- **Projects**: one `<article class="project">` per project, with its screenshot (or a looping clip, once one is recorded), a heading, a description, a line of tags and an optional link. A card with no public link says so instead: `<p class="links private">Private repo</p>`. Copy one to add a project, or delete one to remove it.
 - **Products**: the `<section id="products">` block after Projects, with the same `<article class="project">` cards, for builds that could be real products.
 - **Research & work**: one `<article class="role">` per role.
 - **Selected writeups**: the `<section id="writeups">` block after Projects, laid out like Research & work. Each entry links its report in `papers/`; the link text gives the file's size (e.g. "Report (PDF, 707 KB)"; the tests check it matches the file). To shrink a large PDF without visible loss: `gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -sOutputFile=small.pdf big.pdf`.

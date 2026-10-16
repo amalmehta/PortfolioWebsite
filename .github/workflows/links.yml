@@ -1,5 +1,6 @@
-# Checks every external link on the site once a week (and on demand from the Actions tab).
-# A broken link fails the run, and GitHub emails the repo owner.
+# Once a week (and on demand from the Actions tab): checks every external link on the site,
+# and that the Skills list's "updated" date is under six months old. Either failing fails
+# the run, and GitHub emails the repo owner.
 name: Links
 on:
   schedule:
@@ -14,3 +15,6 @@ jobs:
         with:
           python-version: "3.12"
       - run: python tools/check-links.py
+      - name: Skills list is recent
+        if: always()
+        run: python tools/check-staleness.py
