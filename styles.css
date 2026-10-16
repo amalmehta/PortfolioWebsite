@@ -152,7 +152,6 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 /* Footer */
 .footer { padding-top: 2rem; padding-bottom: 3rem; margin-top: 2rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--faint); }
 .footer p { margin: 0; }
-.footer .psst { margin-top: 0.6rem; font-size: 0.82rem; font-style: italic; }
 
 /* Colour accents */
 .hero::before {
