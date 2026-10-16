@@ -1,6 +1,6 @@
 # Portfolio Website
 
-My personal website: research, eight selected projects and three products, on one clean page.
+My personal website. The profile has research and work, eight projects, three products, two class writeups and a live skills list. Pages of its own cover what I'm thinking about, my live interests and travel, with a Pong game hidden on the Travel page.
 
 **Live:** [amalmehta.github.io/PortfolioWebsite](https://amalmehta.github.io/PortfolioWebsite/)
 
