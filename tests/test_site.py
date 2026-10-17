@@ -232,7 +232,7 @@ class LinksTest(unittest.TestCase):
     def test_link_preview_image_matches_repo(self):
         # Every page's link-preview image exists at 1200x630; each public page has its own.
         seen = {}
-        for name in ("index.html", "interests.html", "photos.html", "thinking.html"):
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html"):
             with self.subTest(page=name):
                 page = parse(ROOT / name)
                 og = page.metas.get("og:image", "")
@@ -248,7 +248,7 @@ class LinksTest(unittest.TestCase):
 
 class SearchTest(unittest.TestCase):
     def test_each_page_names_its_canonical_address(self):
-        for name in ("index.html", "interests.html", "photos.html", "thinking.html"):
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html"):
             with self.subTest(page=name):
                 html = (ROOT / name).read_text(encoding="utf-8")
                 canon = re.search(r'<link rel="canonical" href="([^"]+)">', html)

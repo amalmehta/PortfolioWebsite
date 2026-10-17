@@ -184,7 +184,7 @@ picture { display: contents; }
 .skip { position: absolute; left: 16px; top: -3rem; z-index: 20; padding: 0.4rem 0.8rem; border-radius: 6px; background: var(--surface); color: var(--accent); border: 1px solid var(--line); font-size: 0.92rem; }
 .skip:focus { top: 0.6rem; }
 /* Links inside sentences are underlined, not told apart by colour alone. */
-.more a, .footer a, .credit a, .outside a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.more a, .footer a, .credit a, .outside a, .role p:not(.links):not(.tags) a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .nav-links .file { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; color: var(--faint); }
 
 /* Musings: short notes in three groups, side by side on wide screens */
