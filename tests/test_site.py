@@ -553,6 +553,16 @@ class ColoursTest(unittest.TestCase):
                     ratio = contrast(tokens[fg], tokens[bg])
                     self.assertGreaterEqual(ratio, 4.5, "%.2f:1" % ratio)
 
+    def test_browser_bar_matches_background(self):
+        # Phones colour their browser bar from theme-color: it's the page background in each theme.
+        themes = colour_tokens()
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "404.html"):
+            html = (ROOT / name).read_text(encoding="utf-8")
+            found = dict((t, c.lower()) for c, t in re.findall(
+                r'<meta name="theme-color" content="(#[0-9a-fA-F]{6})" media="\(prefers-color-scheme: (\w+)\)">', html))
+            with self.subTest(page=name):
+                self.assertEqual(found, {t: themes[t]["bg"].lower() for t in ("light", "dark")})
+
     def test_dark_mode_overrides_every_colour(self):
         css = STYLES.read_text(encoding="utf-8")
         dark_at = css.index("prefers-color-scheme: dark")
