@@ -37,7 +37,7 @@ tools/
   draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
   draw-places.py              Draws the "Places I'd like to go" SVGs in images/places/
   check-links.py              Checks the site's external links (run weekly on GitHub)
-  check-staleness.py          Flags a Skills "updated" date over six months old (run weekly on GitHub)
+  check-staleness.py          Flags the Skills and Live interests dates, or the newest thought, over six months old (run weekly on GitHub)
 .github/workflows/tests.yml    Runs the tests on GitHub for every push to main and every pull request
 .github/workflows/links.yml    Checks every external link weekly (Mondays) and on demand
 .github/dependabot.yml         Opens PRs when the workflows' actions have new versions
