@@ -20,7 +20,7 @@ From the repo root, with no installs:
 python3 -m unittest discover tests
 ```
 
-Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing. GitHub also runs them on every pull request and push to `main` (`.github/workflows/tests.yml`), and shows the result on the PR; `main` only accepts a merge once they pass. A second workflow checks every external link each Monday, and that the Skills list's and Live interests' "updated" dates are under six months old (or run them yourself: `python3 tools/check-links.py`, `python3 tools/check-staleness.py`), and Dependabot opens a PR when a workflow's actions need updating.
+Nothing is skipped; the resume's page count is read with the standard library. Run the tests before pushing. GitHub also runs them on every pull request and push to `main` (`.github/workflows/tests.yml`), and shows the result on the PR; `main` only accepts a merge once they pass. A second workflow checks every external link each Monday, and that the Skills list's and Live interests' "updated" dates, and the newest thought on Things I'm thinking about, are under six months old (or run them yourself: `python3 tools/check-links.py`, `python3 tools/check-staleness.py`), and Dependabot opens a PR when a workflow's actions need updating.
 
 ## Edit content
 

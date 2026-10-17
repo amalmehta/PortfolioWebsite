@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Fail if a "kept current" date on the site is more than six months old:
-the profile's Skills list and the Live interests page.
+the profile's Skills list, the Live interests page, and the newest entry on
+Things I'm thinking about.
 
 Run from the repo root: python3 tools/check-staleness.py
 The weekly Links workflow runs it too, so GitHub emails a reminder when the
@@ -15,6 +16,9 @@ DATES = [  # (page, what it is, pattern before the <time datetime="YYYY-MM">)
     ("index.html", "Skills list", r'class="skills-updated">[^<]*'),
     ("interests.html", "Live interests", r'class="page-updated">[^<]*'),
 ]
+NEWEST = [  # pages dated per entry: the most recent entry is what counts
+    ("thinking.html", "Things I'm thinking about"),
+]
 
 def main():
     today, stale = datetime.date.today(), 0
@@ -28,6 +32,16 @@ def main():
         print(f"{what} last updated {year}-{month:02d}: {age} month(s) ago")
         if age > MAX_MONTHS:
             print(f"  over {MAX_MONTHS} months: review it and update its date in {page}"); stale += 1
+    for page, what in NEWEST:
+        html = re.sub(r"<!--.*?-->", "", (ROOT / page).read_text(encoding="utf-8"), flags=re.S)
+        dates = [datetime.date.fromisoformat(d) for d in re.findall(r'<time datetime="(\d{4}-\d{2}-\d{2})">', html)]
+        if not dates:
+            print(f"{what}: no dated entries in {page}"); stale += 1; continue
+        newest = max(dates)
+        age = (today.year - newest.year) * 12 + (today.month - newest.month)
+        print(f"{what}: newest entry {newest}: {age} month(s) ago")
+        if age > MAX_MONTHS:
+            print(f"  over {MAX_MONTHS} months: add or update a thought in {page}"); stale += 1
     return 1 if stale else 0
 
 
