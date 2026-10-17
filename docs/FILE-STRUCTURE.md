@@ -6,7 +6,7 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 index.html                    The profile: intro, research & work, projects, products, writeups, skills, musings (hidden for now), outside work
 thinking.html                 "Things I'm thinking about": linked from Live interests and every footer
 photos.html                   Travel: places I'd like to go, then photos; linked from Live interests and every footer
-values.html                   Values & inspiration: its own page, unlinked until it has entries
+values.html                   Values & inspiration: its own page, linked from the profile footer
 interests.html                Live interests: hobby and curiosity tiles, hidden Books and My art; in every header
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
 favicon.svg                   Browser-tab icon (AM monogram)
@@ -24,7 +24,7 @@ assets/media/                 Looping project clips (MP4) once recorded; empty f
 images/                       Project screenshots (and their WebP copies the cards show) and research drawings (SVG)
   portrait.jpg                Pencil-sketch portrait in the intro (served as portrait-240/-480 AVIF and WebP)
   og.png                      Link-preview image for the profile (1200×630)
-  og-interests.png, og-travel.png, og-thinking.png   Link previews for the other pages
+  og-interests.png, og-travel.png, og-thinking.png, og-values.png   Link previews for the other pages
   apple-touch-icon.png        Home-screen icon (180×180)
   <project>.jpg               Full-size screenshot per project (the source for its poster)
   <project>-960.webp          960 px copy shown on the card (the poster, once it has a clip)

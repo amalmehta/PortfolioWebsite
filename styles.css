@@ -244,7 +244,7 @@ picture { display: contents; }
 .inspo { list-style: none; padding: 0; margin: 0; }
 .inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
 .inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
-.inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
+.inspo-group { margin-top: 3rem; }
 .inspo + .section-title, .tiles + .section-title, .books + .section-title { margin-top: 3rem; }
 .tiles + .books { margin-top: 3rem; }
 /* Books I'm reading: a card per book, with a drawn cover, stars and a short review */

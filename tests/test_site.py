@@ -507,7 +507,7 @@ class ValuesPageTest(unittest.TestCase):
     """values.html: linked quietly from the profile footer once it has entries."""
 
     def test_linked_only_once_filled(self):
-        # While every list still says "Coming soon", nothing links to it.
+        # While every list is still empty, nothing links to it.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
         has_entries = 'class="value"' in html or 'class="inspo-item"' in html
         self.assertEqual("values.html" in [v for _, _, v in PAGE.links], has_entries)
@@ -517,6 +517,15 @@ class ValuesPageTest(unittest.TestCase):
                     self.assertNotIn("values.html", [v for _, _, v in parse(ROOT / other).links])
         # ...and search engines are asked to skip it until then.
         self.assertEqual('<meta name="robots" content="noindex">' in html, not has_entries)
+
+    def test_empty_sections_hidden(self):
+        # Inspiration and Things I care about stay hidden exactly while they're empty.
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
+        groups = re.findall(r'(<section class="inspo-group"[^>]*>)(.*?)</section>', html, flags=re.S)
+        self.assertEqual(len(groups), 2)
+        for tag, body in groups:
+            with self.subTest(section=re.search(r"<h2[^>]*>(.*?)</h2>", body).group(1)):
+                self.assertEqual(re.search(r"\bhidden\b", tag) is not None, 'class="inspo-item"' not in body)
 
     def test_local_links_resolve(self):
         page = parse(ROOT / "values.html")
