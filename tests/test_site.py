@@ -242,6 +242,9 @@ class LinksTest(unittest.TestCase):
                 self.assertEqual(image_size(path), (1200, 630))
                 self.assertEqual(page.metas.get("og:image:width"), "1200")
                 self.assertEqual(page.metas.get("og:image:height"), "630")
+                # Described for screen readers, the same way for every network.
+                self.assertTrue(page.metas.get("og:image:alt"))
+                self.assertEqual(page.metas.get("twitter:image:alt"), page.metas.get("og:image:alt"))
                 seen[name] = og
         self.assertEqual(len(set(seen.values())), len(seen), seen)
 

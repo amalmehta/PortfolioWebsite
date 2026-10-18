@@ -97,7 +97,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .section { padding-top: 4.5rem; padding-bottom: 2.2rem; }
 .section-title {
   font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.12em; color: var(--warm);
+  text-transform: uppercase; letter-spacing: 0.09em; color: var(--warm);
   display: flex; align-items: center; gap: 0.6rem;
   margin: 0 0 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
 }
@@ -108,7 +108,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 @media (min-width: 820px) {
   .project { grid-template-columns: 0.85fr 1fr; gap: 2rem; align-items: center; }
 }
-.shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s; }
+.shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 .shot img, .shot video { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
 .shot video { cursor: pointer; }
 .shot.contain img, .shot.contain video { object-fit: contain; object-position: center; background: #fcfcfa; }
@@ -166,12 +166,12 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
     radial-gradient(40rem 24rem at 14% 22%, color-mix(in srgb, var(--warm) 10%, transparent), transparent 70%);
 }
 main { overflow-x: clip; }
-.section-title::before { content: ""; width: 1.4rem; height: 3px; border-radius: 2px; background: var(--warm); }
+.section-title::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--warm); }
 .tags.pubs { display: block; }
 .chip { font-size: 0.78rem; line-height: 1.5; padding: 0.1rem 0.55rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
 .project .chip { background: var(--warm-soft); color: var(--warm); }
 .credit { font-size: 0.75rem; color: var(--faint); }
-.project:hover .shot { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); transform: translateY(-2px); }
+.project:hover .shot { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .nav-name::before { content: ""; display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--warm); margin-right: 0.5rem; vertical-align: middle; }
 .outside { padding-top: 1rem; color: var(--muted); font-size: 0.95rem; }
 .outside strong { color: var(--text); font-weight: 600; }
@@ -252,8 +252,8 @@ picture { display: contents; }
 .tiles + .books { margin-top: 3rem; }
 /* Books I'm reading: a card per book, with a drawn cover, stars and a short review */
 .book-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-.book { display: grid; grid-template-columns: 76px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; transition: border-color 0.2s, transform 0.2s; }
-.book:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); transform: translateY(-2px); }
+.book { display: grid; grid-template-columns: 76px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+.book:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .book-cover { aspect-ratio: 2 / 3; border-radius: 4px 7px 7px 4px; padding: 0.5rem 0.45rem 0.5rem 0.65rem; display: flex; align-items: flex-end;
   background: linear-gradient(160deg, hsl(var(--hue, 210) 45% 46%), hsl(calc(var(--hue, 210) + 25) 50% 30%));
   box-shadow: inset 5px 0 0 rgb(0 0 0 / 0.18), 0 2px 6px rgb(0 0 0 / 0.15); }
@@ -277,8 +277,8 @@ picture { display: contents; }
 .tile:hover .antenna, .tile.is-live .antenna { animation: tile-swing 1s ease-in-out infinite; }
 .tile:hover .eyes, .tile.is-live .eyes { animation: tile-blink 2.2s ease-in-out infinite; }
 @keyframes tile-blink { 0%, 44%, 52%, 100% { transform: scaleY(1); } 48% { transform: scaleY(0.1); } }
-.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s; }
-.tile:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); transform: translateY(-2px); }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+.tile:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .tile-icon { display: block; width: 36px; height: 36px; padding: 7px; margin-bottom: 0.75rem; border-radius: 12px; background: var(--accent-soft); color: var(--accent);
   fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .tile:nth-child(even) .tile-icon { background: var(--warm-soft); color: var(--warm); }
