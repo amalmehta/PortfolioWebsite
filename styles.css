@@ -359,7 +359,18 @@ picture { display: contents; }
 .pong-help { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
   .tile, .tile-icon, .tile-icon * { animation: none !important; transition: none !important; }
-  .tile:hover, .tile:hover .tile-icon { transform: none; }
+  .tile:hover, .tile:hover .tile-icon, .tile.is-live .tile-icon { transform: none; }
+}
+/* Reduced motion everywhere else: links jump instead of gliding, and hovered cards don't lift. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .shot, .hello a { transition: none; }
+  .project:hover .shot { transform: none; }
+}
+/* Dark mode: bright drawings and screenshots are dimmed a touch so they don't glare, and brighten on hover. */
+@media (prefers-color-scheme: dark) {
+  .shot img, .photo img { filter: brightness(0.86); transition: filter 0.2s; }
+  .project:hover .shot img, .role:hover .shot img, .photo:hover img { filter: none; }
 }
 
 /* Print: a few tidy pages instead of a long screen layout. Hide the chrome and the
