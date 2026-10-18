@@ -9,7 +9,7 @@
 :root {
   --bg: #fafaf8;
   --surface: #ffffff;
-  --text: #1c1b19;
+  --text: #272624;
   --muted: #5d5c58;
   --faint: #706e69;
   --line: #e4e3de;
@@ -26,7 +26,7 @@
   :root {
     --bg: #131414;
     --surface: #1b1c1c;
-    --text: #ecebe6;
+    --text: #e6e5e0;
     --muted: #a6a59f;
     --faint: #8d8b85;
     --line: #2c2c2b;
@@ -89,7 +89,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .lede { font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.4; max-width: 38ch; margin: 0 0 1rem; }
 .hero-sub { color: var(--muted); max-width: 52ch; margin: 0 0 1.75rem; }
 .hello { margin: 0 0 0.6rem; font-weight: 500; }
-.hello a { white-space: nowrap; }
+.hello a { white-space: nowrap; padding: 0.15rem 0.8rem; border-radius: 999px; background: var(--accent-soft); transition: background-color 0.2s; }
+.hello a:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
 .contact { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.95rem; }
 
 /* Sections */
@@ -107,7 +108,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 @media (min-width: 820px) {
   .project { grid-template-columns: 0.85fr 1fr; gap: 2rem; align-items: center; }
 }
-.shot { margin: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s; }
+.shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s; }
 .shot img, .shot video { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
 .shot video { cursor: pointer; }
 .shot.contain img, .shot.contain video { object-fit: contain; object-position: center; background: #fcfcfa; }
@@ -192,7 +193,7 @@ picture { display: contents; }
 /* Musings: short notes in three groups, side by side on wide screens */
 .musings { display: grid; gap: 1.25rem; }
 @media (min-width: 820px) { .musings { grid-template-columns: repeat(3, 1fr); } }
-.musing-group { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem 1.25rem 0.4rem; }
+.musing-group { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem 1.25rem 0.4rem; }
 .musing-group h3 { font-size: 1.3rem; margin: 0 0 0.15rem; }
 .musing-blurb { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--muted); }
 .musing { border-top: 1px solid var(--line); padding: 0.9rem 0; }
@@ -229,7 +230,7 @@ picture { display: contents; }
 @media (min-width: 640px) { .photos { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 960px) { .photos { grid-template-columns: repeat(3, 1fr); } }
 .photo { margin: 0; }
-.photo img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); }
+.photo img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); }
 .photo figcaption { margin-top: 0.55rem; font-size: 0.92rem; color: var(--muted); line-height: 1.45; }
 .photo figcaption strong { display: block; color: var(--text); font-weight: 600; }
 .photos-empty { grid-column: 1 / -1; margin: 0; padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
@@ -251,7 +252,7 @@ picture { display: contents; }
 .tiles + .books { margin-top: 3rem; }
 /* Books I'm reading: a card per book, with a drawn cover, stars and a short review */
 .book-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-.book { display: grid; grid-template-columns: 76px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; transition: border-color 0.2s, transform 0.2s; }
+.book { display: grid; grid-template-columns: 76px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; transition: border-color 0.2s, transform 0.2s; }
 .book:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); transform: translateY(-2px); }
 .book-cover { aspect-ratio: 2 / 3; border-radius: 4px 7px 7px 4px; padding: 0.5rem 0.45rem 0.5rem 0.65rem; display: flex; align-items: flex-end;
   background: linear-gradient(160deg, hsl(var(--hue, 210) 45% 46%), hsl(calc(var(--hue, 210) + 25) 50% 30%));
@@ -276,9 +277,9 @@ picture { display: contents; }
 .tile:hover .antenna, .tile.is-live .antenna { animation: tile-swing 1s ease-in-out infinite; }
 .tile:hover .eyes, .tile.is-live .eyes { animation: tile-blink 2.2s ease-in-out infinite; }
 @keyframes tile-blink { 0%, 44%, 52%, 100% { transform: scaleY(1); } 48% { transform: scaleY(0.1); } }
-.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s; }
 .tile:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); transform: translateY(-2px); }
-.tile-icon { display: block; width: 36px; height: 36px; padding: 7px; margin-bottom: 0.75rem; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+.tile-icon { display: block; width: 36px; height: 36px; padding: 7px; margin-bottom: 0.75rem; border-radius: 12px; background: var(--accent-soft); color: var(--accent);
   fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .tile:nth-child(even) .tile-icon { background: var(--warm-soft); color: var(--warm); }
 /* Icons: a soft fill under the line drawing, and a small motion of their own on hover */
@@ -318,7 +319,7 @@ picture { display: contents; }
 /* A tile with somewhere to go: its title is the link, and the whole tile is clickable */
 .tile { position: relative; }
 .tile-link { color: inherit; }
-.tile-link::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+.tile-link::after { content: ""; position: absolute; inset: 0; border-radius: 16px; }
 .tile-link:hover { text-decoration: none; }
 .tile:has(.tile-link) h3::after { content: " →"; color: var(--accent); transition: margin 0.2s; }
 .tile:has(.tile-link):hover h3::after { margin-left: 0.2rem; }
@@ -347,7 +348,7 @@ picture { display: contents; }
   100% { left: 35%; top: 45.5%; opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .skier { animation: none; } }
-.pong { width: min(680px, calc(100vw - 32px)); padding: 1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--text); }
+.pong { width: min(680px, calc(100vw - 32px)); padding: 1rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--text); }
 .pong::backdrop { background: rgb(0 0 0 / 0.55); }
 .pong-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
 .pong-score { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
