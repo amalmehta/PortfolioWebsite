@@ -6,6 +6,7 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 index.html                    The profile: intro, research & work, projects, products, writeups, skills, musings (hidden for now), outside work
 thinking.html                 "Things I'm thinking about": linked from Live interests and every footer
 photos.html                   Travel: places I'm going, places I'd like to go, then photos; linked from Live interests and every footer
+writings.html                 Writings: its own page, unlinked and noindex until the first piece is in
 values.html                   Values & inspiration: its own page, linked from the profile footer
 interests.html                Live interests: hobby and curiosity tiles, hidden Books and My art; in every header
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
