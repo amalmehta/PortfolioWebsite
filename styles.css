@@ -7,16 +7,16 @@
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("fonts/inter-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
 :root {
-  --bg: #fbfaf7;
+  --bg: #fafaf8;
   --surface: #ffffff;
   --text: #1c1b19;
-  --muted: #5f5c55;
-  --faint: #736f67;
-  --line: #e6e2d9;
+  --muted: #5d5c58;
+  --faint: #706e69;
+  --line: #e4e3de;
   --accent: #2f5d8a;
   --accent-soft: #e7eef6;
-  --warm: #a5532a;
-  --warm-soft: #f8ebe2;
+  --warm: #9c5636;
+  --warm-soft: #f5ece7;
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: light dark;
@@ -24,16 +24,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #141412;
-    --surface: #1c1c1a;
+    --bg: #131414;
+    --surface: #1b1c1c;
     --text: #ecebe6;
-    --muted: #a8a59c;
-    --faint: #8f8b82;
-    --line: #2d2c29;
+    --muted: #a6a59f;
+    --faint: #8d8b85;
+    --line: #2c2c2b;
     --accent: #8db6dd;
     --accent-soft: #1f2a35;
-    --warm: #e39a6f;
-    --warm-soft: #2e221b;
+    --warm: #d9a07f;
+    --warm-soft: #2b2320;
   }
 }
 
@@ -69,6 +69,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .nav-links { display: flex; gap: 1.25rem; font-size: 0.92rem; }
 .nav-links a { color: var(--muted); }
 .nav-links a:hover { color: var(--text); }
+/* The page you're on (or, for Travel, Thinking and Values, the page they belong to) */
+.nav-links a[aria-current] { color: var(--text); text-decoration: underline; text-decoration-color: var(--warm); text-decoration-thickness: 1px; text-underline-offset: 0.4em; }
 
 /* Hero */
 .hero { position: relative; display: flex; flex-direction: column; gap: 1.5rem; padding: 4.5rem 16px 2.5rem; }
@@ -160,7 +162,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
   content: ""; position: absolute; inset: 0 -20vw; z-index: -1; pointer-events: none;
   background:
     radial-gradient(40rem 22rem at 85% 35%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
-    radial-gradient(34rem 20rem at 10% 10%, color-mix(in srgb, var(--warm) 9%, transparent), transparent 70%);
+    radial-gradient(34rem 20rem at 10% 10%, color-mix(in srgb, var(--warm) 6%, transparent), transparent 70%);
 }
 main { overflow-x: clip; }
 .section-title::before { content: ""; width: 1.4rem; height: 3px; border-radius: 2px; background: var(--warm); }
@@ -239,7 +241,7 @@ picture { display: contents; }
 .values { list-style: none; padding: 0; margin: 0 0 3rem; counter-reset: value; }
 .value { counter-increment: value; position: relative; padding: 0 0 1.25rem 2.75rem; margin-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
 .value::before { content: counter(value, decimal-leading-zero); position: absolute; left: 0; top: 0.15rem; font-family: var(--serif); font-size: 1.05rem; color: var(--warm); }
-.value h2 { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; margin: 0 0 0.3rem; }
+.value h3 { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; margin: 0 0 0.3rem; }
 .value p { margin: 0; color: var(--muted); }
 .inspo { list-style: none; padding: 0; margin: 0; }
 .inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }

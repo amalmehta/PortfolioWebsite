@@ -503,6 +503,21 @@ class ArtSectionTest(unittest.TestCase):
         self.assertEqual(hidden, not has_pieces)
 
 
+class HeaderTest(unittest.TestCase):
+    # Each page marks its own header link, or the one for the page it belongs to.
+    CURRENT = {"interests.html": ("interests.html", "page"), "thinking.html": ("interests.html", "true"),
+               "photos.html": ("interests.html", "true"), "values.html": ("index.html", "true")}
+
+    def test_current_page_is_marked(self):
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "404.html"):
+            html = (ROOT / name).read_text(encoding="utf-8")
+            start = html.index('<div class="nav-links">')
+            nav = html[start:html.index("</div>", start)]
+            marked = re.findall(r'<a href="([^"]+)"[^>]*\baria-current="(\w+)"', nav)
+            with self.subTest(page=name):
+                self.assertEqual(marked, [self.CURRENT[name]] if name in self.CURRENT else [])
+
+
 class ValuesPageTest(unittest.TestCase):
     """values.html: linked quietly from the profile footer once it has entries."""
 
@@ -517,6 +532,12 @@ class ValuesPageTest(unittest.TestCase):
                     self.assertNotIn("values.html", [v for _, _, v in parse(ROOT / other).links])
         # ...and search engines are asked to skip it until then.
         self.assertEqual('<meta name="robots" content="noindex">' in html, not has_entries)
+
+    def test_value_headings_sit_under_their_section(self):
+        html = (ROOT / "values.html").read_text(encoding="utf-8")
+        for value in re.findall(r'<li class="value">(.*?)</li>', html, flags=re.S):
+            with self.subTest(value=value.strip()[:40]):
+                self.assertRegex(value.strip(), r"^<h3>")
 
     def test_empty_sections_hidden(self):
         # Inspiration and Things I care about stay hidden exactly while they're empty.
