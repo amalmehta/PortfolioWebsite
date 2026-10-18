@@ -179,6 +179,40 @@ def colour_tokens():
     return {"light": light, "dark": dict(light, **dict(token.findall(dark_block)))}
 
 
+def pdf_chunks(path):
+    """A PDF's raw bytes plus every inflated Flate stream (objects may sit in compressed streams)."""
+    import zlib
+    data = path.read_bytes()
+    chunks = [data]
+    for m in re.finditer(rb"/FlateDecode.*?stream\r?\n", data, re.S):
+        start = m.end(); end = data.find(b"endstream", start)
+        try:
+            chunks.append(zlib.decompress(data[start:end]))
+        except zlib.error:
+            pass
+    return chunks
+
+
+def pdf_title(path):
+    """The /Title in a PDF's document info, decoded, or "" if it has none."""
+    # Bookmarks have titles too; the document's own sits beside /Producer or /CreationDate.
+    for chunk in pdf_chunks(path):
+        for m in re.finditer(rb"/Title\s*(<[0-9A-Fa-f\s]*>|\((?:[^()\\]|\\.)*\))", chunk):
+            start = chunk.rfind(b"<<", 0, m.start()); end = chunk.find(b">>", m.end())
+            if re.search(rb"/(Producer|CreationDate|ModDate)", chunk[start:end]):
+                return decode_pdf_string(m.group(1))
+    return ""
+
+
+def decode_pdf_string(raw):
+    """A PDF string, <hex> or (literal), as text (UTF-16 when it starts with a byte-order mark)."""
+    if raw.startswith(b"<"):
+        b = bytes.fromhex(re.sub(rb"\s", b"", raw[1:-1]).decode())
+    else:
+        b = re.sub(rb"\\(.)", rb"\1", raw[1:-1])
+    return b[2:].decode("utf-16-be") if b.startswith(b"\xfe\xff") else b.decode("latin-1")
+
+
 def contrast(fg, bg):
     def luminance(hex_colour):
         channels = [int(hex_colour[i:i + 2], 16) / 255 for i in (1, 3, 5)]
@@ -519,6 +553,22 @@ class ArtSectionTest(unittest.TestCase):
         self.assertEqual(hidden, not has_pieces)
 
 
+class ContactTest(unittest.TestCase):
+    def test_private_projects_invite_a_question(self):
+        html = INDEX.read_text(encoding="utf-8")
+        private = re.findall(r'<p class="links private">(.*?)</p>', html)
+        self.assertTrue(private)
+        for p in private:
+            with self.subTest(text=p):
+                if p.startswith("Private repo"):
+                    self.assertIn('<a href="https://reachouts.me/?u=amal">ask me about it →</a>', p)
+
+    def test_intro_email_can_be_copied(self):
+        js = (ROOT / "email.js").read_text(encoding="utf-8")
+        self.assertIn("navigator.clipboard.writeText", js)
+        self.assertIn('closest(".contact")', js)
+
+
 class HeaderTest(unittest.TestCase):
     # Each page marks its own header link, or the one for the page it belongs to.
     CURRENT = {"interests.html": ("interests.html", "page"), "thinking.html": ("interests.html", "true"),
@@ -659,6 +709,14 @@ PHONE = re.compile(r"(\+?\d[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}")
 
 
 class PapersTest(unittest.TestCase):
+    def test_every_pdf_has_a_title(self):
+        # Browsers show a PDF's own title in the tab, so none should be blank or a draft name.
+        for pdf in sorted((ROOT / "papers").glob("*.pdf")) + [RESUME_PDF]:
+            with self.subTest(pdf=pdf.name):
+                title = pdf_title(pdf)
+                self.assertTrue(title, "no title")
+                self.assertNotIn("draft", title.lower())
+
     def test_link_sizes_match_files(self):
         # "(PDF, 374 KB)" / "(PDF, 1.2 MB)" on each papers/ link matches the file.
         html = INDEX.read_text(encoding="utf-8")
@@ -694,15 +752,7 @@ class ResumeTest(unittest.TestCase):
         # Counted with the standard library: the page tree may sit in compressed
         # object streams, so inflate every Flate stream and look for /Type /Pages.
         # (The phone-number rule is checked on the LaTeX source above.)
-        import zlib
-        data = RESUME_PDF.read_bytes()
-        chunks = [data]
-        for m in re.finditer(rb"/FlateDecode.*?stream\r?\n", data, re.S):
-            start = m.end(); end = data.find(b"endstream", start)
-            try:
-                chunks.append(zlib.decompress(data[start:end]))
-            except zlib.error:
-                pass
+        chunks = pdf_chunks(RESUME_PDF)
         counts = [int(c) for chunk in chunks
                   for c in re.findall(rb"/Type\s*/Pages\b[^>]*?/Count\s+(\d+)|/Count\s+(\d+)[^>]*?/Type\s*/Pages\b", chunk)
                   for c in c if c]
