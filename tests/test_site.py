@@ -525,13 +525,47 @@ class HeaderTest(unittest.TestCase):
                "photos.html": ("interests.html", "true"), "values.html": ("index.html", "true")}
 
     def test_current_page_is_marked(self):
-        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "404.html"):
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "writings.html", "404.html"):
             html = (ROOT / name).read_text(encoding="utf-8")
             start = html.index('<div class="nav-links">')
             nav = html[start:html.index("</div>", start)]
             marked = re.findall(r'<a href="([^"]+)"[^>]*\baria-current="(\w+)"', nav)
             with self.subTest(page=name):
                 self.assertEqual(marked, [self.CURRENT[name]] if name in self.CURRENT else [])
+
+
+class WritingsPageTest(unittest.TestCase):
+    """writings.html: hidden from every page and from search until the first piece is in."""
+    OTHERS = ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "404.html")
+
+    def html(self):
+        return re.sub(r"<!--.*?-->", "", (ROOT / "writings.html").read_text(encoding="utf-8"), flags=re.S)
+
+    def test_linked_and_indexed_only_once_filled(self):
+        html = self.html()
+        has_pieces = 'class="writing"' in html
+        self.assertEqual('<meta name="robots" content="noindex">' in html, not has_pieces)
+        self.assertEqual("First piece coming soon." in html, not has_pieces)
+        for other in self.OTHERS:
+            with self.subTest(page=other):
+                text = (ROOT / other).read_text(encoding="utf-8")
+                start = text.index('<div class="nav-links">')
+                header = text[start:text.index("</div>", start)]
+                footer = text[text.index('<footer'):]
+                for part in (header, footer):
+                    self.assertEqual("writings.html" in part, has_pieces)
+
+    def test_pieces_are_dated(self):
+        for piece in re.findall(r'<article class="writing">(.*?)</article>', self.html(), flags=re.S):
+            with self.subTest(piece=piece.strip()[:40]):
+                self.assertRegex(piece, r"<h2>.+</h2>")
+                self.assertRegex(piece, r'<time datetime="\d{4}-\d{2}-\d{2}">')
+
+    def test_local_links_resolve(self):
+        page = parse(ROOT / "writings.html")
+        missing = [v for _, _, v in page.links
+                   if local_target(v) is not None and not local_target(v).is_file()]
+        self.assertEqual(missing, [])
 
 
 class ValuesPageTest(unittest.TestCase):
@@ -593,7 +627,7 @@ class ColoursTest(unittest.TestCase):
     def test_browser_bar_matches_background(self):
         # Phones colour their browser bar from theme-color: it's the page background in each theme.
         themes = colour_tokens()
-        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "404.html"):
+        for name in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "writings.html", "404.html"):
             html = (ROOT / name).read_text(encoding="utf-8")
             found = dict((t, c.lower()) for c, t in re.findall(
                 r'<meta name="theme-color" content="(#[0-9a-fA-F]{6})" media="\(prefers-color-scheme: (\w+)\)">', html))

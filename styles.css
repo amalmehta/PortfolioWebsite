@@ -239,6 +239,15 @@ picture { display: contents; }
 .wishlist.going { margin-bottom: 3rem; }
 .trip-dates { display: block; margin-top: 0.2rem; color: var(--accent); font-weight: 500; }
 
+/* Writings: its own page (writings.html), unlinked until the first piece is in */
+.writings { margin: 0; }
+.writing { padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+.writing:first-child { padding-top: 0; }
+.writing h2 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-height: 1.3; margin: 0 0 0.4rem; }
+.writing p { margin: 0 0 0.6rem; }
+.writing .when { margin: 0; font-size: 0.85rem; }
+.writings-empty { margin: 0; padding: 0 0 1rem; border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
+
 /* Values & inspiration: its own page (values.html), linked quietly from the footer */
 .footer a.quiet { color: var(--muted); text-decoration-color: var(--line); }
 .values { list-style: none; padding: 0; margin: 0 0 3rem; counter-reset: value; }
@@ -371,6 +380,8 @@ picture { display: contents; }
 @media (prefers-color-scheme: dark) {
   .shot img, .photo img { filter: brightness(0.86); transition: filter 0.2s; }
   .project:hover .shot img, .role:hover .shot img, .photo:hover img { filter: none; }
+  .portrait { filter: brightness(0.88); transition: filter 0.2s; }
+  .portrait:hover { filter: none; }
 }
 
 /* Print: a few tidy pages instead of a long screen layout. Hide the chrome and the
