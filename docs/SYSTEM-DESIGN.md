@@ -65,7 +65,8 @@ All in the repo. Nothing is stored or collected on the site: no analytics, cooki
 - The Neuroimaging Platform screenshot shows the MNI ICBM152 template, credited on the card as its README does.
 - **Clips as muted MP4 loops, not GIFs.** `<video autoplay muted loop playsinline preload="none">` with a poster is a fraction of a GIF's size and plays inline on phones. Clips are lazy-loaded by `media.js` because `autoplay` would otherwise start downloading every clip on page load. No project has a clip yet, so the cards show still images and `media.js` stays off the page until one does.
 - **Drawings for the research entries.** There's no footage to show from past lab work, and stock photos either showed other people or weren't the real robot, so each research entry has an original drawing in the site's colours. The numbers and outlines in them are illustrative, not results.
-- **Follows the system's light/dark setting** with no manual toggle, to keep the page minimal.
+- **Follows the system's light/dark setting** with no manual toggle, to keep the page minimal. In dark mode, screenshots and drawings are dimmed slightly so they don't glare, and brighten on hover.
+- **Respects reduced motion.** With it on, nothing lifts or animates on hover, scroll-in or tap, and in-page links jump instead of gliding (tested).
 - **Prints as a short document.** A print stylesheet hides the header, pictures and decorations, sets print-sized type, keeps dates beside entries and keeps each entry or card on one page: the profile prints in about 5 pages instead of 18. On paper, links print the address they go to, and the Live interests tiles print without their fade-in.
 
 ## How it's tested

@@ -600,6 +600,19 @@ class ColoursTest(unittest.TestCase):
             with self.subTest(page=name):
                 self.assertEqual(found, {t: themes[t]["bg"].lower() for t in ("light", "dark")})
 
+    def test_reduced_motion_stops_hover_lifts(self):
+        # Anything that lifts on hover stays still with reduced motion on, and links jump instead of gliding.
+        css = re.sub(r"/\*.*?\*/", "", STYLES.read_text(encoding="utf-8"), flags=re.S)
+        calm = "".join(re.findall(r"@media \(prefers-reduced-motion: reduce\) \{\n(.*?)\n\}", css, flags=re.S))
+        calm += "".join(re.findall(r"@media \(prefers-reduced-motion: reduce\) \{([^\n]*)\}\n", css))
+        lifts = re.findall(r"^([^@{}\n]*:hover[^{}\n]*)\{[^}]*transform: translate", css, flags=re.M)
+        self.assertTrue(lifts)
+        for selector in lifts:
+            for one in selector.split(","):
+                with self.subTest(selector=one.strip()):
+                    self.assertRegex(calm, re.escape(one.strip()) + r"[^{]*\{[^}]*transform: none")
+        self.assertIn("scroll-behavior: auto", calm)
+
     def test_dark_mode_overrides_every_colour(self):
         css = STYLES.read_text(encoding="utf-8")
         dark_at = css.index("prefers-color-scheme: dark")
