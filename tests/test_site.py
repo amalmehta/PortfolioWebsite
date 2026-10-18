@@ -460,6 +460,19 @@ class SubpagesTest(unittest.TestCase):
         self.assertIn('<script src="messi.js" defer></script>', html)
         self.assertTrue((ROOT / "messi.js").is_file())
 
+    def test_trips_have_dates(self):
+        # Each trip under "Places I'm going" gives its first and last day, in order.
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "photos.html").read_text(encoding="utf-8"), flags=re.S)
+        going = html[html.index('<section class="wishlist going">'):]
+        going = going[:going.index("</section>")]
+        figures = re.findall(r'<figure class="photo">(.*?)</figure>', going, flags=re.S)
+        self.assertTrue(figures)
+        for fig in figures:
+            with self.subTest(trip=re.search(r"<strong>(.*?)</strong>", fig).group(1)):
+                days = re.findall(r'<time datetime="(\d{4}-\d{2}-\d{2})">', fig)
+                self.assertEqual(len(days), 2)
+                self.assertLessEqual(days[0], days[1])
+
     def test_photos_have_alt_and_size(self):
         # Each photo needs alt text and its real width/height, so the grid
         # doesn't jump as photos load. The first two are on screen when the

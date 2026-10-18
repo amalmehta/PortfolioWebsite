@@ -1,4 +1,4 @@
-"""Draws the "Places I'd like to go" illustrations as 1200x800 SVGs in images/places/.
+"""Draws the Travel page's illustrations (Places I'm going, Places I'd like to go) as 1200x800 SVGs in images/places/.
 
 Each is an original drawing of one iconic spot, not a photograph. Run from the
 repo root after changing a drawing:
@@ -352,8 +352,57 @@ def faroe():
     return svg("faroe", "".join(b), ("#b4c0c8", "#e4e8ea"), defs=defs)
 
 
+# ---------------------------------------------------------------- Chamonix: Mont Blanc and the Aiguille du Midi
+def chamonix():
+    rng = random.Random(7)
+    b = []
+    b.append(glow(820, 300, 620, 260, "#fbe7d6", 0.55))
+    b.append(clouds(rng, 3, 70, 170, opacity=0.5))
+    # Far ridge, then the Mont Blanc massif: a broad snow dome on the right.
+    b.append(poly(ridge(0, W, 580, rng, [(0.15, 0.12, 0.6), (0.45, 0.1, 0.5), (0.8, 0.2, 0.7)], 150, jag=6), "#a9b8c9"))
+    dome = [(380, 580), (560, 330), (700, 250), (790, 205), (860, 190), (930, 200), (1030, 250), (1130, 320), (1200, 360), (1200, 580)]
+    b.append(poly(dome, "#f4f7fa"))
+    b.append(poly([(860, 190), (930, 200), (1030, 250), (1130, 320), (1200, 360), (1200, 580), (900, 580)], "#24364d", opacity="0.10"))
+    for x0, y0 in ((640, 300), (760, 250), (980, 260), (1090, 320)):  # rock bands showing through the snow
+        b.append(f'<path d="M{x0},{y0} q{rng.uniform(10, 30):.0f},{rng.uniform(40, 70):.0f} {rng.uniform(-10, 20):.0f},{rng.uniform(110, 150):.0f}" '
+                 f'fill="none" stroke="#7b8796" stroke-width="{rng.uniform(5, 9):.0f}" stroke-linecap="round" opacity="0.35"/>')
+    # The Bossons glacier, tumbling from the dome toward the valley.
+    b.append(f'<path d="M840,215 C820,300 760,400 730,560 L810,560 C830,400 860,300 870,215 Z" fill="#e3edf6"/>')
+    b.append(f'<path d="M760,420 l20,-6 M772,380 l22,-6 M790,330 l20,-5" stroke="#b9cde0" stroke-width="4" stroke-linecap="round"/>')
+    # The Aiguille du Midi: granite needles on the left, the summit station on the tallest.
+    needles = [(100, 580), (170, 360), (200, 300), (215, 210), (232, 150), (250, 214), (272, 260), (300, 230), (330, 320), (380, 300), (430, 400), (500, 580)]
+    b.append(poly(needles, "#5f6670"))
+    b.append(poly([(232, 150), (250, 214), (272, 260), (300, 230), (330, 320), (380, 300), (430, 400), (500, 580), (300, 580)], "#24364d", opacity="0.22"))
+    b.append(poly([(200, 300), (215, 210), (232, 150), (240, 190), (222, 240)], "#f4f7fa", opacity="0.85"))
+    b.append(f'<rect x="222" y="128" width="22" height="24" rx="2" fill="#3b3a37"/><path d="M233,128 L233,104" stroke="#3b3a37" stroke-width="3"/>')
+    # The cable car line down to the valley, with one cabin on it.
+    b.append(f'<path d="M244,146 Q520,420 780,520" fill="none" stroke="#3b3a37" stroke-width="1.6" opacity="0.7"/>')
+    b.append(f'<rect x="520" y="372" width="18" height="14" rx="3" fill="#c8402f"/><path d="M529,366 L529,372" stroke="#3b3a37" stroke-width="2"/>')
+    b.append(f'<rect x="768" y="512" width="26" height="18" rx="2" fill="#3b3a37"/>')  # the valley station
+    # Snowfields and dark pine forest on the lower slopes.
+    b.append(f'<path d="M0,560 C240,500 520,540 760,520 S1060,500 1200,530 L1200,800 L0,800 Z" fill="#e9eff5"/>')
+    for i in range(46):
+        x = rng.uniform(0, W)
+        y = 545 - 18 * math.sin(x / 210) + rng.uniform(-6, 26)
+        h = rng.uniform(30, 58)
+        b.append(poly([(x - h * 0.26, y), (x, y - h), (x + h * 0.26, y)], rng.choice(("#2f4a3c", "#294235", "#365443"))))
+    # The valley floor, ski tracks and a few snow-roofed chalets.
+    b.append(f'<path d="M0,650 C260,610 560,670 820,630 S1100,610 1200,640 L1200,800 L0,800 Z" fill="#fbfcfd"/>')
+    for d in ("M90,800 C200,720 240,690 330,660", "M140,800 C250,720 300,690 380,662"):
+        b.append(f'<path d="{d}" fill="none" stroke="#d3deea" stroke-width="3" stroke-linecap="round"/>')
+    for cx, cy, w in ((560, 690, 70), (650, 678, 56), (930, 668, 64), (1030, 690, 74)):
+        h = w * 0.55
+        b.append(f'<rect x="{cx - w / 2:.0f}" y="{cy - h:.0f}" width="{w}" height="{h:.0f}" fill="#8a5a3b"/>')
+        b.append(f'<rect x="{cx - w * 0.18:.0f}" y="{cy - h * 0.62:.0f}" width="{w * 0.14:.0f}" height="{h * 0.3:.0f}" fill="#f1c76b"/>')
+        b.append(poly([(cx - w * 0.66, cy - h + 2), (cx, cy - h - w * 0.42), (cx + w * 0.66, cy - h + 2)], "#f7f9fb"))
+        b.append(f'<path d="M{cx - w * 0.66:.0f},{cy - h + 2:.0f} L{cx + w * 0.66:.0f},{cy - h + 2:.0f}" stroke="#c8d4e2" stroke-width="3"/>')
+    b.append(f'<ellipse cx="800" cy="702" rx="380" ry="10" fill="#c8d4e2" opacity="0.45"/>')
+    return svg("chamonix", "".join(b), ("#9fc0de", "#e8f0f7"))
+
+
 PLACES = (("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
-          ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe))
+          ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
+          ("chamonix", chamonix))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:

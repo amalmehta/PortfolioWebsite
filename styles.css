@@ -236,6 +236,8 @@ picture { display: contents; }
 .photos-empty { grid-column: 1 / -1; margin: 0; padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .photo-log { margin-top: 3.5rem; }
 .wishlist-note { margin: -1.25rem 0 1.5rem; color: var(--muted); font-size: 0.92rem; }
+.wishlist.going { margin-bottom: 3rem; }
+.trip-dates { display: block; margin-top: 0.2rem; color: var(--accent); font-weight: 500; }
 
 /* Values & inspiration: its own page (values.html), linked quietly from the footer */
 .footer a.quiet { color: var(--muted); text-decoration-color: var(--line); }

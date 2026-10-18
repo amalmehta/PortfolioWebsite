@@ -5,7 +5,7 @@ Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System
 ```
 index.html                    The profile: intro, research & work, projects, products, writeups, skills, musings (hidden for now), outside work
 thinking.html                 "Things I'm thinking about": linked from Live interests and every footer
-photos.html                   Travel: places I'd like to go, then photos; linked from Live interests and every footer
+photos.html                   Travel: places I'm going, places I'd like to go, then photos; linked from Live interests and every footer
 values.html                   Values & inspiration: its own page, linked from the profile footer
 interests.html                Live interests: hobby and curiosity tiles, hidden Books and My art; in every header
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
@@ -35,7 +35,7 @@ resume/
 tools/
   make-images.sh              Builds the WebP posters and portrait AVIF/WebP from the JPEGs in images/
   draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
-  draw-places.py              Draws the "Places I'd like to go" SVGs in images/places/
+  draw-places.py              Draws the Travel page's place drawings in images/places/
   check-links.py              Checks the site's external links (run weekly on GitHub)
   check-staleness.py          Flags the Skills and Live interests dates, or the newest thought, over six months old (run weekly on GitHub)
 .github/workflows/tests.yml    Runs the tests on GitHub for every push to main and every pull request
