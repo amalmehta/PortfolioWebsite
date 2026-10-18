@@ -8,18 +8,18 @@
   <meta name="theme-color" content="#131414" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta name="description" content="Places Amal Mehta would like to go, and photos from the trips.">
+  <meta name="description" content="Where Amal Mehta is headed next, places on the wish list, and photos from the trips.">
   <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/photos.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/photos.html">
   <meta property="og:title" content="Travel · Amal Mehta">
-  <meta property="og:description" content="Places Amal Mehta would like to go, and photos from the trips.">
+  <meta property="og:description" content="Where Amal Mehta is headed next, places on the wish list, and photos from the trips.">
   <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og-travel.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Travel: drawings of Hokkaido, Lofoten and Patagonia from places Amal Mehta would like to go">
+  <meta property="og:image:alt" content="Travel: a drawing of Chamonix under Mont Blanc, the next trip, above drawings of places Amal Mehta would like to go">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image:alt" content="Travel: drawings of Hokkaido, Lofoten and Patagonia from places Amal Mehta would like to go">
+  <meta name="twitter:image:alt" content="Travel: a drawing of Chamonix under Mont Blanc, the next trip, above drawings of places Amal Mehta would like to go">
   <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -43,8 +43,25 @@
   <main id="top" class="wrap page photos-page">
     <header class="page-head">
       <h1>Travel</h1>
-      <p>Places I’d like to go, and photos from where I’ve been.</p>
+      <p>Where I’m headed next, places I’d like to go, and photos from where I’ve been.</p>
     </header>
+
+    <section class="wishlist going">
+      <h2 class="section-title">Places I’m going</h2>
+      <div class="photos">
+        <!-- Upcoming trips, soonest first. The weekly staleness check flags a trip once its last day has passed:
+             then move it to Photos (or delete it). Drawings come from tools/draw-places.py.
+        <figure class="photo">
+          <img src="images/places/place.svg" alt="Drawing: what it shows" loading="lazy" width="1200" height="800">
+          <figcaption><strong>Place, country</strong> What for. <span class="trip-dates"><time datetime="YYYY-MM-DD">Month D</time> – <time datetime="YYYY-MM-DD">D, YYYY</time></span></figcaption>
+        </figure>
+        -->
+        <figure class="photo">
+          <img src="images/places/chamonix.svg" alt="Drawing: the Aiguille du Midi’s granite spire and cable car beside Mont Blanc’s snow dome, above pines and snow-roofed chalets" fetchpriority="high" width="1200" height="800">
+          <figcaption><strong>Chamonix, France</strong> Skiing under Mont Blanc. <span class="trip-dates"><time datetime="2027-01-12">January 12</time> – <time datetime="2027-01-18">18, 2027</time></span></figcaption>
+        </figure>
+      </div>
+    </section>
 
     <section class="wishlist">
       <h2 class="section-title">Places I’d like to go</h2>
@@ -61,7 +78,7 @@
         <figcaption><strong>Hokkaido, Japan</strong> Mount Yōtei over winter snowfields.</figcaption>
       </figure>
       <figure class="photo">
-        <img src="images/places/lofoten.svg" alt="Drawing: red fishing cabins on stilts along the water under jagged granite peaks" fetchpriority="high" width="1200" height="800">
+        <img src="images/places/lofoten.svg" alt="Drawing: red fishing cabins on stilts along the water under jagged granite peaks" loading="lazy" width="1200" height="800">
         <figcaption><strong>Lofoten, Norway</strong> Red fishing cabins on stilts under Reine’s granite peaks.</figcaption>
       </figure>
       <figure class="photo">
