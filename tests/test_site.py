@@ -276,6 +276,7 @@ class LinksTest(unittest.TestCase):
                 self.assertEqual(image_size(path), (1200, 630))
                 self.assertEqual(page.metas.get("og:image:width"), "1200")
                 self.assertEqual(page.metas.get("og:image:height"), "630")
+                self.assertEqual(page.metas.get("og:site_name"), "Amal Mehta")
                 # Described for screen readers, the same way for every network.
                 self.assertTrue(page.metas.get("og:image:alt"))
                 self.assertEqual(page.metas.get("twitter:image:alt"), page.metas.get("og:image:alt"))
@@ -618,6 +619,51 @@ class WritingsPageTest(unittest.TestCase):
         self.assertEqual(missing, [])
 
 
+class LinkingTest(unittest.TestCase):
+    PAGES = ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "writings.html", "404.html")
+
+    def test_every_entry_can_be_linked_to(self):
+        # Each project, product, role and writeup on the profile, and each thought, has its own anchor.
+        for name, pattern in (("index.html", r'<article class="(?:project|role)"([^>]*)>'), ("thinking.html", r'<li class="thought"([^>]*)>')):
+            html = re.sub(r"<!--.*?-->", "", (ROOT / name).read_text(encoding="utf-8"), flags=re.S)
+            entries = re.findall(pattern, html)
+            self.assertTrue(entries)
+            for attrs in entries:
+                with self.subTest(page=name, attrs=attrs):
+                    self.assertRegex(attrs, r'\bid="[a-z0-9-]+"')
+            ids = re.findall(r'\bid="([^"]+)"', html)
+            self.assertEqual(len(ids), len(set(ids)), name)
+
+    def test_linkedin_is_marked_as_mine(self):
+        for name in self.PAGES:
+            html = (ROOT / name).read_text(encoding="utf-8")
+            for tag in re.findall(r'<a [^>]*linkedin\.com[^>]*>', html):
+                with self.subTest(page=name):
+                    self.assertIn('rel="me"', tag)
+
+    def test_png_icon_backs_up_the_svg(self):
+        self.assertEqual(image_size(ROOT / "images/favicon-32.png"), (32, 32))
+        for name in self.PAGES:
+            with self.subTest(page=name):
+                self.assertRegex((ROOT / name).read_text(encoding="utf-8"),
+                                 r'<link rel="icon" href="[^"]*images/favicon-32\.png" sizes="32x32" type="image/png">\n\s*<link rel="icon" href="[^"]*favicon\.svg"')
+
+    def test_thinking_updated_matches_newest_thought(self):
+        html = re.sub(r"<!--.*?-->", "", THINKING.read_text(encoding="utf-8"), flags=re.S)
+        shown = re.search(r'class="page-updated">Updated <time datetime="(\d{4}-\d{2})">', html).group(1)
+        newest = max(re.findall(r'<p class="when" hidden>Added <time datetime="(\d{4}-\d{2})-\d{2}">', html))
+        self.assertEqual(shown, newest)
+
+    def test_next_trip_is_a_planned_trip(self):
+        # "Next: …" on Live interests names a trip under Travel's Places I'm going.
+        nxt = re.search(r'<span class="next-trip">Next: ([^<]+?) in [A-Z][a-z]+\.</span>', (ROOT / "interests.html").read_text(encoding="utf-8"))
+        if nxt:
+            going = (ROOT / "photos.html").read_text(encoding="utf-8")
+            going = going[going.index('<section class="wishlist going">'):]
+            going = re.sub(r"<!--.*?-->", "", going[:going.index("</section>")], flags=re.S)
+            self.assertIn(f"<strong>{nxt.group(1)},", going)
+
+
 class ValuesPageTest(unittest.TestCase):
     """values.html: linked quietly from the profile footer once it has entries."""
 
@@ -639,14 +685,14 @@ class ValuesPageTest(unittest.TestCase):
             with self.subTest(value=value.strip()[:40]):
                 self.assertRegex(value.strip(), r"^<h3>")
 
-    def test_empty_sections_hidden(self):
-        # Inspiration and Things I care about stay hidden exactly while they're empty.
+    def test_empty_sections_say_coming_soon(self):
+        # Inspiration and Things I care about show "Coming soon." exactly while they're empty.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
-        groups = re.findall(r'(<section class="inspo-group"[^>]*>)(.*?)</section>', html, flags=re.S)
+        groups = re.findall(r'<section class="inspo-group">(.*?)</section>', html, flags=re.S)
         self.assertEqual(len(groups), 2)
-        for tag, body in groups:
+        for body in groups:
             with self.subTest(section=re.search(r"<h2[^>]*>(.*?)</h2>", body).group(1)):
-                self.assertEqual(re.search(r"\bhidden\b", tag) is not None, 'class="inspo-item"' not in body)
+                self.assertEqual("Coming soon." in body, 'class="inspo-item"' not in body)
 
     def test_local_links_resolve(self):
         page = parse(ROOT / "values.html")

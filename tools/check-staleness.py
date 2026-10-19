@@ -49,7 +49,7 @@ def main():
     for name, end in trips(going):
         print(f"Places I'm going: {name}, until {end}")
         if end < today:
-            print(f"  that trip is over: move it to Photos (or delete it) in photos.html"); stale += 1
+            print(f"  that trip is over: move it to Photos (or delete it) in photos.html, and update the Next: line on interests.html"); stale += 1
     return 1 if stale else 0
 
 

@@ -6,11 +6,13 @@
   <title>Amal Mehta · Research engineer in RL and robotics</title>
   <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#131414" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <meta name="description" content="Amal Mehta, research engineer in reinforcement learning and robotics: AI that learns from experience and holds up in the real world, from robots to brain decoding. Research, projects and apps.">
   <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Amal Mehta">
   <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/">
   <meta property="og:title" content="Amal Mehta · RL and robotics">
   <meta property="og:description" content="Research engineer in reinforcement learning and robotics: AI that learns from experience and holds up in the real world, from robots to brain decoding.">
@@ -82,7 +84,7 @@
       <p class="hello">Hi! I’d love to hear from you, about anything :) <a href="https://reachouts.me/?u=amal">Get in touch →</a></p>
       <ul class="contact">
         <li><a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a></li>
-        <li><a href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></li>
+        <li><a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></li>
         <li><a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">Resume (PDF, 94 KB)</a></li>
       </ul>
       </div>
@@ -91,7 +93,7 @@
     <section id="research" class="wrap section">
       <h2 class="section-title">Research &amp; work</h2>
 
-      <article class="role">
+      <article class="role" id="independent-research">
         <p class="when">2025 – now</p>
         <div>
           <h3>Independent ML &amp; Robotics Research</h3>
@@ -101,7 +103,7 @@
         </div>
       </article>
 
-      <article class="role">
+      <article class="role" id="physicsai">
         <p class="when">2021 – 2025</p>
         <div>
           <h3>Deep Learning Scientist · PhysicsAI</h3>
@@ -128,7 +130,7 @@
         </div>
       </article>
 
-      <article class="role">
+      <article class="role" id="vip-lab">
         <p class="when">2020 – 2022</p>
         <div>
           <h3>Research Assistant · Video &amp; Image Processing Lab</h3>
@@ -169,7 +171,7 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project" id="post-training-lab">
         <figure class="shot"><img src="images/post-training-960.webp" alt="Post Training Lab: results averaged over 3 seeds: held-out success from 70% to 80% with GRPO and to 81% with DPO, 63% to 74% on harder mazes, and 7% for the reward hacker" loading="lazy" width="960" height="778"></figure>
         <div class="project-text">
           <h3>Post Training Lab</h3>
@@ -179,7 +181,7 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project" id="reward-hack-zoo">
         <figure class="shot"><img src="images/reward-hack-zoo.svg" alt="Drawing: over training, proxy reward keeps climbing while the true score falls, with the step where hacking starts marked; below, the five environments" loading="lazy" width="1400" height="875"></figure>
         <div class="project-text">
           <h3>Reward Hack Zoo</h3>
@@ -189,7 +191,7 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project" id="alphago-lite">
         <figure class="shot"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></figure>
         <div class="project-text">
           <h3>AlphaGo Lite</h3>
@@ -199,7 +201,7 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project" id="sim-to-real-drone-bench">
         <figure class="shot contain"><img src="images/drone-bench-960.webp" alt="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy" loading="lazy" width="960" height="304"></figure>
         <div class="project-text">
           <h3>Sim to Real Drone Bench</h3>
@@ -209,7 +211,7 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project" id="autonomous-driving-sim">
         <figure class="shot"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a chase view of the car on a city street with lidar points, boxes around tracked vehicles and its planned path, beside live stats for each stage of the stack and the RL speed policy’s learning curve" loading="lazy" width="960" height="600"></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
@@ -247,7 +249,7 @@
     <section id="products" class="wrap section">
       <h2 class="section-title">Products</h2>
 
-      <article class="project">
+      <article class="project" id="paper-to-playground">
         <figure class="shot"><img src="images/paper-playground-960.webp" alt="Paper to Playground: a demo of the Adam paper, with sliders for loss scale and step sizes beside plots of Adam and SGD with momentum crossing a loss valley" loading="lazy" width="960" height="641"></figure>
         <div class="project-text">
           <h3>Paper to Playground</h3>
@@ -257,7 +259,7 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project" id="ramclean">
         <figure class="shot"><img src="images/ramclean-960.webp" alt="RamClean: the Model page of a Mac app, showing whether its classifier is still learning, how many answers it has and its held-out accuracy" loading="lazy" width="960" height="440"></figure>
         <div class="project-text">
           <h3>RamClean</h3>
@@ -267,7 +269,7 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project" id="sports-pred">
         <figure class="shot"><img src="images/sports-pred-960.webp" alt="Sports Pred: a grid of competitions, each with its favourite and their chance to win, such as Bayern Munich at 85% in the Bundesliga" loading="lazy" width="960" height="653"></figure>
         <div class="project-text">
           <h3>Sports Pred</h3>
@@ -281,7 +283,7 @@
     <section id="writeups" class="wrap section">
       <h2 class="section-title">Selected writeups</h2>
 
-      <article class="role">
+      <article class="role" id="few-shot-imitation">
         <p class="when">2021</p>
         <div>
           <h3>Few-Shot Imitation Learning for Robotic Manipulation</h3>
@@ -293,7 +295,7 @@
       </article>
 
 
-      <article class="role">
+      <article class="role" id="defensive-retraining">
         <p class="when">2020</p>
         <div>
           <h3>Defensive Iterative Retraining</h3>
@@ -388,7 +390,7 @@
   </main>
 
   <footer class="wrap footer">
-    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a href="thinking.html">Things I'm thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a class="quiet" href="values.html">Values</a></p>
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a href="thinking.html">Things I'm thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a class="quiet" href="values.html">Values</a></p>
   </footer>
 </body>
 </html>

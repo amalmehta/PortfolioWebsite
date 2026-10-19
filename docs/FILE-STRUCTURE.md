@@ -27,6 +27,7 @@ images/                       Project screenshots (and their WebP copies the car
   og.png                      Link-preview image for the profile (1200×630)
   og-interests.png, og-travel.png, og-thinking.png, og-values.png   Link previews for the other pages
   apple-touch-icon.png        Home-screen icon (180×180)
+  favicon-32.png              PNG copy of the tab icon, for browsers without SVG icons
   <project>.jpg               Full-size screenshot per project (the source for its poster)
   <project>-960.webp          960 px copy shown on the card (the poster, once it has a clip)
 papers/                       PDFs linked from the site: the robot soccer thesis and school reports

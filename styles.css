@@ -93,6 +93,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .hello a:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
 .contact { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.95rem; }
 .copy-email { margin-left: 0.45rem; padding: 0.1rem 0.55rem; font: 600 0.72rem/1.4 var(--sans); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; vertical-align: 0.1em; }
+/* On touch screens the button keeps its size but gets a fingertip-sized tap area (about 45 px tall). */
+@media (pointer: coarse) { .copy-email { position: relative; } .copy-email::after { content: ""; position: absolute; inset: -12px -8px; } }
 .copy-email:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
 
 /* Sections */
@@ -261,6 +263,7 @@ picture { display: contents; }
 .inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
 .inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
 .inspo-group { margin-top: 3rem; }
+.inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .inspo + .section-title, .tiles + .section-title, .books + .section-title { margin-top: 3rem; }
 .tiles + .books { margin-top: 3rem; }
 /* Books I'm reading: a card per book, with a drawn cover, stars and a short review */
