@@ -519,6 +519,16 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 
+class MediaTest(unittest.TestCase):
+    def test_media_says_coming_soon_only_while_empty(self):
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
+        section = re.search(r'<section class="media" id="media">(.*?)</section>', html, flags=re.S).group(1)
+        self.assertEqual("Coming soon." in section, 'class="inspo-item"' not in section)
+        for item in re.findall(r'<li class="inspo-item">(.*?)</li>', section, flags=re.S):
+            with self.subTest(item=item[:40]):
+                self.assertRegex(item, r'^<strong>[^<]+</strong> <span class="media-kind">[^<]+</span> \S')
+
+
 class BooksTest(unittest.TestCase):
     """Live interests' Books I'm reading: cards with an optional star rating."""
 

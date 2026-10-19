@@ -263,6 +263,8 @@ picture { display: contents; }
 .inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
 .inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
 .inspo-group { margin-top: 3rem; }
+.media { margin-top: 3rem; }
+.media-kind { display: inline-block; margin-right: 0.4rem; padding: 0 0.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 999px; background: var(--warm-soft); color: var(--warm); vertical-align: 0.1em; }
 /* Beliefs: two tabs (beliefs.js), What I believe currently and Outdated */
 .beliefs { margin-top: 3rem; }
 .belief-tabs { display: inline-flex; gap: 0.25rem; padding: 0.25rem; margin: 0 0 1.25rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
