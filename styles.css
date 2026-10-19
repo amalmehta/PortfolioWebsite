@@ -263,6 +263,17 @@ picture { display: contents; }
 .inspo-item { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
 .inspo-item strong { color: var(--text); font-weight: 600; margin-right: 0.4rem; }
 .inspo-group { margin-top: 3rem; }
+/* Beliefs: two tabs (beliefs.js), What I believe currently and Outdated */
+.beliefs { margin-top: 3rem; }
+.belief-tabs { display: inline-flex; gap: 0.25rem; padding: 0.25rem; margin: 0 0 1.25rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.belief-tabs [role="tab"] { font: 600 0.88rem/1.2 var(--sans); padding: 0.5rem 0.95rem; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; }
+.belief-tabs [role="tab"]:hover { color: var(--text); }
+.belief-tabs [role="tab"][aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+.belief-heading { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 0 0 0.6rem; }
+.belief-panel + .belief-panel { margin-top: 2rem; }
+.beliefs.tabbed .belief-heading { display: none; }
+.beliefs.tabbed .belief-panel + .belief-panel { margin-top: 0; }
+.belief-note { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.92rem; }
 .inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .inspo + .section-title, .tiles + .section-title, .books + .section-title { margin-top: 3rem; }
 .tiles + .books { margin-top: 3rem; }
@@ -396,6 +407,9 @@ picture { display: contents; }
   @page { margin: 14mm 15mm; }
   html { font-size: 10pt; }
   body { font-size: 10pt; line-height: 1.45; background: #fff; color: #000; }
+  .belief-tabs { display: none !important; }
+  .belief-panel[hidden] { display: block !important; }
+  .beliefs.tabbed .belief-heading { display: block; }
   .site-header, .skip, .hero::before, .shot, .portrait, picture, dialog, .pong, .hello, .copy-email { display: none !important; }
   .wrap { max-width: none; padding: 0; }
   .hero { display: block; padding: 0 0 0.6rem; }

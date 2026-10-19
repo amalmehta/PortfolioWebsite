@@ -685,6 +685,21 @@ class ValuesPageTest(unittest.TestCase):
             with self.subTest(value=value.strip()[:40]):
                 self.assertRegex(value.strip(), r"^<h3>")
 
+    def test_beliefs_tabs_are_wired(self):
+        # Two tabs, each pointing at its own panel; beliefs.js is loaded to switch them.
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
+        tabs = re.findall(r'<button type="button" role="tab" id="([^"]+)" aria-controls="([^"]+)"[^>]*>([^<]+)</button>', html)
+        self.assertEqual([t[2] for t in tabs], ["What I believe currently", "Outdated"])
+        for tab_id, panel_id, _ in tabs:
+            with self.subTest(tab=tab_id):
+                self.assertRegex(html, rf'<div class="belief-panel" id="{panel_id}" role="tabpanel" aria-labelledby="{tab_id}">')
+        self.assertIn('<script src="beliefs.js" defer></script>', html)
+        self.assertTrue((ROOT / "beliefs.js").is_file())
+        # Each list says "Coming soon." exactly while it's empty.
+        for panel in re.findall(r'<div class="belief-panel"[^>]*>(.*?)</div>', html, flags=re.S):
+            with self.subTest(panel=re.search(r"<h3[^>]*>(.*?)</h3>", panel).group(1)):
+                self.assertEqual("Coming soon." in panel, 'class="inspo-item"' not in panel)
+
     def test_empty_sections_say_coming_soon(self):
         # Inspiration and Things I care about show "Coming soon." exactly while they're empty.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)

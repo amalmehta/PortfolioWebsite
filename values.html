@@ -19,13 +19,14 @@
   <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og-values.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Values and inspiration: High agency, Ambition, Curiosity and Caring">
+  <meta property="og:image:alt" content="Values and inspiration: High agency, Ambition, Deep curiosity and Caring">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image:alt" content="Values and inspiration: High agency, Ambition, Curiosity and Caring">
+  <meta name="twitter:image:alt" content="Values and inspiration: High agency, Ambition, Deep curiosity and Caring">
   <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script src="email.js" defer></script>
+  <script src="beliefs.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#top">Skip to content</a>
@@ -62,12 +63,42 @@
         <h3>Ambition</h3>
       </li>
       <li class="value">
-        <h3>Curiosity</h3>
+        <h3>Deep curiosity</h3>
       </li>
       <li class="value">
         <h3>Caring</h3>
       </li>
     </ol>
+
+    <!-- Beliefs: what I believe now, and an archive of what I used to. beliefs.js turns the two
+         lists into tabs; without JavaScript they show one after the other. -->
+    <section class="beliefs" id="beliefs">
+      <h2 class="section-title">Beliefs</h2>
+      <div class="belief-tabs" role="tablist" aria-label="Beliefs" hidden>
+        <button type="button" role="tab" id="tab-current" aria-controls="beliefs-current" aria-selected="true">What I believe currently</button>
+        <button type="button" role="tab" id="tab-outdated" aria-controls="beliefs-outdated" aria-selected="false" tabindex="-1">Outdated</button>
+      </div>
+      <div class="belief-panel" id="beliefs-current" role="tabpanel" aria-labelledby="tab-current">
+        <h3 class="belief-heading">What I believe currently</h3>
+        <ul class="inspo">
+          <!-- New beliefs go here, one per line:
+          <li class="inspo-item"><strong>The belief</strong> One line on why you hold it.</li>
+          When you stop believing one, move it to Outdated below and say what changed your mind.
+          -->
+          <li class="inspo-item"><strong>Rate of learning is a higher quality signal than experience.</strong></li>
+        </ul>
+      </div>
+      <div class="belief-panel" id="beliefs-outdated" role="tabpanel" aria-labelledby="tab-outdated">
+        <h3 class="belief-heading">Outdated</h3>
+        <p class="belief-note">Things I used to believe, and what changed my mind.</p>
+        <ul class="inspo">
+          <!-- Beliefs you've let go of, most recent first:
+          <li class="inspo-item"><strong>The old belief</strong> What changed your mind, and roughly when.</li>
+          Delete the "coming soon" line below once the first one is in. -->
+          <li class="inspo-empty">Coming soon.</li>
+        </ul>
+      </div>
+    </section>
 
     <section class="inspo-group">
       <h2 class="section-title">Inspiration</h2>
