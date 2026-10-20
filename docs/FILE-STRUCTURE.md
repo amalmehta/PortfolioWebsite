@@ -7,14 +7,16 @@ index.html                    The profile: intro, research & work, projects, pro
 thinking.html                 "Things I'm thinking about": linked from Live interests and every footer
 photos.html                   Travel: places I'm going, places I'd like to go, then photos; linked from Live interests and every footer
 writings.html                 Writings: its own page, unlinked and noindex until the first piece is in
-values.html                   Values & inspiration: its own page, linked from the profile footer
+values.html                   What I live by: values, beliefs, how to lead a life, inspiration; linked from the profile footer
 interests.html                Live interests: hobby and curiosity tiles, hidden Books and My art; in every header
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
+feed.xml                      RSS feed of Things I'm thinking about (built by tools/make-feed.py)
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
 media.js                      Lazy-loads and plays looping clips; on the page only once a card has one
 messi.js                      Hidden replay of Messi's 2011 solo goal at the Bernabéu, behind "soccer tournaments" on the profile
 email.js                      Turns the bot-proofed "name [at] domain" email links back into real ones
+anchors.js                    Adds the "#" link beside each entry's heading on the profile and Thinking
 beliefs.js                    Switches the Values page's Beliefs between its two tabs: current and Outdated
 tiles.js                      Plays the Live interests tile icons once on scroll-in and on tap (phones have no hover)
 pong.js                       Hidden Pong game behind the skier on the Hokkaido drawing (photos.html)
@@ -40,6 +42,7 @@ tools/
   draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
   draw-places.py              Draws the Travel page's place drawings in images/places/
   check-links.py              Checks the site's external links (run weekly on GitHub)
+  make-feed.py                Builds feed.xml (RSS for Things I'm thinking about) from thinking.html
   check-staleness.py          Flags the Skills and Live interests dates, or the newest thought, over six months old (run weekly on GitHub)
 .github/workflows/tests.yml    Runs the tests on GitHub for every push to main and every pull request
 .github/workflows/links.yml    Checks every external link weekly (Mondays) and on demand

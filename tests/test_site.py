@@ -519,7 +519,9 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual((int(img["width"]), int(img["height"])), image_size(local_target(img["src"])))
 
 
-class MediaTest(unittest.TestCase):
+class MediaILoveTest(unittest.TestCase):
+    """Live interests' Media I love section."""
+
     def test_reading_tile_links_to_media(self):
         html = (ROOT / "interests.html").read_text(encoding="utf-8")
         self.assertIn('<h3><a class="tile-link" href="#media">Reading, film and games</a></h3>', html)
@@ -837,6 +839,59 @@ class ResumeTest(unittest.TestCase):
                   for c in c if c]
         self.assertTrue(counts, "no page tree found")
         self.assertEqual(max(counts), 1, "the resume should fit on one page")
+
+
+class PolishTest(unittest.TestCase):
+    PAGES = ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "writings.html", "404.html")
+
+    def test_pages_only_run_their_own_files(self):
+        # A content security policy: no outside or inline scripts, plugins or forms.
+        # The 404 page loads its files by full address (it's served at any depth), so it names the site too.
+        for name in self.PAGES:
+            html = (ROOT / name).read_text(encoding="utf-8")
+            source = "'self' https://amalmehta.github.io" if name == "404.html" else "'self'"
+            policy = f'<meta http-equiv="Content-Security-Policy" content="default-src {source}; object-src \'none\'; base-uri \'self\'; form-action \'none\'">'
+            with self.subTest(page=name):
+                self.assertIn(policy, html)
+                body = re.sub(r"<!--.*?-->", "", html, flags=re.S)
+                self.assertNotRegex(body, r'<script(?![^>]*\bsrc=)(?![^>]*application/ld\+json)')
+                self.assertNotRegex(body, r'\sstyle="|<style\b|\son[a-z]+="')
+
+    def test_apostrophes_are_curly(self):
+        # Visible text, titles, descriptions and labels use ’, not '.
+        for name in self.PAGES:
+            html = (ROOT / name).read_text(encoding="utf-8")
+            html = re.sub(r"<!--.*?-->|<script.*?</script>", "", html, flags=re.S)
+            seen = re.findall(r"[A-Za-z]'[A-Za-z]", re.sub(r"<[^>]+>", " ", html))
+            for attr in re.findall(r'\b(?:content|alt|aria-label|title)="([^"]*)"', html):
+                if not attr.startswith("default-src"):
+                    seen += re.findall(r"[A-Za-z]'[A-Za-z]", attr)
+            with self.subTest(page=name):
+                self.assertEqual(seen, [])
+
+    def test_feed_matches_thinking_page(self):
+        import importlib.util, xml.etree.ElementTree as ET
+        spec = importlib.util.spec_from_file_location("make_feed", ROOT / "tools/make-feed.py")
+        make_feed = importlib.util.module_from_spec(spec); spec.loader.exec_module(make_feed)
+        self.assertEqual((ROOT / "feed.xml").read_text(encoding="utf-8"), make_feed.build(),
+                         "feed.xml is out of date: run python3 tools/make-feed.py")
+        items = ET.parse(ROOT / "feed.xml").findall(".//item")
+        ids = re.findall(r'<li class="thought" id="([^"]+)">', re.sub(r"<!--.*?-->", "", THINKING.read_text(encoding="utf-8"), flags=re.S))
+        self.assertEqual([i.find("link").text.rsplit("#", 1)[1] for i in items], ids)
+        self.assertIn('<link rel="alternate" type="application/rss+xml"', THINKING.read_text(encoding="utf-8"))
+
+    def test_entry_links_are_offered(self):
+        for name in ("index.html", "thinking.html"):
+            with self.subTest(page=name):
+                self.assertIn('<script src="anchors.js" defer></script>', (ROOT / name).read_text(encoding="utf-8"))
+        self.assertTrue((ROOT / "anchors.js").is_file())
+
+
+class TestSuiteTest(unittest.TestCase):
+    def test_no_test_class_is_defined_twice(self):
+        # A second class with the same name replaces the first, and its tests silently stop running.
+        names = re.findall(r"^class (\w+)\(unittest\.TestCase\)", Path(__file__).read_text(encoding="utf-8"), flags=re.M)
+        self.assertEqual(sorted(n for n in set(names) if names.count(n) > 1), [])
 
 
 if __name__ == "__main__":

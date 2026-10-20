@@ -15,10 +15,11 @@
   const fromHash = () => tabs.find(t => "#" + t.getAttribute("aria-controls") === location.hash);
   tabs.forEach((tab, i) => {
     tab.addEventListener("click", () => pick(tab));
-    tab.addEventListener("keydown", e => {  // arrow keys move between tabs
+    tab.addEventListener("keydown", e => {  // arrow keys move between tabs; Home and End jump to the ends
       const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-      if (!step) return;
-      const next = tabs[(i + step + tabs.length) % tabs.length];
+      const next = e.key === "Home" ? tabs[0] : e.key === "End" ? tabs[tabs.length - 1]
+        : step ? tabs[(i + step + tabs.length) % tabs.length] : null;
+      if (!next) return;
       pick(next); next.focus(); e.preventDefault();
     });
   });

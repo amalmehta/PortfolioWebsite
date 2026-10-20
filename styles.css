@@ -158,6 +158,12 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .messi-foot .pong-help { margin: 0; }
 .messi-again { flex-shrink: 0; font: 600 0.85rem var(--sans); color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
 
+/* The "#" link beside each entry's heading (anchors.js): faint until the entry is hovered or focused */
+.anchor { margin-left: 0.15rem; font: 500 0.8em var(--sans); color: var(--faint); text-decoration: none; opacity: 0; transition: opacity 0.15s; }
+.project:hover .anchor, .role:hover .anchor, .thought:hover .anchor, .anchor:focus-visible { opacity: 1; }
+.anchor:hover { color: var(--accent); text-decoration: none; }
+@media (hover: none) { .anchor { opacity: 0.6; } }
+
 /* Footer */
 .footer { padding-top: 2rem; padding-bottom: 3rem; margin-top: 2rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--faint); }
 .footer p { margin: 0; }
@@ -418,7 +424,7 @@ picture { display: contents; }
   .belief-tabs { display: none !important; }
   .belief-panel[hidden] { display: block !important; }
   .beliefs.tabbed .belief-heading { display: block; }
-  .site-header, .skip, .hero::before, .shot, .portrait, picture, dialog, .pong, .hello, .copy-email { display: none !important; }
+  .site-header, .skip, .hero::before, .shot, .portrait, picture, dialog, .pong, .hello, .copy-email, .anchor { display: none !important; }
   .wrap { max-width: none; padding: 0; }
   .hero { display: block; padding: 0 0 0.6rem; }
   .hero h1 { font-size: 22pt; margin: 0 0 0.3rem; }
