@@ -1,5 +1,6 @@
 // Values page: shows Beliefs as two tabs, "What I believe currently" and "Outdated".
 // Without JavaScript both lists show one after the other, each under its own heading.
+// Each tab has its own address (values.html#beliefs-outdated), so either can be linked to.
 (() => {
   const section = document.querySelector(".beliefs");
   if (!section) return;
@@ -10,16 +11,21 @@
     t.tabIndex = on ? 0 : -1;
     document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
   });
+  const pick = tab => { show(tab); history.replaceState(null, "", "#" + tab.getAttribute("aria-controls")); };
+  const fromHash = () => tabs.find(t => "#" + t.getAttribute("aria-controls") === location.hash);
   tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => show(tab));
+    tab.addEventListener("click", () => pick(tab));
     tab.addEventListener("keydown", e => {  // arrow keys move between tabs
       const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
       if (!step) return;
       const next = tabs[(i + step + tabs.length) % tabs.length];
-      show(next); next.focus(); e.preventDefault();
+      pick(next); next.focus(); e.preventDefault();
     });
   });
   section.querySelector('[role="tablist"]').hidden = false;
   section.classList.add("tabbed");
-  show(tabs[0]);
+  const linked = fromHash();
+  show(linked || tabs[0]);
+  if (linked) section.scrollIntoView();
+  window.addEventListener("hashchange", () => { const t = fromHash(); if (t) { show(t); section.scrollIntoView(); } });
 })();

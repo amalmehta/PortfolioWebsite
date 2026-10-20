@@ -520,6 +520,11 @@ class SubpagesTest(unittest.TestCase):
 
 
 class MediaTest(unittest.TestCase):
+    def test_reading_tile_links_to_media(self):
+        html = (ROOT / "interests.html").read_text(encoding="utf-8")
+        self.assertIn('<h3><a class="tile-link" href="#media">Reading, film and games</a></h3>', html)
+        self.assertIn('id="media"', html)
+
     def test_media_says_coming_soon_only_while_empty(self):
         html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
         section = re.search(r'<section class="media" id="media">(.*?)</section>', html, flags=re.S).group(1)
@@ -704,6 +709,9 @@ class ValuesPageTest(unittest.TestCase):
             with self.subTest(tab=tab_id):
                 self.assertRegex(html, rf'<div class="belief-panel" id="{panel_id}" role="tabpanel" aria-labelledby="{tab_id}">')
         self.assertIn('<script src="beliefs.js" defer></script>', html)
+        # A link to either tab opens it, and the tab list stays hidden without JavaScript.
+        self.assertIn("location.hash", (ROOT / "beliefs.js").read_text(encoding="utf-8"))
+        self.assertIn(".belief-tabs[hidden] { display: none; }", STYLES.read_text(encoding="utf-8"))
         self.assertTrue((ROOT / "beliefs.js").is_file())
         # Each list says "Coming soon." exactly while it's empty.
         for panel in re.findall(r'<div class="belief-panel"[^>]*>(.*?)</div>', html, flags=re.S):
