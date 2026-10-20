@@ -8,6 +8,7 @@
     link.href = "#" + id;
     link.textContent = "#";
     link.setAttribute("aria-label", "Link to " + h.textContent.trim());
+    link.setAttribute("aria-live", "polite");  // so "Copied" is read out
     link.addEventListener("click", e => {
       e.preventDefault();
       history.replaceState(null, "", "#" + id);

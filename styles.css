@@ -113,6 +113,8 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
   .project { grid-template-columns: 0.85fr 1fr; gap: 2rem; align-items: center; }
 }
 .shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+/* The card's <picture> (AVIF with a WebP fallback) lays out as if it were just the image. */
+.shot picture { display: contents; }
 .shot img, .shot video { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
 .shot video { cursor: pointer; }
 .shot.contain img, .shot.contain video { object-fit: contain; object-position: center; background: #fcfcfa; }
@@ -162,7 +164,8 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .anchor { margin-left: 0.15rem; font: 500 0.8em var(--sans); color: var(--faint); text-decoration: none; opacity: 0; transition: opacity 0.15s; }
 .project:hover .anchor, .role:hover .anchor, .thought:hover .anchor, .anchor:focus-visible { opacity: 1; }
 .anchor:hover { color: var(--accent); text-decoration: none; }
-@media (hover: none) { .anchor { opacity: 0.6; } }
+/* Phones have no hover: keep the "#" on Thinking, where linking one thought matters, and drop it on the profile. */
+@media (hover: none) { .anchor { opacity: 0.6; } .project .anchor, .role .anchor { display: none; } }
 
 /* Footer */
 .footer { padding-top: 2rem; padding-bottom: 3rem; margin-top: 2rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--faint); }

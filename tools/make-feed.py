@@ -26,7 +26,8 @@ def build():
         items.append(f"    <item>\n      <title>{html.escape(title)}</title>\n      <link>{link}</link>\n"
                      f"      <guid>{link}</guid>\n      <pubDate>{when}</pubDate>\n"
                      f"      <description>{html.escape(summary)}</description>\n    </item>\n")
-    return ('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0">\n  <channel>\n'
+    return ('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n'
+            f'    <atom:link href="{SITE}feed.xml" rel="self" type="application/rss+xml"/>\n'
             "    <title>Things I’m thinking about · Amal Mehta</title>\n"
             f"    <link>{SITE}thinking.html</link>\n"
             "    <description>Open questions and ideas Amal Mehta keeps coming back to.</description>\n"

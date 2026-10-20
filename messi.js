@@ -2,13 +2,12 @@
 // replay inspired by Messi's solo goal against Real Madrid at the Bernabéu
 // (2011 Champions League semi-final). Dots on half a pitch, no photos or logos.
 // The run is an approximation, not tracking data.
+// eggs.js shows the button and loads this file the first time it's clicked.
 (() => {
   const trigger = document.querySelector(".messi-egg");
   if (!trigger) return;
-  trigger.hidden = false;  // a plain-text fallback sits beside it for no-JS
-  document.querySelector(".messi-plain")?.remove();
   let replay;
-  trigger.addEventListener("click", () => (replay ||= build()).open());
+  (window.openEgg ||= {}).messi = () => (replay ||= build()).open();
 
   function build() {
     // Pitch in metres at 12 px each: x from just behind halfway (50) to past the goal line (106),

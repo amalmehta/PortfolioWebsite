@@ -2,7 +2,7 @@
 # Builds the compressed copies the page actually serves from the full-size
 # JPEGs in images/ (the JPEGs stay as the originals and the no-AVIF/WebP fallback):
 #   portrait.jpg  -> portrait-240/-480 .avif and .webp (the <picture> srcset)
-#   <project>.jpg -> <project>-960.webp                (the <video> poster)
+#   <project>.jpg -> <project>-960.avif and .webp      (the card's <picture>, and the poster once it has a clip)
 # Needs sips (macOS), avifenc and cwebp:  brew install libavif webp
 # Run from the repo root after adding or replacing an image:
 #   tools/make-images.sh                     # every image
@@ -25,6 +25,7 @@ for src in $files; do
     done
   else
     sips -s format png --resampleWidth 960 "$src" --out "$tmp/$name.png" >/dev/null
+    avifenc -q 60 -s 4 "$tmp/$name.png" "images/$name-960.avif" >/dev/null
     cwebp -quiet -q 80 -m 6 "$tmp/$name.png" -o "images/$name-960.webp"
   fi
   echo "$src: $(ls images/$name-*.* | tr '\n' ' ')"

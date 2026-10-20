@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
   <title>Amal Mehta · Research engineer in RL and robotics</title>
   <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
@@ -11,6 +12,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <meta name="description" content="Amal Mehta, research engineer in reinforcement learning and robotics: AI that learns from experience and holds up in the real world, from robots to brain decoding. Research, projects and apps.">
+  <link rel="alternate" type="application/rss+xml" title="Things I’m thinking about" href="feed.xml">
   <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Amal Mehta">
@@ -56,10 +58,18 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Amal Mehta",
+    "url": "https://amalmehta.github.io/PortfolioWebsite/"
+  }
+  </script>
   <link rel="stylesheet" href="styles.css">
   <script src="email.js" defer></script>
   <script src="anchors.js" defer></script>
-  <script src="messi.js" defer></script>
+  <script src="eggs.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#top">Skip to content</a>
@@ -164,7 +174,7 @@
       <h2 class="section-title">Selected projects</h2>
 
       <article class="project" id="neural-signal-ml">
-        <figure class="shot contain"><img src="images/neural-signal-ml-960.webp" alt="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)" loading="lazy" width="960" height="351"></figure>
+        <figure class="shot contain"><picture><source type="image/avif" srcset="images/neural-signal-ml-960.avif"><img src="images/neural-signal-ml-960.webp" alt="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)" loading="lazy" width="960" height="351"></picture></figure>
         <div class="project-text">
           <h3>Neural Signal ML</h3>
           <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter. It also decodes imagined movements from EEG, where a classic CSP + LDA model (63.9% on a held-out day) edges out EEGNet (62.3%), and comes with a Mac app for viewing the recordings.</p>
@@ -174,7 +184,7 @@
       </article>
 
       <article class="project" id="post-training-lab">
-        <figure class="shot"><img src="images/post-training-960.webp" alt="Post Training Lab: results averaged over 3 seeds: held-out success from 70% to 80% with GRPO and to 81% with DPO, 63% to 74% on harder mazes, and 7% for the reward hacker" loading="lazy" width="960" height="778"></figure>
+        <figure class="shot"><picture><source type="image/avif" srcset="images/post-training-960.avif"><img src="images/post-training-960.webp" alt="Post Training Lab: results averaged over 3 seeds: held-out success from 70% to 80% with GRPO and to 81% with DPO, 63% to 74% on harder mazes, and 7% for the reward hacker" loading="lazy" width="960" height="778"></picture></figure>
         <div class="project-text">
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a key-and-door maze: supervised fine-tuning on demos from a planner with a bad habit, then two ways to fix it, GRPO (online RL on a verifiable reward) and DPO (offline preferences). Averaged over 3 seeds, GRPO lifts held-out success from 70% to 80% and DPO to 81%; RL from scratch on the same budget reaches 0%, and a run with a subtly wrong reward games it down to 7%.</p>
@@ -194,7 +204,7 @@
       </article>
 
       <article class="project" id="alphago-lite">
-        <figure class="shot"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></figure>
+        <figure class="shot"><picture><source type="image/avif" srcset="images/alphago-lite-960.avif"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></picture></figure>
         <div class="project-text">
           <h3>AlphaGo Lite</h3>
           <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
@@ -204,7 +214,7 @@
       </article>
 
       <article class="project" id="sim-to-real-drone-bench">
-        <figure class="shot contain"><img src="images/drone-bench-960.webp" alt="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy" loading="lazy" width="960" height="304"></figure>
+        <figure class="shot contain"><picture><source type="image/avif" srcset="images/drone-bench-960.avif"><img src="images/drone-bench-960.webp" alt="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy" loading="lazy" width="960" height="304"></picture></figure>
         <div class="project-text">
           <h3>Sim to Real Drone Bench</h3>
           <p>Flies one course with a classical controller and RL policies, including a meta-learned one, and measures the sim-to-real gap. Built for a Crazyflie; so far it’s been tested against a deliberately mismatched simulated drone.</p>
@@ -214,7 +224,7 @@
       </article>
 
       <article class="project" id="autonomous-driving-sim">
-        <figure class="shot"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a chase view of the car on a city street with lidar points, boxes around tracked vehicles and its planned path, beside live stats for each stage of the stack and the RL speed policy’s learning curve" loading="lazy" width="960" height="600"></figure>
+        <figure class="shot"><picture><source type="image/avif" srcset="images/driving-sim-960.avif"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a chase view of the car on a city street with lidar points, boxes around tracked vehicles and its planned path, beside live stats for each stage of the stack and the RL speed policy’s learning curve" loading="lazy" width="960" height="600"></picture></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
           <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations.</p>
@@ -227,7 +237,7 @@
 
 
       <article class="project" id="neuroimaging-platform">
-        <figure class="shot"><img src="images/neuroimaging-960.webp" alt="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp" loading="lazy" width="960" height="673"></figure>
+        <figure class="shot"><picture><source type="image/avif" srcset="images/neuroimaging-960.avif"><img src="images/neuroimaging-960.webp" alt="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp" loading="lazy" width="960" height="673"></picture></figure>
         <div class="project-text">
           <h3>Neuroimaging Platform</h3>
           <p>A Mac app that opens 3D brain MRI scans, separates gray matter, white matter and fluid voxel by voxel, and places EEG electrodes on the head. It also runs research methods from UCSF: segmentation stability, stable pattern discovery and follow-up atrophy maps.</p>
@@ -238,7 +248,7 @@
       </article>
 
       <article class="project" id="sport-analyzer">
-        <figure class="shot crop-right"><img src="images/sport-analyzer-960.webp" alt="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics" loading="lazy" width="960" height="439"></figure>
+        <figure class="shot crop-right"><picture><source type="image/avif" srcset="images/sport-analyzer-960.avif"><img src="images/sport-analyzer-960.webp" alt="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics" loading="lazy" width="960" height="439"></picture></figure>
         <div class="project-text">
           <h3>Sport Analyzer</h3>
           <p>Strava for technique: tracks your body in 3D from a webcam and measures running stride, lifts, swings and shots. Ghost Coach learns a new movement from one example rep and scores yours against it.</p>
@@ -252,7 +262,7 @@
       <h2 class="section-title">Products</h2>
 
       <article class="project" id="paper-to-playground">
-        <figure class="shot"><img src="images/paper-playground-960.webp" alt="Paper to Playground: a demo of the Adam paper, with sliders for loss scale and step sizes beside plots of Adam and SGD with momentum crossing a loss valley" loading="lazy" width="960" height="641"></figure>
+        <figure class="shot"><picture><source type="image/avif" srcset="images/paper-playground-960.avif"><img src="images/paper-playground-960.webp" alt="Paper to Playground: a demo of the Adam paper, with sliders for loss scale and step sizes beside plots of Adam and SGD with momentum crossing a loss valley" loading="lazy" width="960" height="641"></picture></figure>
         <div class="project-text">
           <h3>Paper to Playground</h3>
           <p>Paste an arXiv link and get a small, runnable demo of the paper’s core idea: a page of sliders over a NumPy or PyTorch backend. A language model writes the first draft, the app runs, type-checks and lints it until it passes, and you refine it by hand.</p>
@@ -262,7 +272,7 @@
       </article>
 
       <article class="project" id="ramclean">
-        <figure class="shot"><img src="images/ramclean-960.webp" alt="RamClean: the Model page of a Mac app, showing whether its classifier is still learning, how many answers it has and its held-out accuracy" loading="lazy" width="960" height="440"></figure>
+        <figure class="shot"><picture><source type="image/avif" srcset="images/ramclean-960.avif"><img src="images/ramclean-960.webp" alt="RamClean: the Model page of a Mac app, showing whether its classifier is still learning, how many answers it has and its held-out accuracy" loading="lazy" width="960" height="440"></picture></figure>
         <div class="project-text">
           <h3>RamClean</h3>
           <p>A Mac menu bar app that spots apps eating memory you aren’t using, asks before quitting them, and learns your habits. A Create ML classifier trains on your Quit and Keep answers, on your Mac, and blends with rules of thumb; apps you’re using or that are playing audio are never suggested.</p>
@@ -272,7 +282,7 @@
       </article>
 
       <article class="project" id="sports-pred">
-        <figure class="shot"><img src="images/sports-pred-960.webp" alt="Sports Pred: a grid of competitions, each with its favourite and their chance to win, such as Bayern Munich at 85% in the Bundesliga" loading="lazy" width="960" height="653"></figure>
+        <figure class="shot"><picture><source type="image/avif" srcset="images/sports-pred-960.avif"><img src="images/sports-pred-960.webp" alt="Sports Pred: a grid of competitions, each with its favourite and their chance to win, such as Bayern Munich at 85% in the Bundesliga" loading="lazy" width="960" height="653"></picture></figure>
         <div class="project-text">
           <h3>Sports Pred</h3>
           <p>Live title odds for soccer leagues and tennis tournaments, refreshed every three hours: Elo ratings built from past results feed 10,000 simulated seasons and draws for each competition. Covers Europe’s top leagues, the Champions League and the Grand Slams, as a website and a Mac app.</p>
@@ -387,12 +397,12 @@
     </section>
 
     <section class="wrap outside">
-      <p><strong>Outside work</strong>, I spend a lot of my time outdoors. I’ve finished Ironman-distance triathlons, competed in <span class="messi-plain">soccer tournaments</span><button type="button" class="messi-egg" aria-label="soccer tournaments (opens a replay of Messi’s goal)" hidden>soccer tournaments</button> and climbed high mountains. The summer after my freshman year at Berkeley, I biked across the country from Seattle to DC with a group of fellow Eagle Scouts, and learned a lot along the way. I’ve also led trips to Half Dome and the Channel Islands, and a team in the Lake Tahoe relay. <a href="photos.html">When I travel</a>, I go for the history, art, architecture, cuisine and people, which so far has taken me across Europe, Asia and the East Coast.</p>
+      <p><strong>Outside work</strong>, I spend a lot of my time outdoors. I’ve finished Ironman-distance triathlons, competed in <span class="messi-plain">soccer tournaments</span><button type="button" class="messi-egg" data-script="messi.js" aria-label="soccer tournaments (opens a replay of Messi’s goal)" hidden>soccer tournaments</button> and climbed high mountains. The summer after my freshman year at Berkeley, I biked across the country from Seattle to DC with a group of fellow Eagle Scouts, and learned a lot along the way. I’ve also led trips to Half Dome and the Channel Islands, and a team in the Lake Tahoe relay. <a href="photos.html">When I travel</a>, I go for the history, art, architecture, cuisine and people, which so far has taken me across Europe, Asia and the East Coast.</p>
     </section>
   </main>
 
   <footer class="wrap footer">
-    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a href="thinking.html">Things I’m thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a class="quiet" href="values.html">What I live by</a></p>
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a href="thinking.html">Things I’m thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a class="quiet" href="values.html">What I live by</a> · <a href="feed.xml">RSS</a></p>
   </footer>
 </body>
 </html>

@@ -481,19 +481,22 @@ class SubpagesTest(unittest.TestCase):
 
     def test_skier_opens_pong(self):
         # The hidden game: a skier button on the Hokkaido drawing, hidden until
-        # pong.js (loaded by the page) shows it and wires it up.
+        # eggs.js shows it; eggs.js fetches pong.js on the first click.
         html = (ROOT / "photos.html").read_text(encoding="utf-8")
-        self.assertRegex(html, r'<button type="button" class="skier" aria-label="[^"]+" hidden>')
-        self.assertIn('<script src="pong.js" defer></script>', html)
-        self.assertTrue((ROOT / "pong.js").is_file())
+        self.assertRegex(html, r'<button type="button" class="skier" data-script="pong.js" aria-label="[^"]+" hidden>')
+        self.assertIn('<script src="eggs.js" defer></script>', html)
+        self.assertNotIn('<script src="pong.js"', html)
+        self.assertIn("openEgg ||= {}).pong =", (ROOT / "pong.js").read_text(encoding="utf-8"))
 
     def test_messi_replay_is_wired(self):
-        # The profile's other hidden extra: "soccer tournaments" opens messi.js's replay.
+        # The profile's other hidden extra: "soccer tournaments" opens messi.js's replay,
+        # which eggs.js fetches on the first click.
         html = INDEX.read_text(encoding="utf-8")
-        self.assertRegex(html, r'<button type="button" class="messi-egg" aria-label="soccer tournaments \(opens a replay[^"]*\)" hidden>soccer tournaments</button>')
+        self.assertRegex(html, r'<button type="button" class="messi-egg" data-script="messi.js" aria-label="soccer tournaments \(opens a replay[^"]*\)" hidden>soccer tournaments</button>')
         self.assertIn('<span class="messi-plain">soccer tournaments</span>', html)
-        self.assertIn('<script src="messi.js" defer></script>', html)
-        self.assertTrue((ROOT / "messi.js").is_file())
+        self.assertIn('<script src="eggs.js" defer></script>', html)
+        self.assertNotIn('<script src="messi.js"', html)
+        self.assertIn("openEgg ||= {}).messi =", (ROOT / "messi.js").read_text(encoding="utf-8"))
 
     def test_trips_have_dates(self):
         # Each trip under "Places I'm going" gives its first and last day, in order.

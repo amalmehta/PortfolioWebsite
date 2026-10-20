@@ -1,11 +1,11 @@
 // Pong, hidden behind the skier on the Hokkaido drawing (photos.html).
 // Without JavaScript the skier stays hidden, since it would do nothing.
+// eggs.js shows the skier and loads this file the first time it's clicked.
 (() => {
   const skier = document.querySelector(".skier");
   if (!skier) return;
-  skier.hidden = false;
   let game;
-  skier.addEventListener("click", () => (game ||= makeGame()).open());
+  (window.openEgg ||= {}).pong = () => (game ||= makeGame()).open();
 
   function makeGame() {
     const W = 640, H = 400, PW = 10, PH = 72, R = 7, WIN = 5, X = 26;
