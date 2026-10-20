@@ -233,6 +233,16 @@
         </div>
       </article>
 
+      <article class="project" id="distributed-training">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/distributed-training-960.avif"><img src="images/distributed-training-960.webp" alt="Distributed Training: the demo site, with the largest loss gap between strategies (5×10⁻⁷), FSDP’s memory per process (25%) and an animation of DDP splitting a batch across 4 processes" loading="lazy" width="960" height="600"></picture></figure>
+        <div class="project-text">
+          <h3>Distributed Training</h3>
+          <p>One PyTorch training loop for a small transformer, split across processes four ways with a single flag: one process, DDP, FSDP and pipeline parallel. Across 7 real runs no strategy’s loss drifts more than 5×10⁻⁷ from the single process, and FSDP over 4 processes needs a quarter of the memory per process. The site animates how each one splits the model and the batch.</p>
+          <p class="tags"><span class="chip">PyTorch</span> <span class="chip">DDP</span> <span class="chip">FSDP</span> <span class="chip">Pipeline parallelism</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/DistributedTraining/">See how each split works →</a></p>
+        </div>
+      </article>
+
 
 
 
@@ -271,13 +281,23 @@
         </div>
       </article>
 
-      <article class="project" id="ramclean">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/ramclean-960.avif"><img src="images/ramclean-960.webp" alt="RamClean: the Model page of a Mac app, showing whether its classifier is still learning, how many answers it has and its held-out accuracy" loading="lazy" width="960" height="440"></picture></figure>
+      <article class="project" id="take-it-apart">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/take-it-apart-960.avif"><img src="images/take-it-apart-960.webp" alt="Take It Apart: a jet engine taken apart in 3D, with the nacelle cowls opened above and below, the fan at the front and the compressor and turbine stages spread along the shafts" loading="lazy" width="960" height="617"></picture></figure>
         <div class="project-text">
-          <h3>RamClean</h3>
-          <p>A Mac menu bar app that spots apps eating memory you aren’t using, asks before quitting them, and learns your habits. A Create ML classifier trains on your Quit and Keep answers, on your Mac, and blends with rules of thumb; apps you’re using or that are playing audio are never suggested.</p>
-          <p class="tags"><span class="chip">Menu bar app</span> <span class="chip">SwiftUI</span> <span class="chip">Core ML</span> <span class="chip">On-device learning</span></p>
-          <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
+          <h3>Take It Apart</h3>
+          <p>Takes an object apart in 3D: every part flies out the way it really comes off, and you can orbit, zoom and click any piece to see what it is and what it does. The website has 34 ready-made objects, from a 163-piece rocket and a 536-piece jet engine to a watch, a grand piano and a fusion reactor. With your own Anthropic API key, name anything else or drop in a photo, and Claude plans its parts.</p>
+          <p class="tags"><span class="chip">three.js</span> <span class="chip">SceneKit</span> <span class="chip">LLM-generated 3D</span> <span class="chip">Website + Mac app</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/take-it-apart-site/">Take something apart →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="top-gun-simulator">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/top-gun-960.avif"><img src="images/top-gun-960.webp" alt="Top Gun Simulator: a fighter jet flying low through a canyon with a green HUD showing 360 knots and 1,433 feet, beside the lesson panel, a map and a side profile of the terrain" loading="lazy" width="960" height="656"></picture></figure>
+        <div class="project-text">
+          <h3>Top Gun Simulator</h3>
+          <p>A flight simulator that teaches you to fly: real aerodynamics at 240 steps a second, a live instructor and 11 lessons, from what the stick does to landing. Then you take a fighter jet through a canyon run and a guns-only dogfight. Plays in the browser, with touch controls on phones, and as a Mac app.</p>
+          <p class="tags"><span class="chip">Flight physics</span> <span class="chip">three.js</span> <span class="chip">SceneKit</span> <span class="chip">Website + Mac app</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/TopGunSimulator/">Fly it in your browser →</a></p>
         </div>
       </article>
 
