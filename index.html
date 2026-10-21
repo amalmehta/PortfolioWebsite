@@ -113,7 +113,7 @@
         <div>
           <h3>Independent ML &amp; Robotics Research</h3>
           <p class="where">San Francisco Bay Area</p>
-          <p>Building and evaluating learning systems end to end: studying <a href="#unverifiable-rewards">how code agents learn to game the checks they’re rewarded on</a>, with a pilot and 50 pre-registered experiments; building <a href="#bci-projects">four brain–computer interface projects</a> on real neural data, three of them written up as papers; and testing meta-RL for drones and for post-training. Also post-training small transformers with GRPO and DPO, training game-playing agents by self-play and from pixels, and building tools for researchers, such as <a href="#researcher-pal">Researcher Pal</a>. Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience, and mentor to undergraduate scholars from UC Berkeley.</p>
+          <p>Building and evaluating learning systems end to end: studying <a href="#unverifiable-rewards">how code agents learn to game the checks they’re rewarded on</a>, with a pilot and 50 pre-registered experiments; building <a href="#bci-projects">four brain–computer interface projects</a> on real neural data, three of them written up as papers; and testing meta-RL for drones. Also post-training small transformers with GRPO and DPO, training game-playing agents by self-play and from pixels, and building tools for researchers, such as <a href="#researcher-pal">Researcher Pal</a>. Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience, and mentor to undergraduate scholars from UC Berkeley.</p>
           <p class="tags"><span class="chip">Reward hacking</span> <span class="chip">GRPO</span> <span class="chip">Neural decoding</span> <span class="chip">Meta-RL</span> <span class="chip">Sim-to-real</span> <span class="chip">Self-play RL</span></p>
         </div>
       </article>
@@ -240,7 +240,7 @@
         <figure class="shot"><picture><source type="image/avif" srcset="images/atari-dqn-960.avif"><img src="images/atari-dqn-960.webp" alt="Atari DQN: the Pong learning curve, with score per episode climbing from −21 to about +17 over half a million training steps, against the paper’s score of 20" loading="lazy" width="960" height="614"></picture></figure>
         <div class="project-text">
           <h3>Atari DQN</h3>
-          <p>DeepMind’s 2013 Atari paper, rebuilt from scratch in PyTorch and trained on a laptop CPU: one network learns to play from screen pixels and the score alone. On Pong it climbs from −21 to +17 in half a million steps, close to the paper’s 20; Breakout hasn’t taken off yet in its short run. The site walks through how it works.</p>
+          <p>DeepMind’s 2013 Atari paper, rebuilt from scratch in PyTorch and trained on a laptop CPU: one network learns to play from screen pixels and the score alone. On Pong it climbs from −21 to +17 in half a million steps, close to the paper’s 20. The site walks through how it works.</p>
           <p class="tags"><span class="chip">Deep Q-learning</span> <span class="chip">PyTorch</span> <span class="chip">Paper reproduction</span></p>
           <p class="links"><a href="https://amalmehta.github.io/AtariRL/">See how it works →</a></p>
         </div>
@@ -250,19 +250,9 @@
         <figure class="shot contain"><picture><source type="image/avif" srcset="images/drone-autonomy-960.avif"><img src="images/drone-autonomy-960.webp" alt="Drone Autonomy: two recorded flights seen from above, each with the obstacles mapped from depth, the final A* plan and the track flown; the second flight carries extra payload in wind with a worn motor" loading="lazy" width="960" height="353"></picture></figure>
         <div class="project-text">
           <h3>Drone Autonomy</h3>
-          <p>A quadrotor that maps unknown rooms with a depth camera, plans its path with A*, and adapts to payload, wind and motor wear by combining seven meta-learning methods with classical control. In simulation, a learned residual roughly halves the error of tuned adaptive control, and meta-learning helps most when it tunes the classical controller’s gains. Every method still fails out of distribution, and the paper says so.</p>
+          <p>A quadrotor that maps unknown rooms with a depth camera, plans its path with A*, and adapts to payload, wind and motor wear by combining seven meta-learning methods with classical control. In simulation, a learned residual roughly halves the error of tuned adaptive control, and meta-learning helps most when it tunes the classical controller’s gains.</p>
           <p class="tags"><span class="chip">Meta-learning</span> <span class="chip">Adaptive control</span> <span class="chip">Planning</span> <span class="chip">Simulation</span></p>
           <p class="links"><a href="https://amalmehta.github.io/DroneAutonomy/">Replay the flights →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="mehta-learning">
-        <figure class="shot contain"><picture><source type="image/avif" srcset="images/mehta-learning-960.avif"><img src="images/mehta-learning-960.webp" alt="MEHTA Learning: return against post-training steps on in-distribution goals, out-of-distribution goals and shifted dynamics, for MEHTA, PEARL alone, PEARL with naive fine-tuning and first-order MAML" loading="lazy" width="960" height="259"></picture></figure>
-        <div class="project-text">
-          <h3>MEHTA Learning</h3>
-          <p>A meta-RL method for post-training: PEARL’s latent task inference combined with a long-horizon MAML update, tested on goals and dynamics the agent never trained on. Inferring the task and then post-training clearly beats either alone. The new MAML update showed no measurable gain over plain fine-tuning at this scale, and long sparse episodes failed for every method; the write-up says both plainly.</p>
-          <p class="tags"><span class="chip">Meta-RL</span> <span class="chip">PEARL</span> <span class="chip">MAML</span> <span class="chip">Post-training</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/MEHTAlearning/">Try the demo →</a></p>
         </div>
       </article>
 

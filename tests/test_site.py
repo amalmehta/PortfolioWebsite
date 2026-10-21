@@ -395,14 +395,14 @@ class MediaTest(unittest.TestCase):
 
 
 class ProjectsTest(unittest.TestCase):
-    def test_thirteen_projects_and_ten_products(self):
+    def test_twelve_projects_and_ten_products(self):
         # Cards are split across two sections: Selected projects and Products.
         html = INDEX.read_text(encoding="utf-8")
         def cards(section_id):
             sec = html[html.index(f'<section id="{section_id}"'):]
             return len(re.findall(r'<article class="project"[ >]', sec[:sec.index("</section>")]))
-        self.assertEqual((cards("projects"), cards("products")), (13, 10))
-        self.assertEqual(len(PAGE.projects), 23, [p["title"] for p in PAGE.projects])
+        self.assertEqual((cards("projects"), cards("products")), (12, 10))
+        self.assertEqual(len(PAGE.projects), 22, [p["title"] for p in PAGE.projects])
 
     def test_each_card_is_complete(self):
         for p in PAGE.projects:
