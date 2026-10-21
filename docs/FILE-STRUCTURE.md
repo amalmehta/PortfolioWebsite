@@ -12,6 +12,7 @@ interests.html                Live interests: hobby and curiosity tiles, Books (
 books.json                    Books: reading now, read (stars and reviews) and want to read; run tools/make-books.py after editing
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
 feed.xml                      RSS feed of Things I'm thinking about (built by tools/make-feed.py)
+sitemap.xml                   Every public page for search engines (noindex pages stay out; the tests check the list)
 favicon.svg                   Browser-tab icon (AM monogram)
 styles.css                    Layout, typography, light and dark colours, @font-face rules
 media.js                      Lazy-loads and plays looping clips; on the page only once a card has one

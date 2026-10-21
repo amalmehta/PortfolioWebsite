@@ -304,6 +304,33 @@ class SearchTest(unittest.TestCase):
             self.assertIn(profile, data["sameAs"])
         self.assertTrue((ROOT / data["image"][len(SITE_URL):]).is_file())
 
+    def test_sitemap_lists_every_public_page(self):
+        # Each published page that search engines may index, by its canonical address; noindex pages stay out.
+        import xml.etree.ElementTree as ET
+        listed = [loc.text for loc in ET.parse(ROOT / "sitemap.xml").iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+        public = []
+        for page in sorted(ROOT.glob("*.html")):
+            html = page.read_text(encoding="utf-8")
+            if '<meta name="robots" content="noindex">' not in html:
+                public.append(re.search(r'<link rel="canonical" href="([^"]+)">', html).group(1))
+        self.assertEqual(sorted(listed), sorted(public))
+
+    def test_featured_projects_are_described_for_search(self):
+        # The profile's structured data names each Featured card, with the same hook, demo and source.
+        import html as htmllib, json
+        html = INDEX.read_text(encoding="utf-8")
+        blocks = [json.loads(b) for b in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)]
+        listed = [e["item"] for b in blocks if b.get("@type") == "ItemList" for e in b["itemListElement"]]
+        sec = html[html.index('<section id="featured"'):]
+        cards = re.findall(r'<article class="project".*?</article>', sec[:sec.index("</section>")], flags=re.S)
+        self.assertEqual(len(listed), len(cards))
+        for item, card in zip(listed, cards):
+            with self.subTest(project=item["name"]):
+                self.assertEqual(item["name"], htmllib.unescape(re.search(r"<h3>(.*?)</h3>", card).group(1)))
+                self.assertEqual(item["description"], htmllib.unescape(re.search(r"</h3>\s*<p>(.*?)</p>", card, re.S).group(1)))
+                self.assertIn(f'<a href="{item["url"]}">Live demo', card)
+                self.assertIn(f'<a href="{item["codeRepository"]}">Source', card)
+
 
 class ShareTagsTest(unittest.TestCase):
     """Every published page gives a title, summary and image when its link is shared."""
