@@ -1,5 +1,5 @@
 """Draws the site's illustrations as SVGs in images/: the four research entries
-(1280x720) and the Reward Hack Zoo project card (1400x875).
+(1280x720).
 
 Run from the repo root after changing a drawing:
   python3 tools/draw-research-art.py
@@ -401,59 +401,7 @@ def brain_emd():
     return svg("".join(b))
 
 
-# ---------------------------------------------------------------- Reward Hack Zoo (project card)
-def reward_hack_zoo():
-    """Proxy reward keeps climbing while the true score falls: the shape the zoo looks for."""
-    w, h = 1400, 875
-    rng = random.Random(11)
-    b = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">'
-         f'<rect width="{w}" height="{h}" fill="{PAPER}"/>']
-    x0, x1, y0, y1 = 150, 1300, 120, 600  # plot box: left, right, top, bottom
-    X = lambda t: x0 + (x1 - x0) * t
-    Y = lambda v: y1 - (y1 - y0) * v
-    b.append(f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" fill="#fff" stroke="#d8d3c6" stroke-width="2"/>')
-    for v in (0.25, 0.5, 0.75):
-        b.append(f'<line x1="{x0}" y1="{Y(v):.0f}" x2="{x1}" y2="{Y(v):.0f}" stroke="#ece8df" stroke-width="2"/>')
-    mono = 'font-family="Menlo,monospace"'
-    b.append(f'<text x="{(x0 + x1) / 2:.0f}" y="{y1 + 52}" {mono} font-size="24" fill="#5f5c55" text-anchor="middle">training step</text>')
-
-    onset = 0.42
-    proxy, true = [], []
-    for i in range(61):
-        t = i / 60
-        p = 0.55 + 0.40 / (1 + math.exp(-(t - 0.45) * 9)) + rng.uniform(-0.012, 0.012)
-        q = 0.62 + 0.06 * min(t / onset, 1) - (0.5 * ((t - onset) / (1 - onset)) ** 1.3 if t > onset else 0) + rng.uniform(-0.012, 0.012)
-        proxy.append((X(t), Y(p)))
-        true.append((X(t), Y(q)))
-    # The gap after onset, shaded.
-    k = int(onset * 60)
-    gap = proxy[k:] + true[k:][::-1]
-    b.append('<polygon points="' + " ".join(f"{x:.1f},{y:.1f}" for x, y in gap) + f'" fill="{WARM}" opacity="0.10"/>')
-    b.append(f'<line x1="{X(onset):.0f}" y1="{y0}" x2="{X(onset):.0f}" y2="{y1}" stroke="{INK}" stroke-width="2.5" stroke-dasharray="10 9"/>')
-    b.append(f'<rect x="{X(onset) - 118:.0f}" y="{y0 + 18}" width="236" height="40" rx="6" fill="{INK}"/>'
-             f'<text x="{X(onset):.0f}" y="{y0 + 45}" {mono} font-size="21" fill="#fff" text-anchor="middle">hacking starts</text>')
-    for pts, col in ((true, BLUE), (proxy, WARM)):
-        b.append('<polyline points="' + " ".join(f"{x:.1f},{y:.1f}" for x, y in pts) + f'" fill="none" stroke="{col}" '
-                 f'stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>')
-    b.append(f'<text x="{x1 - 16}" y="{proxy[-1][1] - 22:.0f}" {mono} font-size="24" fill="{WARM}" text-anchor="end">proxy reward</text>'
-             f'<text x="{x1 - 16}" y="{true[-1][1] + 44:.0f}" {mono} font-size="24" fill="{BLUE}" text-anchor="end">true score</text>')
-
-    # The five environments, coloured by family as on the project's demo page.
-    envs = (("Length Bias", "#b7791f"), ("Keyword Stuffing", "#d69e2e"), ("Sycophancy", "#6b46c1"),
-            ("Self-Grading", "#9f7aea"), ("Test Special-Casing", "#2f855a"))
-    widths = [len(n) * 15 + 44 for n, _ in envs]
-    gapx = 18
-    x = (w - (sum(widths) + gapx * (len(envs) - 1))) / 2
-    for (name, col), bw in zip(envs, widths):
-        b.append(f'<rect x="{x:.0f}" y="712" width="{bw}" height="56" rx="28" fill="#fff" stroke="{col}" stroke-width="3"/>'
-                 f'<circle cx="{x + 26:.0f}" cy="740" r="8" fill="{col}"/>'
-                 f'<text x="{x + 42:.0f}" y="748" {mono} font-size="22" fill="{INK}">{name}</text>')
-        x += bw + gapx
-    b.append('</svg>')
-    return "".join(b)
-
-
-DRAWINGS = (("robot-soccer", robot_soccer), ("physicsai", physicsai), ("vip-lab", vip_lab), ("brain-emd", brain_emd), ("reward-hack-zoo", reward_hack_zoo))
+DRAWINGS = (("robot-soccer", robot_soccer), ("physicsai", physicsai), ("vip-lab", vip_lab), ("brain-emd", brain_emd))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in DRAWINGS:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:

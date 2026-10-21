@@ -39,7 +39,7 @@ resume/
   Amal Mehta Resume.pdf       Built resume, linked from the site
 tools/
   make-images.sh              Builds the WebP posters and portrait AVIF/WebP from the JPEGs in images/
-  draw-research-art.py        Draws the research-entry and Reward Hack Zoo SVGs in images/
+  draw-research-art.py        Draws the research-entry SVGs in images/
   draw-places.py              Draws the Travel page's place drawings in images/places/
   check-links.py              Checks the site's external links (run weekly on GitHub)
   make-feed.py                Builds feed.xml (RSS for Things I'm thinking about) from thinking.html

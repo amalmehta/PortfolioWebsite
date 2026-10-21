@@ -173,13 +173,13 @@
     <section id="projects" class="wrap section">
       <h2 class="section-title">Selected projects</h2>
 
-      <article class="project" id="neural-signal-ml">
-        <figure class="shot contain"><picture><source type="image/avif" srcset="images/neural-signal-ml-960.avif"><img src="images/neural-signal-ml-960.webp" alt="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)" loading="lazy" width="960" height="351"></picture></figure>
+      <article class="project" id="unverifiable-rewards">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/unverifiable-rewards-960.avif"><img src="images/unverifiable-rewards-960.webp" alt="Rewarding What You Can’t Verify, Figure 1: during GRPO the share of programs passing the visible checks climbs to 58% while the share actually correct falls to 2%, with the gap shaded as false success" loading="lazy" width="960" height="604"></picture></figure>
         <div class="project-text">
-          <h3>Neural Signal ML</h3>
-          <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter. It also decodes imagined movements from EEG, where a classic CSP + LDA model (63.9% on a held-out day) edges out EEGNet (62.3%), and comes with a Mac app for viewing the recordings.</p>
-          <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">Motor cortex</span> <span class="chip">EEG</span> <span class="chip">Kalman filter vs GRU</span> <span class="chip">PyTorch</span></p>
-          <p class="links"><a href="https://github.com/amalmehta/NeuralSignalML">Code and write-up →</a></p>
+          <h3>Rewarding What You Can’t Verify</h3>
+          <p>A research program on post-training long-horizon code agents when the checks you can run are narrower than correctness. In the pilot, an agent trained against visible tests alone learns to delete 98% of the code branches no test reaches: its pass rate climbs while real correctness falls from 31% to 2%. Auditing a random 25% of episodes with a hidden check prevents it. I then pre-registered 50 harder questions, each with a prediction and a kill criterion: 21 were supported, 15 refuted, 12 mixed and 2 deferred. It grew out of Reward Hack Zoo, five small post-training environments whose naive rewards a model can game, from length bias to self-grading.</p>
+          <p class="tags"><span class="chip">Reward hacking</span> <span class="chip">GRPO</span> <span class="chip">Code agents</span> <span class="chip">Pre-registered experiments</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/long_term_horizon_planning/">Read the proposal and results →</a></p>
         </div>
       </article>
 
@@ -203,23 +203,13 @@
         </div>
       </article>
 
-      <article class="project" id="reward-hack-zoo">
-        <figure class="shot"><img src="images/reward-hack-zoo.svg" alt="Drawing: over training, proxy reward keeps climbing while the true score falls, with the step where hacking starts marked; below, the five environments" loading="lazy" width="1400" height="875"></figure>
+      <article class="project" id="neural-signal-ml">
+        <figure class="shot contain"><picture><source type="image/avif" srcset="images/neural-signal-ml-960.avif"><img src="images/neural-signal-ml-960.webp" alt="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)" loading="lazy" width="960" height="351"></picture></figure>
         <div class="project-text">
-          <h3>Reward Hack Zoo</h3>
-          <p>Five tiny post-training environments, each with a naive reward a model can game: length bias, sycophancy, test special-casing, keyword stuffing and self-grading. A 135M-parameter model is trained on each with RL and rejection-sampling SFT, to mark the step where the reward it chases pulls away from the score that actually matters. Early runs are in for three of the five, and the first plot, for length bias, is done.</p>
-          <p class="tags"><span class="chip">Reward hacking</span> <span class="chip">Post-training</span> <span class="chip">GRPO</span> <span class="chip">Evals</span></p>
-          <p class="links private">Code not public yet</p>
-        </div>
-      </article>
-
-      <article class="project" id="unverifiable-rewards">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/unverifiable-rewards-960.avif"><img src="images/unverifiable-rewards-960.webp" alt="Rewarding What You Can’t Verify, Figure 1: during GRPO the share of programs passing the visible checks climbs to 58% while the share actually correct falls to 2%, with the gap shaded as false success" loading="lazy" width="960" height="604"></picture></figure>
-        <div class="project-text">
-          <h3>Rewarding What You Can’t Verify</h3>
-          <p>A research program on post-training long-horizon code agents when the checks you can run are narrower than correctness. In the pilot, an agent trained against visible tests alone learns to delete 98% of the code branches no test reaches: its pass rate climbs while real correctness falls from 31% to 2%. Auditing a random 25% of episodes with a hidden check prevents it. I then pre-registered 50 harder questions, each with a prediction and a kill criterion: 21 were supported, 15 refuted, 12 mixed and 2 deferred.</p>
-          <p class="tags"><span class="chip">Reward hacking</span> <span class="chip">GRPO</span> <span class="chip">Code agents</span> <span class="chip">Pre-registered experiments</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/long_term_horizon_planning/">Read the proposal and results →</a></p>
+          <h3>Neural Signal ML</h3>
+          <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter. It also decodes imagined movements from EEG, where a classic CSP + LDA model (63.9% on a held-out day) edges out EEGNet (62.3%), and comes with a Mac app for viewing the recordings.</p>
+          <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">Motor cortex</span> <span class="chip">EEG</span> <span class="chip">Kalman filter vs GRU</span> <span class="chip">PyTorch</span></p>
+          <p class="links"><a href="https://github.com/amalmehta/NeuralSignalML">Code and write-up →</a></p>
         </div>
       </article>
 
@@ -292,9 +282,6 @@
           <p class="links"><a href="https://amalmehta.github.io/DistributedTraining/">See how each split works →</a></p>
         </div>
       </article>
-
-
-
 
       <article class="project" id="neuroimaging-platform">
         <figure class="shot"><picture><source type="image/avif" srcset="images/neuroimaging-960.avif"><img src="images/neuroimaging-960.webp" alt="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp" loading="lazy" width="960" height="673"></picture></figure>
@@ -411,15 +398,6 @@
         </div>
       </article>
 
-      <article class="project" id="sports-pred">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/sports-pred-960.avif"><img src="images/sports-pred-960.webp" alt="Sports Pred: a grid of competitions, each with its favourite and their chance to win, such as Bayern Munich at 85% in the Bundesliga" loading="lazy" width="960" height="653"></picture></figure>
-        <div class="project-text">
-          <h3>Sports Pred</h3>
-          <p>Live title odds for soccer leagues and tennis tournaments, refreshed every three hours: Elo ratings built from past results feed 10,000 simulated seasons and draws for each competition. Covers Europe’s top leagues, the Champions League and the Grand Slams, as a website and a Mac app.</p>
-          <p class="tags"><span class="chip">Elo ratings</span> <span class="chip">Monte Carlo simulation</span> <span class="chip">Live data</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/SportsPred/">See today’s odds →</a></p>
-        </div>
-      </article>
     </section>
 
     <section id="writeups" class="wrap section">
