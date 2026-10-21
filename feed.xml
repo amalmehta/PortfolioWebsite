@@ -11,7 +11,7 @@
       <link>https://amalmehta.github.io/PortfolioWebsite/thinking.html#tools-for-anyone</link>
       <guid>https://amalmehta.github.io/PortfolioWebsite/thinking.html#tools-for-anyone</guid>
       <pubDate>Sun, 11 Oct 2026 12:00:00 +0000</pubDate>
-      <description>The best tools shrink the distance between wanting to do something and being able to: spreadsheets let anyone model, phones let anyone film. AI and robots could close that distance for almost anything, from writing software to running an experiment to making a physical thing. The hard parts are keeping people in charge of what they’re making, having the tool understand what they mean rather than only what they said, and making it work the first time for someone who isn’t an expert. A few of my projects, like a webcam coach for sport technique and a Mac app for brain scans, were small tries at this.</description>
+      <description>The best tools shrink the distance between wanting to do something and being able to: spreadsheets let anyone model, phones let anyone film. AI and robots could close that distance for almost anything, from writing software to running an experiment to making a physical thing. The hard parts are keeping people in charge of what they’re making, having the tool understand what they mean rather than only what they said, and making it work the first time for someone who isn’t an expert. A few of my projects are small tries at this, like a 3D viewer that takes any object apart, a course on how language models are trained, and a webcam coach for sport technique.</description>
     </item>
     <item>
       <title>How do we build tools that help people escape inequity?</title>
@@ -25,7 +25,7 @@
       <link>https://amalmehta.github.io/PortfolioWebsite/thinking.html#brains-and-robots</link>
       <guid>https://amalmehta.github.io/PortfolioWebsite/thinking.html#brains-and-robots</guid>
       <pubDate>Sun, 11 Oct 2026 12:00:00 +0000</pubDate>
-      <description>Animals pick up new movements from a handful of tries, keep perceiving while they act, and correct themselves mid-motion. Most robot learning still leans on huge amounts of data and separate stages for seeing, planning and moving. Sensorimotor AI asks what changes if perception and action are learned together, as one loop. It’s the thread running through the Sensorimotor AI journal club at Berkeley’s Redwood Center and through my own work decoding hand movement from motor-cortex spikes. I want to know which of the brain’s tricks (prediction, fast feedback, learning from little) actually carry over to agents, and which are just biology.</description>
+      <description>Animals pick up new movements from a handful of tries, keep perceiving while they act, and correct themselves mid-motion. Most robot learning still leans on huge amounts of data and separate stages for seeing, planning and moving. Sensorimotor AI asks what changes if perception and action are learned together, as one loop. It’s the thread running through the Sensorimotor AI journal club at Berkeley’s Redwood Center and through my own work building brain–computer interfaces and decoding hand movement from motor-cortex spikes. I want to know which of the brain’s tricks (prediction, fast feedback, learning from little) actually carry over to agents, and which are just biology.</description>
     </item>
     <item>
       <title>Where do vision-language-action models meet physical intelligence?</title>

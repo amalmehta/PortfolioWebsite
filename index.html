@@ -11,14 +11,14 @@
   <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta name="description" content="Amal Mehta, research engineer in reinforcement learning and robotics: AI that learns from experience and holds up in the real world, from robots to brain decoding. Research, projects and apps.">
+  <meta name="description" content="Amal Mehta, research engineer in reinforcement learning and robotics: AI that learns from experience and holds up in the real world, from robots and language models to brain decoding. Research, projects and apps.">
   <link rel="alternate" type="application/rss+xml" title="Things I’m thinking about" href="feed.xml">
   <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Amal Mehta">
   <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/">
   <meta property="og:title" content="Amal Mehta · RL and robotics">
-  <meta property="og:description" content="Research engineer in reinforcement learning and robotics: AI that learns from experience and holds up in the real world, from robots to brain decoding.">
+  <meta property="og:description" content="Research engineer in reinforcement learning and robotics: AI that learns from experience and holds up in the real world, from robots and language models to brain decoding.">
   <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
     "@type": "Person",
     "name": "Amal Mehta",
     "jobTitle": "Research engineer",
-    "description": "Research engineer in reinforcement learning and robotics. I build AI that learns from experience and holds up in the real world, from robots trained in simulation to models that decode the brain.",
+    "description": "Research engineer in reinforcement learning and robotics. I build AI that learns from experience and holds up in the real world, from robots trained in simulation and language models post-trained with RL to models that decode the brain.",
     "url": "https://amalmehta.github.io/PortfolioWebsite/",
     "image": "https://amalmehta.github.io/PortfolioWebsite/images/portrait.jpg",
     "address": {
@@ -51,7 +51,10 @@
       "Sensorimotor AI",
       "Deep learning",
       "Sim-to-real transfer",
-      "Neural decoding"
+      "Neural decoding",
+      "Post-training",
+      "Reward hacking",
+      "Brain–computer interfaces"
     ],
     "sameAs": [
       "https://www.linkedin.com/in/amal-mehta-264413a9/"
@@ -91,7 +94,7 @@
       <picture><source type="image/avif" srcset="images/portrait-240.avif 240w, images/portrait-480.avif 480w" sizes="(min-width: 820px) 220px, 120px"><source type="image/webp" srcset="images/portrait-240.webp 240w, images/portrait-480.webp 480w" sizes="(min-width: 820px) 220px, 120px"><img class="portrait" src="images/portrait.jpg" fetchpriority="high" alt="Pencil-sketch portrait of Amal Mehta" width="480" height="480"></picture>
       <div class="hero-text">
       <h1>Amal Mehta</h1>
-      <p class="lede">Research engineer in reinforcement learning and robotics. I build AI that learns from experience and holds up in the real world, from robots trained in simulation to models that decode the brain.</p>
+      <p class="lede">Research engineer in reinforcement learning and robotics. I build AI that learns from experience and holds up in the real world, from robots trained in simulation and language models post-trained with RL to models that decode the brain.</p>
       <p class="hero-sub">Six years of applied deep learning, from generative models and vision to control. I work on learning from little data and adapting quickly to new settings. Based in the San Francisco Bay Area, and a world builder and storyteller at heart.</p>
       <p class="hello">Hi! I’d love to hear from you, about anything :) <a href="https://reachouts.me/?u=amal">Get in touch →</a></p>
       <ul class="contact">
@@ -308,13 +311,23 @@
     <section id="products" class="wrap section compact">
       <h2 class="section-title">Products</h2>
 
-      <article class="project" id="paper-to-playground">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/paper-playground-960.avif"><img src="images/paper-playground-960.webp" alt="Paper to Playground: a demo of the Adam paper, with sliders for loss scale and step sizes beside plots of Adam and SGD with momentum crossing a loss valley" loading="lazy" width="960" height="641"></picture></figure>
+      <article class="project" id="llm-understander">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/llm-understander-960.avif"><img src="images/llm-understander-960.webp" alt="LLM Understander: the Transformer Block chapter, with a diagram of one block (layer norm, multi-head attention, MLP and residual connections) beside the list of 18 chapters" loading="lazy" width="960" height="639"></picture></figure>
         <div class="project-text">
-          <h3>Paper to Playground</h3>
-          <p>Paste an arXiv link and get a small, runnable demo of the paper’s core idea: a page of sliders over a NumPy or PyTorch backend. A language model writes the first draft, the app runs, type-checks and lints it until it passes, and you refine it by hand.</p>
-          <p class="tags"><span class="chip">Mac app</span> <span class="chip">Electron</span> <span class="chip">TypeScript</span> <span class="chip">Next.js</span> <span class="chip">LLM agents</span></p>
-          <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
+          <h3>LLM Understander</h3>
+          <p>How a large language model is trained, from tokens to RLHF, and how it becomes an agent inside a harness, in 18 chapters. Every visualization is driven by a real tiny transformer that trains as you read, in your browser or on your Mac.</p>
+          <p class="tags"><span class="chip">Transformers</span> <span class="chip">Post-training</span> <span class="chip">Agents</span> <span class="chip">Website + Mac app</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/LLMUnderstander/">Start reading →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="system-design-oracle">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/system-design-oracle-960.avif"><img src="images/system-design-oracle-960.webp" alt="System Design Oracle: the design problem Trajectory Prediction for an Autonomous Vehicle at depth 2, with the list of design problems and topics beside it" loading="lazy" width="960" height="600"></picture></figure>
+        <div class="project-text">
+          <h3>System Design Oracle</h3>
+          <p>Learn system design across the stack: 56 topics in 10 areas, from operating systems and GPUs to serving LLMs and self-driving cars, plus 10 worked design problems, such as pre-training a 70B LLM on 2,000 GPUs. Every page reads at four depths, from a one-sentence gist down to failure modes, real systems and interview questions.</p>
+          <p class="tags"><span class="chip">System design</span> <span class="chip">ML infrastructure</span> <span class="chip">Website + Mac app</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/SystemDesignOracle/">Start learning →</a></p>
         </div>
       </article>
 
@@ -338,16 +351,6 @@
         </div>
       </article>
 
-      <article class="project" id="llm-understander">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/llm-understander-960.avif"><img src="images/llm-understander-960.webp" alt="LLM Understander: the Transformer Block chapter, with a diagram of one block (layer norm, multi-head attention, MLP and residual connections) beside the list of 18 chapters" loading="lazy" width="960" height="639"></picture></figure>
-        <div class="project-text">
-          <h3>LLM Understander</h3>
-          <p>How a large language model is trained, from tokens to RLHF, and how it becomes an agent inside a harness, in 18 chapters. Every visualization is driven by a real tiny transformer that trains as you read, in your browser or on your Mac.</p>
-          <p class="tags"><span class="chip">Transformers</span> <span class="chip">Post-training</span> <span class="chip">Agents</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/LLMUnderstander/">Start reading →</a></p>
-        </div>
-      </article>
-
       <article class="project" id="take-it-apart">
         <figure class="shot"><picture><source type="image/avif" srcset="images/take-it-apart-960.avif"><img src="images/take-it-apart-960.webp" alt="Take It Apart: a jet engine taken apart in 3D, with the nacelle cowls opened above and below, the fan at the front and the compressor and turbine stages spread along the shafts" loading="lazy" width="960" height="617"></picture></figure>
         <div class="project-text">
@@ -368,26 +371,6 @@
         </div>
       </article>
 
-      <article class="project" id="path-finder">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/path-finder-960.avif"><img src="images/path-finder-960.webp" alt="Path Finder: the Where you should go feed, recommending Hokkaido with its taste tags (snow, empty, onsen, quiet), best months, trip length and budget, and buttons to plan the trip, pin it or say not for me" loading="lazy" width="960" height="564"></picture></figure>
-        <div class="project-text">
-          <h3>Path Finder</h3>
-          <p>A trip advisor that starts from what you listen to, watch and read rather than from a map. It reads your taste in music, film and books, then scrolls you destinations argued from it, each naming the thing of yours it draws on. Before planning, it asks what the trip is for, then writes a day-by-day itinerary with what to book, real costs and packing, and learns from a log of the trips you’ve taken.</p>
-          <p class="tags"><span class="chip">Recommendations</span> <span class="chip">LLM agents</span> <span class="chip">Node</span> <span class="chip">Mac app (Electron)</span></p>
-          <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="system-design-oracle">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/system-design-oracle-960.avif"><img src="images/system-design-oracle-960.webp" alt="System Design Oracle: the design problem Trajectory Prediction for an Autonomous Vehicle at depth 2, with the list of design problems and topics beside it" loading="lazy" width="960" height="600"></picture></figure>
-        <div class="project-text">
-          <h3>System Design Oracle</h3>
-          <p>Learn system design across the stack: 56 topics in 10 areas, from operating systems and GPUs to serving LLMs and self-driving cars, plus 10 worked design problems, such as pre-training a 70B LLM on 2,000 GPUs. Every page reads at four depths, from a one-sentence gist down to failure modes, real systems and interview questions.</p>
-          <p class="tags"><span class="chip">System design</span> <span class="chip">ML infrastructure</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/SystemDesignOracle/">Start learning →</a></p>
-        </div>
-      </article>
-
       <article class="project" id="ai-advances">
         <figure class="shot"><picture><source type="image/avif" srcset="images/ai-advances-960.avif"><img src="images/ai-advances-960.webp" alt="AI Advances: the Forecasts page, with a written outlook and a timeline of dated predictions, such as when benchmarks reach 90% and when AI handles tasks taking a full work-week" loading="lazy" width="960" height="645"></picture></figure>
         <div class="project-text">
@@ -405,6 +388,26 @@
           <p>Where should an AI data center get its power? Set your load, deadline and US region, and it ranks eleven power options by cost, carbon, speed to power and reliability. Every figure links to one of 47 public sources, such as Lazard, the EIA and NREL.</p>
           <p class="tags"><span class="chip">AI infrastructure</span> <span class="chip">Sourced data</span> <span class="chip">Decision tool</span></p>
           <p class="links"><a href="https://amalmehta.github.io/EnergyForAI/">Rank the options →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="path-finder">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/path-finder-960.avif"><img src="images/path-finder-960.webp" alt="Path Finder: the Where you should go feed, recommending Hokkaido with its taste tags (snow, empty, onsen, quiet), best months, trip length and budget, and buttons to plan the trip, pin it or say not for me" loading="lazy" width="960" height="564"></picture></figure>
+        <div class="project-text">
+          <h3>Path Finder</h3>
+          <p>A trip advisor that starts from what you listen to, watch and read rather than from a map. It reads your taste in music, film and books, then scrolls you destinations argued from it, each naming the thing of yours it draws on. Before planning, it asks what the trip is for, then writes a day-by-day itinerary with what to book, real costs and packing, and learns from a log of the trips you’ve taken.</p>
+          <p class="tags"><span class="chip">Recommendations</span> <span class="chip">LLM agents</span> <span class="chip">Node</span> <span class="chip">Mac app (Electron)</span></p>
+          <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="paper-to-playground">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/paper-playground-960.avif"><img src="images/paper-playground-960.webp" alt="Paper to Playground: a demo of the Adam paper, with sliders for loss scale and step sizes beside plots of Adam and SGD with momentum crossing a loss valley" loading="lazy" width="960" height="641"></picture></figure>
+        <div class="project-text">
+          <h3>Paper to Playground</h3>
+          <p>Paste an arXiv link and get a small, runnable demo of the paper’s core idea: a page of sliders over a NumPy or PyTorch backend. A language model writes the first draft, the app runs, type-checks and lints it until it passes, and you refine it by hand.</p>
+          <p class="tags"><span class="chip">Mac app</span> <span class="chip">Electron</span> <span class="chip">TypeScript</span> <span class="chip">Next.js</span> <span class="chip">LLM agents</span></p>
+          <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
         </div>
       </article>
 
