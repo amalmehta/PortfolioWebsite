@@ -121,6 +121,9 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .featured .project-text h3 + p { font-family: var(--serif); font-size: 1.12rem; line-height: 1.5; }
 .featured .links { display: flex; flex-wrap: wrap; gap: 0.2rem 1.25rem; }
 .featured + .more { margin-top: 2.5rem; }
+/* The image opens the live demo too; the text link is the one for keyboards and screen readers. */
+.shot-link { display: contents; }
+.shot:has(.shot-link) img { cursor: pointer; }
 /* More projects: one compact line each, two columns on wide screens, no pictures. */
 .minis { list-style: none; padding: 0; margin: 0; display: grid; column-gap: 2rem; }
 @media (min-width: 720px) { .minis { grid-template-columns: 1fr 1fr; } }
