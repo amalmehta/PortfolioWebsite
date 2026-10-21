@@ -213,6 +213,16 @@
         </div>
       </article>
 
+      <article class="project" id="unverifiable-rewards">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/unverifiable-rewards-960.avif"><img src="images/unverifiable-rewards-960.webp" alt="Rewarding What You Can’t Verify, Figure 1: during GRPO the share of programs passing the visible checks climbs to 58% while the share actually correct falls to 2%, with the gap shaded as false success" loading="lazy" width="960" height="604"></picture></figure>
+        <div class="project-text">
+          <h3>Rewarding What You Can’t Verify</h3>
+          <p>A research program on post-training long-horizon code agents when the checks you can run are narrower than correctness. In the pilot, an agent trained against visible tests alone learns to delete 98% of the code branches no test reaches: its pass rate climbs while real correctness falls from 31% to 2%. Auditing a random 25% of episodes with a hidden check prevents it. I then pre-registered 50 harder questions, each with a prediction and a kill criterion: 21 were supported, 15 refuted, 12 mixed and 2 deferred.</p>
+          <p class="tags"><span class="chip">Reward hacking</span> <span class="chip">GRPO</span> <span class="chip">Code agents</span> <span class="chip">Pre-registered experiments</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/long_term_horizon_planning/">Read the proposal and results →</a></p>
+        </div>
+      </article>
+
       <article class="project" id="rl-init-stability">
         <figure class="shot"><picture><source type="image/avif" srcset="images/rl-init-stability-960.avif"><img src="images/rl-init-stability-960.webp" alt="RL Init and Stability: the live lab training PPO on CartPole with four initialization schemes, with charts of return, entropy, gradient norm, weight norm, and dormant and saturated units" loading="lazy" width="960" height="674"></picture></figure>
         <div class="project-text">
@@ -253,11 +263,21 @@
         </div>
       </article>
 
+      <article class="project" id="mehta-learning">
+        <figure class="shot contain"><picture><source type="image/avif" srcset="images/mehta-learning-960.avif"><img src="images/mehta-learning-960.webp" alt="MEHTA Learning: return against post-training steps on in-distribution goals, out-of-distribution goals and shifted dynamics, for MEHTA, PEARL alone, PEARL with naive fine-tuning and first-order MAML" loading="lazy" width="960" height="259"></picture></figure>
+        <div class="project-text">
+          <h3>MEHTA Learning</h3>
+          <p>A meta-RL method for post-training: PEARL’s latent task inference combined with a long-horizon MAML update, tested on goals and dynamics the agent never trained on. Inferring the task and then post-training clearly beats either alone. The new MAML update showed no measurable gain over plain fine-tuning at this scale, and long sparse episodes failed for every method; the write-up says both plainly.</p>
+          <p class="tags"><span class="chip">Meta-RL</span> <span class="chip">PEARL</span> <span class="chip">MAML</span> <span class="chip">Post-training</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/MEHTAlearning/">Try the demo →</a></p>
+        </div>
+      </article>
+
       <article class="project" id="autonomous-driving-sim">
         <figure class="shot"><picture><source type="image/avif" srcset="images/driving-sim-960.avif"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a chase view of the car on a city street with lidar points, boxes around tracked vehicles and its planned path, beside live stats for each stage of the stack and the RL speed policy’s learning curve" loading="lazy" width="960" height="600"></picture></figure>
         <div class="project-text">
           <h3>Autonomous Driving Sim</h3>
-          <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations.</p>
+          <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations. A companion tool, Disengagement Diary, runs the stack over generated edge cases such as jaywalkers, hidden merges and sensor dropouts, and groups every failure into a searchable report.</p>
           <p class="tags"><span class="chip">Perception</span> <span class="chip">Planning</span> <span class="chip">RL with a safety validator</span></p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
         </div>
@@ -321,6 +341,16 @@
         </div>
       </article>
 
+      <article class="project" id="autoresearch">
+        <figure class="shot contain"><picture><source type="image/avif" srcset="images/autoresearch-960.avif"><img src="images/autoresearch-960.webp" alt="My Autoresearch: an example run of 8 experiments, 3 kept, taking validation loss from 0.0288 to 0.0031, with each kept change labelled, such as replacing SGD with Adam" loading="lazy" width="960" height="460"></picture></figure>
+        <div class="project-text">
+          <h3>My Autoresearch</h3>
+          <p>Point it at any git repo and a metric. Claude Code changes the code one experiment at a time, the harness runs your benchmark, and only changes that improve the metric are kept, each as its own commit, with a report at the end. My take on Karpathy’s autoresearch, made to work on any project.</p>
+          <p class="tags"><span class="chip">AI agents</span> <span class="chip">Claude Code</span> <span class="chip">Experiment automation</span></p>
+          <p class="links"><a href="https://github.com/amalmehta/MyAutoresearch">Get the tool →</a></p>
+        </div>
+      </article>
+
       <article class="project" id="llm-understander">
         <figure class="shot"><picture><source type="image/avif" srcset="images/llm-understander-960.avif"><img src="images/llm-understander-960.webp" alt="LLM Understander: the Transformer Block chapter, with a diagram of one block (layer norm, multi-head attention, MLP and residual connections) beside the list of 18 chapters" loading="lazy" width="960" height="639"></picture></figure>
         <div class="project-text">
@@ -368,6 +398,16 @@
           <p>Tracks where AI is heading: new model releases, what each lab is working on, and long-run trends in capability, cost, context and compute, turned into dated forecasts that recompute as new data arrives. The site rebuilds every morning, and each day’s forecasts are logged so you can watch them move.</p>
           <p class="tags"><span class="chip">Forecasting</span> <span class="chip">Live data</span> <span class="chip">Website + Mac app</span></p>
           <p class="links"><a href="https://amalmehta.github.io/ai-advances/">See today’s forecasts →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="energy-for-ai">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/energy-for-ai-960.avif"><img src="images/energy-for-ai-960.webp" alt="Energy for AI: a chart of cost per megawatt-hour against years to power, with the top three options for a 2029 deadline highlighted: gas engines and aero turbines, existing nuclear, and fuel cells" loading="lazy" width="960" height="590"></picture></figure>
+        <div class="project-text">
+          <h3>Energy for AI</h3>
+          <p>Where should an AI data center get its power? Set your load, deadline and US region, and it ranks eleven power options by cost, carbon, speed to power and reliability. Every figure links to one of 47 public sources, such as Lazard, the EIA and NREL.</p>
+          <p class="tags"><span class="chip">AI infrastructure</span> <span class="chip">Sourced data</span> <span class="chip">Decision tool</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/EnergyForAI/">Rank the options →</a></p>
         </div>
       </article>
 
