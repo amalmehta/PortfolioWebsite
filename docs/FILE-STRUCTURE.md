@@ -29,6 +29,7 @@ images/                       Project screenshots (and their WebP copies the car
   portrait.jpg                Pencil-sketch portrait in the intro (served as portrait-240/-480 AVIF and WebP)
   og.png                      Link-preview image for the profile (1200×630)
   og-interests.png, og-travel.png, og-thinking.png, og-values.png   Link previews for the other pages
+  og-default.png              Fallback link preview (name and tagline) for pages without their own: writings.html, 404.html
   apple-touch-icon.png        Home-screen icon (180×180)
   favicon-32.png              PNG copy of the tab icon, for browsers without SVG icons
   <project>.jpg               Full-size screenshot per project (the source for its poster)

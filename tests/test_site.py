@@ -299,8 +299,37 @@ class SearchTest(unittest.TestCase):
         html = INDEX.read_text(encoding="utf-8")
         data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1))
         self.assertEqual((data["@type"], data["name"]), ("Person", "Amal Mehta"))
-        self.assertIn("https://www.linkedin.com/in/amal-mehta-264413a9/", data["sameAs"])
+        self.assertEqual(data["url"], SITE_URL)
+        for profile in ("https://github.com/amalmehta", "https://www.linkedin.com/in/amal-mehta-264413a9/"):
+            self.assertIn(profile, data["sameAs"])
         self.assertTrue((ROOT / data["image"][len(SITE_URL):]).is_file())
+
+
+class ShareTagsTest(unittest.TestCase):
+    """Every published page gives a title, summary and image when its link is shared."""
+
+    def published_pages(self):
+        # Pages skips folders starting with _ (and dotfolders), so those aren't published.
+        pages = [p for p in ROOT.rglob("*.html")
+                 if not any(part.startswith(("_", ".")) for part in p.relative_to(ROOT).parts)]
+        self.assertTrue(pages)
+        return sorted(pages)
+
+    def test_every_page_has_share_tags(self):
+        for path in self.published_pages():
+            name = str(path.relative_to(ROOT))
+            with self.subTest(page=name):
+                page = parse(path)
+                html = path.read_text(encoding="utf-8")
+                for key in ("og:title", "og:description", "og:image", "og:url", "og:type", "description"):
+                    self.assertTrue(page.metas.get(key), f"missing {key}")
+                self.assertEqual(page.metas.get("twitter:card"), "summary_large_image")
+                canon = re.search(r'<link rel="canonical" href="([^"]+)">', html)
+                self.assertTrue(canon, "missing canonical link")
+                self.assertEqual(canon.group(1), page.metas["og:url"])
+                og = page.metas["og:image"]
+                self.assertTrue(og.startswith(SITE_URL), og)
+                self.assertEqual(image_size(ROOT / og[len(SITE_URL):]), (1200, 630))
 
 
 class EmailTest(unittest.TestCase):
