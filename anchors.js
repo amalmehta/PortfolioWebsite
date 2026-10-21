@@ -1,7 +1,7 @@
 // Profile and Things I'm thinking about: a small "#" beside each entry's heading. It shows on
 // hover or focus; clicking it puts that entry's address in the address bar and on the clipboard.
 (() => {
-  document.querySelectorAll(".project[id] > div > h3, .role[id] > div > h3, .thought[id] > h2").forEach(h => {
+  document.querySelectorAll(".project[id] > div > h3, .role[id] > div > h3, .mini[id] > h3, .thought[id] > h2").forEach(h => {
     const id = h.closest("[id]").id;
     const link = document.createElement("a");
     link.className = "anchor";

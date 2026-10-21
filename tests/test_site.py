@@ -424,14 +424,37 @@ class MediaTest(unittest.TestCase):
 
 
 class ProjectsTest(unittest.TestCase):
-    def test_eight_projects_and_nine_products(self):
-        # Cards are split across two sections: Selected projects and Products.
+    def section(self, section_id):
+        html = re.sub(r"<!--.*?-->", "", INDEX.read_text(encoding="utf-8"), flags=re.S)
+        sec = html[html.index(f'<section id="{section_id}"'):]
+        return sec[:sec.index("</section>")]
+
+    def test_featured_comes_first_with_three_or_four_cards(self):
+        # The profile opens with Featured projects, right after the intro; every other project is in More projects.
         html = INDEX.read_text(encoding="utf-8")
-        def cards(section_id):
-            sec = html[html.index(f'<section id="{section_id}"'):]
-            return len(re.findall(r'<article class="project"[ >]', sec[:sec.index("</section>")]))
-        self.assertEqual((cards("projects"), cards("products")), (8, 9))
-        self.assertEqual(len(PAGE.projects), 17, [p["title"] for p in PAGE.projects])
+        self.assertLess(html.index('<section id="featured"'), html.index('<section id="research"'))
+        cards = re.findall(r'<article class="project"[ >]', self.section("featured"))
+        self.assertIn(len(cards), (3, 4))
+        self.assertEqual(len(PAGE.projects), len(cards), [p["title"] for p in PAGE.projects])
+
+    def test_featured_cards_have_avif_demo_and_source(self):
+        # Each Featured card: an AVIF image, a one-sentence hook, its stack, a live demo and its public source.
+        for card in re.findall(r'<article class="project".*?</article>', self.section("featured"), flags=re.S):
+            title = re.search(r"<h3>(.*?)</h3>", card).group(1)
+            with self.subTest(project=title):
+                self.assertRegex(card, r'<source type="image/avif" srcset="images/[^"]+\.avif')
+                hook = re.search(r"</h3>\s*<p>(.*?)</p>", card, flags=re.S).group(1)
+                self.assertEqual(len(re.findall(r"[.!?](\s|$)", hook)), 1, "one sentence")
+                links = re.search(r'<p class="links">(.*?)</p>', card).group(1)
+                self.assertRegex(links, r'<a href="https://amalmehta\.github\.io/[^"]+">Live demo')
+                self.assertRegex(links, r'<a href="https://github\.com/amalmehta/[^"]+">Source')
+
+    def test_more_projects_are_compact_and_linkable(self):
+        # One line each: an anchor, a name, a sentence, and a link or a note that the repo is private.
+        items = re.findall(r'<li class="mini" id="[a-z0-9-]+">\s*<h3>[^<]+</h3>\s*<p>[^\n]+</p>\s*<p class="links[^"]*">.*?<a href=', self.section("more-projects"))
+        self.assertEqual(len(items), self.section("more-projects").count('<li class="mini"'))
+        self.assertEqual(len(items), 21)
+        self.assertNotIn("<img", self.section("more-projects"))
 
     def test_each_card_is_complete(self):
         for p in PAGE.projects:
@@ -712,8 +735,8 @@ class LinkingTest(unittest.TestCase):
     PAGES = ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "writings.html", "404.html")
 
     def test_every_entry_can_be_linked_to(self):
-        # Each project, product, role and writeup on the profile, and each thought, has its own anchor.
-        for name, pattern in (("index.html", r'<article class="(?:project|role)"([^>]*)>'), ("thinking.html", r'<li class="thought"([^>]*)>')):
+        # Each project, role and writeup on the profile, and each thought, has its own anchor.
+        for name, pattern in (("index.html", r'<(?:article class="(?:project|role)"|li class="mini")([^>]*)>'), ("thinking.html", r'<li class="thought"([^>]*)>')):
             html = re.sub(r"<!--.*?-->", "", (ROOT / name).read_text(encoding="utf-8"), flags=re.S)
             entries = re.findall(pattern, html)
             self.assertTrue(entries)

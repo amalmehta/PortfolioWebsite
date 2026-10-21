@@ -24,7 +24,7 @@ flowchart LR
 
 | Part | Job |
 |---|---|
-| `index.html` | The profile. A sticky header, an intro with a hello line and contact links, five research and work entries laid out as a timeline (dates on the left, a summary, a drawing and a tags line), then eight project cards, a Products section of three product builds in the same card layout, two selected writeups (class reports) in the timeline layout, each linking its PDF in `papers/`, a dated Skills list (a superset of the resume's, checked by the tests), a Musings section hidden until its first note, and an Outside work paragraph whose "soccer tournaments" hides the Messi replay. |
+| `index.html` | The profile. A sticky header, an intro with a hello line and contact links, a Featured projects section of four large cards (image, one-sentence hook, stack, live demo and source), five research and work entries laid out as a timeline (dates on the left, a summary, a drawing and a tags line), then More projects, a compact two-column list with one line and the links for every other project, two selected writeups (class reports) in the timeline layout, each linking its PDF in `papers/`, a dated Skills list (a superset of the resume's, checked by the tests), a Musings section hidden until its first note, and an Outside work paragraph whose "soccer tournaments" hides the Messi replay. |
 | `thinking.html` | "Things I'm thinking about": a separate page of numbered open questions, sharing the header, footer and stylesheet. Thoughts link to the project cards and entries they mention. Linked from Live interests and every page's footer. |
 | `photos.html` | Travel: opens with Places I'm going (upcoming trips with their dates, each with a drawing; Chamonix first), then Places I'd like to go, six original drawings of an iconic spot from each place (`images/places/`, drawn by `tools/draw-places.py`, labelled as drawings), then a Photos section for captioned photos (place and year, plus a line about the moment), still "coming soon". Photos go in `images/photos/` as WebP with location data stripped. One column on phones up to three on wide screens. Linked from Live interests and every page's footer. |
 | `messi.js` | A second hidden extra. "soccer tournaments" in the profile's Outside work is a button that looks like plain text; it opens a dialog with a canvas replay inspired by Messi's solo goal against Real Madrid in the 2011 Champions League semi-final: dots on half a pitch, a dotted trail, defenders who close him down and fall away, the keeper diving the wrong way, and "Goal!". It's an approximation, not tracking data, and says so. With reduced motion it shows the final picture. Without JavaScript the words stay plain text. |
@@ -44,7 +44,7 @@ flowchart LR
 
 ## Main flows
 
-- **Visiting**: the browser loads the HTML, the stylesheet and the fonts; images below the fold load lazily. The header links to Research, Projects, Products, Interests and the resume (Profile instead of Research and Projects on the other pages). The link for the page you're on is underlined and marked for screen readers; Things I'm thinking about and Travel mark Interests, and Values marks Profile, since that's where they're linked from. Below 600 px it keeps three links, dropping Research and Products, which sit right below the intro and right after Projects. Research comes first on the profile: it's the strongest evidence on the page.
+- **Visiting**: the browser loads the HTML, the stylesheet and the fonts; images below the fold load lazily. The header links to Projects (Featured), Research, Interests and the resume (Profile and Projects instead on the other pages). The link for the page you're on is underlined and marked for screen readers; Things I'm thinking about and Travel mark Interests, and Values marks Profile, since that's where they're linked from. Below 600 px it keeps three links, dropping Research, which sits right below Featured, and, on the other pages, Projects, which Profile already leads to. Featured projects come first on the profile, so a visitor sees the strongest work, each with a demo to try and its source, before the timeline.
 - **Updating**: edit `index.html` or swap an image, preview with a local server, push. Pages redeploys.
 - **Resume**: edit the `.tex`, rebuild with Tectonic, commit the PDF.
 
@@ -75,7 +75,8 @@ Automatically, with `python3 -m unittest discover tests` (standard library only;
 
 - every local link, image and anchor resolves, and nothing links into `_archive/`;
 - each image's `width`/`height` match the file, and any clip is a muted, lazy-loaded loop under 2 MB that comes with `media.js`;
-- there are eight project cards and three products, each complete, and the four named research entries have an image;
+- Featured comes first with three or four complete cards, each with an AVIF image, a one-sentence hook, a live demo and its source, and every other project is one line in More projects;
+- the four named research entries have an image;
 - text and chip colours reach 4.5:1 contrast in both themes;
 - the Skills list contains every resume skill and carries an "updated" date;
 - hidden sections (Musings, Books, My art, Writings) are hidden exactly while they're empty, and Values' Inspiration and Things I care about say "Coming soon." exactly while they're empty;

@@ -112,13 +112,23 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 @media (min-width: 820px) {
   .project { grid-template-columns: 0.85fr 1fr; gap: 2rem; align-items: center; }
 }
-/* Products: a two-column grid of smaller cards, each image above its text. */
-@media (min-width: 820px) {
-  .compact { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; align-items: start; }
-  .compact > .section-title { grid-column: 1 / -1; }
-  .compact .project { grid-template-columns: 1fr; gap: 0.9rem; align-items: start; margin-bottom: 2.75rem; }
-  .compact .project-text h3 { font-size: 1.2rem; }
-}
+/* Featured: the top four projects, two by two on wide screens, each a large image above
+   a one-sentence hook, its stack and links to the live demo and the source. */
+.featured { display: grid; gap: 2.75rem 2rem; }
+@media (min-width: 820px) { .featured { grid-template-columns: 1fr 1fr; } }
+.featured .project { grid-template-columns: 1fr; gap: 1rem; align-items: start; align-content: start; margin-bottom: 0; }
+.featured .project-text h3 { font-size: 1.45rem; }
+.featured .project-text h3 + p { font-family: var(--serif); font-size: 1.12rem; line-height: 1.5; }
+.featured .links { display: flex; flex-wrap: wrap; gap: 0.2rem 1.25rem; }
+.featured + .more { margin-top: 2.5rem; }
+/* More projects: one compact line each, two columns on wide screens, no pictures. */
+.minis { list-style: none; padding: 0; margin: 0; display: grid; column-gap: 2rem; }
+@media (min-width: 720px) { .minis { grid-template-columns: 1fr 1fr; } }
+.mini { padding: 0.9rem 0 1rem; border-top: 1px solid var(--line); }
+.mini h3 { font-size: 1.12rem; margin: 0 0 0.2rem; }
+.mini p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
+.mini .links { display: flex; flex-wrap: wrap; gap: 0 1rem; margin-top: 0.35rem; font-size: 0.88rem; }
+.mini .links.private { display: block; font-size: 0.82rem; color: var(--faint); }
 .shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 /* The card's <picture> (AVIF with a WebP fallback) lays out as if it were just the image. */
 .shot picture { display: contents; }
@@ -169,10 +179,10 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 
 /* The "#" link beside each entry's heading (anchors.js): faint until the entry is hovered or focused */
 .anchor { margin-left: 0.15rem; font: 500 0.8em var(--sans); color: var(--faint); text-decoration: none; opacity: 0; transition: opacity 0.15s; }
-.project:hover .anchor, .role:hover .anchor, .thought:hover .anchor, .anchor:focus-visible { opacity: 1; }
+.project:hover .anchor, .role:hover .anchor, .mini:hover .anchor, .thought:hover .anchor, .anchor:focus-visible { opacity: 1; }
 .anchor:hover { color: var(--accent); text-decoration: none; }
 /* Phones have no hover: keep the "#" on Thinking, where linking one thought matters, and drop it on the profile. */
-@media (hover: none) { .anchor { opacity: 0.6; } .project .anchor, .role .anchor { display: none; } }
+@media (hover: none) { .anchor { opacity: 0.6; } .project .anchor, .role .anchor, .mini .anchor { display: none; } }
 
 /* Footer */
 .footer { padding-top: 2rem; padding-bottom: 3rem; margin-top: 2rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--faint); }
@@ -207,7 +217,7 @@ picture { display: contents; }
 .skip { position: absolute; left: 16px; top: -3rem; z-index: 20; padding: 0.4rem 0.8rem; border-radius: 6px; background: var(--surface); color: var(--accent); border: 1px solid var(--line); font-size: 0.92rem; }
 .skip:focus { top: 0.6rem; }
 /* Links inside sentences are underlined, not told apart by colour alone. */
-.more a, .footer a, .credit a, .outside a, .role p:not(.links):not(.tags) a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.more a, .footer a, .credit a, .outside a, .page-head p a, .role p:not(.links):not(.tags) a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .nav-links .file { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; color: var(--faint); }
 
 /* Musings: short notes in three groups, side by side on wide screens */
@@ -222,11 +232,11 @@ picture { display: contents; }
 .musing p:last-child { margin: 0; font-size: 0.95rem; }
 .musing-empty { border-top: 1px dashed var(--line); padding: 0.9rem 0; margin: 0; font-size: 0.92rem; font-style: italic; color: var(--muted); }
 .nav-name, .nav-links a { white-space: nowrap; }
-/* Narrow screens: there's room for three links. Research starts right below the intro
-   and Products right after Projects, so those links give way to the others. */
+/* Narrow screens: there's room for three links. Research starts right below Featured projects,
+   and on the other pages Profile already leads to them, so those links give way to the others. */
 @media (max-width: 600px) {
   .nav-links { gap: 0.8rem; }
-  .nav-links a[href="#research"], .nav-links a[href$="#products"], .nav-links .file { display: none; }
+  .nav-links a[href="#research"], .nav-links a[href$="index.html#featured"], .nav-links a[href$="/#featured"], .nav-links .file { display: none; }
 }
 @media (max-width: 380px) { .nav-links { gap: 0.6rem; } }
 @media (max-width: 360px) { .nav-name { font-size: 1.02rem; } .nav-links { gap: 0.5rem; font-size: 0.86rem; } }  /* 320 px phones */
@@ -459,7 +469,9 @@ picture { display: contents; }
   .section-title { margin-bottom: 0.6rem; padding-bottom: 0.3rem; font-size: 8pt; }
   .role { grid-template-columns: 6.5rem 1fr; gap: 0 1.2rem; padding: 0.55rem 0; break-inside: avoid; }
   .role h3, .project-text h3 { font-size: 11pt; margin-bottom: 0.1rem; }
-  .project { display: block; margin-bottom: 0.7rem; break-inside: avoid; }
+  .project, .mini { display: block; margin-bottom: 0.7rem; break-inside: avoid; }
+  .minis { display: block; }
+  .mini { padding: 0.3rem 0; border: 0; }
   .skill-row { grid-template-columns: 6.5rem 1fr; gap: 0 1.2rem; padding: 0.3rem 0; break-inside: avoid; }
   .chip { padding: 0; background: none !important; color: #333 !important; font-size: 8.5pt; }
   .chip + .chip::before { content: "· "; color: #999; }

@@ -3,7 +3,7 @@
 Back to the [README](../README.md) · [Instructions](INSTRUCTIONS.md) · [System design](SYSTEM-DESIGN.md)
 
 ```
-index.html                    The profile: intro, research & work, projects, products, writeups, skills, musings (hidden for now), outside work
+index.html                    The profile: intro, featured projects, research & work, more projects, writeups, skills, musings (hidden for now), outside work
 thinking.html                 "Things I'm thinking about": linked from Live interests and every footer
 photos.html                   Travel: places I'm going, places I'd like to go, then photos; linked from Live interests and every footer
 writings.html                 Writings: its own page, unlinked and noindex until the first piece is in
@@ -40,7 +40,7 @@ resume/
   Amal Mehta Resume.tex       Resume source (latest resume, no phone number)
   Amal Mehta Resume.pdf       Built resume, linked from the site
 tools/
-  make-images.sh              Builds the WebP posters and portrait AVIF/WebP from the JPEGs in images/
+  make-images.sh              Builds the AVIF/WebP card images (and, with --large, Featured's bigger copies) and the portrait from the JPEGs in images/
   draw-research-art.py        Draws the research-entry SVGs in images/
   draw-places.py              Draws the Travel page's place drawings in images/places/
   check-links.py              Checks the site's external links (run weekly on GitHub)

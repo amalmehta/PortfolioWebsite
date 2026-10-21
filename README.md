@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/amalmehta/PortfolioWebsite/actions/workflows/tests.yml/badge.svg)](https://github.com/amalmehta/PortfolioWebsite/actions/workflows/tests.yml)
 
-My personal website. The profile has research and work, eight projects, three products, two class writeups and a live skills list. Pages of its own cover what I'm thinking about (with an RSS feed), my live interests (hobbies, curiosities and media I love), travel (where I'm headed next and places I'd like to go) and what I live by (values, beliefs and how I want to lead my life). A Writings page waits, hidden, for its first piece. Two extras are hidden: a Pong game on the Travel page, and a replay of Messi's 2011 solo goal behind "soccer tournaments" on the profile.
+My personal website. The profile has four featured projects, research and work, a compact list of more projects, two class writeups and a live skills list. Pages of its own cover what I'm thinking about (with an RSS feed), my live interests (hobbies, curiosities and media I love), travel (where I'm headed next and places I'd like to go) and what I live by (values, beliefs and how I want to lead my life). A Writings page waits, hidden, for its first piece. Two extras are hidden: a Pong game on the Travel page, and a replay of Messi's 2011 solo goal behind "soccer tournaments" on the profile.
 
 **Live:** [amalmehta.github.io/PortfolioWebsite](https://amalmehta.github.io/PortfolioWebsite/)
 

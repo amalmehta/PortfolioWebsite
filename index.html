@@ -81,9 +81,8 @@
     <nav class="wrap nav">
       <a class="nav-name" href="#top">Amal Mehta</a>
       <div class="nav-links">
+        <a href="#featured">Projects</a>
         <a href="#research">Research</a>
-        <a href="#projects">Projects</a>
-        <a href="#products">Products</a>
         <a href="interests.html">Interests</a>
         <a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">Resume <span class="file">PDF</span></a>
       </div>
@@ -104,6 +103,52 @@
         <li><a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">Resume (PDF, 94 KB)</a></li>
       </ul>
       </div>
+    </section>
+
+    <section id="featured" class="wrap section">
+      <h2 class="section-title">Featured projects</h2>
+      <div class="featured">
+      <article class="project" id="unverifiable-rewards">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/unverifiable-rewards-960.avif 960w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><source type="image/webp" srcset="images/unverifiable-rewards-960.webp 960w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><img src="images/unverifiable-rewards-960.webp" alt="Rewarding What You Can’t Verify, Figure 1: during GRPO the share of programs passing the visible checks climbs to 58% while the share actually correct falls to 2%, with the gap shaded as false success" loading="lazy" width="960" height="604"></picture></figure>
+        <div class="project-text">
+          <h3>Rewarding What You Can’t Verify</h3>
+          <p>Trained against visible tests alone, a code agent learns to delete 98% of the branches no test reaches, so its pass rate climbs while real correctness falls from 31% to 2%, and auditing a random 25% of episodes with a hidden check prevents it.</p>
+          <p class="tags"><span class="chip">Python</span> <span class="chip">GRPO</span> <span class="chip">Reward hacking</span> <span class="chip">Code agents</span> <span class="chip">Pre-registered experiments</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/long_term_horizon_planning/">Live demo: proposal and results →</a> <a href="https://github.com/amalmehta/long_term_horizon_planning">Source on GitHub →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="alphago-lite">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/alphago-lite-960.avif 960w, images/alphago-lite-1400.avif 1400w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><source type="image/webp" srcset="images/alphago-lite-960.webp 960w, images/alphago-lite-1400.webp 1400w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></picture></figure>
+        <div class="project-text">
+          <h3>AlphaGo Lite</h3>
+          <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe, 7,040 self-play games in about 11 hours on one laptop, and shows you which moves it’s weighing as you play it.</p>
+          <p class="tags"><span class="chip">PyTorch</span> <span class="chip">Monte Carlo tree search</span> <span class="chip">Self-play RL</span> <span class="chip">ONNX in the browser</span> <span class="chip">Swift + Core ML</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/AlphaGoLite/">Live demo: play it →</a> <a href="https://github.com/amalmehta/AlphaGoLite">Source on GitHub →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="drone-autonomy">
+        <figure class="shot contain"><picture><source type="image/avif" srcset="images/drone-autonomy-960.avif 960w, images/drone-autonomy-1600.avif 1600w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><source type="image/webp" srcset="images/drone-autonomy-960.webp 960w, images/drone-autonomy-1600.webp 1600w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><img src="images/drone-autonomy-960.webp" alt="Drone Autonomy: two recorded flights seen from above, each with the obstacles mapped from depth, the final A* plan and the track flown; the second flight carries extra payload in wind with a worn motor" loading="lazy" width="960" height="353"></picture></figure>
+        <div class="project-text">
+          <h3>Drone Autonomy</h3>
+          <p>A simulated quadrotor maps unknown rooms with a depth camera, plans with A* and adapts to payload, wind and motor wear, where a learned residual roughly halves the error of tuned adaptive control.</p>
+          <p class="tags"><span class="chip">Python</span> <span class="chip">Meta-learning (7 methods)</span> <span class="chip">L1 adaptive control</span> <span class="chip">A* planning</span> <span class="chip">Simulation</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/DroneAutonomy/">Live demo: replay the flights →</a> <a href="https://github.com/amalmehta/DroneAutonomy">Source on GitHub →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="llm-understander">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/llm-understander-960.avif 960w, images/llm-understander-1600.avif 1600w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><source type="image/webp" srcset="images/llm-understander-960.webp 960w, images/llm-understander-1600.webp 1600w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><img src="images/llm-understander-960.webp" alt="LLM Understander: the Transformer Block chapter, with a diagram of one block (layer norm, multi-head attention, MLP and residual connections) beside the list of 18 chapters" loading="lazy" width="960" height="639"></picture></figure>
+        <div class="project-text">
+          <h3>LLM Understander</h3>
+          <p>How a large language model is trained, from tokens to RLHF, and how it becomes an agent inside a harness, in 18 chapters whose every visualization is driven by a real tiny transformer that trains as you read.</p>
+          <p class="tags"><span class="chip">TypeScript</span> <span class="chip">Swift + SwiftUI</span> <span class="chip">Transformers</span> <span class="chip">Post-training</span> <span class="chip">Website + Mac app</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/LLMUnderstander/">Live demo: start reading →</a> <a href="https://github.com/amalmehta/LLMUnderstander">Source on GitHub →</a></p>
+        </div>
+      </article>
+      </div>
+      <p class="more"><a href="#more-projects">More projects, products and things I’ve built for fun ↓</a></p>
     </section>
 
     <section id="research" class="wrap section">
@@ -174,184 +219,117 @@
       <p class="more">B.A. in Computer Science from UC Berkeley, focused on robotics and linear system theory, with Regents, merit and leadership awards. Education is in the <a href="resume/Amal%20Mehta%20Resume.pdf" type="application/pdf">resume (PDF, 94 KB)</a>, and an up-to-date list of skills is <a href="#skills">below</a>.</p>
     </section>
 
-    <section id="projects" class="wrap section">
-      <h2 class="section-title">Selected projects</h2>
-
-      <article class="project" id="unverifiable-rewards">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/unverifiable-rewards-960.avif"><img src="images/unverifiable-rewards-960.webp" alt="Rewarding What You Can’t Verify, Figure 1: during GRPO the share of programs passing the visible checks climbs to 58% while the share actually correct falls to 2%, with the gap shaded as false success" loading="lazy" width="960" height="604"></picture></figure>
-        <div class="project-text">
-          <h3>Rewarding What You Can’t Verify</h3>
-          <p>A research program on post-training long-horizon code agents when the checks you can run are narrower than correctness. In the pilot, an agent trained against visible tests alone learns to delete 98% of the code branches no test reaches: its pass rate climbs while real correctness falls from 31% to 2%. Auditing a random 25% of episodes with a hidden check prevents it. I then pre-registered 50 harder questions, each with a prediction and a kill criterion: 21 were supported, 15 refuted, 12 mixed and 2 deferred. It grew out of Reward Hack Zoo, five small post-training environments whose naive rewards a model can game, from length bias to self-grading.</p>
-          <p class="tags"><span class="chip">Reward hacking</span> <span class="chip">GRPO</span> <span class="chip">Code agents</span> <span class="chip">Pre-registered experiments</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/long_term_horizon_planning/">Read the proposal and results →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="bci-projects">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/bci-projects-960.avif"><img src="images/bci-projects-960.webp" alt="BCI Projects: four cards with headline results: cursor decoding R² 0.72, attempted speech at 38.8% phoneme error, simulated grasp success from 2% to 100%, and stimulation fidelity SSIM 0.84 vs 0.73" loading="lazy" width="960" height="607"></picture></figure>
-        <div class="project-text">
+    <section id="more-projects" class="wrap section">
+      <h2 class="section-title">More projects</h2>
+      <!-- One line each, research first, then products, then things built for fun.
+           A project moves up to Featured only with a live demo and public source. -->
+      <ul class="minis">
+        <li class="mini" id="bci-projects">
           <h3>BCI Projects</h3>
-          <p>Four machine-learning projects for brain–computer interfaces, each with real public neural data where it exists, strong baselines, a closed-loop simulator and a web demo. Cursor decoding still scores R² 0.72 up to 138 days later with no new labels; attempted speech becomes text at a 38.8% phoneme error rate; assistance lifts a 7-joint robot arm’s simulated grasp success from 2% to 100%; and a learned visual-cortex stimulation encoder beats plain intensity-based stimulation. Three come with papers. A follow-up on the FALCON benchmark, <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon</a>, finds that re-scaling a decoder’s inputs with a few seconds of unlabelled new-day data beats fine-tuning on 20 seconds of labelled data.</p>
-          <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">Shared autonomy</span> <span class="chip">Closed-loop simulation</span> <span class="chip">PyTorch</span></p>
-          <p class="links"><a href="https://github.com/amalmehta/BCIProjects">Code and papers →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="post-training-lab">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/post-training-960.avif"><img src="images/post-training-960.webp" alt="Post Training Lab: results averaged over 3 seeds: held-out success from 70% to 80% with GRPO and to 81% with DPO, 63% to 74% on harder mazes, and 7% for the reward hacker" loading="lazy" width="960" height="778"></picture></figure>
-        <div class="project-text">
+          <p>Four machine-learning projects for brain–computer interfaces on real public neural data: cursor decoding that still scores R² 0.72 138 days later, attempted speech to text at a 38.8% phoneme error rate, assisted robot grasping and visual-cortex stimulation.</p>
+          <p class="links"><a href="https://github.com/amalmehta/BCIProjects">Code and papers →</a> <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon follow-up →</a></p>
+        </li>
+        <li class="mini" id="post-training-lab">
           <h3>Post Training Lab</h3>
-          <p>A 59k-parameter transformer learns a key-and-door maze: supervised fine-tuning on demos from a planner with a bad habit, then two ways to fix it, GRPO (online RL on a verifiable reward) and DPO (offline preferences). Averaged over 3 seeds, GRPO lifts held-out success from 70% to 80% and DPO to 81%; RL from scratch on the same budget reaches 0%, and a run with a subtly wrong reward games it down to 7%.</p>
-          <p class="tags"><span class="chip">Post-training</span> <span class="chip">SFT → GRPO</span> <span class="chip">DPO</span> <span class="chip">Transformers</span> <span class="chip">PyTorch</span></p>
+          <p>A 59k-parameter transformer learns a key-and-door maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81%, while a subtly wrong reward gets gamed down to 7%.</p>
           <p class="links"><a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="alphago-lite">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/alphago-lite-960.avif"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></picture></figure>
-        <div class="project-text">
-          <h3>AlphaGo Lite</h3>
-          <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
-          <p class="tags"><span class="chip">Self-play RL</span> <span class="chip">Monte Carlo tree search</span> <span class="chip">PyTorch</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/AlphaGoLite/">Play it in your browser →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="drone-autonomy">
-        <figure class="shot contain"><picture><source type="image/avif" srcset="images/drone-autonomy-960.avif"><img src="images/drone-autonomy-960.webp" alt="Drone Autonomy: two recorded flights seen from above, each with the obstacles mapped from depth, the final A* plan and the track flown; the second flight carries extra payload in wind with a worn motor" loading="lazy" width="960" height="353"></picture></figure>
-        <div class="project-text">
-          <h3>Drone Autonomy</h3>
-          <p>A quadrotor that maps unknown rooms with a depth camera, plans its path with A*, and adapts to payload, wind and motor wear by combining seven meta-learning methods with classical control. In simulation, a learned residual roughly halves the error of tuned adaptive control, and meta-learning helps most when it tunes the classical controller’s gains.</p>
-          <p class="tags"><span class="chip">Meta-learning</span> <span class="chip">Adaptive control</span> <span class="chip">Planning</span> <span class="chip">Simulation</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/DroneAutonomy/">Replay the flights →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="autonomous-driving-sim">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/driving-sim-960.avif"><img src="images/driving-sim-960.webp" alt="Autonomous Driving Sim: a chase view of the car on a city street with lidar points, boxes around tracked vehicles and its planned path, beside live stats for each stage of the stack and the RL speed policy’s learning curve" loading="lazy" width="960" height="600"></picture></figure>
-        <div class="project-text">
+        </li>
+        <li class="mini" id="autonomous-driving-sim">
           <h3>Autonomous Driving Sim</h3>
-          <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations. A companion tool, Disengagement Diary, runs the stack over generated edge cases such as jaywalkers, hidden merges and sensor dropouts, and groups every failure into a searchable report.</p>
-          <p class="tags"><span class="chip">Perception</span> <span class="chip">Planning</span> <span class="chip">RL with a safety validator</span></p>
+          <p>A browser self-driving stack, from perception to control, whose RL speed policy can only act through a safety check: no collisions or red-light violations across 6 scenarios in 3 modes.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="neuroimaging-platform">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/neuroimaging-960.avif"><img src="images/neuroimaging-960.webp" alt="Neuroimaging Platform: a brain scan in axial, coronal, sagittal and 3D views with a white-matter heat map and EEG electrodes on the scalp" loading="lazy" width="960" height="673"></picture></figure>
-        <div class="project-text">
+        </li>
+        <li class="mini" id="neuroimaging-platform">
           <h3>Neuroimaging Platform</h3>
-          <p>A Mac app that opens 3D brain MRI scans, separates gray matter, white matter and fluid voxel by voxel, and places EEG electrodes on the head. It also runs research methods from UCSF: segmentation stability, stable pattern discovery and follow-up atrophy maps.</p>
-          <p class="tags"><span class="chip">Medical imaging</span> <span class="chip">Segmentation</span> <span class="chip">Mac app</span></p>
-          <p class="credit">Scan: MNI ICBM152 template © McConnell Brain Imaging Centre, MNI</p>
+          <p>A Mac app that segments 3D brain MRI into gray matter, white matter and fluid, places EEG electrodes on the head and runs research methods from UCSF.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="sport-analyzer">
-        <figure class="shot crop-right"><picture><source type="image/avif" srcset="images/sport-analyzer-960.avif"><img src="images/sport-analyzer-960.webp" alt="Sport Analyzer: a runner’s pose shown in 3D next to live cadence, stride and knee-angle metrics" loading="lazy" width="960" height="439"></picture></figure>
-        <div class="project-text">
+        </li>
+        <li class="mini" id="sport-analyzer">
           <h3>Sport Analyzer</h3>
-          <p>Strava for technique: tracks your body in 3D from a webcam and measures running stride, lifts, swings and shots. Ghost Coach learns a new movement from one example rep and scores yours against it.</p>
-          <p class="tags"><span class="chip">Computer vision</span> <span class="chip">3D pose estimation</span> <span class="chip">Real time</span></p>
+          <p>Strava for technique: tracks your body in 3D from a webcam, measures stride, lifts, swings and shots, and scores your reps against one example.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
-        </div>
-      </article>
-    </section>
-
-    <section id="products" class="wrap section compact">
-      <h2 class="section-title">Products</h2>
-
-      <article class="project" id="llm-understander">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/llm-understander-960.avif"><img src="images/llm-understander-960.webp" alt="LLM Understander: the Transformer Block chapter, with a diagram of one block (layer norm, multi-head attention, MLP and residual connections) beside the list of 18 chapters" loading="lazy" width="960" height="639"></picture></figure>
-        <div class="project-text">
-          <h3>LLM Understander</h3>
-          <p>How a large language model is trained, from tokens to RLHF, and how it becomes an agent inside a harness, in 18 chapters. Every visualization is driven by a real tiny transformer that trains as you read, in your browser or on your Mac.</p>
-          <p class="tags"><span class="chip">Transformers</span> <span class="chip">Post-training</span> <span class="chip">Agents</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/LLMUnderstander/">Start reading →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="system-design-oracle">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/system-design-oracle-960.avif"><img src="images/system-design-oracle-960.webp" alt="System Design Oracle: the design problem Trajectory Prediction for an Autonomous Vehicle at depth 2, with the list of design problems and topics beside it" loading="lazy" width="960" height="600"></picture></figure>
-        <div class="project-text">
+        </li>
+        <li class="mini" id="system-design-oracle">
           <h3>System Design Oracle</h3>
-          <p>Learn system design across the stack: 56 topics in 10 areas, from operating systems and GPUs to serving LLMs and self-driving cars, plus 10 worked design problems, such as pre-training a 70B LLM on 2,000 GPUs. Every page reads at four depths, from a one-sentence gist down to failure modes, real systems and interview questions.</p>
-          <p class="tags"><span class="chip">System design</span> <span class="chip">ML infrastructure</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/SystemDesignOracle/">Start learning →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="researcher-pal">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/researcher-pal-960.avif"><img src="images/researcher-pal-960.webp" alt="Researcher Pal: an interactive animation of scaled dot-product attention from Attention Is All You Need, with the formula, query, key and value plots, a score matrix and sliders" loading="lazy" width="960" height="648"></picture></figure>
-        <div class="project-text">
+          <p>System design across the stack, from GPUs to serving LLMs and self-driving cars, in 56 topics and 10 worked problems, each readable at four depths.</p>
+          <p class="links"><a href="https://amalmehta.github.io/SystemDesignOracle/">Demo →</a> <a href="https://github.com/amalmehta/SystemDesignOracle">Code →</a></p>
+        </li>
+        <li class="mini" id="researcher-pal">
           <h3>Researcher Pal</h3>
-          <p>Three Claude Code skills for research papers. One teaches any paper from scratch, with a map of its concepts, step-by-step interactive animations like this one and exercises with hints. One turns your results and notes into a venue-formatted LaTeX paper with verified citations. The third finds what reviewers will attack and checks each idea against the literature.</p>
-          <p class="tags"><span class="chip">Claude Code skills</span> <span class="chip">AI agents</span> <span class="chip">Research tools</span></p>
+          <p>Three Claude Code skills: one teaches any research paper with interactive animations, one writes your own paper in venue LaTeX, and one finds what reviewers will attack.</p>
           <p class="links"><a href="https://github.com/amalmehta/researcher_pal">Get the skills →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="take-it-apart">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/take-it-apart-960.avif"><img src="images/take-it-apart-960.webp" alt="Take It Apart: a jet engine taken apart in 3D, with the nacelle cowls opened above and below, the fan at the front and the compressor and turbine stages spread along the shafts" loading="lazy" width="960" height="617"></picture></figure>
-        <div class="project-text">
+        </li>
+        <li class="mini" id="take-it-apart">
           <h3>Take It Apart</h3>
-          <p>Takes an object apart in 3D: every part flies out the way it really comes off, and you can orbit, zoom and click any piece to see what it is and what it does. The website has 34 ready-made objects, from a 163-piece rocket and a 536-piece jet engine to a watch, a grand piano and a fusion reactor. With your own Anthropic API key, name anything else or drop in a photo, and Claude plans its parts.</p>
-          <p class="tags"><span class="chip">three.js</span> <span class="chip">SceneKit</span> <span class="chip">LLM-generated 3D</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/take-it-apart-site/">Take something apart →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="top-gun-simulator">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/top-gun-960.avif"><img src="images/top-gun-960.webp" alt="Top Gun Simulator: a fighter jet flying low through a canyon with a green HUD showing 360 knots and 1,433 feet, beside the lesson panel, a map and a side profile of the terrain" loading="lazy" width="960" height="656"></picture></figure>
-        <div class="project-text">
+          <p>Takes an object apart in 3D, from a 536-piece jet engine to a grand piano, with every part explained; name anything else and Claude plans its parts.</p>
+          <p class="links"><a href="https://amalmehta.github.io/take-it-apart-site/">Demo →</a></p>
+        </li>
+        <li class="mini" id="top-gun-simulator">
           <h3>Top Gun Simulator</h3>
-          <p>A flight simulator that teaches you to fly: real aerodynamics at 240 steps a second, a live instructor and 11 lessons, from what the stick does to landing. Then you take a fighter jet through a canyon run and a guns-only dogfight. Plays in the browser, with touch controls on phones, and as a Mac app.</p>
-          <p class="tags"><span class="chip">Flight physics</span> <span class="chip">three.js</span> <span class="chip">SceneKit</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/TopGunSimulator/">Fly it in your browser →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="ai-advances">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/ai-advances-960.avif"><img src="images/ai-advances-960.webp" alt="AI Advances: the Forecasts page, with a written outlook and a timeline of dated predictions, such as when benchmarks reach 90% and when AI handles tasks taking a full work-week" loading="lazy" width="960" height="645"></picture></figure>
-        <div class="project-text">
+          <p>A flight simulator with real aerodynamics and a live instructor that teaches you to fly in 11 lessons, then sends you through a canyon run and a dogfight.</p>
+          <p class="links"><a href="https://amalmehta.github.io/TopGunSimulator/">Demo →</a> <a href="https://github.com/amalmehta/TopGunSimulator">Code →</a></p>
+        </li>
+        <li class="mini" id="ai-advances">
           <h3>AI Advances</h3>
-          <p>Tracks where AI is heading: new model releases, what each lab is working on, and long-run trends in capability, cost, context and compute, turned into dated forecasts that recompute as new data arrives. The site rebuilds every morning, and each day’s forecasts are logged so you can watch them move.</p>
-          <p class="tags"><span class="chip">Forecasting</span> <span class="chip">Live data</span> <span class="chip">Website + Mac app</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/ai-advances/">See today’s forecasts →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="energy-for-ai">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/energy-for-ai-960.avif"><img src="images/energy-for-ai-960.webp" alt="Energy for AI: a chart of cost per megawatt-hour against years to power, with the top three options for a 2029 deadline highlighted: gas engines and aero turbines, existing nuclear, and fuel cells" loading="lazy" width="960" height="590"></picture></figure>
-        <div class="project-text">
+          <p>New models, lab work and long-run trends in capability, cost and compute, turned into dated forecasts that rebuild every morning.</p>
+          <p class="links"><a href="https://amalmehta.github.io/ai-advances/">Demo →</a> <a href="https://github.com/amalmehta/ai-advances">Code →</a></p>
+        </li>
+        <li class="mini" id="energy-for-ai">
           <h3>Energy for AI</h3>
-          <p>Where should an AI data center get its power? Set your load, deadline and US region, and it ranks eleven power options by cost, carbon, speed to power and reliability. Every figure links to one of 47 public sources, such as Lazard, the EIA and NREL.</p>
-          <p class="tags"><span class="chip">AI infrastructure</span> <span class="chip">Sourced data</span> <span class="chip">Decision tool</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/EnergyForAI/">Rank the options →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="path-finder">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/path-finder-960.avif"><img src="images/path-finder-960.webp" alt="Path Finder: the Where you should go feed, recommending Hokkaido with its taste tags (snow, empty, onsen, quiet), best months, trip length and budget, and buttons to plan the trip, pin it or say not for me" loading="lazy" width="960" height="564"></picture></figure>
-        <div class="project-text">
+          <p>Ranks eleven ways to power an AI data center by cost, carbon, speed and reliability for your load, deadline and region, with every figure sourced.</p>
+          <p class="links"><a href="https://amalmehta.github.io/EnergyForAI/">Demo →</a> <a href="https://github.com/amalmehta/EnergyForAI">Code →</a></p>
+        </li>
+        <li class="mini" id="path-finder">
           <h3>Path Finder</h3>
-          <p>A trip advisor that starts from what you listen to, watch and read rather than from a map. It reads your taste in music, film and books, then scrolls you destinations argued from it, each naming the thing of yours it draws on. Before planning, it asks what the trip is for, then writes a day-by-day itinerary with what to book, real costs and packing, and learns from a log of the trips you’ve taken.</p>
-          <p class="tags"><span class="chip">Recommendations</span> <span class="chip">LLM agents</span> <span class="chip">Node</span> <span class="chip">Mac app (Electron)</span></p>
+          <p>A trip advisor that reads your taste in music, film and books, argues destinations from it and writes a day-by-day itinerary.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="paper-to-playground">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/paper-playground-960.avif"><img src="images/paper-playground-960.webp" alt="Paper to Playground: a demo of the Adam paper, with sliders for loss scale and step sizes beside plots of Adam and SGD with momentum crossing a loss valley" loading="lazy" width="960" height="641"></picture></figure>
-        <div class="project-text">
+        </li>
+        <li class="mini" id="paper-to-playground">
           <h3>Paper to Playground</h3>
-          <p>Paste an arXiv link and get a small, runnable demo of the paper’s core idea: a page of sliders over a NumPy or PyTorch backend. A language model writes the first draft, the app runs, type-checks and lints it until it passes, and you refine it by hand.</p>
-          <p class="tags"><span class="chip">Mac app</span> <span class="chip">Electron</span> <span class="chip">TypeScript</span> <span class="chip">Next.js</span> <span class="chip">LLM agents</span></p>
+          <p>Paste an arXiv link and get a runnable page of sliders over the paper’s core idea, drafted by a language model and checked until it passes.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
-        </div>
-      </article>
-
+        </li>
+        <li class="mini" id="track-the-migration">
+          <h3>Track the Migration</h3>
+          <p>Seventeen real animal migrations, from wildebeest to godwits, replayed on a 3D globe from published tracking data.</p>
+          <p class="links"><a href="https://amalmehta.github.io/TrackTheMigration/">Demo →</a> <a href="https://github.com/amalmehta/TrackTheMigration">Code →</a></p>
+        </li>
+        <li class="mini" id="moonshot">
+          <h3>Moonshot</h3>
+          <p>How SpaceX’s rockets work from first principles, with 200 simulated booster landings and a flight to the Moon (unofficial).</p>
+          <p class="links"><a href="https://amalmehta.github.io/Moonshot/">Demo →</a> <a href="https://github.com/amalmehta/Moonshot">Code →</a></p>
+        </li>
+        <li class="mini" id="orbit-lab">
+          <h3>Orbit Lab</h3>
+          <p>Plan real orbital moves in 3D, then watch a reinforcement-learning agent learn to dock with a space station.</p>
+          <p class="links"><a href="https://amalmehta.github.io/OrbitLab/">Demo →</a> <a href="https://github.com/amalmehta/OrbitLab">Code →</a></p>
+        </li>
+        <li class="mini" id="black-hole-simulator">
+          <h3>Black Hole Simulator</h3>
+          <p>A black hole ray-traced live in the browser, with a walk-through of the physics behind every pixel.</p>
+          <p class="links"><a href="https://amalmehta.github.io/BlackHoleSimulator/">Demo →</a> <a href="https://github.com/amalmehta/BlackHoleSimulator">Code →</a></p>
+        </li>
+        <li class="mini" id="birdseye-fc">
+          <h3>Birdseye FC</h3>
+          <p>Famous football goals replayed from above, from Carlos Alberto in 1970 to Maradona and Bergkamp, with commentary read aloud.</p>
+          <p class="links"><a href="https://amalmehta.github.io/soccer_viz/">Demo →</a> <a href="https://github.com/amalmehta/soccer_viz">Code →</a></p>
+        </li>
+        <li class="mini" id="navier-stokes">
+          <h3>Navier–Stokes</h3>
+          <p>Five water simulations that solve the Navier–Stokes equations live on your GPU.</p>
+          <p class="links"><a href="https://amalmehta.github.io/NavierStokes/">Demo →</a> <a href="https://github.com/amalmehta/NavierStokes">Code →</a></p>
+        </li>
+        <li class="mini" id="signal-processing">
+          <h3>Signal Processing Primer and Spectrogram Studio</h3>
+          <p>A 13-lesson course on the maths of audio, images and video, then a studio for painting filters onto a spectrogram and hearing the result.</p>
+          <p class="links"><a href="https://amalmehta.github.io/SignalProcessingPrimer/">Course →</a> <a href="https://amalmehta.github.io/SpectrogramStudio/">Studio →</a> <a href="https://github.com/amalmehta/SignalProcessingPrimer">Course code →</a> <a href="https://github.com/amalmehta/SpectrogramStudio">Studio code →</a></p>
+        </li>
+        <li class="mini" id="sports-pred">
+          <h3>Sports Pred</h3>
+          <p>Live title odds for soccer leagues and tennis tournaments, from Elo ratings and 10,000 simulated seasons, refreshed every three hours.</p>
+          <p class="links"><a href="https://amalmehta.github.io/SportsPred/">Demo →</a> <a href="https://github.com/amalmehta/SportsPred">Code →</a></p>
+        </li>
+      </ul>
     </section>
 
     <section id="writeups" class="wrap section">
