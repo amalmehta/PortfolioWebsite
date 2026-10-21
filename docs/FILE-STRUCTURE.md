@@ -8,7 +8,8 @@ thinking.html                 "Things I'm thinking about": linked from Live inte
 photos.html                   Travel: places I'm going, places I'd like to go, then photos; linked from Live interests and every footer
 writings.html                 Writings: its own page, unlinked and noindex until the first piece is in
 values.html                   What I live by: values, beliefs, how to lead a life, inspiration; linked from the profile footer
-interests.html                Live interests: hobby and curiosity tiles, hidden Books and My art; in every header
+interests.html                Live interests: hobby and curiosity tiles, Books (built from books.json), hidden My art; in every header
+books.json                    Books: reading now, read (stars and reviews) and want to read; run tools/make-books.py after editing
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)
 feed.xml                      RSS feed of Things I'm thinking about (built by tools/make-feed.py)
 favicon.svg                   Browser-tab icon (AM monogram)
@@ -44,6 +45,7 @@ tools/
   draw-places.py              Draws the Travel page's place drawings in images/places/
   check-links.py              Checks the site's external links (run weekly on GitHub)
   make-feed.py                Builds feed.xml (RSS for Things I'm thinking about) from thinking.html
+  make-books.py               Builds the Books section of interests.html from books.json
   check-staleness.py          Flags the Skills and Live interests dates, or the newest thought, over six months old (run weekly on GitHub)
 .github/workflows/tests.yml    Runs the tests on GitHub for every push to main and every pull request
 .github/workflows/links.yml    Checks every external link weekly (Mondays) and on demand

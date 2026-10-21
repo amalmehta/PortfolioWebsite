@@ -101,25 +101,11 @@
       </figure>
     </div>
 
-    <!-- Books I'm reading: hidden until the first book is in. Add cards below, then delete "hidden". -->
-    <section class="books" hidden>
-      <h2 class="section-title">Books I’m reading</h2>
-      <div class="book-grid">
-        <!-- One card per book, newest first. --hue picks the cover colour (0–360).
-             data-stars is 0–5 in halves (e.g. 4.5), or leave the stars line out while you're still reading.
-        <article class="book" style="--hue: 210">
-          <div class="book-cover" aria-hidden="true"><span>Title</span></div>
-          <div class="book-body">
-            <p class="book-status">Reading · since Oct 2026</p>
-            <h3>Title</h3>
-            <p class="book-by">Author</p>
-            <p class="stars" data-stars="4.5" style="--stars: 4.5" aria-label="4.5 out of 5 stars">★★★★★</p>
-            <p class="book-review">A line or two on what you think of it.</p>
-          </div>
-        </article>
-        -->
-      </div>
+    <!-- books:start (built by tools/make-books.py from books.json; don't edit by hand) -->
+    <section class="books" id="books" hidden>
+      <h2 class="section-title">Books</h2>
     </section>
+    <!-- books:end -->
 
     <h2 class="section-title">Curious about</h2>
     <ul class="tiles pair">

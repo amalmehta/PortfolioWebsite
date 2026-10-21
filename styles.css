@@ -301,22 +301,35 @@ picture { display: contents; }
 .belief-note { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.92rem; }
 .inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .inspo + .section-title, .tiles + .section-title, .books + .section-title { margin-top: 3rem; }
-.tiles + .books { margin-top: 3rem; }
-/* Books I'm reading: a card per book, with a drawn cover, stars and a short review */
+.tiles + .books, .photos + .books { margin-top: 3rem; }
+/* Books (built from books.json by tools/make-books.py): Reading now, Read and Want to read,
+   a card per book with a drawn cover, and stars and a short review once read */
+.book-group { margin: 1.75rem 0 0.75rem; font: 600 0.8rem/1.4 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.book-group:first-of-type { margin-top: 0; }
 .book-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 .book { display: grid; grid-template-columns: 76px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 .book:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .book-cover { aspect-ratio: 2 / 3; border-radius: 4px 7px 7px 4px; padding: 0.5rem 0.45rem 0.5rem 0.65rem; display: flex; align-items: flex-end;
   background: linear-gradient(160deg, hsl(var(--hue, 210) 45% 46%), hsl(calc(var(--hue, 210) + 25) 50% 30%));
   box-shadow: inset 5px 0 0 rgb(0 0 0 / 0.18), 0 2px 6px rgb(0 0 0 / 0.15); }
+/* Cover colours, picked per book by tools/make-books.py (inline styles are blocked by the content security policy) */
+.cover-0 { --hue: 210; }
+.cover-1 { --hue: 25; }
+.cover-2 { --hue: 150; }
+.cover-3 { --hue: 340; }
+.cover-4 { --hue: 265; }
+.cover-5 { --hue: 45; }
+.cover-6 { --hue: 190; }
+.cover-7 { --hue: 0; }
 .book-cover span { font: 600 0.68rem/1.25 var(--serif); color: #fff; overflow-wrap: anywhere; }
-.book-body h3 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; line-height: 1.3; margin: 0.1rem 0 0.1rem; }
+.book-body h4 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; line-height: 1.3; margin: 0.1rem 0 0.1rem; }
 .book-status { margin: 0; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--faint); }
 .book-by { margin: 0 0 0.35rem; font-size: 0.88rem; color: var(--muted); }
 .book-review { margin: 0.35rem 0 0; font-size: 0.92rem; line-height: 1.5; color: var(--muted); }
 /* Stars: five glyphs, filled to --stars (0–5, halves allowed) with a gradient clipped to the text */
 .stars { margin: 0; font-size: 1rem; letter-spacing: 0.08em; line-height: 1; width: max-content;
   background: linear-gradient(90deg, var(--warm) calc(var(--stars, 0) / 5 * 100%), var(--line) 0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stars[data-stars="0"] { --stars: 0; } .stars[data-stars="0.5"] { --stars: 0.5; } .stars[data-stars="1"] { --stars: 1; } .stars[data-stars="1.5"] { --stars: 1.5; } .stars[data-stars="2"] { --stars: 2; } .stars[data-stars="2.5"] { --stars: 2.5; } .stars[data-stars="3"] { --stars: 3; } .stars[data-stars="3.5"] { --stars: 3.5; } .stars[data-stars="4"] { --stars: 4; } .stars[data-stars="4.5"] { --stars: 4.5; } .stars[data-stars="5"] { --stars: 5; }
 @media (prefers-reduced-motion: reduce) { .book { transition: none; } .book:hover { transform: none; } }
 /* Live interests: hobbies as tiles */
 .tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }

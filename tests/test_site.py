@@ -569,27 +569,67 @@ class MediaILoveTest(unittest.TestCase):
 
 
 class BooksTest(unittest.TestCase):
-    """Live interests' Books I'm reading: cards with an optional star rating."""
+    """Live interests' Books: Reading now, Read and Want to read, built from books.json."""
 
-    def section(self):
-        html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
+    def make_books(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("make_books", ROOT / "tools/make-books.py")
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        return module
+
+    def section(self, html=None):
+        html = html or (ROOT / "interests.html").read_text(encoding="utf-8")
         s = html[html.index('<section class="books"'):]
         return s[:s.index("</section>")]
+
+    def test_page_matches_books_json(self):
+        make_books = self.make_books()
+        html = (ROOT / "interests.html").read_text(encoding="utf-8")
+        self.assertEqual(make_books.update(html, make_books.build()), html,
+                         "the Books section is out of date: run python3 tools/make-books.py")
 
     def test_hidden_until_first_book(self):
         s = self.section()
         hidden = re.match(r'<section class="books"[^>]*\bhidden\b', s) is not None
-        self.assertEqual(hidden, 'class="book"' not in s)
+        self.assertEqual(hidden, 'class="book ' not in s)
+
+    def test_lists_show_only_with_books(self):
+        make_books = self.make_books()
+        book = {"title": "A <Title>", "author": "Someone"}
+        built = make_books.build({"reading": [], "read": [dict(book, finished="2026-09", stars=4.5, review="Good."), dict(book, stars=3)], "want": [book]})
+        s = self.section(built)
+        self.assertNotIn(" hidden", s.split(">", 1)[0])
+        self.assertEqual(re.findall(r'<h3 class="book-group">([^<]+)</h3>', s), ["Read", "Want to read"])
+        self.assertIn("A &lt;Title&gt;", s)
+        self.assertIn('<time datetime="2026-09">Sep 2026</time>', s)
+        self.assertEqual(re.findall(r'data-stars="([\d.]+)"', s), ["4.5", "3"], "only read books are rated")
+
+    def test_rejects_bad_entries(self):
+        make_books = self.make_books()
+        book = {"title": "T", "author": "A"}
+        for bad in ({"read": [dict(book, stars=4.3)]}, {"read": [dict(book, stars=6)]},
+                    {"reading": [dict(book, stars=4)]}, {"want": [dict(book, review="x")]},
+                    {"read": [dict(book, finished="Sep 2026")]}, {"read": [{"title": "T"}]},
+                    {"finished": [book]}, {"want": [dict(book, cover=8)]}):
+            with self.subTest(data=bad), self.assertRaises(SystemExit):
+                make_books.build(bad)
 
     def test_star_ratings_are_consistent(self):
-        # data-stars, the --stars fill and the spoken label all say the same 0-5 rating.
+        # data-stars picks the CSS fill, and the spoken label says the same 0-5 rating.
+        css = STYLES.read_text(encoding="utf-8")
         for tag in re.findall(r'<p class="stars"[^>]*>', self.section()):
             with self.subTest(stars=tag):
                 value = re.search(r'data-stars="([\d.]+)"', tag).group(1)
-                n = float(value)
-                self.assertTrue(0 <= n <= 5 and (n * 2).is_integer(), "0-5 in halves")
-                self.assertIn("--stars: " + value, tag)
+                self.assertIn(f'.stars[data-stars="{value}"] {{ --stars: {value}; }}', css)
                 self.assertIn('aria-label="' + value + ' out of 5 stars"', tag)
+        for n in range(11):
+            value = f"{n / 2:g}"
+            self.assertIn(f'.stars[data-stars="{value}"] {{ --stars: {value}; }}', css)
+
+    def test_every_cover_has_a_colour(self):
+        css = STYLES.read_text(encoding="utf-8")
+        for n in range(self.make_books().COVERS):
+            self.assertRegex(css, rf"\.cover-{n} {{ --hue: \d+; }}")
 
 
 class ArtSectionTest(unittest.TestCase):
