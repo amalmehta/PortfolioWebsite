@@ -26,11 +26,11 @@ Research engineer with six years of applied deep learning, from generative model
 
 \role{Independent ML \& Robotics Research}{Sept 2025 -- Present}{Self-directed projects; details at \href{https://amalmehta.github.io/PortfolioWebsite/}{amalmehta.github.io/PortfolioWebsite}}{San Francisco Bay Area}
 \begin{itemize}
-\item \textbf{Neural decoding:} 2D hand velocity from motor/premotor cortex spikes (NLB MC\_Maze); GRU decoder outperformed a Kalman filter on held-out trials (R\textsuperscript{2} 0.75 vs.\ 0.55).
+\item \textbf{Reward hacking in code agents:} GRPO on visible tests taught an agent to delete 98\% of untested branches (true correctness 31\%\,$\to$\,2\% as pass rate rose); random 25\% hidden-check audits prevented it. Pre-registered and ran 50 follow-up experiments.
+\item \textbf{Brain--computer interfaces:} four projects on public neural data, three with papers; cursor decoding held R\textsuperscript{2} 0.72 for 138 days.
 \item \textbf{Post-training:} SFT then GRPO on a small transformer policy in a key-and-door gridworld maze; over 3 seeds, GRPO lifted held-out success from 70\% to 80\% (DPO: 81\%), where RL from scratch failed.
-\item \textbf{Self-play RL:} 9$\times$9 Go engine trained from scratch with the AlphaGo Zero recipe; 7,040 self-play games in $\sim$11 h on a laptop.
-\item \textbf{Research tools:} Mac apps for 3D brain MRI (tissue segmentation, EEG placement) and for turning arXiv papers into runnable demos.
-\item \textbf{Products:} Sports Pred (live soccer and tennis title odds), RamClean (on-device ML Mac app), a webcam 3D pose coach.
+\item \textbf{Meta-RL and self-play:} quadrotor adapting to payload, wind and motor wear with seven meta-learning methods; 9$\times$9 Go by self-play.
+\item \textbf{Tools:} Researcher Pal (Claude Code skills that teach any paper); one PyTorch loop split across DDP, FSDP and pipeline.
 \item Member, Sensorimotor AI journal club, Redwood Center (UC Berkeley); mentored undergraduate scholars from Berkeley.
 \end{itemize}
 
@@ -75,10 +75,10 @@ Research engineer with six years of applied deep learning, from generative model
 \section*{Technical Skills}
 \begin{tabular}{@{}p{0.9in}l}
 \textbf{Languages} & Python, C++, Swift, JavaScript / TypeScript \\
-\textbf{ML / RL} & PyTorch, TensorFlow, stable-baselines3, IsaacGym, OpenCV \\
+\textbf{ML / RL} & PyTorch, TensorFlow, stable-baselines3, IsaacGym, OpenCV, CTC decoding \\
 \textbf{Product} & SwiftUI, Core ML, Electron, Three.js, Next.js, React, SQLite \\
-\textbf{Robotics} & ROS, Gazebo, Unitree Go1, CPG gait control, Kalman filtering \\
-\textbf{Tools} & Docker, GitHub Actions CI, CUDA/multi-GPU, W\&B, Testing (XCTest, Vitest, Playwright) \\
+\textbf{Robotics} & ROS, Gazebo, Unitree Go1, CPG gait control, Kalman filtering, Shared autonomy \\
+\textbf{Tools} & Docker, GitHub Actions CI, CUDA/multi-GPU, DDP/FSDP, W\&B, Testing (XCTest, Vitest, Playwright) \\
 \end{tabular}
 
 \section*{Publications}

@@ -112,6 +112,13 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 @media (min-width: 820px) {
   .project { grid-template-columns: 0.85fr 1fr; gap: 2rem; align-items: center; }
 }
+/* Products: a two-column grid of smaller cards, each image above its text. */
+@media (min-width: 820px) {
+  .compact { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; align-items: start; }
+  .compact > .section-title { grid-column: 1 / -1; }
+  .compact .project { grid-template-columns: 1fr; gap: 0.9rem; align-items: start; margin-bottom: 2.75rem; }
+  .compact .project-text h3 { font-size: 1.2rem; }
+}
 .shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 /* The card's <picture> (AVIF with a WebP fallback) lays out as if it were just the image. */
 .shot picture { display: contents; }
