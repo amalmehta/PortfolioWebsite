@@ -187,7 +187,7 @@
         <figure class="shot"><picture><source type="image/avif" srcset="images/bci-projects-960.avif"><img src="images/bci-projects-960.webp" alt="BCI Projects: four cards with headline results: cursor decoding R² 0.72, attempted speech at 38.8% phoneme error, simulated grasp success from 2% to 100%, and stimulation fidelity SSIM 0.84 vs 0.73" loading="lazy" width="960" height="607"></picture></figure>
         <div class="project-text">
           <h3>BCI Projects</h3>
-          <p>Four machine-learning projects for brain–computer interfaces, each with real public neural data where it exists, strong baselines, a closed-loop simulator and a web demo. Cursor decoding still scores R² 0.72 up to 138 days later with no new labels; attempted speech becomes text at a 38.8% phoneme error rate; assistance lifts a 7-joint robot arm’s simulated grasp success from 2% to 100%; and a learned visual-cortex stimulation encoder beats plain intensity-based stimulation. Three come with papers.</p>
+          <p>Four machine-learning projects for brain–computer interfaces, each with real public neural data where it exists, strong baselines, a closed-loop simulator and a web demo. Cursor decoding still scores R² 0.72 up to 138 days later with no new labels; attempted speech becomes text at a 38.8% phoneme error rate; assistance lifts a 7-joint robot arm’s simulated grasp success from 2% to 100%; and a learned visual-cortex stimulation encoder beats plain intensity-based stimulation. Three come with papers. A follow-up on the FALCON benchmark, <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon</a>, finds that re-scaling a decoder’s inputs with a few seconds of unlabelled new-day data beats fine-tuning on 20 seconds of labelled data.</p>
           <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">Shared autonomy</span> <span class="chip">Closed-loop simulation</span> <span class="chip">PyTorch</span></p>
           <p class="links"><a href="https://github.com/amalmehta/BCIProjects">Code and papers →</a></p>
         </div>
@@ -213,6 +213,16 @@
         </div>
       </article>
 
+      <article class="project" id="rl-init-stability">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/rl-init-stability-960.avif"><img src="images/rl-init-stability-960.webp" alt="RL Init and Stability: the live lab training PPO on CartPole with four initialization schemes, with charts of return, entropy, gradient norm, weight norm, and dormant and saturated units" loading="lazy" width="960" height="674"></picture></figure>
+        <div class="project-text">
+          <h3>RL Init and Stability</h3>
+          <p>A review of 68 papers on how weight initialization and network health shape training stability in deep reinforcement learning, from signal propagation to dead and saturated units. A live lab trains PPO agents in your browser with four init schemes and charts return, entropy, gradient norms and dead units as they learn.</p>
+          <p class="tags"><span class="chip">Literature review</span> <span class="chip">PPO</span> <span class="chip">Training stability</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/RLInitStability/">Open the review and lab →</a></p>
+        </div>
+      </article>
+
       <article class="project" id="alphago-lite">
         <figure class="shot"><picture><source type="image/avif" srcset="images/alphago-lite-960.avif"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></picture></figure>
         <div class="project-text">
@@ -223,13 +233,23 @@
         </div>
       </article>
 
-      <article class="project" id="sim-to-real-drone-bench">
-        <figure class="shot contain"><picture><source type="image/avif" srcset="images/drone-bench-960.avif"><img src="images/drone-bench-960.webp" alt="Sim to Real Drone Bench: a square waypoint course seen from above, flown in simulation and on a stand-in drone by a classical controller, a residual policy and a MAML policy" loading="lazy" width="960" height="304"></picture></figure>
+      <article class="project" id="atari-dqn">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/atari-dqn-960.avif"><img src="images/atari-dqn-960.webp" alt="Atari DQN: the Pong learning curve, with score per episode climbing from −21 to about +17 over half a million training steps, against the paper’s score of 20" loading="lazy" width="960" height="614"></picture></figure>
         <div class="project-text">
-          <h3>Sim to Real Drone Bench</h3>
-          <p>Flies one course with a classical controller and RL policies, including a meta-learned one, and measures the sim-to-real gap. Built for a Crazyflie; so far it’s been tested against a deliberately mismatched simulated drone.</p>
-          <p class="tags"><span class="chip">Sim-to-real</span> <span class="chip">Meta-learning</span> <span class="chip">Quadcopters</span></p>
-          <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
+          <h3>Atari DQN</h3>
+          <p>DeepMind’s 2013 Atari paper, rebuilt from scratch in PyTorch and trained on a laptop CPU: one network learns to play from screen pixels and the score alone. On Pong it climbs from −21 to +17 in half a million steps, close to the paper’s 20; Breakout hasn’t taken off yet in its short run. The site walks through how it works.</p>
+          <p class="tags"><span class="chip">Deep Q-learning</span> <span class="chip">PyTorch</span> <span class="chip">Paper reproduction</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/AtariRL/">See how it works →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="drone-autonomy">
+        <figure class="shot contain"><picture><source type="image/avif" srcset="images/drone-autonomy-960.avif"><img src="images/drone-autonomy-960.webp" alt="Drone Autonomy: two recorded flights seen from above, each with the obstacles mapped from depth, the final A* plan and the track flown; the second flight carries extra payload in wind with a worn motor" loading="lazy" width="960" height="353"></picture></figure>
+        <div class="project-text">
+          <h3>Drone Autonomy</h3>
+          <p>A quadrotor that maps unknown rooms with a depth camera, plans its path with A*, and adapts to payload, wind and motor wear by combining seven meta-learning methods with classical control. In simulation, a learned residual roughly halves the error of tuned adaptive control, and meta-learning helps most when it tunes the classical controller’s gains. Every method still fails out of distribution, and the paper says so.</p>
+          <p class="tags"><span class="chip">Meta-learning</span> <span class="chip">Adaptive control</span> <span class="chip">Planning</span> <span class="chip">Simulation</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/DroneAutonomy/">Replay the flights →</a></p>
         </div>
       </article>
 
@@ -301,6 +321,16 @@
         </div>
       </article>
 
+      <article class="project" id="llm-understander">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/llm-understander-960.avif"><img src="images/llm-understander-960.webp" alt="LLM Understander: the Transformer Block chapter, with a diagram of one block (layer norm, multi-head attention, MLP and residual connections) beside the list of 18 chapters" loading="lazy" width="960" height="639"></picture></figure>
+        <div class="project-text">
+          <h3>LLM Understander</h3>
+          <p>How a large language model is trained, from tokens to RLHF, and how it becomes an agent inside a harness, in 18 chapters. Every visualization is driven by a real tiny transformer that trains as you read, in your browser or on your Mac.</p>
+          <p class="tags"><span class="chip">Transformers</span> <span class="chip">Post-training</span> <span class="chip">Agents</span> <span class="chip">Website + Mac app</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/LLMUnderstander/">Start reading →</a></p>
+        </div>
+      </article>
+
       <article class="project" id="take-it-apart">
         <figure class="shot"><picture><source type="image/avif" srcset="images/take-it-apart-960.avif"><img src="images/take-it-apart-960.webp" alt="Take It Apart: a jet engine taken apart in 3D, with the nacelle cowls opened above and below, the fan at the front and the compressor and turbine stages spread along the shafts" loading="lazy" width="960" height="617"></picture></figure>
         <div class="project-text">
@@ -328,6 +358,16 @@
           <p>Learn system design across the stack: 56 topics in 10 areas, from operating systems and GPUs to serving LLMs and self-driving cars, plus 10 worked design problems, such as pre-training a 70B LLM on 2,000 GPUs. Every page reads at four depths, from a one-sentence gist down to failure modes, real systems and interview questions.</p>
           <p class="tags"><span class="chip">System design</span> <span class="chip">ML infrastructure</span> <span class="chip">Website + Mac app</span></p>
           <p class="links"><a href="https://amalmehta.github.io/SystemDesignOracle/">Start learning →</a></p>
+        </div>
+      </article>
+
+      <article class="project" id="ai-advances">
+        <figure class="shot"><picture><source type="image/avif" srcset="images/ai-advances-960.avif"><img src="images/ai-advances-960.webp" alt="AI Advances: the Forecasts page, with a written outlook and a timeline of dated predictions, such as when benchmarks reach 90% and when AI handles tasks taking a full work-week" loading="lazy" width="960" height="645"></picture></figure>
+        <div class="project-text">
+          <h3>AI Advances</h3>
+          <p>Tracks where AI is heading: new model releases, what each lab is working on, and long-run trends in capability, cost, context and compute, turned into dated forecasts that recompute as new data arrives. The site rebuilds every morning, and each day’s forecasts are logged so you can watch them move.</p>
+          <p class="tags"><span class="chip">Forecasting</span> <span class="chip">Live data</span> <span class="chip">Website + Mac app</span></p>
+          <p class="links"><a href="https://amalmehta.github.io/ai-advances/">See today’s forecasts →</a></p>
         </div>
       </article>
 

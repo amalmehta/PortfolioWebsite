@@ -6,7 +6,7 @@
 # Needs sips (macOS), avifenc and cwebp:  brew install libavif webp
 # Run from the repo root after adding or replacing an image:
 #   tools/make-images.sh                     # every image
-#   tools/make-images.sh images/drone-bench.jpg
+#   tools/make-images.sh images/drone-autonomy.jpg
 # Then set the poster's width/height on its <video> to the new file's size
 # (the tests check they match).
 set -euo pipefail

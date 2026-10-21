@@ -11,7 +11,7 @@ To add a clip, follow [docs/INSTRUCTIONS.md](../../docs/INSTRUCTIONS.md#clips): 
 | `neural-signal-ml.mp4` | Neural Signal ML | Decoded reach paths tracing next to the true ones |
 | `post-training.mp4` | Post Training Lab | The four-policy maze race |
 | `alphago-lite.mp4` | AlphaGo Lite | A few moves with the search overlay |
-| `drone-bench.mp4` | Sim to Real Drone Bench | The course flown by each controller |
+| `drone-autonomy.mp4` | Drone Autonomy | A flight with the room mapping in and the A* plan |
 | `driving-sim.mp4` | Autonomous Driving Sim | A drive with perception and planned path |
 | `neuroimaging.mp4` | Neuroimaging Platform | Scrolling slices or rotating the 3D view |
 | `sport-analyzer.mp4` | Sport Analyzer | A rep with the 3D pose and live metrics |
