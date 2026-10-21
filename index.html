@@ -113,7 +113,7 @@
         <div>
           <h3>Independent ML &amp; Robotics Research</h3>
           <p class="where">San Francisco Bay Area</p>
-          <p>Building and evaluating learning systems end to end: studying <a href="#unverifiable-rewards">how code agents learn to game the checks they’re rewarded on</a>, with a pilot and 50 pre-registered experiments; building <a href="#bci-projects">four brain–computer interface projects</a> on real neural data, three of them written up as papers; and testing meta-RL for drones. Also post-training small transformers with GRPO and DPO, training game-playing agents by self-play and from pixels, and building tools for researchers, such as <a href="#researcher-pal">Researcher Pal</a>. Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience, and mentor to undergraduate scholars from UC Berkeley.</p>
+          <p>Building and evaluating learning systems end to end: studying <a href="#unverifiable-rewards">how code agents learn to game the checks they’re rewarded on</a>, with a pilot and 50 pre-registered experiments; building <a href="#bci-projects">four brain–computer interface projects</a> on real neural data, three of them written up as papers; and testing meta-RL for drones. Also post-training small transformers with GRPO and DPO, training game-playing agents by self-play, and building tools for researchers, such as <a href="#researcher-pal">Researcher Pal</a>. Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience, and mentor to undergraduate scholars from UC Berkeley.</p>
           <p class="tags"><span class="chip">Reward hacking</span> <span class="chip">GRPO</span> <span class="chip">Neural decoding</span> <span class="chip">Meta-RL</span> <span class="chip">Sim-to-real</span> <span class="chip">Self-play RL</span></p>
         </div>
       </article>
@@ -206,26 +206,6 @@
         </div>
       </article>
 
-      <article class="project" id="neural-signal-ml">
-        <figure class="shot contain"><picture><source type="image/avif" srcset="images/neural-signal-ml-960.avif"><img src="images/neural-signal-ml-960.webp" alt="Neural Signal ML: true reach paths next to paths rebuilt from motor-cortex spikes by a Kalman filter (R² 0.55) and a GRU (R² 0.75)" loading="lazy" width="960" height="351"></picture></figure>
-        <div class="project-text">
-          <h3>Neural Signal ML</h3>
-          <p>Decodes a monkey’s hand movement from 152 neurons in motor and premotor cortex, the core problem behind brain-controlled cursors and robot arms. On held-out reaches a GRU decoder scores R² 0.75, against 0.55 for the classic Kalman filter. It also decodes imagined movements from EEG, where a classic CSP + LDA model (63.9% on a held-out day) edges out EEGNet (62.3%), and comes with a Mac app for viewing the recordings.</p>
-          <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">Motor cortex</span> <span class="chip">EEG</span> <span class="chip">Kalman filter vs GRU</span> <span class="chip">PyTorch</span></p>
-          <p class="links"><a href="https://github.com/amalmehta/NeuralSignalML">Code and write-up →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="rl-init-stability">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/rl-init-stability-960.avif"><img src="images/rl-init-stability-960.webp" alt="RL Init and Stability: the live lab training PPO on CartPole with four initialization schemes, with charts of return, entropy, gradient norm, weight norm, and dormant and saturated units" loading="lazy" width="960" height="674"></picture></figure>
-        <div class="project-text">
-          <h3>RL Init and Stability</h3>
-          <p>A review of 68 papers on how weight initialization and network health shape training stability in deep reinforcement learning, from signal propagation to dead and saturated units. A live lab trains PPO agents in your browser with four init schemes and charts return, entropy, gradient norms and dead units as they learn.</p>
-          <p class="tags"><span class="chip">Literature review</span> <span class="chip">PPO</span> <span class="chip">Training stability</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/RLInitStability/">Open the review and lab →</a></p>
-        </div>
-      </article>
-
       <article class="project" id="alphago-lite">
         <figure class="shot"><picture><source type="image/avif" srcset="images/alphago-lite-960.avif"><img src="images/alphago-lite-960.webp" alt="AlphaGo Lite: a 9×9 Go board early in a game, with the engine’s win estimate on each candidate move and a side panel of its top moves and win probability" loading="lazy" width="960" height="634"></picture></figure>
         <div class="project-text">
@@ -233,16 +213,6 @@
           <p>A 9×9 Go engine that taught itself from scratch with the AlphaGo Zero recipe: 7,040 self-play games in about 11 hours on one laptop. Play it and watch which moves it’s weighing.</p>
           <p class="tags"><span class="chip">Self-play RL</span> <span class="chip">Monte Carlo tree search</span> <span class="chip">PyTorch</span></p>
           <p class="links"><a href="https://amalmehta.github.io/AlphaGoLite/">Play it in your browser →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="atari-dqn">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/atari-dqn-960.avif"><img src="images/atari-dqn-960.webp" alt="Atari DQN: the Pong learning curve, with score per episode climbing from −21 to about +17 over half a million training steps, against the paper’s score of 20" loading="lazy" width="960" height="614"></picture></figure>
-        <div class="project-text">
-          <h3>Atari DQN</h3>
-          <p>DeepMind’s 2013 Atari paper, rebuilt from scratch in PyTorch and trained on a laptop CPU: one network learns to play from screen pixels and the score alone. On Pong it climbs from −21 to +17 in half a million steps, close to the paper’s 20. The site walks through how it works.</p>
-          <p class="tags"><span class="chip">Deep Q-learning</span> <span class="chip">PyTorch</span> <span class="chip">Paper reproduction</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/AtariRL/">See how it works →</a></p>
         </div>
       </article>
 
@@ -263,16 +233,6 @@
           <p>A browser self-driving stack, from perception and prediction to planning and control, with a learned speed policy that can only act through a safety check. In a 60-second benchmark of all 6 scenarios in 3 driving modes, it had no collisions and no red-light violations. A companion tool, Disengagement Diary, runs the stack over generated edge cases such as jaywalkers, hidden merges and sensor dropouts, and groups every failure into a searchable report.</p>
           <p class="tags"><span class="chip">Perception</span> <span class="chip">Planning</span> <span class="chip">RL with a safety validator</span></p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="distributed-training">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/distributed-training-960.avif"><img src="images/distributed-training-960.webp" alt="Distributed Training: the demo site, with the largest loss gap between strategies (5×10⁻⁷), FSDP’s memory per process (25%) and an animation of DDP splitting a batch across 4 processes" loading="lazy" width="960" height="600"></picture></figure>
-        <div class="project-text">
-          <h3>Distributed Training</h3>
-          <p>One PyTorch training loop for a small transformer, split across processes four ways with a single flag: one process, DDP, FSDP and pipeline parallel. Across 7 real runs no strategy’s loss drifts more than 5×10⁻⁷ from the single process, and FSDP over 4 processes needs a quarter of the memory per process. The site animates how each one splits the model and the batch.</p>
-          <p class="tags"><span class="chip">PyTorch</span> <span class="chip">DDP</span> <span class="chip">FSDP</span> <span class="chip">Pipeline parallelism</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/DistributedTraining/">See how each split works →</a></p>
         </div>
       </article>
 
@@ -328,16 +288,6 @@
           <p>Three Claude Code skills for research papers. One teaches any paper from scratch, with a map of its concepts, step-by-step interactive animations like this one and exercises with hints. One turns your results and notes into a venue-formatted LaTeX paper with verified citations. The third finds what reviewers will attack and checks each idea against the literature.</p>
           <p class="tags"><span class="chip">Claude Code skills</span> <span class="chip">AI agents</span> <span class="chip">Research tools</span></p>
           <p class="links"><a href="https://github.com/amalmehta/researcher_pal">Get the skills →</a></p>
-        </div>
-      </article>
-
-      <article class="project" id="autoresearch">
-        <figure class="shot contain"><picture><source type="image/avif" srcset="images/autoresearch-960.avif"><img src="images/autoresearch-960.webp" alt="My Autoresearch: an example run of 8 experiments, 3 kept, taking validation loss from 0.0288 to 0.0031, with each kept change labelled, such as replacing SGD with Adam" loading="lazy" width="960" height="460"></picture></figure>
-        <div class="project-text">
-          <h3>My Autoresearch</h3>
-          <p>Point it at any git repo and a metric. Claude Code changes the code one experiment at a time, the harness runs your benchmark, and only changes that improve the metric are kept, each as its own commit, with a report at the end. My take on Karpathy’s autoresearch, made to work on any project.</p>
-          <p class="tags"><span class="chip">AI agents</span> <span class="chip">Claude Code</span> <span class="chip">Experiment automation</span></p>
-          <p class="links"><a href="https://github.com/amalmehta/MyAutoresearch">Get the tool →</a></p>
         </div>
       </article>
 
@@ -458,7 +408,7 @@
         </div>
         <div class="skill-row">
           <h3>Tools</h3>
-          <p class="tags"><span class="chip">Docker</span> <span class="chip">GitHub Actions CI</span> <span class="chip">CUDA/multi-GPU</span> <span class="chip">DDP/FSDP</span> <span class="chip">W&amp;B</span> <span class="chip">Testing (XCTest, Vitest, Playwright)</span></p>
+          <p class="tags"><span class="chip">Docker</span> <span class="chip">GitHub Actions CI</span> <span class="chip">CUDA/multi-GPU</span> <span class="chip">W&amp;B</span> <span class="chip">Testing (XCTest, Vitest, Playwright)</span></p>
         </div>
       </div>
     </section>

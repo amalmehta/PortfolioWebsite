@@ -8,7 +8,6 @@ To add a clip, follow [docs/INSTRUCTIONS.md](../../docs/INSTRUCTIONS.md#clips): 
 
 | File | Card | What it should show |
 |---|---|---|
-| `neural-signal-ml.mp4` | Neural Signal ML | Decoded reach paths tracing next to the true ones |
 | `post-training.mp4` | Post Training Lab | The four-policy maze race |
 | `alphago-lite.mp4` | AlphaGo Lite | A few moves with the search overlay |
 | `drone-autonomy.mp4` | Drone Autonomy | A flight with the room mapping in and the A* plan |
