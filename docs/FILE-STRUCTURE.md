@@ -38,8 +38,8 @@ images/                       Project screenshots (and their WebP copies the car
   <project>-960.webp          960 px copy shown on the card (the poster, once it has a clip)
 papers/                       PDFs linked from the site: the robot soccer thesis and school reports
 resume/
-  Amal Mehta Resume.tex       Resume source (latest resume, no phone number)
-  Amal Mehta Resume.pdf       Built resume, linked from the site
+  amal-mehta-resume.tex       Resume source (latest resume, no phone number)
+  amal-mehta-resume.pdf       Built resume, linked from the site
 tools/
   make-images.sh              Builds the AVIF/WebP card images (and, with --large, Featured's bigger copies) and the portrait from the JPEGs in images/
   draw-research-art.py        Draws the research-entry SVGs in images/

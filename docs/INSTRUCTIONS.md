@@ -116,10 +116,10 @@ Below your photos, **Places I’d like to go** shows drawings (not photos) of on
 
 ## Rebuild the resume
 
-The resume PDF is built from `resume/Amal Mehta Resume.tex` with [Tectonic](https://tectonic-typesetting.github.io/) and the macOS Times New Roman font:
+The resume PDF is built from `resume/amal-mehta-resume.tex` with [Tectonic](https://tectonic-typesetting.github.io/) and the macOS Times New Roman font:
 
 ```bash
-cd resume && tectonic -c minimal "Amal Mehta Resume.tex"
+cd resume && tectonic -c minimal amal-mehta-resume.tex
 ```
 
 It has no phone number. Keep it to one page.

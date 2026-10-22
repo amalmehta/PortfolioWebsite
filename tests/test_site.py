@@ -13,8 +13,8 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
 STYLES = ROOT / "styles.css"
-RESUME_TEX = ROOT / "resume" / "Amal Mehta Resume.tex"
-RESUME_PDF = ROOT / "resume" / "Amal Mehta Resume.pdf"
+RESUME_TEX = ROOT / "resume" / "amal-mehta-resume.tex"
+RESUME_PDF = ROOT / "resume" / "amal-mehta-resume.pdf"
 MEDIA_DIR = ROOT / "assets" / "media"
 MAX_MEDIA_BYTES = 2 * 1024 * 1024
 SITE_URL = "https://amalmehta.github.io/PortfolioWebsite/"
