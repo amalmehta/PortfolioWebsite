@@ -30,7 +30,7 @@ def build():
             f'    <atom:link href="{SITE}feed.xml" rel="self" type="application/rss+xml"/>\n'
             "    <title>Things I’m thinking about · Amal Mehta</title>\n"
             f"    <link>{SITE}thinking.html</link>\n"
-            "    <description>Open questions and ideas Amal Mehta keeps coming back to.</description>\n"
+            "    <description>Open questions Amal Mehta keeps coming back to: tools that let anyone build what they want, what brains can teach robots, and physical intelligence.</description>\n"
             "    <language>en</language>\n" + "".join(items) + "  </channel>\n</rss>\n")
 
 
