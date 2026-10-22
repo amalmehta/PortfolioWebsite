@@ -235,11 +235,12 @@ picture { display: contents; }
 .musing p:last-child { margin: 0; font-size: 0.95rem; }
 .musing-empty { border-top: 1px dashed var(--line); padding: 0.9rem 0; margin: 0; font-size: 0.92rem; font-style: italic; color: var(--muted); }
 .nav-name, .nav-links a { white-space: nowrap; }
-/* Narrow screens: there's room for three links. Research starts right below Featured projects,
-   and on the other pages Profile already leads to them, so those links give way to the others. */
+/* Narrow screens: there's room for three links. On the profile, Featured projects start right below
+   the intro while Research is screens further down, so Projects gives way; on the other pages Profile
+   already leads to the projects. */
 @media (max-width: 600px) {
   .nav-links { gap: 0.8rem; }
-  .nav-links a[href="#research"], .nav-links a[href$="index.html#featured"], .nav-links a[href$="/#featured"], .nav-links .file { display: none; }
+  .nav-links a[href$="#featured"], .nav-links .file { display: none; }
 }
 @media (max-width: 380px) { .nav-links { gap: 0.6rem; } }
 @media (max-width: 360px) { .nav-name { font-size: 1.02rem; } .nav-links { gap: 0.5rem; font-size: 0.86rem; } }  /* 320 px phones */

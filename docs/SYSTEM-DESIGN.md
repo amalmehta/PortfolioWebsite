@@ -44,7 +44,7 @@ flowchart LR
 
 ## Main flows
 
-- **Visiting**: the browser loads the HTML, the stylesheet and the fonts; images below the fold load lazily. The header links to Projects (Featured), Research, Interests and the resume (Profile and Projects instead on the other pages). The link for the page you're on is underlined and marked for screen readers; Things I'm thinking about and Travel mark Interests, and Values marks Profile, since that's where they're linked from. Below 600 px it keeps three links, dropping Research, which sits right below Featured, and, on the other pages, Projects, which Profile already leads to. Featured projects come first on the profile, so a visitor sees the strongest work, each with a demo to try and its source, before the timeline.
+- **Visiting**: the browser loads the HTML, the stylesheet and the fonts; images below the fold load lazily. The header links to Projects (Featured), Research, Interests and the resume (Profile and Projects instead on the other pages). The link for the page you're on is underlined and marked for screen readers; Things I'm thinking about and Travel mark Interests, and Values marks Profile, since that's where they're linked from. Below 600 px it keeps three links and drops Projects: on the profile Featured starts right below the intro while Research is several screens down, and on the other pages Profile already leads to the projects. Featured projects come first on the profile, so a visitor sees the strongest work, each with a demo to try and its source, before the timeline.
 - **Updating**: edit `index.html` or swap an image, preview with a local server, push. Pages redeploys.
 - **Resume**: edit the `.tex`, rebuild with Tectonic, commit the PDF.
 
