@@ -41,6 +41,8 @@ The profile lives in `index.html`; the other pages each have their own file:
 
 The tab icon is `favicon.svg`, with `images/favicon-32.png` as a fallback for browsers that don't show SVG icons; redraw both if the colours change. Colours, fonts and spacing are in `styles.css`. The fonts are self-hosted: the `@font-face` rules at the top of `styles.css` point at `fonts/`, and each page preloads the two Latin files. The colour values at the top (`:root`) have a second set under `prefers-color-scheme: dark` for dark mode. If you change `--bg` in either set, change the matching `theme-color` tag at the top of each page too (phones colour their browser bar from it; the tests check they match).
 
+After editing a page, and before committing, run `python3 tools/make-sitemap.py`: it rewrites `sitemap.xml` with the date each public page last changed, so search engines know what to recrawl. Adding or removing a page, or a page's `noindex`, needs it too (the tests check the list).
+
 ## Screenshots
 
 Project screenshots live in `images/` as JPEG about 1400 px wide. The cards show a 960 px WebP copy, built from the JPEG:

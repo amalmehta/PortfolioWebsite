@@ -314,6 +314,12 @@ class SearchTest(unittest.TestCase):
             if '<meta name="robots" content="noindex">' not in html:
                 public.append(re.search(r'<link rel="canonical" href="([^"]+)">', html).group(1))
         self.assertEqual(sorted(listed), sorted(public))
+        # Each page says when it last changed (tools/make-sitemap.py), as a real date that isn't in the future.
+        import datetime
+        days = [m.text for m in ET.parse(ROOT / "sitemap.xml").iter("{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")]
+        self.assertEqual(len(days), len(listed), "every page needs a <lastmod>: run python3 tools/make-sitemap.py")
+        for day in days:
+            self.assertLessEqual(datetime.date.fromisoformat(day), datetime.date.today())
 
     def test_featured_projects_are_described_for_search(self):
         # The profile's structured data names each Featured card, with the same hook, demo and source.
