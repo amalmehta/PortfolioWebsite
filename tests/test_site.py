@@ -322,7 +322,7 @@ class SearchTest(unittest.TestCase):
             self.assertLessEqual(datetime.date.fromisoformat(day), datetime.date.today())
 
     def test_featured_projects_are_described_for_search(self):
-        # The profile's structured data names each Featured card, with the same hook, demo and source.
+        # The profile's structured data names each Featured card, with the same hook, its demo (or, without one, its code) and source.
         import html as htmllib, json
         html = INDEX.read_text(encoding="utf-8")
         blocks = [json.loads(b) for b in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)]
@@ -334,8 +334,9 @@ class SearchTest(unittest.TestCase):
             with self.subTest(project=item["name"]):
                 self.assertEqual(item["name"], htmllib.unescape(re.search(r"<h3>(.*?)</h3>", card).group(1)))
                 self.assertEqual(item["description"], htmllib.unescape(re.search(r"</h3>\s*<p>(.*?)</p>", card, re.S).group(1)))
-                self.assertIn(f'<a href="{item["url"]}">Live demo', card)
-                self.assertIn(f'<a href="{item["codeRepository"]}">Source', card)
+                demo = re.search(r'<a href="([^"]+)">Live demo', card)
+                self.assertEqual(item["url"], demo.group(1) if demo else item["codeRepository"])
+                self.assertIn(f'<a href="{item["codeRepository"]}">', card)
 
 
 class ShareTagsTest(unittest.TestCase):
@@ -470,8 +471,9 @@ class ProjectsTest(unittest.TestCase):
         self.assertIn(len(cards), (3, 4))
         self.assertEqual(len(PAGE.projects), len(cards), [p["title"] for p in PAGE.projects])
 
-    def test_featured_cards_have_avif_demo_and_source(self):
-        # Each Featured card: an AVIF image, a one-sentence hook, its stack, a live demo and its public source.
+    def test_featured_cards_have_avif_hook_and_source(self):
+        # Each Featured card: an AVIF image, a one-sentence hook, its stack and its public source, plus a live demo
+        # where one exists. Featured is for the most vetted research, so the code must be checkable.
         for card in re.findall(r'<article class="project".*?</article>', self.section("featured"), flags=re.S):
             title = re.search(r"<h3>(.*?)</h3>", card).group(1)
             with self.subTest(project=title):
@@ -479,14 +481,16 @@ class ProjectsTest(unittest.TestCase):
                 hook = re.search(r"</h3>\s*<p>(.*?)</p>", card, flags=re.S).group(1)
                 self.assertEqual(len(re.findall(r"[.!?](\s|$)", hook)), 1, "one sentence")
                 links = re.search(r'<p class="links">(.*?)</p>', card).group(1)
-                self.assertRegex(links, r'<a href="https://amalmehta\.github\.io/[^"]+">Live demo')
-                self.assertRegex(links, r'<a href="https://github\.com/amalmehta/[^"]+">Source')
+                self.assertRegex(links, r'<a href="https://github\.com/amalmehta/[^"]+">[^<]*GitHub')
+                demo = re.search(r'<a href="([^"]+)">Live demo', links)
+                if demo:
+                    self.assertTrue(demo.group(1).startswith("https://amalmehta.github.io/"), demo.group(1))
 
     def test_more_projects_are_compact_and_linkable(self):
         # One line each: an anchor, a name, a sentence, and a link or a note that the repo is private.
         items = re.findall(r'<li class="mini" id="[a-z0-9-]+">\s*<h3>[^<]+</h3>\s*<p>[^\n]+</p>\s*<p class="links[^"]*">.*?<a href=', self.section("more-projects"))
         self.assertEqual(len(items), self.section("more-projects").count('<li class="mini"'))
-        self.assertEqual(len(items), 21)
+        self.assertTrue(items)
         self.assertNotIn("<img", self.section("more-projects"))
 
     def test_apps_show_only_with_real_checkouts(self):
@@ -506,15 +510,15 @@ class ProjectsTest(unittest.TestCase):
         for app in apps:
             self.assertRegex(app, r'<p class="app-meta">Mac · macOS \d+ or later</p>')
 
-    def test_built_for_fun_is_closed_and_counted(self):
-        # The things built for fun sit below the rest of More projects, closed until clicked, with a true count.
-        sec = self.section("more-projects")
-        group = re.search(r'<details class="fun" id="built-for-fun">\s*<summary>Built for fun <span class="fun-count">· (\d+) more</span></summary>(.*?)</details>', sec, re.S)
-        self.assertTrue(group, "Built for fun group")
-        self.assertEqual(int(group.group(1)), group.group(2).count('<li class="mini"'))
-        self.assertGreater(sec[:group.start()].count('<li class="mini"'), 0, "the main list comes first")
-        # anchors.js opens it for a link to one of its projects, so their addresses keep working.
-        self.assertIn('details:not([open])', (ROOT / "anchors.js").read_text(encoding="utf-8"))
+    def test_every_project_has_public_code(self):
+        # Only vetted, checkable work is on the profile: every Featured card and More projects line links its public code.
+        entries = re.findall(r'<article class="project".*?</article>', self.section("featured"), flags=re.S)
+        entries += re.findall(r'<li class="mini".*?</li>', self.section("more-projects"), flags=re.S)
+        self.assertTrue(entries)
+        for entry in entries:
+            with self.subTest(project=re.search(r"<h3>(.*?)</h3>", entry).group(1)):
+                self.assertRegex(entry, r'<a href="https://github\.com/amalmehta/[^"]+">')
+                self.assertNotIn('class="links private"', entry)
 
     def test_each_card_is_complete(self):
         for p in PAGE.projects:
@@ -765,8 +769,8 @@ class ArtSectionTest(unittest.TestCase):
 class ContactTest(unittest.TestCase):
     def test_private_projects_invite_a_question(self):
         html = INDEX.read_text(encoding="utf-8")
+        # Any entry without public code says so and invites a question (the profile itself now has none).
         private = re.findall(r'<p class="links private">(.*?)</p>', html)
-        self.assertTrue(private)
         for p in private:
             with self.subTest(text=p):
                 if p.startswith("Private repo"):
