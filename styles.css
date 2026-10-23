@@ -375,6 +375,9 @@ picture { display: contents; }
   .belief-tabs [role="tab"] { flex: 1; padding: 0.5rem 0.6rem; font-size: 0.82rem; white-space: nowrap; }
 }
 .belief-heading { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 0 0 0.6rem; }
+/* Beliefs read as quotes: italic serif with a thin bar on the left, no dividers */
+.beliefs .inspo-item { border-bottom: 0; padding: 0.15rem 0 0.15rem 1rem; margin: 0 0 1rem; border-left: 2px solid color-mix(in srgb, var(--warm) 45%, var(--surface)); }
+.beliefs .inspo-item strong { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.15rem; line-height: 1.45; color: var(--text); margin: 0; }
 .belief-panel + .belief-panel { margin-top: 2rem; }
 .beliefs.tabbed .belief-heading, .beliefs.single .belief-heading { display: none; }
 .beliefs.tabbed .belief-panel + .belief-panel { margin-top: 0; }
