@@ -400,9 +400,90 @@ def chamonix():
     return svg("chamonix", "".join(b), ("#9fc0de", "#e8f0f7"))
 
 
+# ---------------------------------------------------------------- Garibaldi: the lake below the Black Tusk
+def garibaldi():
+    rng = random.Random(8)
+    b = []
+    b.append(clouds(rng, 4, 70, 190, opacity=0.7))
+    # Snow peaks and glaciers across the lake (the Guard, Sphinx and Garibaldi massif)
+    back = ridge(0, W, 470, rng, [(0.18, 0.1, 0.75), (0.42, 0.09, 1.0), (0.62, 0.1, 0.85), (0.86, 0.12, 0.7)], 260, jag=10, step=16)
+    b.append(poly(back, "#7f8ea1"))
+    # Snowcaps: white above a ragged snowline, cut to the peaks' own shape
+    line = [(x, 330 + 26 * math.sin(x / 37) + rng.uniform(-14, 14)) for x in range(0, W + 1, 24)]
+    b.append(f'<defs><clipPath id="garibaldi-peaks">{poly(back, "#000")}</clipPath></defs>'
+             f'<g clip-path="url(#garibaldi-peaks)">{poly([(0, 0), (W, 0)] + line[::-1], "#f3f6f9")}'
+             f'{poly([(600, 0), (W, 0)] + [p for p in line[::-1] if p[0] >= 600], "#d5dde6")}</g>')
+    b.append(poly([(260, 470), (420, 400), (560, 430), (700, 380), (860, 420), (960, 470)], "#e8eef4", opacity="0.85"))  # the Sphinx Glacier tongue
+    # The Black Tusk: a dark volcanic spire on its ridge, at the left
+    tusk_ridge = ridge(0, 420, 500, rng, [(0.35, 0.3, 0.8)], 120, jag=4)
+    b.append(poly(tusk_ridge, "#5b5048"))
+    b.append(poly([(150, 400), (166, 300), (172, 252), (186, 236), (198, 248), (206, 236), (214, 254), (222, 306), (240, 400)], "#2f2a28"))
+    b.append(poly([(198, 248), (206, 236), (214, 254), (222, 306), (240, 400), (210, 400)], "#4a423d"))
+    # Garibaldi Lake: milky turquoise glacial water
+    b.append(f'<rect x="0" y="470" width="{W}" height="200" fill="#36b2b5"/>')
+    b.append(f'<rect x="0" y="470" width="{W}" height="30" fill="#5cc6c4" opacity="0.7"/>')
+    refl = [(x, 470 + (470 - y) * 0.35) for x, y in back]
+    b.append(poly(refl, "#2f9ea3", opacity="0.5"))
+    for _ in range(34):
+        x, y = rng.uniform(0, W), rng.uniform(500, 660)
+        b.append(f'<path d="M{x:.0f},{y:.0f} l{rng.uniform(30, 80):.0f},0" stroke="#a8e3e0" stroke-width="2.5" opacity="0.6" stroke-linecap="round"/>')
+    # The near shore: a meadow and subalpine firs
+    b.append(f'<path d="M0,660 C220,630 520,680 780,650 S1080,630 1200,650 L1200,800 L0,800 Z" fill="#6f9a58"/>')
+    b.append(f'<path d="M0,720 C300,690 640,740 940,705 S1150,700 1200,710 L1200,800 L0,800 Z" fill="#55804a"/>')
+    for x, base, h in ((70, 700, 170), (150, 690, 120), (1040, 690, 190), (1130, 700, 150), (980, 700, 110)):
+        for k in range(5):
+            w = h * (0.36 - k * 0.06)
+            y = base - k * h * 0.2
+            b.append(poly([(x - w, y), (x, y - h * 0.32), (x + w, y)], "#2b4a37"))
+    for _ in range(40):  # wildflowers in the meadow
+        x, y = rng.uniform(0, W), rng.uniform(690, 790)
+        b.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{rng.uniform(2.5, 4.5):.1f}" fill="{rng.choice(("#e8d35a", "#d65f7a", "#f4f1ea", "#8e6fc4"))}"/>')
+    return svg("garibaldi", "".join(b), ("#9fc4e0", "#e9f1f7"))
+
+
+# ---------------------------------------------------------------- Glacier: Wild Goose Island in St. Mary Lake
+def glacier():
+    rng = random.Random(9)
+    b = []
+    b.append(glow(820, 300, 520, 200, "#ffe2b8", 0.55))
+    b.append(clouds(rng, 3, 80, 180, colour="#fff4e6", opacity=0.7))
+    # Layered peaks around the lake: far, middle, near
+    far = ridge(0, W, 470, rng, [(0.2, 0.08, 0.8), (0.4, 0.07, 1.0), (0.62, 0.09, 0.9), (0.85, 0.08, 0.75)], 290, jag=9, step=14)
+    b.append(poly(far, "#8a92a8"))
+    for x, y in far[1:-1:3]:
+        if y < 300 and rng.random() < 0.7:  # lingering snow in the couloirs
+            b.append(f'<path d="M{x:.0f},{y + 6:.0f} L{x + rng.uniform(-12, 12):.0f},{y + rng.uniform(40, 90):.0f}" stroke="#f3f5f8" stroke-width="5" stroke-linecap="round" opacity="0.9"/>')
+    mid = ridge(0, W, 490, rng, [(0.1, 0.12, 0.8), (0.75, 0.14, 0.7), (0.95, 0.08, 0.9)], 170, jag=5)
+    b.append(poly(mid, "#5f6a7c"))
+    b.append(poly([(0, 490), (0, 330), (110, 300), (230, 360), (330, 430), (420, 490)], "#3f4a3c"))  # forested slope at the left
+    for _ in range(70):
+        x = rng.uniform(0, 400); y = rng.uniform(340 + x * 0.3, 490)
+        h = rng.uniform(16, 30)
+        b.append(poly([(x - h * 0.28, y), (x, y - h), (x + h * 0.28, y)], "#2a3a2c"))
+    # St. Mary Lake, deep blue, mirroring the peaks
+    b.append(f'<rect x="0" y="488" width="{W}" height="{H - 488}" fill="#3f6f95"/>')
+    refl = [(x, 488 + (488 - y) * 0.5) for x, y in far]
+    b.append(poly(refl, "#5a7f9e", opacity="0.55"))
+    for _ in range(46):
+        x, y = rng.uniform(0, W), rng.uniform(520, 790)
+        b.append(f'<path d="M{x:.0f},{y:.0f} l{rng.uniform(30, 90):.0f},0" stroke="#a9c8de" stroke-width="2.5" opacity="0.55" stroke-linecap="round"/>')
+    # Wild Goose Island: a small rocky island with a handful of conifers
+    ix, iy = 640, 600
+    b.append(f'<ellipse cx="{ix}" cy="{iy}" rx="70" ry="16" fill="#5b4a3a"/>')
+    b.append(f'<ellipse cx="{ix}" cy="{iy + 8}" rx="84" ry="10" fill="#2f5470" opacity="0.6"/>')
+    for dx, h in ((-44, 54), (-26, 78), (-8, 96), (10, 84), (28, 66), (44, 48)):
+        x = ix + dx
+        for k in range(4):
+            w = h * (0.3 - k * 0.06)
+            y = iy - 6 - k * h * 0.22
+            b.append(poly([(x - w, y), (x, y - h * 0.34), (x + w, y)], "#23402e"))
+        b.append(poly([(x - h * 0.2, iy + 10), (x, iy + 10 + h * 0.5), (x + h * 0.2, iy + 10)], "#23402e", opacity="0.35"))
+    return svg("glacier", "".join(b), ("#f6d7b4", "#dfe9f2"))
+
+
 PLACES = (("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
-          ("chamonix", chamonix))
+          ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:
