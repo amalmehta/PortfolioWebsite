@@ -18,7 +18,7 @@
         setTimeout(() => { link.textContent = "#"; }, 1500);
       }, () => {});
     });
-    h.append(" ", link);
+    h.append("\u00a0", link);  // a no-break space keeps the "#" on the heading's last line instead of wrapping alone
   });
 
   // A link to an entry inside a closed group (Built for fun) opens the group, then goes to the entry.

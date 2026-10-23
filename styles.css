@@ -359,6 +359,7 @@ picture { display: contents; }
 .inspo-group { margin-top: 3rem; }
 /* Inspiration: a card per person or thing, with a drawing, in a grid like the photos */
 .inspo:has(.inspo-card) { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.inspo-link { display: block; margin-top: 0.3rem; font-weight: 500; }
 .media { margin-top: 3rem; }
 .media-kind { display: inline-block; margin-right: 0.4rem; padding: 0 0.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 999px; background: var(--warm-soft); color: var(--warm); vertical-align: 0.1em; }
 /* Beliefs: two tabs (beliefs.js), What I believe currently and Outdated */
@@ -457,7 +458,7 @@ picture { display: contents; }
 /* The tiles arrive one after another when the page opens */
 .tile { animation: tile-in 0.5s ease both; }
 .tile:nth-child(2) { animation-delay: 0.05s; } .tile:nth-child(3) { animation-delay: 0.1s; } .tile:nth-child(4) { animation-delay: 0.15s; }
-.tile:nth-child(5) { animation-delay: 0.2s; } .tile:nth-child(6) { animation-delay: 0.25s; } .tile:nth-child(7) { animation-delay: 0.3s; } .tile:nth-child(8) { animation-delay: 0.35s; }
+.tile:nth-child(5) { animation-delay: 0.2s; } .tile:nth-child(6) { animation-delay: 0.25s; } .tile:nth-child(7) { animation-delay: 0.3s; } .tile:nth-child(8) { animation-delay: 0.35s; } .tile:nth-child(9) { animation-delay: 0.4s; }
 @keyframes tile-in { from { opacity: 0; transform: translateY(8px); } }
 .tile h3 { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; line-height: 1.3; margin: 0 0 0.3rem; }
 /* A tile with somewhere to go: its title is the link, and the whole tile is clickable */
