@@ -11,13 +11,13 @@
   <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta name="description" content="What Amal Mehta tries to live by: values, beliefs, how to lead a life, and the people behind it.">
+  <meta name="description" content="What Amal Mehta tries to live by: values, beliefs, and the people who inspire them.">
   <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/values.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Amal Mehta">
   <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/values.html">
   <meta property="og:title" content="What I live by · Amal Mehta">
-  <meta property="og:description" content="What Amal Mehta tries to live by: values, beliefs, how to lead a life, and the people behind it.">
+  <meta property="og:description" content="What Amal Mehta tries to live by: values, beliefs, and the people who inspire them.">
   <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og-values.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -47,7 +47,7 @@
   <main id="top" class="wrap page">
     <header class="page-head">
       <h1>What I live by</h1>
-      <p>My values, beliefs, and how I want to lead my life.</p>
+      <p>My values, beliefs, and the people who inspire me.</p>
     </header>
 
     <h2 class="section-title">Values</h2>
@@ -78,7 +78,7 @@
       <h2 class="section-title">Beliefs</h2>
       <div class="belief-tabs" role="tablist" aria-label="Beliefs" hidden>
         <button type="button" role="tab" id="tab-current" aria-controls="beliefs-current" aria-selected="true">What I believe currently</button>
-        <button type="button" role="tab" id="tab-outdated" aria-controls="beliefs-outdated" aria-selected="false" tabindex="-1">Outdated</button>
+        <button type="button" role="tab" id="tab-outdated" aria-controls="beliefs-outdated" aria-selected="false" tabindex="-1" hidden>Outdated</button>
       </div>
       <div class="belief-panel" id="beliefs-current" role="tabpanel" aria-labelledby="tab-current">
         <h3 class="belief-heading">What I believe currently</h3>
@@ -97,7 +97,8 @@
           -->
         </ul>
       </div>
-      <div class="belief-panel" id="beliefs-outdated" role="tabpanel" aria-labelledby="tab-outdated">
+      <!-- Outdated: hidden until the first one is in. Add it below, delete "Coming soon.", then delete "hidden" here and on its tab. -->
+      <div class="belief-panel" id="beliefs-outdated" role="tabpanel" aria-labelledby="tab-outdated" hidden>
         <h3 class="belief-heading">Outdated</h3>
         <p class="belief-note">Things I used to believe, and what changed my mind.</p>
         <ul class="inspo">
@@ -109,7 +110,8 @@
       </div>
     </section>
 
-    <section class="inspo-group" id="how-i-want-to-live">
+    <!-- Hidden until the first entry is in: add it below, delete "Coming soon.", then delete "hidden". -->
+    <section class="inspo-group" id="how-i-want-to-live" hidden>
       <h2 class="section-title">Ways I want to lead my life</h2>
       <ul class="inspo">
         <!-- New entries go here, one per line:
@@ -174,7 +176,8 @@
       </ul>
     </section>
 
-    <section class="inspo-group">
+    <!-- Hidden until the first entry is in: add it below, delete "Coming soon.", then delete "hidden". -->
+    <section class="inspo-group" hidden>
       <h2 class="section-title">Things I care about</h2>
       <ul class="inspo">
         <!-- New entries go here, one per line:

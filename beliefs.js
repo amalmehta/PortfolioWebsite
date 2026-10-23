@@ -4,7 +4,9 @@
 (() => {
   const section = document.querySelector(".beliefs");
   if (!section) return;
-  const tabs = [...section.querySelectorAll('[role="tab"]')];
+  // A tab whose list is still empty stays hidden; with one tab left there's nothing to switch, so no tab bar
+  const tabs = [...section.querySelectorAll('[role="tab"]')].filter(t => !t.hidden);
+  if (tabs.length < 2) return;
   const show = tab => tabs.forEach(t => {
     const on = t === tab;
     t.setAttribute("aria-selected", on);

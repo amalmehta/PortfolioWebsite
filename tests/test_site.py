@@ -623,6 +623,13 @@ class SubpagesTest(unittest.TestCase):
                 self.assertEqual(len(days), 2)
                 self.assertLessEqual(days[0], days[1])
 
+    def test_photos_hidden_until_first_photo(self):
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "photos.html").read_text(encoding="utf-8"), flags=re.S)
+        m = re.search(r'<section class="photo-log"([^>]*)>(.*?)</section>', html, flags=re.S)
+        has_photos = 'images/photos/' in m.group(2)
+        self.assertEqual("hidden" in m.group(1), not has_photos)
+        self.assertEqual("Photos coming soon." in m.group(2), not has_photos)
+
     def test_photos_have_alt_and_size(self):
         # Each photo needs alt text and its real width/height, so the grid
         # doesn't jump as photos load. The first two are on screen when the
@@ -638,14 +645,19 @@ class MediaILoveTest(unittest.TestCase):
     """Live interests' Media I love section."""
 
     def test_reading_tile_links_to_media(self):
+        # The tile points at Media I love once it's shown, and at Books while Media I love is hidden.
         html = (ROOT / "interests.html").read_text(encoding="utf-8")
-        self.assertIn('<h3><a class="tile-link" href="#media">Reading, film and games</a></h3>', html)
+        hidden = re.search(r'<section class="media" id="media"[^>]*\bhidden\b', html) is not None
+        target = "#books" if hidden else "#media"
+        self.assertIn(f'<h3><a class="tile-link" href="{target}">Reading, film and games</a></h3>', html)
         self.assertIn('id="media"', html)
 
     def test_media_says_coming_soon_only_while_empty(self):
         html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
-        section = re.search(r'<section class="media" id="media">(.*?)</section>', html, flags=re.S).group(1)
+        m = re.search(r'<section class="media" id="media"([^>]*)>(.*?)</section>', html, flags=re.S)
+        section = m.group(2)
         self.assertEqual("Coming soon." in section, 'class="inspo-item"' not in section)
+        self.assertEqual("hidden" in m.group(1), 'class="inspo-item"' not in section, "hidden exactly while empty")
         for item in re.findall(r'<li class="inspo-item">(.*?)</li>', section, flags=re.S):
             with self.subTest(item=item[:40]):
                 self.assertRegex(item, r'^<strong>[^<]+</strong> <span class="media-kind">[^<]+</span> \S')
@@ -888,7 +900,12 @@ class ValuesPageTest(unittest.TestCase):
         self.assertEqual([t[2] for t in tabs], ["What I believe currently", "Outdated"])
         for tab_id, panel_id, _ in tabs:
             with self.subTest(tab=tab_id):
-                self.assertRegex(html, rf'<div class="belief-panel" id="{panel_id}" role="tabpanel" aria-labelledby="{tab_id}">')
+                self.assertRegex(html, rf'<div class="belief-panel" id="{panel_id}" role="tabpanel" aria-labelledby="{tab_id}"( hidden)?>')
+                # An empty list is hidden, and so is its tab.
+                panel = re.search(rf'<div class="belief-panel" id="{panel_id}"[^>]*>(.*?)</div>', html, flags=re.S)
+                empty = 'class="inspo-item"' not in panel.group(1)
+                self.assertEqual(" hidden" in panel.group(0).split(">")[0], empty)
+                self.assertEqual(re.search(rf'id="{tab_id}"[^>]*\bhidden\b', html) is not None, empty)
         self.assertIn('<script src="beliefs.js" defer></script>', html)
         # A link to either tab opens it, and the tab list stays hidden without JavaScript.
         self.assertIn("location.hash", (ROOT / "beliefs.js").read_text(encoding="utf-8"))
@@ -902,11 +919,13 @@ class ValuesPageTest(unittest.TestCase):
     def test_empty_sections_say_coming_soon(self):
         # Ways I want to lead my life, Inspiration and Things I care about show "Coming soon." exactly while they're empty.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
-        groups = re.findall(r'<section class="inspo-group"[^>]*>(.*?)</section>', html, flags=re.S)
+        groups = re.findall(r'<section class="inspo-group"([^>]*)>(.*?)</section>', html, flags=re.S)
         self.assertEqual(len(groups), 3)
-        for body in groups:
+        for attrs, body in groups:
             with self.subTest(section=re.search(r"<h2[^>]*>(.*?)</h2>", body).group(1)):
-                self.assertEqual("Coming soon." in body, re.search(r'class="inspo-(?:item|card)"', body) is None)
+                empty = re.search(r'class="inspo-(?:item|card)"', body) is None
+                self.assertEqual("Coming soon." in body, empty)
+                self.assertEqual("hidden" in attrs, empty, "hidden exactly while empty")
 
     def test_local_links_resolve(self):
         page = parse(ROOT / "values.html")

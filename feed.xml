@@ -7,6 +7,13 @@
     <description>Open questions Amal Mehta keeps coming back to: tools that let anyone build what they want, what brains can teach robots, and physical intelligence.</description>
     <language>en</language>
     <item>
+      <title>How do we train many agents to work together over long horizons?</title>
+      <link>https://amalmehta.github.io/PortfolioWebsite/thinking.html#long-horizon-multi-agent-rl</link>
+      <guid>https://amalmehta.github.io/PortfolioWebsite/thinking.html#long-horizon-multi-agent-rl</guid>
+      <pubDate>Fri, 23 Oct 2026 12:00:00 +0000</pubDate>
+      <description>Most reinforcement learning still rewards one agent for what happens in the next few steps. The problems I care about look different: many agents, some cooperating and some competing, working toward something that only pays off hours or weeks later. That’s where credit assignment breaks down (whose choice, made when, actually mattered?) and where reward hacking gets easiest, because the checks you can run are much narrower than the outcome you want. My work on rewarding long-horizon code agents is one corner of this, and training agents to resist adversarial policies is another. I want to know what it takes for a group of agents to stay honest, keep learning from each other, and still get the long job done.</description>
+    </item>
+    <item>
       <title>How do we build tools so anyone can do anything they want?</title>
       <link>https://amalmehta.github.io/PortfolioWebsite/thinking.html#tools-for-anyone</link>
       <guid>https://amalmehta.github.io/PortfolioWebsite/thinking.html#tools-for-anyone</guid>
