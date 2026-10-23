@@ -173,6 +173,10 @@ def build():
     lines += ["  </svg>",
               '  <figcaption class="map-legend">' + " ".join(
                   f'<span class="key key-{k}">{KINDS[k]} <span class="key-count">{counts[k]}</span></span>' for k in KINDS) + "</figcaption>",
+              # Pin names show on hover, which phones don't have, so the places I've been are listed too
+              # (the trip and wishlist places have their cards just below)
+              '  <p class="map-been-list"><span class="key key-been">Been</span> '
+              + html.escape(" · ".join(label for k, label, *_ in PINS if k == "been")) + "</p>",
               "</figure>", END]
     return "\n".join(I + line for line in lines)
 

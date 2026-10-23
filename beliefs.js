@@ -6,7 +6,7 @@
   if (!section) return;
   // A tab whose list is still empty stays hidden; with one tab left there's nothing to switch, so no tab bar
   const tabs = [...section.querySelectorAll('[role="tab"]')].filter(t => !t.hidden);
-  if (tabs.length < 2) return;
+  if (tabs.length < 2) { section.classList.add("single"); return; }  // one list: the section title is enough, so its own heading hides
   const show = tab => tabs.forEach(t => {
     const on = t === tab;
     t.setAttribute("aria-selected", on);
