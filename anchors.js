@@ -20,4 +20,17 @@
     });
     h.append(" ", link);
   });
+
+  // A link to an entry inside a closed group (Built for fun) opens the group, then goes to the entry.
+  // Printing opens every group, since paper can't be clicked.
+  const reveal = () => {
+    const target = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    const group = target && target.closest("details:not([open])");
+    if (!group) return;
+    group.open = true;
+    target.scrollIntoView();
+  };
+  reveal();
+  addEventListener("hashchange", reveal);
+  addEventListener("beforeprint", () => document.querySelectorAll("details").forEach(d => { d.open = true; }));
 })();

@@ -132,6 +132,15 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .mini p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
 .mini .links { display: flex; flex-wrap: wrap; gap: 0 1rem; margin-top: 0.35rem; font-size: 0.88rem; }
 .mini .links.private { display: block; font-size: 0.82rem; color: var(--faint); }
+/* Built for fun: the rest of More projects, closed until clicked (anchors.js opens it for a link to one of them) */
+.fun { margin-top: 1.25rem; }
+.fun > summary { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.5rem 0; border-top: 1px solid var(--line); cursor: pointer; list-style: none;
+  font: 600 0.8rem/1.4 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.fun > summary::-webkit-details-marker { display: none; }
+.fun > summary::before { content: ""; width: 0.4rem; height: 0.4rem; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(-45deg); transition: transform 0.2s; }
+.fun[open] > summary::before { transform: rotate(45deg); }
+.fun > summary:hover { color: var(--text); }
+.fun-count { font-weight: 500; letter-spacing: 0.02em; text-transform: none; color: var(--faint); }
 .shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 /* The card's <picture> (AVIF with a WebP fallback) lays out as if it were just the image. */
 .shot picture { display: contents; }

@@ -489,6 +489,16 @@ class ProjectsTest(unittest.TestCase):
         self.assertEqual(len(items), 21)
         self.assertNotIn("<img", self.section("more-projects"))
 
+    def test_built_for_fun_is_closed_and_counted(self):
+        # The things built for fun sit below the rest of More projects, closed until clicked, with a true count.
+        sec = self.section("more-projects")
+        group = re.search(r'<details class="fun" id="built-for-fun">\s*<summary>Built for fun <span class="fun-count">· (\d+) more</span></summary>(.*?)</details>', sec, re.S)
+        self.assertTrue(group, "Built for fun group")
+        self.assertEqual(int(group.group(1)), group.group(2).count('<li class="mini"'))
+        self.assertGreater(sec[:group.start()].count('<li class="mini"'), 0, "the main list comes first")
+        # anchors.js opens it for a link to one of its projects, so their addresses keep working.
+        self.assertIn('details:not([open])', (ROOT / "anchors.js").read_text(encoding="utf-8"))
+
     def test_each_card_is_complete(self):
         for p in PAGE.projects:
             with self.subTest(project=p["title"].strip() or "(untitled)"):

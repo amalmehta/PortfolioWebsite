@@ -295,7 +295,8 @@
 
     <section id="more-projects" class="wrap section">
       <h2 class="section-title">More projects</h2>
-      <!-- One line each, research first, then products, then things built for fun.
+      <!-- One line each: research first, then tools. Things built for fun go in
+           the "Built for fun" group below, closed until clicked; keep its count in step.
            A project moves up to Featured only with a live demo and public source. -->
       <ul class="minis">
         <li class="mini" id="bci-projects">
@@ -313,6 +314,11 @@
           <p>A browser self-driving stack, from perception to control, whose RL speed policy can only act through a safety check: no collisions or red-light violations across 6 scenarios in 3 modes.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
         </li>
+        <li class="mini" id="orbit-lab">
+          <h3>Orbit Lab</h3>
+          <p>Plan real orbital moves in 3D, then watch a reinforcement-learning agent learn to dock with a space station.</p>
+          <p class="links"><a href="https://amalmehta.github.io/OrbitLab/">Demo →</a> <a href="https://github.com/amalmehta/OrbitLab">Code →</a></p>
+        </li>
         <li class="mini" id="neuroimaging-platform">
           <h3>Neuroimaging Platform</h3>
           <p>A Mac app that segments 3D brain MRI into gray matter, white matter and fluid, places EEG electrodes on the head and runs research methods from UCSF.</p>
@@ -323,87 +329,87 @@
           <p>Strava for technique: tracks your body in 3D from a webcam, measures stride, lifts, swings and shots, and scores your reps against one example.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
         </li>
-        <li class="mini" id="system-design-oracle">
-          <h3>System Design Oracle</h3>
-          <p>System design across the stack, from GPUs to serving LLMs and self-driving cars, in 56 topics and 10 worked problems, each readable at four depths.</p>
-          <p class="links"><a href="https://amalmehta.github.io/SystemDesignOracle/">Demo →</a> <a href="https://github.com/amalmehta/SystemDesignOracle">Code →</a></p>
-        </li>
         <li class="mini" id="researcher-pal">
           <h3>Researcher Pal</h3>
           <p>Three Claude Code skills: one teaches any research paper with interactive animations, one writes your own paper in venue LaTeX, and one finds what reviewers will attack.</p>
           <p class="links"><a href="https://github.com/amalmehta/researcher_pal">Get the skills →</a></p>
-        </li>
-        <li class="mini" id="take-it-apart">
-          <h3>Take It Apart</h3>
-          <p>Takes an object apart in 3D, from a 536-piece jet engine to a grand piano, with every part explained; name anything else and Claude plans its parts.</p>
-          <p class="links"><a href="https://amalmehta.github.io/take-it-apart-site/">Demo →</a></p>
-        </li>
-        <li class="mini" id="top-gun-simulator">
-          <h3>Top Gun Simulator</h3>
-          <p>A flight simulator with real aerodynamics and a live instructor that teaches you to fly in 11 lessons, then sends you through a canyon run and a dogfight.</p>
-          <p class="links"><a href="https://amalmehta.github.io/TopGunSimulator/">Demo →</a> <a href="https://github.com/amalmehta/TopGunSimulator">Code →</a></p>
-        </li>
-        <li class="mini" id="ai-advances">
-          <h3>AI Advances</h3>
-          <p>New models, lab work and long-run trends in capability, cost and compute, turned into dated forecasts that rebuild every morning.</p>
-          <p class="links"><a href="https://amalmehta.github.io/ai-advances/">Demo →</a> <a href="https://github.com/amalmehta/ai-advances">Code →</a></p>
-        </li>
-        <li class="mini" id="energy-for-ai">
-          <h3>Energy for AI</h3>
-          <p>Ranks eleven ways to power an AI data center by cost, carbon, speed and reliability for your load, deadline and region, with every figure sourced.</p>
-          <p class="links"><a href="https://amalmehta.github.io/EnergyForAI/">Demo →</a> <a href="https://github.com/amalmehta/EnergyForAI">Code →</a></p>
-        </li>
-        <li class="mini" id="path-finder">
-          <h3>Path Finder</h3>
-          <p>A trip advisor that reads your taste in music, film and books, argues destinations from it and writes a day-by-day itinerary.</p>
-          <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
         </li>
         <li class="mini" id="paper-to-playground">
           <h3>Paper to Playground</h3>
           <p>Paste an arXiv link and get a runnable page of sliders over the paper’s core idea, drafted by a language model and checked until it passes.</p>
           <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
         </li>
-        <li class="mini" id="track-the-migration">
-          <h3>Track the Migration</h3>
-          <p>Seventeen real animal migrations, from wildebeest to godwits, replayed on a 3D globe from published tracking data.</p>
-          <p class="links"><a href="https://amalmehta.github.io/TrackTheMigration/">Demo →</a> <a href="https://github.com/amalmehta/TrackTheMigration">Code →</a></p>
+        <li class="mini" id="system-design-oracle">
+          <h3>System Design Oracle</h3>
+          <p>System design across the stack, from GPUs to serving LLMs and self-driving cars, in 56 topics and 10 worked problems, each readable at four depths.</p>
+          <p class="links"><a href="https://amalmehta.github.io/SystemDesignOracle/">Demo →</a> <a href="https://github.com/amalmehta/SystemDesignOracle">Code →</a></p>
         </li>
-        <li class="mini" id="moonshot">
-          <h3>Moonshot</h3>
-          <p>How SpaceX’s rockets work from first principles, with 200 simulated booster landings and a flight to the Moon (unofficial).</p>
-          <p class="links"><a href="https://amalmehta.github.io/Moonshot/">Demo →</a> <a href="https://github.com/amalmehta/Moonshot">Code →</a></p>
-        </li>
-        <li class="mini" id="orbit-lab">
-          <h3>Orbit Lab</h3>
-          <p>Plan real orbital moves in 3D, then watch a reinforcement-learning agent learn to dock with a space station.</p>
-          <p class="links"><a href="https://amalmehta.github.io/OrbitLab/">Demo →</a> <a href="https://github.com/amalmehta/OrbitLab">Code →</a></p>
-        </li>
-        <li class="mini" id="black-hole-simulator">
-          <h3>Black Hole Simulator</h3>
-          <p>A black hole ray-traced live in the browser, with a walk-through of the physics behind every pixel.</p>
-          <p class="links"><a href="https://amalmehta.github.io/BlackHoleSimulator/">Demo →</a> <a href="https://github.com/amalmehta/BlackHoleSimulator">Code →</a></p>
-        </li>
-        <li class="mini" id="birdseye-fc">
-          <h3>Birdseye FC</h3>
-          <p>Famous football goals replayed from above, from Carlos Alberto in 1970 to Maradona and Bergkamp, with commentary read aloud.</p>
-          <p class="links"><a href="https://amalmehta.github.io/soccer_viz/">Demo →</a> <a href="https://github.com/amalmehta/soccer_viz">Code →</a></p>
-        </li>
-        <li class="mini" id="navier-stokes">
-          <h3>Navier–Stokes</h3>
-          <p>Five water simulations that solve the Navier–Stokes equations live on your GPU.</p>
-          <p class="links"><a href="https://amalmehta.github.io/NavierStokes/">Demo →</a> <a href="https://github.com/amalmehta/NavierStokes">Code →</a></p>
-        </li>
-        <li class="mini" id="signal-processing">
-          <h3>Signal Processing Primer and Spectrogram Studio</h3>
-          <p>A 13-lesson course on the maths of audio, images and video, then a studio for painting filters onto a spectrogram and hearing the result.</p>
-          <p class="links"><a href="https://amalmehta.github.io/SignalProcessingPrimer/">Course →</a> <a href="https://amalmehta.github.io/SpectrogramStudio/">Studio →</a> <a href="https://github.com/amalmehta/SignalProcessingPrimer">Course code →</a> <a href="https://github.com/amalmehta/SpectrogramStudio">Studio code →</a></p>
-        </li>
-        <li class="mini" id="sports-pred">
-          <h3>Sports Pred</h3>
-          <p>Live title odds for soccer leagues and tennis tournaments, from Elo ratings and 10,000 simulated seasons, refreshed every three hours.</p>
-          <p class="links"><a href="https://amalmehta.github.io/SportsPred/">Demo →</a> <a href="https://github.com/amalmehta/SportsPred">Code →</a></p>
+        <li class="mini" id="ai-advances">
+          <h3>AI Advances</h3>
+          <p>New models, lab work and long-run trends in capability, cost and compute, turned into dated forecasts that rebuild every morning.</p>
+          <p class="links"><a href="https://amalmehta.github.io/ai-advances/">Demo →</a> <a href="https://github.com/amalmehta/ai-advances">Code →</a></p>
         </li>
       </ul>
+      <details class="fun" id="built-for-fun">
+        <summary>Built for fun <span class="fun-count">· 11 more</span></summary>
+        <ul class="minis">
+          <li class="mini" id="take-it-apart">
+            <h3>Take It Apart</h3>
+            <p>Takes an object apart in 3D, from a 536-piece jet engine to a grand piano, with every part explained; name anything else and Claude plans its parts.</p>
+            <p class="links"><a href="https://amalmehta.github.io/take-it-apart-site/">Demo →</a></p>
+          </li>
+          <li class="mini" id="top-gun-simulator">
+            <h3>Top Gun Simulator</h3>
+            <p>A flight simulator with real aerodynamics and a live instructor that teaches you to fly in 11 lessons, then sends you through a canyon run and a dogfight.</p>
+            <p class="links"><a href="https://amalmehta.github.io/TopGunSimulator/">Demo →</a> <a href="https://github.com/amalmehta/TopGunSimulator">Code →</a></p>
+          </li>
+          <li class="mini" id="energy-for-ai">
+            <h3>Energy for AI</h3>
+            <p>Ranks eleven ways to power an AI data center by cost, carbon, speed and reliability for your load, deadline and region, with every figure sourced.</p>
+            <p class="links"><a href="https://amalmehta.github.io/EnergyForAI/">Demo →</a> <a href="https://github.com/amalmehta/EnergyForAI">Code →</a></p>
+          </li>
+          <li class="mini" id="path-finder">
+            <h3>Path Finder</h3>
+            <p>A trip advisor that reads your taste in music, film and books, argues destinations from it and writes a day-by-day itinerary.</p>
+            <p class="links private">Private repo · <a href="https://reachouts.me/?u=amal">ask me about it →</a></p>
+          </li>
+          <li class="mini" id="track-the-migration">
+            <h3>Track the Migration</h3>
+            <p>Seventeen real animal migrations, from wildebeest to godwits, replayed on a 3D globe from published tracking data.</p>
+            <p class="links"><a href="https://amalmehta.github.io/TrackTheMigration/">Demo →</a> <a href="https://github.com/amalmehta/TrackTheMigration">Code →</a></p>
+          </li>
+          <li class="mini" id="moonshot">
+            <h3>Moonshot</h3>
+            <p>How SpaceX’s rockets work from first principles, with 200 simulated booster landings and a flight to the Moon (unofficial).</p>
+            <p class="links"><a href="https://amalmehta.github.io/Moonshot/">Demo →</a> <a href="https://github.com/amalmehta/Moonshot">Code →</a></p>
+          </li>
+          <li class="mini" id="black-hole-simulator">
+            <h3>Black Hole Simulator</h3>
+            <p>A black hole ray-traced live in the browser, with a walk-through of the physics behind every pixel.</p>
+            <p class="links"><a href="https://amalmehta.github.io/BlackHoleSimulator/">Demo →</a> <a href="https://github.com/amalmehta/BlackHoleSimulator">Code →</a></p>
+          </li>
+          <li class="mini" id="birdseye-fc">
+            <h3>Birdseye FC</h3>
+            <p>Famous football goals replayed from above, from Carlos Alberto in 1970 to Maradona and Bergkamp, with commentary read aloud.</p>
+            <p class="links"><a href="https://amalmehta.github.io/soccer_viz/">Demo →</a> <a href="https://github.com/amalmehta/soccer_viz">Code →</a></p>
+          </li>
+          <li class="mini" id="navier-stokes">
+            <h3>Navier–Stokes</h3>
+            <p>Five water simulations that solve the Navier–Stokes equations live on your GPU.</p>
+            <p class="links"><a href="https://amalmehta.github.io/NavierStokes/">Demo →</a> <a href="https://github.com/amalmehta/NavierStokes">Code →</a></p>
+          </li>
+          <li class="mini" id="signal-processing">
+            <h3>Signal Processing Primer and Spectrogram Studio</h3>
+            <p>A 13-lesson course on the maths of audio, images and video, then a studio for painting filters onto a spectrogram and hearing the result.</p>
+            <p class="links"><a href="https://amalmehta.github.io/SignalProcessingPrimer/">Course →</a> <a href="https://amalmehta.github.io/SpectrogramStudio/">Studio →</a> <a href="https://github.com/amalmehta/SignalProcessingPrimer">Course code →</a> <a href="https://github.com/amalmehta/SpectrogramStudio">Studio code →</a></p>
+          </li>
+          <li class="mini" id="sports-pred">
+            <h3>Sports Pred</h3>
+            <p>Live title odds for soccer leagues and tennis tournaments, from Elo ratings and 10,000 simulated seasons, refreshed every three hours.</p>
+            <p class="links"><a href="https://amalmehta.github.io/SportsPred/">Demo →</a> <a href="https://github.com/amalmehta/SportsPred">Code →</a></p>
+          </li>
+        </ul>
+      </details>
     </section>
 
     <section id="writeups" class="wrap section">
