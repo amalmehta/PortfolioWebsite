@@ -438,61 +438,77 @@ def alcaraz():
     body.append('<circle cx="250" cy="720" r="13" fill="#dfe86a"/><path d="M240 713 q10 8 20 0" fill="none" stroke="#f7f7f2" stroke-width="2"/>')
     return wrap(defs, body)
 
-def musk():
-    """SpaceX catching a returning Super Heavy booster with the launch tower's arms, Starbase,
-    Texas, at sunrise on 13 October 2024."""
-    rng = random.Random(2024)
-    defs = ('<linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1">'
-            '<stop offset="0" stop-color="#355c8c"/><stop offset="0.55" stop-color="#e9a77a"/><stop offset="1" stop-color="#f6d2a0"/></linearGradient>'
-            '<linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">'
-            '<stop offset="0" stop-color="#8e959c"/><stop offset="0.35" stop-color="#e9edf0"/><stop offset="0.6" stop-color="#c3c9ce"/><stop offset="1" stop-color="#7d848b"/></linearGradient>'
-            '<radialGradient id="flame" cx="0.5" cy="0.2" r="0.8">'
-            '<stop offset="0" stop-color="#fffbe8"/><stop offset="0.35" stop-color="#ffd166"/><stop offset="0.8" stop-color="#f07a3a" stop-opacity="0.7"/><stop offset="1" stop-color="#f07a3a" stop-opacity="0"/></radialGradient>'
-            '<radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">'
-            '<stop offset="0" stop-color="#fff4d6" stop-opacity="0.9"/><stop offset="1" stop-color="#fff4d6" stop-opacity="0"/></radialGradient>')
-    body = [f'<rect width="{W}" height="{H}" fill="url(#dawn)"/>', '<circle cx="1000" cy="640" r="240" fill="url(#sun)"/>']
-    # The Gulf on the horizon, and the flat coast
-    body.append('<rect y="626" width="1200" height="24" fill="#b98a7a"/><rect y="650" width="1200" height="150" fill="#3a2f2c"/>')
-    # Exhaust and dust billowing over the pad, lit by the engines
-    for _ in range(26):
-        x, y, r = rng.uniform(300, 760), rng.uniform(600, 700), rng.uniform(30, 80)
-        body.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.0f}" fill="{rng.choice(("#d9c3a8", "#c9ad90", "#e8d3b8"))}" opacity="0.85"/>')
-    # The launch mount under it
-    body.append(f'<polygon points="{pts([(380, 700), (400, 590), (640, 590), (660, 700)])}" fill="#2b2523"/>'
-                '<rect x="392" y="580" width="256" height="18" fill="#3a3230"/>')
-    # The tower: a steel lattice with the two catch arms ("chopsticks") reaching out to the booster
-    tx, tw = 700, 84
-    body.append(f'<rect x="{tx}" y="70" width="{tw}" height="630" fill="#2f2a2a"/>')
-    lat = "".join(f'<line x1="{tx}" y1="{y}" x2="{tx + tw}" y2="{y + 42}"/><line x1="{tx + tw}" y1="{y}" x2="{tx}" y2="{y + 42}"/>' for y in range(70, 700, 42))
-    body.append(f'<g stroke="#5a5250" stroke-width="3">{lat}</g>')
-    body.append(f'<rect x="{tx - 6}" y="56" width="{tw + 12}" height="18" fill="#2f2a2a"/><line x1="{tx + tw / 2}" y1="20" x2="{tx + tw / 2}" y2="56" stroke="#2f2a2a" stroke-width="5"/>')
-    def arm(y, shade):
-        braces = "".join(f'<line x1="{x}" y1="{y}" x2="{x + 22}" y2="{y + 22}"/>' for x in range(416, tx, 26))
-        return f'<rect x="412" y="{y}" width="{tx - 412}" height="22" fill="{shade}"/><g stroke="#62585a" stroke-width="2">{braces}</g>'
-    body.append(arm(228, "#3d3534"))  # the arm behind the booster
-    body.append(f'<rect x="{tx - 18}" y="214" width="30" height="72" fill="#2f2a2a"/>')
-    # The booster: a tall stainless-steel cylinder hanging between the arms, grid fins at the top
-    bx, bw, top, bot = 474, 96, 150, 520
-    body.append(f'<rect x="{bx}" y="{top}" width="{bw}" height="{bot - top}" rx="6" fill="url(#steel)"/>')
-    for y in range(top + 40, bot, 38):
-        body.append(f'<line x1="{bx}" y1="{y}" x2="{bx + bw}" y2="{y}" stroke="#8a9198" stroke-width="1.5" opacity="0.7"/>')
-    body.append(f'<rect x="{bx}" y="{bot - 90}" width="{bw}" height="90" fill="#3a3533" opacity="0.45"/>')  # soot near the engines
-    body.append(f'<path d="M{bx} {top + 10} Q{bx + bw / 2} {top - 18} {bx + bw} {top + 10} L{bx + bw} {top + 20} L{bx} {top + 20} Z" fill="#cfd5da"/>')
-    for d in (-1, 1):
-        gx_ = bx + (bw if d > 0 else 0) + d * 4
-        body.append(f'<rect x="{gx_ - (0 if d > 0 else 34)}" y="{top + 40}" width="34" height="40" fill="#3b3836"/>')
-        body.append(f'<g stroke="#77706c" stroke-width="2">' + "".join(f'<line x1="{gx_ - (0 if d > 0 else 34)}" y1="{top + 44 + k * 8}" x2="{gx_ + (34 if d > 0 else 0)}" y2="{top + 44 + k * 8}"/>' for k in range(5)) + '</g>')
-    body.append(arm(242, "#2a2423"))  # the arm in front, closed around it just under the grid fins
-    # Its engines still burning: a bright plume down onto the mount
-    body.append(f'<polygon points="{pts([(bx + 10, bot), (bx + bw - 10, bot), (bx + bw + 30, 640), (bx - 30, 640)])}" fill="url(#flame)"/>')
-    body.append(f'<polygon points="{pts([(bx + 26, bot), (bx + bw - 26, bot), (bx + bw / 2 + 16, 600), (bx + bw / 2 - 16, 600)])}" fill="#fffbe8" opacity="0.9"/>')
-    body.append(f'<rect x="{bx + 8}" y="{bot}" width="{bw - 16}" height="10" rx="3" fill="#2b2523"/>')
-    return wrap(defs, body)
+def neuralink():
+    """Neuralink's first patient, 2024: a man in a wheelchair moving a cursor across a chess game on
+    a laptop by thought, a faint signal running from his head to the screen. A generic, faceless
+    figure, not a likeness."""
+    defs = ('<linearGradient id="nwall" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#efe7da"/><stop offset="1" stop-color="#e2d6c3"/></linearGradient>'
+            '<linearGradient id="nscreen" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0" stop-color="#2b3a4e"/><stop offset="1" stop-color="#1c2735"/></linearGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#nwall)"/>',
+            f'<rect y="600" width="{W}" height="200" fill="#b8a283"/>', f'<rect y="596" width="{W}" height="8" fill="#a48e70"/>']
+    # A window with soft daylight, and a plant
+    body.append('<rect x="70" y="90" width="300" height="330" rx="6" fill="#cfe2ee"/><rect x="70" y="90" width="300" height="330" rx="6" fill="none" stroke="#fbf8f2" stroke-width="16"/>'
+                '<line x1="220" y1="90" x2="220" y2="420" stroke="#fbf8f2" stroke-width="10"/><line x1="70" y1="255" x2="370" y2="255" stroke="#fbf8f2" stroke-width="10"/>')
+    body.append('<rect x="1040" y="500" width="70" height="100" rx="10" fill="#c46a43"/>')
+    for dx, dy, r in ((-24, -40, 36), (26, -52, 40), (0, -86, 38), (-40, -88, 26), (40, -100, 28)):
+        body.append(f'<ellipse cx="{1075 + dx}" cy="{500 + dy}" rx="{r * 0.6:.0f}" ry="{r}" fill="#4f8a4f"/>')
+    # The table and laptop, its screen turned toward him and us
+    body.append('<rect x="640" y="470" width="360" height="22" rx="6" fill="#8a6a45"/><rect x="664" y="492" width="16" height="108" fill="#7a5c3a"/><rect x="960" y="492" width="16" height="108" fill="#7a5c3a"/>')
+    body.append(f'<polygon points="{pts([(700, 468), (940, 468), (960, 458), (712, 458)])}" fill="#b9c0c8"/>')
+    body.append(f'<polygon points="{pts([(712, 458), (952, 458), (930, 250), (690, 270)])}" fill="#9aa3ad"/>')
+    body.append(f'<polygon points="{pts([(722, 448), (940, 448), (920, 262), (702, 280)])}" fill="url(#nscreen)"/>')
+    # The chess game on the screen, drawn flat and skewed onto it
+    board = []
+    for r in range(8):
+        for c in range(8):
+            board.append(f'<rect x="{c * 20}" y="{r * 20}" width="20" height="20" fill="{"#e8d8b0" if (r + c) % 2 == 0 else "#9c7a54"}"/>')
+    # Chess pieces mid-game (solid glyphs, filled white or black)
+    pieces = ((4, 7, "♚", "#f6f6f2"), (3, 7, "♛", "#f6f6f2"), (0, 7, "♜", "#f6f6f2"), (5, 6, "♟", "#f6f6f2"), (6, 6, "♟", "#f6f6f2"),
+              (2, 5, "♞", "#f6f6f2"), (4, 4, "♟", "#f6f6f2"), (4, 0, "♚", "#1b1c1e"), (3, 0, "♛", "#1b1c1e"), (7, 0, "♜", "#1b1c1e"),
+              (2, 1, "♟", "#1b1c1e"), (5, 2, "♞", "#1b1c1e"), (3, 3, "♟", "#1b1c1e"), (6, 1, "♟", "#1b1c1e"))
+    for c, r, g, col in pieces:
+        stroke = "#1b1c1e" if col != "#1b1c1e" else "#f6f6f2"
+        board.append(f'<text x="{c * 20 + 10}" y="{r * 20 + 16}" text-anchor="middle" font-size="17" '
+                     f'font-family="DejaVu Sans, Segoe UI Symbol, Apple Symbols, sans-serif" fill="{col}" stroke="{stroke}" stroke-width="0.6">{g}\ufe0e</text>')  # FE0E: draw as text, never as an emoji
+    board.append('<rect x="80" y="80" width="20" height="20" fill="none" stroke="#7fe0ff" stroke-width="2.5"/>')
+    board.append('<path d="M92 92 l0 22 l6 -6 l5 10 l4 -2 l-5 -10 l8 0 z" fill="#ffffff" stroke="#1b1c1e" stroke-width="1.2"/>')
+    body.append(f'<g transform="matrix(0.95 -0.07 0 0.95 748 292)">{"".join(board)}</g>')
 
+    # The wheelchair: big wheel, seat and back, a small front caster
+    body.append('<circle cx="330" cy="600" r="118" fill="none" stroke="#3a3f46" stroke-width="12"/>'
+                '<circle cx="330" cy="600" r="100" fill="none" stroke="#8d949c" stroke-width="3"/>')
+    for k in range(8):
+        import math
+        a_ = k * math.pi / 8
+        body.append(f'<line x1="{330 + 100 * math.cos(a_):.0f}" y1="{600 + 100 * math.sin(a_):.0f}" x2="{330 - 100 * math.cos(a_):.0f}" y2="{600 - 100 * math.sin(a_):.0f}" stroke="#8d949c" stroke-width="2"/>')
+    body.append('<circle cx="330" cy="600" r="12" fill="#3a3f46"/><circle cx="520" cy="690" r="26" fill="none" stroke="#3a3f46" stroke-width="9"/>')
+    body.append(f'<polyline points="{pts([(250, 330), (270, 560), (470, 560), (520, 664)])}" fill="none" stroke="#3a3f46" stroke-width="12" stroke-linejoin="round"/>')
+    body.append('<rect x="268" y="520" width="200" height="34" rx="10" fill="#2c3e57"/>')  # seat cushion
+    body.append('<rect x="244" y="330" width="40" height="210" rx="14" fill="#2c3e57"/>')  # backrest
+
+    # Him, seated, faceless, turned toward the screen; hands resting in his lap
+    skin, top, trousers, hair = "#d9a77f", "#6c8eb5", "#3b4656", "#3a2a20"
+    body.append(f'<polyline points="{pts([(300, 540), (470, 540), (480, 700)])}" fill="none" stroke="{trousers}" stroke-width="52" stroke-linejoin="round"/>')
+    body.append('<ellipse cx="500" cy="716" rx="34" ry="14" fill="#2a2a2a"/>')
+    body.append(f'<path d="M268 548 L282 380 Q290 350 330 346 Q372 350 380 380 L394 548 Z" fill="{top}"/>')
+    body.append(f'<polyline points="{pts([(352, 400), (398, 486), (452, 516)])}" fill="none" stroke="{top}" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>')
+    body.append(f'<circle cx="462" cy="520" r="18" fill="{skin}"/>')
+    body.append(f'<rect x="318" y="308" width="30" height="46" rx="12" fill="{skin}"/>')
+    body.append(f'<ellipse cx="340" cy="270" rx="50" ry="56" fill="{skin}"/>')
+    body.append(f'<path d="M292 268 Q288 208 344 206 Q394 208 390 250 Q366 236 340 238 Q312 242 300 290 Z" fill="{hair}"/>')
+    # The signal: soft arcs travelling from his head to the cursor
+    for k in range(4):
+        r = 70 + k * 46
+        body.append(f'<path d="M{340 + r * 0.82:.0f} {270 - r * 0.45:.0f} A{r} {r} 0 0 1 {340 + r * 0.9:.0f} {270 + r * 0.42:.0f}" fill="none" '
+                    f'stroke="#4fb6e0" stroke-width="5" stroke-linecap="round" opacity="{0.75 - k * 0.15:.2f}"/>')
+    body.append('<line x1="560" y1="300" x2="830" y2="364" stroke="#4fb6e0" stroke-width="2.5" stroke-dasharray="6 9" opacity="0.6"/>')
+    return wrap(defs, body)
 
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
-            "spacex-booster-catch": musk}
+            "neuralink-chess": neuralink}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
