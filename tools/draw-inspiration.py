@@ -107,7 +107,95 @@ def messi():
             f'<defs>{defs}</defs>{"".join(body)}</svg>\n')
 
 
-DRAWINGS = {"messi-world-cup": messi}
+def alphago():
+    """AlphaGo against Lee Sedol, Seoul, March 2016: a 19x19 board mid-game, one black stone glowing
+    for the move that surprised everyone, and a small policy-and-value network beside the board."""
+    rng = random.Random(37)
+    defs = (
+        '<linearGradient id="room" x1="0" y1="0" x2="0" y2="1">'
+        '<stop offset="0" stop-color="#1d2326"/><stop offset="1" stop-color="#2c3236"/></linearGradient>'
+        '<linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">'
+        '<stop offset="0" stop-color="#e2bd72"/><stop offset="1" stop-color="#c99a4e"/></linearGradient>'
+        '<radialGradient id="spot" cx="0.5" cy="0.5" r="0.5">'
+        '<stop offset="0" stop-color="#ffe9a8" stop-opacity="0.9"/><stop offset="1" stop-color="#ffe9a8" stop-opacity="0"/></radialGradient>'
+        '<radialGradient id="lamp" cx="0.5" cy="0.5" r="0.5">'
+        '<stop offset="0" stop-color="#fff3d6" stop-opacity="0.16"/><stop offset="1" stop-color="#fff3d6" stop-opacity="0"/></radialGradient>'
+    )
+    body = [f'<rect width="{W}" height="{H}" fill="url(#room)"/>', '<circle cx="600" cy="400" r="520" fill="url(#lamp)"/>']
+    # The board, seen from above: wood with a faint grain, and a shadow under it
+    x0, y0, size = 290, 90, 620
+    body.append(f'<rect x="{x0 + 14}" y="{y0 + 18}" width="{size}" height="{size}" rx="8" fill="#0f1315" opacity="0.55"/>')
+    body.append(f'<rect x="{x0}" y="{y0}" width="{size}" height="{size}" rx="8" fill="url(#wood)"/>')
+    for i in range(14):
+        y = y0 + 20 + i * 44 + rng.uniform(-8, 8)
+        body.append(f'<path d="M{x0 + 6} {y:.1f} Q{x0 + size / 2} {y + rng.uniform(-10, 10):.1f} {x0 + size - 6} {y + rng.uniform(-6, 6):.1f}" '
+                    'fill="none" stroke="#b78a43" stroke-width="2" opacity="0.35"/>')
+    m = 34
+    step = (size - 2 * m) / 18
+    gx = lambda c: x0 + m + c * step
+    gy = lambda r: y0 + m + r * step
+    lines = "".join(f'<line x1="{gx(0):.1f}" y1="{gy(i):.1f}" x2="{gx(18):.1f}" y2="{gy(i):.1f}"/>'
+                    f'<line x1="{gx(i):.1f}" y1="{gy(0):.1f}" x2="{gx(i):.1f}" y2="{gy(18):.1f}"/>' for i in range(19))
+    body.append(f'<g stroke="#3b2c18" stroke-width="1.6">{lines}</g>')
+    for c in (3, 9, 15):
+        for r in (3, 9, 15):
+            body.append(f'<circle cx="{gx(c):.1f}" cy="{gy(r):.1f}" r="4.5" fill="#3b2c18"/>')
+    # A game in progress: corners and sides taken first, as in a real opening
+    taken = set()
+    def stone(c, r, black):
+        taken.add((c, r))
+        x, y, rad = gx(c), gy(r), step * 0.47
+        body.append(f'<circle cx="{x + 2:.1f}" cy="{y + 3:.1f}" r="{rad:.1f}" fill="#000" opacity="0.25"/>')
+        if black:
+            body.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rad:.1f}" fill="#1b1c1e"/>'
+                        f'<circle cx="{x - rad * 0.32:.1f}" cy="{y - rad * 0.34:.1f}" r="{rad * 0.28:.1f}" fill="#4a4d52" opacity="0.7"/>')
+        else:
+            body.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rad:.1f}" fill="#f3f1ea"/>'
+                        f'<circle cx="{x + rad * 0.18:.1f}" cy="{y + rad * 0.22:.1f}" r="{rad * 0.8:.1f}" fill="#d9d5ca" opacity="0.45"/>')
+    groups = [((3, 3), 7), ((15, 3), 6), ((3, 15), 6), ((15, 15), 7), ((9, 3), 3), ((3, 9), 3), ((15, 10), 4), ((10, 15), 3)]
+    black = True
+    for (cc, cr), n in groups:
+        for _ in range(n):
+            for _try in range(20):
+                c, r = cc + rng.randint(-2, 2), cr + rng.randint(-2, 2)
+                if 0 <= c <= 18 and 0 <= r <= 18 and (c, r) not in taken:
+                    stone(c, r, black)
+                    black = not black
+                    break
+    # The move that surprised everyone: a black stone on the fifth line, ringed in light
+    mc, mr = 13, 8
+    taken.discard((mc, mr))
+    body.append(f'<circle cx="{gx(mc):.1f}" cy="{gy(mr):.1f}" r="{step * 1.6:.1f}" fill="url(#spot)"/>')
+    stone(mc, mr, True)
+    body.append(f'<circle cx="{gx(mc):.1f}" cy="{gy(mr):.1f}" r="{step * 0.62:.1f}" fill="none" stroke="#f5c84c" stroke-width="3"/>')
+
+    # Beside the board: the policy and value network, layers of nodes feeding one output
+    layers = [5, 7, 7, 4, 1]
+    nx = [80, 135, 190, 230, 262]
+    nodes = [[(nx[i], 400 + (j - (n - 1) / 2) * 46) for j in range(n)] for i, n in enumerate(layers)]
+    edges = []
+    for a, b in zip(nodes, nodes[1:]):
+        for p in a:
+            for q in b:
+                edges.append(f'<line x1="{p[0]}" y1="{p[1]:.1f}" x2="{q[0]}" y2="{q[1]:.1f}"/>')
+    body.append(f'<g stroke="#78acdc" stroke-width="1.2" opacity="0.35">{"".join(edges)}</g>')
+    for i, layer in enumerate(nodes):
+        for p in layer:
+            fill = "#f5c84c" if i == len(nodes) - 1 else "#78acdc"
+            body.append(f'<circle cx="{p[0]}" cy="{p[1]:.1f}" r="{9 if i < len(nodes) - 1 else 12}" fill="{fill}"/>')
+    body.append(f'<line x1="274" y1="400" x2="{x0 - 4}" y2="400" stroke="#f5c84c" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.7"/>')
+    # The other side: the bowls of stones, lids off
+    for cy, fill, rim in ((290, "#1b1c1e", "#6b4a26"), (520, "#f3f1ea", "#6b4a26")):
+        body.append(f'<ellipse cx="1060" cy="{cy}" rx="86" ry="78" fill="{rim}"/><ellipse cx="1060" cy="{cy}" rx="70" ry="62" fill="#4c3319"/>')
+        for _ in range(14):
+            x, y = 1060 + rng.uniform(-48, 48), cy + rng.uniform(-40, 40)
+            body.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="13" fill="{fill}"/>')
+
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
+            f'<defs>{defs}</defs>{"".join(body)}</svg>\n')
+
+
+DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
