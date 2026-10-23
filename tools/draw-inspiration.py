@@ -387,8 +387,112 @@ def honnold():
     return wrap(defs, body)
 
 
+def alcaraz():
+    """Carlos Alcaraz flat on his back on Centre Court's grass, arms flung out, just after winning
+    Wimbledon in July 2023, seen from the side with the crowd on its feet behind him."""
+    rng = random.Random(2023)
+    defs = ('<linearGradient id="asky" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#cfe2ee"/><stop offset="1" stop-color="#eef3f2"/></linearGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#asky)"/>']
+    # The stands, rising away from the court, packed and standing
+    body.append(f'<polygon points="{pts([(0, 70), (W, 40), (W, 440), (0, 440)])}" fill="#1f4a2c"/>')
+    for row in range(9):
+        y = 92 + row * 38
+        x = rng.uniform(-10, 10)
+        while x < W + 10:
+            col = rng.choice(("#f2f2ee", "#c0392b", "#2c3e50", "#e1b12c", "#7f8c8d", "#e8c4a0", "#5b2a86", "#f2f2ee"))
+            body.append(f'<rect x="{x:.0f}" y="{y + 8:.0f}" width="20" height="22" rx="5" fill="{col}"/>'
+                        f'<circle cx="{x + 10:.0f}" cy="{y + 3:.0f}" r="8" fill="{rng.choice(("#e2b48c", "#c69070", "#8a5a3c", "#f0cfb0"))}"/>')
+            if rng.random() < 0.12:  # an arm up in the air
+                body.append(f'<line x1="{x + 16:.0f}" y1="{y + 10:.0f}" x2="{x + 24:.0f}" y2="{y - 12:.0f}" stroke="#e2b48c" stroke-width="5" stroke-linecap="round"/>')
+            x += rng.uniform(24, 30)
+    # The court's back wall, dark green with a purple band
+    body.append(f'<rect y="440" width="{W}" height="62" fill="#17391f"/><rect y="440" width="{W}" height="9" fill="#5b2a86"/>')
+    # Grass, its mowing stripes running away from us, and the baseline
+    body.append(f'<rect y="502" width="{W}" height="{H - 502}" fill="#5f9a46"/>')
+    for i, y in enumerate((502, 540, 590, 652, 728)):
+        if i % 2 == 0:
+            body.append(f'<rect y="{y}" width="{W}" height="{(540, 590, 652, 728, 800)[i] - y}" fill="#6aa54f"/>')
+    body.append(f'<polygon points="{pts([(0, 556), (W, 548), (W, 558), (0, 566)])}" fill="#f7f7f2"/>')
+    body.append('<ellipse cx="610" cy="650" rx="420" ry="60" fill="#b59a63" opacity="0.55"/>')
+
+    skin, kit, kit_shade, hair = "#e2b48c", "#fbfbf8", "#e4e4de", "#2b1d16"
+    # His shadow on the grass, then Alcaraz lying on his back, head to the left
+    body.append('<ellipse cx="610" cy="690" rx="270" ry="22" fill="#000" opacity="0.12"/>')
+    body.append(f'<polyline points="{pts([(500, 652), (420, 630), (346, 620)])}" fill="none" stroke="{skin}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>')  # far arm, over his head
+    body.append(f'<circle cx="340" cy="619" r="13" fill="{skin}"/>')
+    body.append(f'<polyline points="{pts([(760, 668), (820, 600), (900, 664)])}" fill="none" stroke="{skin}" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>')  # far leg, knee up
+    body.append(f'<ellipse cx="912" cy="668" rx="26" ry="14" fill="{kit}"/>')
+    body.append(f'<rect x="490" y="636" width="200" height="58" rx="24" fill="{kit}"/>')  # shirt
+    body.append(f'<rect x="680" y="640" width="96" height="52" rx="18" fill="{kit_shade}"/>')  # shorts
+    body.append(f'<polyline points="{pts([(760, 680), (860, 684), (950, 690)])}" fill="none" stroke="{skin}" stroke-width="24" stroke-linecap="round"/>')  # near leg, straight
+    body.append(f'<ellipse cx="966" cy="688" rx="28" ry="15" fill="{kit}"/>')
+    body.append(f'<rect x="448" y="652" width="50" height="22" rx="10" fill="{skin}"/>')  # neck
+    body.append(f'<ellipse cx="424" cy="662" rx="40" ry="34" fill="{skin}"/>')
+    body.append(f'<path d="M386 664 Q384 700 424 700 Q462 700 462 676 Q440 690 420 686 Q396 682 386 664 Z" fill="{hair}"/>')
+    body.append(f'<polyline points="{pts([(540, 660), (520, 720), (470, 748)])}" fill="none" stroke="{skin}" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>')  # near arm, flung out toward us
+    body.append(f'<circle cx="462" cy="752" r="15" fill="{skin}"/>')
+    # His racket on the grass where he let it go, and a ball
+    body.append('<line x1="1040" y1="736" x2="1100" y2="722" stroke="#2b2b2b" stroke-width="11" stroke-linecap="round"/>')
+    body.append('<ellipse cx="1006" cy="742" rx="58" ry="20" fill="#d9d9d2" stroke="#2b2b2b" stroke-width="9"/>')
+    body.append('<circle cx="250" cy="720" r="13" fill="#dfe86a"/><path d="M240 713 q10 8 20 0" fill="none" stroke="#f7f7f2" stroke-width="2"/>')
+    return wrap(defs, body)
+
+def musk():
+    """SpaceX catching a returning Super Heavy booster with the launch tower's arms, Starbase,
+    Texas, at sunrise on 13 October 2024."""
+    rng = random.Random(2024)
+    defs = ('<linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#355c8c"/><stop offset="0.55" stop-color="#e9a77a"/><stop offset="1" stop-color="#f6d2a0"/></linearGradient>'
+            '<linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">'
+            '<stop offset="0" stop-color="#8e959c"/><stop offset="0.35" stop-color="#e9edf0"/><stop offset="0.6" stop-color="#c3c9ce"/><stop offset="1" stop-color="#7d848b"/></linearGradient>'
+            '<radialGradient id="flame" cx="0.5" cy="0.2" r="0.8">'
+            '<stop offset="0" stop-color="#fffbe8"/><stop offset="0.35" stop-color="#ffd166"/><stop offset="0.8" stop-color="#f07a3a" stop-opacity="0.7"/><stop offset="1" stop-color="#f07a3a" stop-opacity="0"/></radialGradient>'
+            '<radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0" stop-color="#fff4d6" stop-opacity="0.9"/><stop offset="1" stop-color="#fff4d6" stop-opacity="0"/></radialGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#dawn)"/>', '<circle cx="1000" cy="640" r="240" fill="url(#sun)"/>']
+    # The Gulf on the horizon, and the flat coast
+    body.append('<rect y="626" width="1200" height="24" fill="#b98a7a"/><rect y="650" width="1200" height="150" fill="#3a2f2c"/>')
+    # Exhaust and dust billowing over the pad, lit by the engines
+    for _ in range(26):
+        x, y, r = rng.uniform(300, 760), rng.uniform(600, 700), rng.uniform(30, 80)
+        body.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.0f}" fill="{rng.choice(("#d9c3a8", "#c9ad90", "#e8d3b8"))}" opacity="0.85"/>')
+    # The launch mount under it
+    body.append(f'<polygon points="{pts([(380, 700), (400, 590), (640, 590), (660, 700)])}" fill="#2b2523"/>'
+                '<rect x="392" y="580" width="256" height="18" fill="#3a3230"/>')
+    # The tower: a steel lattice with the two catch arms ("chopsticks") reaching out to the booster
+    tx, tw = 700, 84
+    body.append(f'<rect x="{tx}" y="70" width="{tw}" height="630" fill="#2f2a2a"/>')
+    lat = "".join(f'<line x1="{tx}" y1="{y}" x2="{tx + tw}" y2="{y + 42}"/><line x1="{tx + tw}" y1="{y}" x2="{tx}" y2="{y + 42}"/>' for y in range(70, 700, 42))
+    body.append(f'<g stroke="#5a5250" stroke-width="3">{lat}</g>')
+    body.append(f'<rect x="{tx - 6}" y="56" width="{tw + 12}" height="18" fill="#2f2a2a"/><line x1="{tx + tw / 2}" y1="20" x2="{tx + tw / 2}" y2="56" stroke="#2f2a2a" stroke-width="5"/>')
+    def arm(y, shade):
+        braces = "".join(f'<line x1="{x}" y1="{y}" x2="{x + 22}" y2="{y + 22}"/>' for x in range(416, tx, 26))
+        return f'<rect x="412" y="{y}" width="{tx - 412}" height="22" fill="{shade}"/><g stroke="#62585a" stroke-width="2">{braces}</g>'
+    body.append(arm(228, "#3d3534"))  # the arm behind the booster
+    body.append(f'<rect x="{tx - 18}" y="214" width="30" height="72" fill="#2f2a2a"/>')
+    # The booster: a tall stainless-steel cylinder hanging between the arms, grid fins at the top
+    bx, bw, top, bot = 474, 96, 150, 520
+    body.append(f'<rect x="{bx}" y="{top}" width="{bw}" height="{bot - top}" rx="6" fill="url(#steel)"/>')
+    for y in range(top + 40, bot, 38):
+        body.append(f'<line x1="{bx}" y1="{y}" x2="{bx + bw}" y2="{y}" stroke="#8a9198" stroke-width="1.5" opacity="0.7"/>')
+    body.append(f'<rect x="{bx}" y="{bot - 90}" width="{bw}" height="90" fill="#3a3533" opacity="0.45"/>')  # soot near the engines
+    body.append(f'<path d="M{bx} {top + 10} Q{bx + bw / 2} {top - 18} {bx + bw} {top + 10} L{bx + bw} {top + 20} L{bx} {top + 20} Z" fill="#cfd5da"/>')
+    for d in (-1, 1):
+        gx_ = bx + (bw if d > 0 else 0) + d * 4
+        body.append(f'<rect x="{gx_ - (0 if d > 0 else 34)}" y="{top + 40}" width="34" height="40" fill="#3b3836"/>')
+        body.append(f'<g stroke="#77706c" stroke-width="2">' + "".join(f'<line x1="{gx_ - (0 if d > 0 else 34)}" y1="{top + 44 + k * 8}" x2="{gx_ + (34 if d > 0 else 0)}" y2="{top + 44 + k * 8}"/>' for k in range(5)) + '</g>')
+    body.append(arm(242, "#2a2423"))  # the arm in front, closed around it just under the grid fins
+    # Its engines still burning: a bright plume down onto the mount
+    body.append(f'<polygon points="{pts([(bx + 10, bot), (bx + bw - 10, bot), (bx + bw + 30, 640), (bx - 30, 640)])}" fill="url(#flame)"/>')
+    body.append(f'<polygon points="{pts([(bx + 26, bot), (bx + bw - 26, bot), (bx + bw / 2 + 16, 600), (bx + bw / 2 - 16, 600)])}" fill="#fffbe8" opacity="0.9"/>')
+    body.append(f'<rect x="{bx + 8}" y="{bot}" width="{bw - 16}" height="10" rx="3" fill="#2b2523"/>')
+    return wrap(defs, body)
+
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
-            "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold}
+            "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
+            "spacex-booster-catch": musk}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
