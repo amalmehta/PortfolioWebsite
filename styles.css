@@ -114,6 +114,14 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 @media (min-width: 820px) {
   .project { grid-template-columns: 0.85fr 1fr; gap: 2rem; align-items: center; }
 }
+/* North star: two guiding lines under the intro, human and technical, side by side on wide screens */
+.north-star { padding-top: 2.5rem; padding-bottom: 0; }
+.ns-lines { display: grid; gap: 1rem; }
+@media (min-width: 820px) { .ns-lines { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+.ns-line { padding: 1.2rem 1.4rem 1.3rem; border: 1px solid var(--line); border-left: 3px solid var(--warm); border-radius: 14px; background: var(--surface); }
+.ns-line + .ns-line { border-left-color: var(--accent); }
+.ns-kind { margin: 0 0 0.35rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ns-text { margin: 0; font-family: var(--serif); font-size: clamp(1.15rem, 2vw, 1.35rem); line-height: 1.4; color: var(--text); }
 /* Featured: the top four projects, two by two on wide screens, each a large image above
    a one-sentence hook, its stack and links to the live demo and the source. */
 .featured { display: grid; gap: 2.75rem 2rem; }
