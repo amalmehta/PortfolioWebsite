@@ -319,8 +319,11 @@ picture { display: contents; }
 .pin-been { --pin: var(--been); }
 .pin-dot { fill: var(--pin); stroke: var(--surface); stroke-width: 3; }
 .pin-halo { fill: var(--pin); opacity: 0.18; transition: opacity 0.2s; }
-.travel-map a:hover .pin-halo, .travel-map a:focus-visible .pin-halo { opacity: 0.45; }
+.travel-map a:hover .pin-halo { opacity: 0.45; }
+/* Keyboard focus: a solid ring round the pin in its own colour (the browser's outline would box the whole map) */
 .travel-map a:focus-visible { outline: none; }
+.travel-map a:focus-visible .pin-halo { opacity: 1; fill-opacity: 0.25; stroke: var(--pin); stroke-width: 4; animation: none; }
+.travel-map a:focus-visible .pin-dot { stroke: var(--text); }
 .pin-going .pin-halo { transform-box: fill-box; transform-origin: center; animation: pin-pulse 2.4s ease-out infinite; }
 @keyframes pin-pulse { 0% { transform: scale(0.6); opacity: 0.5; } 100% { transform: scale(1.8); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .pin-going .pin-halo { animation: none; } }

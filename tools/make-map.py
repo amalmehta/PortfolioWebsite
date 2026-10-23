@@ -94,19 +94,20 @@ def ring(arcs, indexes):
 
 
 def path(rings):
-    """An SVG path for some rings, dropping points closer than half a pixel, split where a ring
-    jumps across the map's edge."""
+    """An SVG path for some rings, in whole pixels (a tenth of a pixel is invisible and was a third
+    of the page's weight), dropping points that round onto the last one, split where a ring jumps
+    across the map's edge."""
     d = []
     for r in rings:
         last = None
         for lon, lat in r:
-            x, y = project(lon, lat)
+            x, y = (round(v) for v in project(lon, lat))
             if last is None or abs(x - last[0]) > W / 2:
-                d.append(f"M{x:.1f} {y:.1f}")
-            elif abs(x - last[0]) + abs(y - last[1]) < 0.5:
+                d.append(f"M{x} {y}")
+            elif (x, y) == last:
                 continue
             else:
-                d.append(f"L{x:.1f} {y:.1f}")
+                d.append(f"L{x} {y}")
             last = (x, y)
         d.append("Z")
     return "".join(d).replace("ZM", "Z M")
@@ -133,17 +134,17 @@ def graticule():
     d = []
     for lon in range(-180, 181, 30):
         pts = [project(lon, lat) for lat in range(int(SOUTH), int(NORTH) + 1, 2)]
-        d.append("M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts))
+        d.append("M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in pts))
     for lat in range(-30, 61, 30):
         pts = [project(lon, lat) for lon in range(-180, 181, 3)]
-        d.append("M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts))
+        d.append("M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in pts))
     return "".join(d)
 
 
 def outline():
     left = [project(-180, lat) for lat in range(int(NORTH), int(SOUTH) - 1, -2)]
     right = [project(180, lat) for lat in range(int(SOUTH), int(NORTH) + 1, 2)]
-    return "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in left + right) + "Z"
+    return "M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in left + right) + "Z"
 
 
 def build():
