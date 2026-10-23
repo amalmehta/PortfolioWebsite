@@ -132,6 +132,21 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .mini p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
 .mini .links { display: flex; flex-wrap: wrap; gap: 0 1rem; margin-top: 0.35rem; font-size: 0.88rem; }
 .mini .links.private { display: block; font-size: 0.82rem; color: var(--faint); }
+/* Apps you can use: an icon, a line, and a Buy button that goes to the Lemon Squeezy checkout */
+.apps-intro { color: var(--muted); max-width: 62ch; margin: 0 0 1.25rem; }
+.apps { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+@media (min-width: 720px) { .apps { grid-template-columns: 1fr 1fr; } }
+.app { display: grid; grid-template-columns: 64px 1fr; gap: 1rem; align-items: start; padding: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.app-icon { width: 64px; height: 64px; }
+.app h3 { font-size: 1.15rem; margin: 0.1rem 0 0.25rem; }
+.app p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
+.app .app-meta { margin-top: 0.35rem; font-size: 0.82rem; color: var(--faint); }
+.app .links { margin-top: 0.75rem; }
+.buy { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; background: var(--accent-soft); transition: background-color 0.2s; }
+.buy:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
+.buy { white-space: nowrap; }
+@media (max-width: 480px) { .app { grid-template-columns: 48px 1fr; gap: 0.8rem; padding: 1rem 0.9rem; } .app-icon { width: 48px; height: 48px; } }
+@media (pointer: coarse) { .buy { padding-block: 0.65rem; } }
 /* Built for fun: the rest of More projects, closed until clicked (anchors.js opens it for a link to one of them) */
 .fun { margin-top: 1.25rem; }
 .fun > summary { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.5rem 0; border-top: 1px solid var(--line); cursor: pointer; list-style: none;

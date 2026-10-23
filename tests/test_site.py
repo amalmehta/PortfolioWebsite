@@ -489,6 +489,23 @@ class ProjectsTest(unittest.TestCase):
         self.assertEqual(len(items), 21)
         self.assertNotIn("<img", self.section("more-projects"))
 
+    def test_apps_show_only_with_real_checkouts(self):
+        # Apps you can use comes right after Featured, and stays hidden while any Buy link is a placeholder;
+        # once shown, every Buy link is a Lemon Squeezy checkout and every app says its price and macOS.
+        html = INDEX.read_text(encoding="utf-8")
+        self.assertLess(html.index('<section id="featured"'), html.index('<section id="apps"'))
+        self.assertLess(html.index('<section id="apps"'), html.index('<section id="research"'))
+        sec = self.section("apps")
+        apps = re.findall(r'<li class="app" id="[a-z0-9-]+">.*?</li>', sec, re.S)
+        self.assertTrue(apps)
+        hidden = re.match(r'<section id="apps"[^>]*\bhidden\b', sec) is not None
+        buys = [re.search(r'<a class="buy" href="([^"]+)">Buy [^<]+ · \$5 →</a>', a) for a in apps]
+        self.assertTrue(all(buys), "each app has a $5 Buy link")
+        real = [re.fullmatch(r"https://[a-z0-9-]+\.lemonsqueezy\.com/(checkout/)?buy/[0-9a-f-]{8,}", b.group(1)) for b in buys]
+        self.assertTrue(hidden or all(real), "show Apps you can use only once every Buy link is a real checkout")
+        for app in apps:
+            self.assertRegex(app, r'<p class="app-meta">Mac · macOS \d+ or later</p>')
+
     def test_built_for_fun_is_closed_and_counted(self):
         # The things built for fun sit below the rest of More projects, closed until clicked, with a true count.
         sec = self.section("more-projects")

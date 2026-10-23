@@ -16,7 +16,9 @@ def links():
     for page in sorted(ROOT.glob("*.html")):
         html = re.sub(r"<!--.*?-->", "", page.read_text(encoding="utf-8"), flags=re.S)
         for url in re.findall(r'href="(https?://[^"#]+)', html):
-            if not url.startswith(SITE):  # the site's own pages are covered by the tests
+            # The site's own pages are covered by the tests; REPLACE-ME is a checkout link not set up
+            # yet, which the tests keep inside a hidden section.
+            if not url.startswith(SITE) and "REPLACE-ME" not in url:
                 found.setdefault(url, page.name)
     return found
 

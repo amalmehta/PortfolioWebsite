@@ -28,6 +28,7 @@ _drafts/                      Unpublished drafts (Pages skips _ folders); values
 assets/media/                 Looping project clips (MP4) once recorded; empty for now
   README.md                   Which files to supply, and what each should show
 images/                       Project screenshots (and their WebP copies the cards show) and research drawings (SVG)
+  apps/                       App icons for Apps you can use (128 px WebP, from each app's own icon)
   portrait.jpg                Pencil-sketch portrait in the intro (served as portrait-240/-480 AVIF and WebP)
   og.png                      Link-preview image for the profile (1200×630)
   og-interests.png, og-travel.png, og-thinking.png, og-values.png   Link previews for the other pages
