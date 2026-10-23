@@ -49,6 +49,8 @@ tools/
   make-feed.py                Builds feed.xml (RSS for Things I'm thinking about) from thinking.html
   make-sitemap.py             Builds sitemap.xml from the public pages, with the date each last changed
   make-books.py               Builds the Books section of interests.html from books.json
+  make-map.py                 Builds the Travel page's world map of places going, wanted and been, from tools/data/
+  data/                       Natural Earth world outline (world-atlas, ISC licence) for make-map.py
   check-staleness.py          Flags the Skills and Live interests dates, or the newest thought, over six months old (run weekly on GitHub)
 .github/workflows/tests.yml    Runs the tests on GitHub for every push to main and every pull request
 .github/workflows/links.yml    Checks every external link weekly (Mondays) and on demand

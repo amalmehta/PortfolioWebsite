@@ -481,9 +481,49 @@ def glacier():
     return svg("glacier", "".join(b), ("#f6d7b4", "#dfe9f2"))
 
 
+# ---------------------------------------------------------------- Moorea: Opunohu Bay's peaks over the lagoon
+def moorea():
+    rng = random.Random(10)
+    b = []
+    b.append(clouds(rng, 4, 60, 170, opacity=0.75))
+    # The jagged volcanic peaks, with Mouaroa's shark-tooth spire in the middle
+    back = ridge(0, W, 470, rng, [(0.12, 0.1, 0.6), (0.3, 0.07, 0.8), (0.72, 0.08, 0.85), (0.9, 0.09, 0.65)], 240, jag=10, step=14)
+    b.append(poly(back, "#3f7a52"))
+    b.append(poly([(458, 506), (540, 300), (566, 180), (580, 150), (592, 172), (612, 240), (650, 340), (734, 506)], "#2f6544"))
+    b.append(poly([(580, 150), (592, 172), (612, 240), (650, 340), (734, 506), (624, 506)], "#285a3c"))
+    front = ridge(0, W, 500, rng, [(0.22, 0.16, 0.7), (0.78, 0.18, 0.75)], 120, jag=4)
+    b.append(poly(front, "#4f9461"))
+    for x, y in front[1:-1:2]:  # trees on the lower slopes
+        if rng.random() < 0.7:
+            b.append(f'<circle cx="{x:.0f}" cy="{y + rng.uniform(6, 30):.0f}" r="{rng.uniform(8, 16):.0f}" fill="#3d8152" opacity="0.8"/>')
+    # The lagoon: turquoise in the shallows, deep blue past the reef
+    b.append(f'<rect x="0" y="500" width="{W}" height="{H - 500}" fill="#3ec8c4"/>')
+    b.append(f'<path d="M0,500 C300,530 700,515 1200,505 L1200,560 C800,575 400,560 0,575 Z" fill="#6fdad2" opacity="0.8"/>')
+    b.append(f'<path d="M0,700 C320,680 760,700 1200,684 L1200,800 L0,800 Z" fill="#2a8fb0"/>')
+    for _ in range(40):
+        x, y = rng.uniform(0, W), rng.uniform(560, 690)
+        b.append(f'<path d="M{x:.0f},{y:.0f} l{rng.uniform(30, 80):.0f},0" stroke="#b6eee8" stroke-width="2.5" opacity="0.6" stroke-linecap="round"/>')
+    # Overwater bungalows on a curving jetty
+    jetty = [(140 + i * 74, 612 - 6 * math.sin(i / 2.2)) for i in range(9)]
+    b.append(f'<polyline points="{pts(jetty)}" fill="none" stroke="#8a6a45" stroke-width="7"/>')
+    for x, y in jetty[1:]:
+        for sx in (x - 22, x + 22):
+            b.append(f'<line x1="{sx:.0f}" y1="{y - 4:.0f}" x2="{sx:.0f}" y2="{y + 30:.0f}" stroke="#6b4f33" stroke-width="4"/>')
+        b.append(f'<rect x="{x - 28:.0f}" y="{y - 30:.0f}" width="56" height="28" fill="#c9a26b"/>')
+        b.append(poly([(x - 36, y - 30), (x, y - 58), (x + 36, y - 30)], "#a5793f"))
+        b.append(f'<rect x="{x - 8:.0f}" y="{y - 22:.0f}" width="16" height="14" fill="#5a4630"/>')
+    # A leaning palm on the beach in front
+    b.append(f'<path d="M1080,800 C1070,720 1040,660 990,610" fill="none" stroke="#7a5a3a" stroke-width="14" stroke-linecap="round"/>')
+    for a, l in ((-2.6, 120), (-2.1, 140), (-1.5, 130), (-0.9, 120), (-0.3, 100), (2.9, 110)):
+        x2, y2 = 990 + l * math.cos(a), 610 + l * math.sin(a) * 0.6
+        b.append(f'<path d="M990,610 Q{(990 + x2) / 2:.0f},{min(610, y2) - 30:.0f} {x2:.0f},{y2 + 20:.0f}" fill="none" stroke="#2f7a44" stroke-width="12" stroke-linecap="round"/>')
+    b.append(f'<path d="M900,800 C980,780 1100,770 1200,775 L1200,800 Z" fill="#efe0b9"/>')
+    return svg("moorea", "".join(b), ("#7fc0e6", "#e6f4fa"))
+
+
 PLACES = (("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
-          ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier))
+          ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:

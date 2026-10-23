@@ -17,6 +17,7 @@
   --accent-soft: #e7eef6;
   --warm: #9c5636;
   --warm-soft: #f5ece7;
+  --been: #4f8a5b;
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: light dark;
@@ -34,6 +35,7 @@
     --accent-soft: #1f2a35;
     --warm: #d9a07f;
     --warm-soft: #2b2320;
+    --been: #8cc79a;
   }
 }
 
@@ -296,6 +298,30 @@ picture { display: contents; }
 .photo-log { margin-top: 3.5rem; }
 .wishlist-note { margin: -1.25rem 0 1.5rem; color: var(--muted); font-size: 0.92rem; }
 .wishlist.going { margin-bottom: 3rem; }
+/* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
+.travel-map { margin: 0 0 3rem; }
+.travel-map svg { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
+.map-ocean { fill: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.map-grid { fill: none; stroke: color-mix(in srgb, var(--accent) 16%, var(--surface)); stroke-width: 0.8; }
+.map-land { fill: color-mix(in srgb, var(--text) 13%, var(--surface)); stroke: var(--surface); stroke-width: 0.7; }
+@media (prefers-color-scheme: dark) { .map-land { fill: color-mix(in srgb, var(--text) 22%, var(--surface)); } .map-ocean { fill: color-mix(in srgb, var(--accent) 7%, var(--bg)); } }
+.map-been { fill: color-mix(in srgb, var(--been) 38%, var(--surface)); }
+.pin-going { --pin: var(--warm); }
+.pin-want { --pin: var(--accent); }
+.pin-been { --pin: var(--been); }
+.pin-dot { fill: var(--pin); stroke: var(--surface); stroke-width: 3; }
+.pin-halo { fill: var(--pin); opacity: 0.18; transition: opacity 0.2s; }
+.travel-map a:hover .pin-halo, .travel-map a:focus-visible .pin-halo { opacity: 0.45; }
+.travel-map a:focus-visible { outline: none; }
+.pin-going .pin-halo { transform-box: fill-box; transform-origin: center; animation: pin-pulse 2.4s ease-out infinite; }
+@keyframes pin-pulse { 0% { transform: scale(0.6); opacity: 0.5; } 100% { transform: scale(1.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .pin-going .pin-halo { animation: none; } }
+.map-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-top: 0.7rem; font-size: 0.88rem; color: var(--muted); }
+.key::before { content: ""; display: inline-block; width: 0.65rem; height: 0.65rem; margin-right: 0.4rem; border-radius: 50%; background: var(--pin); vertical-align: 0.02em; }
+.key-going { --pin: var(--warm); } .key-want { --pin: var(--accent); } .key-been { --pin: var(--been); }
+.key-count { color: var(--faint); font-variant-numeric: tabular-nums; }
+/* A pin's link lands on its card below the sticky header */
+.photo[id^="place-"] { scroll-margin-top: 5rem; }
 .trip-dates { display: block; margin-top: 0.2rem; color: var(--accent); font-weight: 500; }
 
 /* Writings: its own page (writings.html), unlinked until the first piece is in */

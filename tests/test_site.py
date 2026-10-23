@@ -615,7 +615,7 @@ class SubpagesTest(unittest.TestCase):
         html = re.sub(r"<!--.*?-->", "", (ROOT / "photos.html").read_text(encoding="utf-8"), flags=re.S)
         going = html[html.index('<section class="wishlist going">'):]
         going = going[:going.index("</section>")]
-        figures = re.findall(r'<figure class="photo">(.*?)</figure>', going, flags=re.S)
+        figures = re.findall(r'<figure class="photo"[^>]*>(.*?)</figure>', going, flags=re.S)
         self.assertTrue(figures)
         for fig in figures:
             with self.subTest(trip=re.search(r"<strong>(.*?)</strong>", fig).group(1)):
@@ -713,6 +713,30 @@ class BooksTest(unittest.TestCase):
         css = STYLES.read_text(encoding="utf-8")
         for n in range(self.make_books().COVERS):
             self.assertRegex(css, rf"\.cover-{n} {{ --hue: \d+; }}")
+
+
+class TravelMapTest(unittest.TestCase):
+    """Travel's map, built by tools/make-map.py: a pin for every place, each card's pin linking to it."""
+
+    def make_map(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("make_map", ROOT / "tools/make-map.py")
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        return module
+
+    def test_page_matches_script(self):
+        make_map = self.make_map()
+        html = (ROOT / "photos.html").read_text(encoding="utf-8")
+        self.assertEqual(make_map.update(html, make_map.build()), html,
+                         "the map is out of date: run python3 tools/make-map.py")
+
+    def test_every_card_has_a_pin(self):
+        # Each trip and wishlist card has an id, and exactly the cards' ids are linked from pins.
+        html = re.sub(r"<!--.*?-->", "", (ROOT / "photos.html").read_text(encoding="utf-8"), flags=re.S)
+        cards = re.findall(r'<figure class="photo" id="(place-[a-z-]+)">', html)
+        self.assertEqual(len(cards), html.count('src="images/places/'), "a place card without an id")
+        linked = re.findall(r'<a href="#(place-[a-z-]+)"><g class="pin pin-(?:going|want)">', html)
+        self.assertEqual(sorted(linked), sorted(cards))
 
 
 class ArtSectionTest(unittest.TestCase):

@@ -56,7 +56,7 @@ def main():
 def trips(section):
     """(name, last day) for each trip in a "Places I'm going" section."""
     out = []
-    for fig in re.findall(r'<figure class="photo">(.*?)</figure>', section, flags=re.S):
+    for fig in re.findall(r'<figure class="photo"[^>]*>(.*?)</figure>', section, flags=re.S):
         name = re.search(r"<strong>(.*?)</strong>", fig).group(1)
         days = re.findall(r'<time datetime="(\d{4}-\d{2}-\d{2})">', fig)
         out.append((name, datetime.date.fromisoformat(days[-1])))
