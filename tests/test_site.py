@@ -842,7 +842,7 @@ class ValuesPageTest(unittest.TestCase):
     def test_linked_only_once_filled(self):
         # While every list is still empty, nothing links to it.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
-        has_entries = 'class="value"' in html or 'class="inspo-item"' in html
+        has_entries = 'class="value"' in html or re.search(r'class="inspo-(?:item|card)"', html) is not None
         self.assertEqual("values.html" in [v for _, _, v in PAGE.links], has_entries)
         if not has_entries:  # no other page links to it either
             for other in ("thinking.html", "photos.html", "interests.html"):
@@ -882,7 +882,7 @@ class ValuesPageTest(unittest.TestCase):
         self.assertEqual(len(groups), 3)
         for body in groups:
             with self.subTest(section=re.search(r"<h2[^>]*>(.*?)</h2>", body).group(1)):
-                self.assertEqual("Coming soon." in body, 'class="inspo-item"' not in body)
+                self.assertEqual("Coming soon." in body, re.search(r'class="inspo-(?:item|card)"', body) is None)
 
     def test_local_links_resolve(self):
         page = parse(ROOT / "values.html")
