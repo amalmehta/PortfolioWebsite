@@ -195,7 +195,200 @@ def alphago():
             f'<defs>{defs}</defs>{"".join(body)}</svg>\n')
 
 
-DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago}
+def wrap(defs, body):
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
+            f'<defs>{defs}</defs>{"".join(body)}</svg>\n')
+
+
+def feynman():
+    """Richard Feynman from behind at a chalkboard, chalk raised beside his diagram of two
+    electrons exchanging a photon."""
+    rng = random.Random(1965)
+    CHALK = "#eef0e6"
+    defs = ('<linearGradient id="board" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0" stop-color="#2f4b3f"/><stop offset="1" stop-color="#253d33"/></linearGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="#6b5a48"/>',
+            f'<rect x="40" y="40" width="1120" height="640" rx="6" fill="#8a6a45"/>',
+            f'<rect x="60" y="60" width="1080" height="600" fill="url(#board)"/>']
+    # Old chalk smudges
+    for _ in range(26):
+        x, y = rng.uniform(90, 1110), rng.uniform(90, 630)
+        body.append(f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{rng.uniform(40, 120):.0f}" ry="{rng.uniform(8, 22):.0f}" fill="{CHALK}" opacity="0.04"/>')
+    ch = f'fill="none" stroke="{CHALK}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"'
+    # The diagram: two electrons come in, swap a photon (the wavy line), and fly apart
+    v1, v2 = (300, 260), (300, 480)
+    body.append(f'<polyline points="{pts([(140, 140), v1, (460, 140)])}" {ch}/>')
+    body.append(f'<polyline points="{pts([(140, 600), v2, (460, 600)])}" {ch}/>')
+    for (ax, ay), (bx, by) in (((140, 140), v1), (v1, (460, 140)), ((140, 600), v2), (v2, (460, 600))):
+        mx, my = (ax + bx) / 2, (ay + by) / 2
+        dx, dy = (bx - ax), (by - ay)
+        n = (dx * dx + dy * dy) ** 0.5
+        ux, uy = dx / n, dy / n
+        body.append(f'<polyline points="{pts([(mx - ux * 16 - uy * 12, my - uy * 16 + ux * 12), (mx, my), (mx - ux * 16 + uy * 12, my - uy * 16 - ux * 12)])}" {ch}/>')
+    wave = "M300 260 " + " ".join(f"Q{300 + (18 if i % 2 == 0 else -18)} {260 + i * 22 + 11} 300 {260 + (i + 1) * 22}" for i in range(10))
+    body.append(f'<path d="{wave}" {ch}/>')
+    for x, y in (v1, v2):
+        body.append(f'<circle cx="{x}" cy="{y}" r="7" fill="{CHALK}"/>')
+    tx = f'fill="{CHALK}" font-family="Georgia, serif" font-style="italic" font-size="34"'
+    body.append(f'<text x="112" y="132" {tx}>e⁻</text><text x="472" y="132" {tx}>e⁻</text>'
+                f'<text x="112" y="636" {tx}>e⁻</text><text x="472" y="636" {tx}>e⁻</text><text x="334" y="384" {tx}>γ</text>')
+    # A few lines of working, just chalk marks, not real equations
+    for i, w in enumerate((300, 240, 330, 190)):
+        y = 170 + i * 56
+        body.append(f'<path d="M560 {y} q{w / 4} -10 {w / 2} 0 t{w / 2} 0" fill="none" stroke="{CHALK}" stroke-width="4" stroke-linecap="round" opacity="0.6"/>')
+    body.append(f'<rect x="60" y="660" width="1080" height="16" fill="#7a5c3a"/>')
+    body.append(f'<rect x="250" y="662" width="40" height="9" rx="3" fill="{CHALK}"/><rect x="310" y="664" width="26" height="7" rx="3" fill="#e9c46a"/>')
+
+    # Feynman, from behind: white shirt, wavy grey hair, right arm raised with the chalk
+    shirt, shade, skin, hair = "#f1efe8", "#d9d6cc", "#d8a682", "#8c8a86"
+    body.append(f'<polyline points="{pts([(930, 520), (870, 380), (790, 300)])}" fill="none" stroke="{shirt}" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>')
+    body.append(f'<circle cx="784" cy="292" r="24" fill="{skin}"/>')
+    body.append(f'<line x1="770" y1="280" x2="752" y2="262" stroke="{CHALK}" stroke-width="9" stroke-linecap="round"/>')
+    body.append(f'<path d="M780 304 q-6 6 -14 6" fill="none" stroke="{CHALK}" stroke-width="5" stroke-linecap="round"/>')
+    body.append(f'<polygon points="{pts([(800, 800), (812, 560), (842, 500), (900, 476), (1010, 476), (1068, 500), (1094, 560), (1106, 800)])}" fill="{shirt}"/>')
+    body.append(f'<polygon points="{pts([(955, 476), (1010, 476), (1068, 500), (1094, 560), (1106, 800), (1000, 800)])}" fill="{shade}" opacity="0.6"/>')
+    body.append(f'<line x1="953" y1="500" x2="953" y2="800" stroke="{shade}" stroke-width="3"/>')
+    body.append(f'<polyline points="{pts([(1062, 520), (1086, 650), (1074, 790)])}" fill="none" stroke="{shirt}" stroke-width="52" stroke-linecap="round"/>')
+    body.append(f'<rect x="928" y="430" width="52" height="60" rx="16" fill="{skin}"/>')
+    body.append(f'<ellipse cx="954" cy="384" rx="66" ry="76" fill="{skin}"/>')
+    body.append(f'<path d="M886 392 Q878 300 954 300 Q1032 300 1022 392 Q1010 440 954 444 Q900 440 886 392 Z" fill="{hair}"/>')
+    for i in range(7):
+        x = 900 + i * 18
+        body.append(f'<path d="M{x} {318 + (i % 2) * 6} q10 -16 20 0" fill="none" stroke="#a7a5a0" stroke-width="5" stroke-linecap="round"/>')
+    body.append(f'<ellipse cx="886" cy="392" rx="10" ry="18" fill="{skin}"/><ellipse cx="1022" cy="392" rx="10" ry="18" fill="{skin}"/>')
+    return wrap(defs, body)
+
+
+def kipchoge():
+    """Eliud Kipchoge breaking the tape in Vienna, October 2019, the first marathon under two hours:
+    arms flung wide under the finish gantry, the clock at 1:59:40, Kenyan flags in the crowd and his
+    pacers in black celebrating behind him."""
+    rng = random.Random(15940)
+    vx, vy = 600, 360  # where the Hauptallee meets the horizon
+    defs = ('<linearGradient id="ksky" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#bcd3e2"/><stop offset="1" stop-color="#e9eee8"/></linearGradient>'
+            '<linearGradient id="kroad" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#9a9c98"/><stop offset="1" stop-color="#5c5f5c"/></linearGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#ksky)"/>',
+            f'<rect y="{vy}" width="{W}" height="{H - vy}" fill="#86a266"/>',
+            f'<polygon points="{pts([(vx - 30, vy), (vx + 30, vy), (1040, H), (160, H)])}" fill="url(#kroad)"/>']
+    # Autumn chestnut trees down the avenue
+    for side in (-1, 1):
+        for i in range(9):
+            t = (i / 8) ** 1.5
+            x, y, r = vx + side * (70 + t * 520), vy + 10 + t * 160, 26 + t * 90
+            col = rng.choice(("#c98a3a", "#b8742e", "#d9a347", "#a3a14c"))
+            body.append(f'<rect x="{x - r * 0.07:.0f}" y="{y - r * 0.5:.0f}" width="{r * 0.14:.0f}" height="{r * 0.7:.0f}" fill="#5b4632"/>')
+            body.append(f'<circle cx="{x:.0f}" cy="{y - r * 0.95:.0f}" r="{r:.0f}" fill="{col}"/>'
+                        f'<circle cx="{x - side * r * 0.45:.0f}" cy="{y - r * 1.25:.0f}" r="{r * 0.7:.0f}" fill="{col}" opacity="0.85"/>')
+    # The crowd behind the barriers on both sides, some waving Kenyan flags
+    def flag(x, y, s):
+        body.append(f'<line x1="{x:.0f}" y1="{y:.0f}" x2="{x:.0f}" y2="{y + 46 * s:.0f}" stroke="#3a3a3a" stroke-width="{2.5 * s:.1f}"/>')
+        for k, col in enumerate(("#111111", "#ffffff", "#bb1f2a", "#ffffff", "#1d7a3a")):
+            hgt = (9, 2, 8, 2, 9)[k] * s
+            off = sum((9, 2, 8, 2, 9)[:k]) * s
+            body.append(f'<rect x="{x:.0f}" y="{y + off:.1f}" width="{44 * s:.1f}" height="{hgt:.1f}" fill="{col}"/>')
+    for side in (-1, 1):
+        for row, y in enumerate((468, 500, 532)):
+            x = vx + side * 250
+            while 0 < x < W:
+                body.append(f'<rect x="{x - 13:.0f}" y="{y:.0f}" width="26" height="40" rx="8" fill="{rng.choice(("#c0392b", "#2c3e50", "#e1b12c", "#6c7a89", "#1d7a3a", "#f0f0f0"))}"/>'
+                            f'<circle cx="{x:.0f}" cy="{y - 6:.0f}" r="11" fill="{rng.choice(("#5a3a28", "#8a5a3c", "#d6a07a"))}"/>')
+                if row == 0 and rng.random() < 0.3:
+                    flag(x + 6, y - 64, 1.0)
+                x += side * rng.uniform(30, 40)
+        body.append(f'<rect x="{0 if side < 0 else vx + 230}" y="560" width="{vx - 230}" height="26" fill="#f2f2f2"/>'
+                    f'<rect x="{0 if side < 0 else vx + 230}" y="572" width="{vx - 230}" height="6" fill="#2f6db5"/>')
+
+    def runner_front(x, y, s, vest, shorts, shoes, skin="#4a2e1f", arms="wide"):
+        """A runner coming toward the viewer at scale s, feet at y."""
+        lg = f'stroke="{skin}" stroke-width="{16 * s:.1f}" stroke-linecap="round" stroke-linejoin="round" fill="none"'
+        body.append(f'<polyline points="{pts([(x - 12 * s, y - 120 * s), (x - 20 * s, y - 64 * s), (x - 16 * s, y - 8 * s)])}" {lg}/>')
+        body.append(f'<polyline points="{pts([(x + 12 * s, y - 120 * s), (x + 26 * s, y - 84 * s), (x + 18 * s, y - 44 * s)])}" {lg}/>')
+        body.append(f'<ellipse cx="{x - 16 * s:.1f}" cy="{y - 4 * s:.1f}" rx="{13 * s:.1f}" ry="{7 * s:.1f}" fill="{shoes}"/>'
+                    f'<ellipse cx="{x + 19 * s:.1f}" cy="{y - 40 * s:.1f}" rx="{12 * s:.1f}" ry="{7 * s:.1f}" fill="{shoes}"/>')
+        body.append(f'<rect x="{x - 30 * s:.1f}" y="{y - 150 * s:.1f}" width="{60 * s:.1f}" height="{38 * s:.1f}" rx="{8 * s:.1f}" fill="{shorts}"/>')
+        body.append(f'<polygon points="{pts([(x - 32 * s, y - 148 * s), (x - 36 * s, y - 236 * s), (x - 18 * s, y - 246 * s), (x + 18 * s, y - 246 * s), (x + 36 * s, y - 236 * s), (x + 32 * s, y - 148 * s)])}" fill="{vest}"/>')
+        am = f'stroke="{skin}" stroke-width="{13 * s:.1f}" stroke-linecap="round" stroke-linejoin="round" fill="none"'
+        if arms == "wide":  # flung out wide and up, the way he crossed the line
+            for d in (-1, 1):
+                body.append(f'<polyline points="{pts([(x + d * 34 * s, y - 236 * s), (x + d * 92 * s, y - 266 * s), (x + d * 140 * s, y - 318 * s)])}" {am}/>')
+                body.append(f'<circle cx="{x + d * 144 * s:.1f}" cy="{y - 324 * s:.1f}" r="{9 * s:.1f}" fill="{skin}"/>')
+        else:  # fists raised
+            for d in (-1, 1):
+                body.append(f'<polyline points="{pts([(x + d * 34 * s, y - 236 * s), (x + d * 56 * s, y - 280 * s), (x + d * 52 * s, y - 330 * s)])}" {am}/>')
+        body.append(f'<rect x="{x - 9 * s:.1f}" y="{y - 266 * s:.1f}" width="{18 * s:.1f}" height="{24 * s:.1f}" fill="{skin}"/>')
+        body.append(f'<ellipse cx="{x:.1f}" cy="{y - 290 * s:.1f}" rx="{22 * s:.1f}" ry="{27 * s:.1f}" fill="{skin}"/>')
+        body.append(f'<path d="M{x - 22 * s:.1f} {y - 294 * s:.1f} Q{x:.1f} {y - 330 * s:.1f} {x + 22 * s:.1f} {y - 294 * s:.1f} Q{x:.1f} {y - 308 * s:.1f} {x - 22 * s:.1f} {y - 294 * s:.1f} Z" fill="#1c1410"/>')
+
+    # His pacers behind him, in black, celebrating
+    for x, s in ((470, 0.62), (548, 0.56), (652, 0.56), (730, 0.62)):
+        runner_front(x, 540, s, "#16181b", "#16181b", "#e8e8e8", arms="fists")
+    # The finish gantry: two posts and a beam with the clock
+    for x in (150, 1050):
+        body.append(f'<rect x="{x - 22}" y="70" width="44" height="730" fill="#20365e"/>')
+    body.append('<rect x="128" y="60" width="944" height="120" rx="6" fill="#20365e"/>')
+    body.append('<rect x="420" y="78" width="360" height="84" rx="8" fill="#0b0d10"/>')
+    body.append('<text x="600" y="146" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-weight="700" '
+                'font-size="66" letter-spacing="4" fill="#ffb02e">1:59:40</text>')
+    body.append('<rect x="190" y="96" width="190" height="48" rx="6" fill="#ffffff" opacity="0.92"/>'
+                '<rect x="820" y="96" width="190" height="48" rx="6" fill="#ffffff" opacity="0.92"/>')
+    body.append('<text x="285" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="26" fill="#20365e">VIENNA</text>'
+                '<text x="915" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="26" fill="#20365e">FINISH</text>')
+    # Kipchoge, white vest and pink shoes, arms wide as he breaks the tape
+    runner_front(600, 790, 1.55, "#f6f6f3", "#2a2f3a", "#ff4fa0")
+    # The tape, broken at his waist, its two ends flying back
+    body.append('<path d="M172 560 Q380 590 548 600 L552 612 Q370 606 172 576 Z" fill="#e8443a"/>'
+                '<path d="M1028 560 Q820 590 652 598 L648 610 Q830 606 1028 576 Z" fill="#e8443a"/>')
+    return wrap(defs, body)
+
+
+def honnold():
+    """Alex Honnold free soloing El Capitan, June 2017: a tiny figure in a red shirt high on the
+    granite, with the Yosemite valley far below."""
+    rng = random.Random(2017)
+    defs = ('<linearGradient id="ysky" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#7fb3de"/><stop offset="1" stop-color="#cfe3f1"/></linearGradient>'
+            '<linearGradient id="granite" x1="0" y1="0" x2="1" y2="0">'
+            '<stop offset="0" stop-color="#d9d2c3"/><stop offset="0.6" stop-color="#c7bfae"/><stop offset="1" stop-color="#a99f8c"/></linearGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#ysky)"/>']
+    # Far valley wall and the forest on the valley floor
+    body.append(f'<polygon points="{pts([(0, 560), (120, 470), (260, 520), (360, 490), (420, 800), (0, 800)])}" fill="#a6b3bd"/>')
+    for i in range(40):
+        x = rng.uniform(0, 420)
+        y = rng.uniform(660, 790)
+        h = rng.uniform(30, 60)
+        body.append(f'<polygon points="{pts([(x, y - h), (x - h * 0.3, y), (x + h * 0.3, y)])}" fill="{rng.choice(("#2f5a3a", "#3b6a45", "#284d33"))}"/>')
+    # El Capitan: a huge granite face, its prow on the left, lit from the left
+    face = [(330, 800), (360, 520), (420, 250), (520, 90), (640, 40), (900, 30), (1200, 60), (1200, 800)]
+    body.append(f'<polygon points="{pts(face)}" fill="url(#granite)"/>')
+    body.append(f'<polygon points="{pts([(520, 90), (640, 40), (900, 30), (1200, 60), (1200, 110), (880, 80), (650, 92)])}" fill="#2f5a3a" opacity="0.8"/>')
+    # Cracks and streaks in the granite
+    for _ in range(26):
+        x, y = rng.uniform(430, 1180), rng.uniform(120, 780)
+        pts_ = [(x, y)]
+        for _k in range(5):
+            x += rng.uniform(-14, 14); y += rng.uniform(18, 40)
+            pts_.append((x, y))
+        body.append(f'<polyline points="{pts(pts_)}" fill="none" stroke="#8f8676" stroke-width="{rng.uniform(1.5, 3.5):.1f}" opacity="0.6"/>')
+    for _ in range(10):
+        x = rng.uniform(600, 1180)
+        body.append(f'<rect x="{x:.0f}" y="{rng.uniform(150, 400):.0f}" width="{rng.uniform(8, 20):.0f}" height="{rng.uniform(200, 420):.0f}" fill="#8f8676" opacity="0.12"/>')
+    # Honnold: a small figure in a red shirt, one hand high, a foot on a hold
+    x, y, s = 700, 330, 1.0
+    skin = "#e0b08a"
+    body.append(f'<polyline points="{pts([(x - 4, y + 8), (x - 16, y + 30), (x - 12, y + 48)])}" fill="none" stroke="#3a4a5e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>')
+    body.append(f'<polyline points="{pts([(x + 4, y + 8), (x + 18, y + 22), (x + 26, y + 18)])}" fill="none" stroke="#3a4a5e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>')
+    body.append(f'<rect x="{x - 9}" y="{y - 26}" width="18" height="36" rx="6" fill="#c8312b"/>')
+    body.append(f'<polyline points="{pts([(x - 6, y - 22), (x - 14, y - 44), (x - 10, y - 64)])}" fill="none" stroke="{skin}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>')
+    body.append(f'<polyline points="{pts([(x + 7, y - 20), (x + 20, y - 30), (x + 24, y - 42)])}" fill="none" stroke="{skin}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>')
+    body.append(f'<circle cx="{x}" cy="{y - 34}" r="8" fill="{skin}"/><path d="M{x - 8} {y - 36} q8 -12 16 0" fill="#3a2a20"/>')
+    body.append(f'<rect x="{x - 6}" y="{y + 6}" width="12" height="8" rx="3" fill="#e8e2d0"/>')
+    return wrap(defs, body)
+
+
+DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
+            "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
