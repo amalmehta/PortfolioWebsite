@@ -134,6 +134,9 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .featured .project-text h3 + p { font-family: var(--serif); font-size: 1.12rem; line-height: 1.5; }
 .featured .links { display: flex; flex-wrap: wrap; gap: 0.2rem 1.25rem; }
 .featured + .more { margin-top: 2.5rem; }
+/* A Featured card's year and status, and Rewarding's pre-registered results */
+.card-when { margin: 0 0 0.2rem !important; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--faint); }
+.card-results { font-size: 0.9rem; color: var(--muted); }
 /* The image opens the live demo too; the text link is the one for keyboards and screen readers. */
 .shot-link { display: contents; }
 .shot:has(.shot-link) img { cursor: pointer; }
@@ -243,7 +246,8 @@ main { overflow-x: clip; }
 .credit { font-size: 0.75rem; color: var(--faint); }
 .project:hover .shot { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .nav-name::before { content: ""; display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--warm); margin-right: 0.5rem; vertical-align: middle; }
-.outside { padding-top: 1rem; color: var(--muted); font-size: 0.95rem; }
+.outside { padding-top: 1rem; color: var(--text); font-size: 1rem; line-height: 1.7; }
+.outside p { max-width: 68ch; margin: 0 0 0.9rem; }
 .outside strong { color: var(--text); font-weight: 600; }
 
 /* Media slots: looping clips with a poster fallback (see media.js) */
