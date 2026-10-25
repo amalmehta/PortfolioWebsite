@@ -313,6 +313,13 @@ picture { display: contents; }
 .photo-log { margin-top: 3.5rem; }
 .wishlist-note { margin: -1.25rem 0 1.5rem; color: var(--muted); font-size: 0.92rem; }
 .wishlist.going { margin-bottom: 3rem; }
+/* Interests: Now, a few lines on what I'm doing this month */
+.now { margin-bottom: 3rem; }
+.now-list { margin: 0; padding-left: 1.2rem; }
+.now-list li { margin-bottom: 0.4rem; }
+.now-list a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+/* Profile: a short through-line above the Research & work timeline */
+.section-intro { max-width: 68ch; margin: 0 0 2rem; font-family: var(--serif); font-size: 1.12rem; line-height: 1.55; }
 /* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
 .travel-map { margin: 0 0 3rem; }
 .travel-map svg { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
