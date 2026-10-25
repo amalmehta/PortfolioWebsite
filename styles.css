@@ -396,6 +396,9 @@ picture { display: contents; }
 .beliefs.tabbed .belief-heading, .beliefs.single .belief-heading { display: none; }
 .beliefs.tabbed .belief-panel + .belief-panel { margin-top: 0; }
 .belief-note { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.92rem; }
+/* Outdated: the old belief struck through, and what changed my mind on its own line below */
+#beliefs-outdated .inspo-item strong { display: block; color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
+#beliefs-outdated .changed { display: block; margin-top: 0.35rem; font-size: 0.95rem; }
 .inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .inspo + .section-title, .tiles + .section-title, .books + .section-title { margin-top: 3rem; }
 .tiles + .books, .photos + .books { margin-top: 3rem; }

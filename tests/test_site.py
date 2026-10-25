@@ -660,8 +660,9 @@ class MediaILoveTest(unittest.TestCase):
         html = re.sub(r"<!--.*?-->", "", (ROOT / "interests.html").read_text(encoding="utf-8"), flags=re.S)
         m = re.search(r'<section class="media" id="media"([^>]*)>(.*?)</section>', html, flags=re.S)
         section = m.group(2)
-        self.assertEqual("Coming soon." in section, 'class="inspo-item"' not in section)
-        self.assertEqual("hidden" in m.group(1), 'class="inspo-item"' not in section, "hidden exactly while empty")
+        empty = 'class="tile"' not in section  # one tile per film
+        self.assertEqual("Coming soon." in section, empty)
+        self.assertEqual("hidden" in m.group(1), empty, "hidden exactly while empty")
         for item in re.findall(r'<li class="inspo-item">(.*?)</li>', section, flags=re.S):
             with self.subTest(item=item[:40]):
                 self.assertRegex(item, r'^<strong>[^<]+</strong> <span class="media-kind">[^<]+</span> \S')
