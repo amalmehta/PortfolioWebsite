@@ -521,9 +521,67 @@ def moorea():
     return svg("moorea", "".join(b), ("#7fc0e6", "#e6f4fa"))
 
 
+# ---------------------------------------------------------------- Mexico City: Palacio de Bellas Artes in jacaranda season
+def mexico_city():
+    rng = random.Random(11)
+    b = []
+    b.append(glow(600, 420, 700, 260, "#ffe9c7", 0.6))
+    b.append(clouds(rng, 3, 70, 160, opacity=0.6))
+    # Popocatépetl, faint on the horizon, and the Torre Latinoamericana to the right
+    b.append(poly([(-40, 470), (160, 330), (200, 318), (240, 330), (470, 470)], "#b9c3d6", opacity="0.7"))
+    b.append(poly([(160, 330), (200, 318), (240, 330), (222, 352), (200, 342), (178, 352)], "#f4f6fa", opacity="0.8"))
+    b.append(f'<rect x="958" y="200" width="70" height="300" fill="#8e9bb0"/><rect x="972" y="170" width="42" height="34" fill="#8e9bb0"/>'
+             f'<rect x="988" y="120" width="10" height="52" fill="#8e9bb0"/>')
+    for y in range(214, 500, 16):
+        b.append(f'<line x1="962" y1="{y}" x2="1024" y2="{y}" stroke="#a9b5c8" stroke-width="3"/>')
+    # The palace: white marble, a wide base with arched bays and columns
+    b.append(f'<rect x="150" y="420" width="900" height="200" fill="#f1ece2"/>')
+    b.append(f'<rect x="150" y="410" width="900" height="16" fill="#e2dacb"/>')
+    b.append(f'<rect x="420" y="360" width="360" height="62" fill="#f6f2ea"/>')
+    b.append(f'<rect x="410" y="352" width="380" height="12" fill="#e2dacb"/>')
+    for x in range(180, 1030, 60):
+        if 430 < x < 770:
+            continue
+        b.append(f'<rect x="{x}" y="450" width="14" height="150" fill="#ddd4c3"/>')
+    for x in range(450, 760, 52):  # the central arches
+        b.append(f'<path d="M{x},600 V500 a22,22 0 0 1 44,0 V600 Z" fill="#c7b9a2"/>')
+        b.append(f'<path d="M{x + 6},600 V504 a16,16 0 0 1 32,0 V600 Z" fill="#7d6a52"/>')
+    # The domes: orange and gold tiles in bands, the big one in the middle
+    def dome(cx, base, rx, ry, top):
+        b.append(f'<path d="M{cx - rx},{base} A{rx},{ry} 0 0 1 {cx + rx},{base} Z" fill="#e0912f"/>')
+        for k in range(1, 4):  # bands of yellow tiles
+            r = rx * (1 - k * 0.22)
+            b.append(f'<path d="M{cx - r:.0f},{base} A{r:.0f},{ry * (1 - k * 0.18):.0f} 0 0 1 {cx + r:.0f},{base}" fill="none" stroke="#f5c542" stroke-width="5" opacity="0.9"/>')
+        for k in range(-3, 4):  # ribs
+            b.append(f'<path d="M{cx + k * rx / 3.6:.0f},{base} Q{cx + k * rx / 6:.0f},{base - ry * 0.8:.0f} {cx},{base - ry}" fill="none" stroke="#b5641d" stroke-width="3"/>')
+        b.append(f'<rect x="{cx - 8}" y="{base - ry - top}" width="16" height="{top}" fill="#d9a441"/>')
+        b.append(f'<circle cx="{cx}" cy="{base - ry - top}" r="9" fill="#d9a441"/>')
+    b.append(f'<rect x="490" y="300" width="220" height="56" fill="#f1ece2"/>')  # the drum under the big dome
+    for x in range(500, 710, 26):
+        b.append(f'<rect x="{x}" y="308" width="10" height="40" fill="#ddd4c3"/>')
+    dome(600, 302, 130, 120, 40)
+    dome(250, 412, 62, 50, 22)
+    dome(950, 412, 62, 50, 22)
+    # The plaza, and jacarandas in bloom framing it
+    b.append(f'<rect x="0" y="618" width="{W}" height="{H - 618}" fill="#d8cdbb"/>')
+    for i in range(0, W, 80):
+        b.append(f'<line x1="{i}" y1="618" x2="{i - 140}" y2="800" stroke="#c9bca6" stroke-width="2"/>')
+    for cx, cy, sc in ((50, 560, 1.0), (1150, 570, 1.0), (380, 660, 0.45), (820, 660, 0.45)):
+        b.append(f'<path d="M{cx},{cy + 200 * sc:.0f} C{cx - 6},{cy + 120 * sc:.0f} {cx + 8},{cy + 60 * sc:.0f} {cx},{cy:.0f}" fill="none" stroke="#5b4636" stroke-width="{14 * sc:.0f}" stroke-linecap="round"/>')
+        for _ in range(int(26 * sc)):
+            x, y = cx + rng.gauss(0, 70 * sc), cy - 30 * sc + rng.gauss(0, 42 * sc)
+            col = rng.choice(("#8b6fc9", "#9d82d6", "#a98fe0", "#7a5fb8"))
+            b.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{rng.uniform(26, 46) * sc:.0f}" fill="{col}" opacity="0.92"/>')
+    for _ in range(120):  # fallen petals on the plaza
+        x, y = rng.uniform(0, W), rng.uniform(630, 790)
+        b.append(f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{rng.uniform(3, 7):.0f}" ry="2.5" fill="#9d82d6" opacity="0.8"/>')
+    return svg("mexico-city", "".join(b), ("#7fb1e0", "#f3e9d8"))
+
+
 PLACES = (("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
-          ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea))
+          ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
+          ("mexico-city", mexico_city))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:

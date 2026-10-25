@@ -29,6 +29,7 @@ PINS = [
     ("want", "Garibaldi, British Columbia", 49.93, -123.03, "place-garibaldi"),
     ("want", "Glacier National Park, Montana", 48.68, -113.60, "place-glacier-national-park"),
     ("want", "Moorea, French Polynesia", -17.53, -149.83, "place-moorea"),
+    ("want", "Mexico City, Mexico", 19.44, -99.14, "place-mexico-city"),
     ("been", "London", 51.51, -0.13, None),
     ("been", "Rome", 41.90, 12.50, None),
     ("been", "Florence", 43.77, 11.26, None),

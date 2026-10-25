@@ -130,7 +130,7 @@
             "item": {
                 "@type": "SoftwareSourceCode",
                 "name": "Drone Autonomy",
-                "description": "A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks, though the gap mostly closes out of distribution.",
+                "description": "A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.",
                 "url": "https://amalmehta.github.io/DroneAutonomy/",
                 "codeRepository": "https://github.com/amalmehta/DroneAutonomy",
                 "author": {
@@ -205,6 +205,7 @@
           <h3>Rewarding What You Can’t Verify</h3>
           <p>A code agent trained only on visible tests learns to delete untested code until real correctness falls to 2%; random audits stopped it in the pilot but only delayed it in follow-ups.</p>
           <p class="card-results">50 pre-registered experiments: 21 supported, 15 refuted, 12 mixed, 2 deferred</p>
+          <p class="card-miss"><span>What didn’t work</span> RL never improved honest repair above the SFT start, and 25% audits only delayed the hack.</p>
           <p class="tags"><span class="chip">Python</span> <span class="chip">GRPO</span> <span class="chip">Reward hacking</span> <span class="chip">Code agents</span> <span class="chip">Pre-registered experiments</span></p>
           <p class="links"><a href="https://amalmehta.github.io/long_term_horizon_planning/">Live demo: proposal and results →</a> <a href="https://github.com/amalmehta/long_term_horizon_planning">Source on GitHub →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/#log">Experiment log →</a></p>
         </div>
@@ -216,6 +217,7 @@
           <p class="card-when">2026 · offline decoding on public data; closed loop simulated</p>
           <h3>BCI Projects</h3>
           <p>Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to 138 days out, against 0.42 for a Wiener filter.</p>
+          <p class="card-miss"><span>What didn’t work</span> Adaptation still fades three to four weeks out: R² 0.21 and 0.15, against 0.42–0.45 on earlier days (Neuro Falcon).</p>
           <p class="tags"><span class="chip">PyTorch</span> <span class="chip">Neural decoding</span> <span class="chip">Shared autonomy</span> <span class="chip">Closed-loop simulation</span> <span class="chip">Real neural data</span></p>
           <p class="links"><a href="https://github.com/amalmehta/BCIProjects">Code and write-ups on GitHub →</a> <a href="https://github.com/amalmehta/BCIProjects/blob/main/papers/Telepathy.pdf">Cursor decoding write-up (PDF) →</a> <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon follow-up →</a></p>
         </div>
@@ -227,6 +229,7 @@
           <p class="card-when">2026 · toy maze, 3 seeds</p>
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81% over 3 seeds.</p>
+          <p class="card-miss"><span>What didn’t work</span> 150-level eval sets and 3 seeds, so one level is worth about 0.7 points.</p>
           <p class="tags"><span class="chip">PyTorch</span> <span class="chip">SFT → GRPO</span> <span class="chip">DPO</span> <span class="chip">Transformers</span> <span class="chip">Reward hacking</span></p>
           <p class="links"><a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up on GitHub →</a></p>
         </div>
@@ -237,7 +240,8 @@
         <div class="project-text">
           <p class="card-when">2026 · simulation only; paper draft</p>
           <h3>Drone Autonomy</h3>
-          <p>A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks, though the gap mostly closes out of distribution.</p>
+          <p>A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.</p>
+          <p class="card-miss"><span>What didn’t work</span> Out of distribution every method fails (navigation success ≤ 21%), and learned residuals crash more often than the plain controller, 43–52% against 34%.</p>
           <p class="tags"><span class="chip">Python</span> <span class="chip">Meta-learning (7 methods)</span> <span class="chip">L1 adaptive control</span> <span class="chip">A* planning</span> <span class="chip">Simulation</span></p>
           <p class="links"><a href="https://amalmehta.github.io/DroneAutonomy/">Live demo: replay the flights →</a> <a href="https://github.com/amalmehta/DroneAutonomy">Source on GitHub →</a> <a href="https://github.com/amalmehta/DroneAutonomy/blob/main/paper/Where%20Does%20Meta-Learning%20Help%20a%20Quadrotor.pdf">Paper draft (PDF) →</a></p>
         </div>
@@ -492,10 +496,11 @@
       <p class="more"><a href="thinking.html">Things I’m thinking about →</a> · <a href="photos.html">Travel →</a></p>
     </section>
 
-    <section class="wrap outside">
-      <p><strong>Outside work</strong>, I spend a lot of my time outdoors. I’ve finished Ironman-distance triathlons, competed in <span class="messi-plain">soccer tournaments</span><button type="button" class="messi-egg" data-script="messi.js" aria-label="soccer tournaments (opens a replay of Messi’s goal)" hidden>soccer tournaments</button> and climbed high mountains.</p>
-      <p>The summer after my freshman year at Berkeley, I biked across the country from Seattle to DC with a group of fellow Eagle Scouts. The lesson I took from it: you don’t have to be perfectly ready to start. I’ve also led trips to Half Dome and the Channel Islands, and a team in the Lake Tahoe relay.</p>
-      <p><a href="photos.html">When I travel</a>, I go for the history, art, architecture, cuisine and people, which so far has taken me across Europe, Asia and the East Coast.</p>
+    <section id="outside" class="wrap section outside">
+      <h2 class="section-title">Outside work</h2>
+      <p>I spend a lot of my time outdoors. I’ve finished Ironman-distance triathlons, competed in <span class="messi-plain">soccer tournaments</span><button type="button" class="messi-egg" data-script="messi.js" aria-label="soccer tournaments (opens a replay of Messi’s goal)" hidden>soccer tournaments</button> and climbed high mountains. I’ve also led trips to Half Dome and the Channel Islands, and a team in the Lake Tahoe relay.</p>
+      <p>The summer after my freshman year at Berkeley, I biked across the country from Seattle to DC with a group of fellow Eagle Scouts. The lesson I took from it: you don’t have to be perfectly ready to start.</p>
+      <p>When I travel, I go for the history, art, architecture, cuisine and people, which so far has taken me across <a href="photos.html">Europe, Asia and the US</a>.</p>
     </section>
   </main>
 
