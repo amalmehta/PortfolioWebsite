@@ -105,11 +105,30 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* Sections */
 .section { padding-top: 4.5rem; padding-bottom: 2.2rem; }
 .section-title {
-  font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.09em; color: var(--warm);
-  display: flex; align-items: center; gap: 0.6rem;
+  font-family: var(--sans); font-size: 0.82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm);
+  display: flex; align-items: center; gap: 0.6rem; position: relative;
   margin: 0 0 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
 }
+/* A short warm underline on the rule, drawn in as the title scrolls into view where browsers can */
+.section-title::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 3.5rem; height: 2px; background: var(--warm); transform-origin: left; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section-title::after { animation: title-draw linear both; animation-timeline: view(); animation-range: entry 10% cover 25%; }
+  }
+}
+@keyframes title-draw { from { transform: scaleX(0); } }
+/* Outside work: an elevation profile of five passes instead of the plain rule, drawn in on load */
+#outside .section-title { border-bottom: 0; padding-bottom: 0.2rem; margin-bottom: 0.3rem; }
+#outside .section-title::after { display: none; }
+.ridge { display: block; width: 100%; height: 56px; margin: 0 0 1.8rem; overflow: visible; }
+.ridge path { fill: none; stroke: color-mix(in srgb, var(--warm) 55%, var(--line)); stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; animation: ride-draw 2.4s ease-out 0.2s forwards; }
+@media (prefers-reduced-motion: reduce) { .ridge path { animation: none; stroke-dashoffset: 0; } }
+/* A trail map's contour lines, faint, behind Outside work and the Endurance tile */
+.outside, .tile-grit { position: relative; isolation: isolate; }
+.outside::before, .tile-grit::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("images/contours.svg") right top / 480px repeat; opacity: 0.16; }
+.outside::before { inset: 3.5rem -16px 0; -webkit-mask-image: linear-gradient(to left, #000, transparent 75%); mask-image: linear-gradient(to left, #000, transparent 75%); }
+.tile-grit { overflow: hidden; }
 h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-height: 1.25; margin: 0 0 0.6rem; }
 
 /* Projects */
@@ -508,6 +527,18 @@ picture { display: contents; }
 .tile-icon .write { stroke-dasharray: 11; stroke-dashoffset: 0; }
 .tile-icon .page { transform-origin: 12px 12px; }
 .tile-icon .trail { stroke-dasharray: 1.4 2.4; }
+.tile-icon .wheel-a { transform-origin: 6px 16px; }
+.tile-icon .wheel-b { transform-origin: 18px 16px; }
+.tile-icon .roll { transform-origin: 12px 12px; }
+.tile-icon .sway { transform-origin: 13px 20.5px; }
+.tile-icon .reach { transform-origin: 7px 13.5px; }
+.tile:hover .wheel-a, .tile.is-live .wheel-a, .tile:hover .wheel-b, .tile.is-live .wheel-b { animation: tile-orbit 0.9s linear infinite; }
+.tile:hover .roll, .tile.is-live .roll { animation: tile-roll 1.6s ease-in-out infinite; }
+.tile:hover .sway, .tile.is-live .sway { animation: tile-sway 1.2s ease-in-out infinite; }
+.tile:hover .reach, .tile.is-live .reach { animation: tile-reach 1.4s ease-in-out infinite; }
+@keyframes tile-roll { 0%, 100% { transform: translateX(-1px) rotate(-30deg); } 50% { transform: translateX(1px) rotate(30deg); } }
+@keyframes tile-sway { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+@keyframes tile-reach { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-14deg); } }
 .tile-icon { transition: transform 0.25s; }
 .tile:hover .tile-icon, .tile.is-live .tile-icon { transform: translateY(-1px) scale(1.06); }
 .tile:hover .orbit, .tile.is-live .orbit { animation: tile-orbit 2.4s linear infinite; }
@@ -640,4 +671,5 @@ picture { display: contents; }
 .minis-note, .thanks { max-width: 68ch; margin: 1.4rem 0 0; color: var(--muted); }
 .thanks { font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
 .minis-note a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.footer .signoff { margin-top: 0.6rem; color: var(--muted); }
+.footer .signoff { margin-top: 1.4rem; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text); }
+.footer .secrets { display: block; margin-top: 0.2rem; font-family: var(--sans); font-style: normal; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
