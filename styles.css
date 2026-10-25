@@ -198,6 +198,15 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .where { margin: 0 0 0.7rem; font-size: 0.92rem; color: var(--muted); }
 .role p { margin-top: 0; }
 .role .tags { margin-bottom: 0; }
+/* Research & work: a thin rail with a dot per role, between the years and the entry */
+@media (min-width: 720px) {
+  #research .role { position: relative; border-top: 0; }
+  #research .role::before { content: ""; position: absolute; left: 10rem; top: 0; bottom: 0; width: 1px; background: var(--line); }
+  #research .role:first-of-type::before { top: 0.75rem; }
+  #research .role:last-of-type::before { bottom: auto; height: 2.5rem; }
+  #research .role::after { content: ""; position: absolute; left: calc(10rem - 4.5px); top: calc(1.75rem + 0.55rem); width: 10px; height: 10px; box-sizing: border-box; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+  #research .role:first-of-type::after { top: 0.55rem; }
+}
 .more { color: var(--muted); margin-top: 1.5rem; }
 
 /* Skills: one row per group, the group name on the left on wide screens */
@@ -222,6 +231,14 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .messi-foot { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
 .messi-foot .pong-help { margin: 0; }
 .messi-again { flex-shrink: 0; font: 600 0.85rem var(--sans); color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
+/* Hidden tree: the first-principles line on What I live by opens it (tree.js); it looks like plain text */
+.tree-egg, .maze-egg, .world-egg, .swarm-egg { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.tree-egg:hover, .maze-egg:hover, .world-egg:hover, .swarm-egg:hover { color: var(--accent); }
+.pong.tree canvas { cursor: default; aspect-ratio: 4 / 3; }
+.maze { width: min(900px, calc(100vw - 32px)); }
+.pong.maze canvas { cursor: default; aspect-ratio: 864 / 356; }
+.pong.world canvas { cursor: default; aspect-ratio: 640 / 440; }
+.pong.swarm canvas { cursor: crosshair; aspect-ratio: 640 / 420; }
 
 /* The "#" link beside each entry's heading (anchors.js): faint until the entry is hovered or focused */
 .anchor { margin-left: 0.15rem; font: 500 0.8em var(--sans); color: var(--faint); text-decoration: none; opacity: 0; transition: opacity 0.15s; }
@@ -239,7 +256,13 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
   content: ""; position: absolute; inset: 0 -20vw; z-index: -1; pointer-events: none;
   background:
     radial-gradient(40rem 22rem at 85% 35%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
-    radial-gradient(40rem 24rem at 14% 22%, color-mix(in srgb, var(--warm) 10%, transparent), transparent 70%);
+    radial-gradient(40rem 24rem at 14% 22%, color-mix(in srgb, var(--warm) 14%, transparent), transparent 70%);
+}
+/* A soft paper grain over the intro's wash, fading out at the bottom so it never meets a hard edge */
+.hero::after {
+  content: ""; position: absolute; inset: 0 -20vw; z-index: -1; pointer-events: none;
+  background: url("images/grain.svg") repeat; opacity: 0.13;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent);
 }
 main { overflow-x: clip; }
 .section-title::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--warm); }
@@ -248,6 +271,12 @@ main { overflow-x: clip; }
 .project .chip { background: var(--warm-soft); color: var(--warm); }
 .credit { font-size: 0.75rem; color: var(--faint); }
 .project:hover .shot { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
+/* Featured cards: the image eases in a touch and the title takes the accent on hover */
+.featured .shot img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.featured .project:hover .shot img { transform: scale(1.035); }
+.featured .project-text h3 { transition: color 0.2s; }
+.featured .project:hover .project-text h3 { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .featured .shot img { transition: none; } .featured .project:hover .shot img { transform: none; } }
 .nav-name::before { content: ""; display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--warm); margin-right: 0.5rem; vertical-align: middle; }
 .outside { color: var(--text); font-size: 1rem; line-height: 1.7; }
 .outside p { max-width: 68ch; margin: 0 0 0.9rem; }
@@ -321,6 +350,12 @@ picture { display: contents; }
 .now-list { margin: 0; padding-left: 1.2rem; }
 .now-list li { margin-bottom: 0.4rem; }
 .now-list a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.now-sub { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 1.6rem 0 0.6rem; }
+.events { list-style: none; margin: 0; padding: 0; }
+.events li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+.events strong { font-weight: 600; }
+.events .event-where { color: var(--muted); }
+.events time { margin-left: auto; font-size: 0.9rem; color: var(--warm); font-variant-numeric: tabular-nums; }
 /* Profile: a short through-line above the Research & work timeline */
 .section-intro { max-width: 68ch; margin: 0 0 2rem; font-family: var(--serif); font-size: 1.12rem; line-height: 1.55; }
 /* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
@@ -344,8 +379,15 @@ picture { display: contents; }
 .pin-going .pin-halo { transform-box: fill-box; transform-origin: center; animation: pin-pulse 2.4s ease-out infinite; }
 @keyframes pin-pulse { 0% { transform: scale(0.6); opacity: 0.5; } 100% { transform: scale(1.8); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .pin-going .pin-halo { animation: none; } }
+/* The Seattle-to-DC ride: a dashed arc that draws itself in once, revealed by an animated mask */
+.map-ride-line { fill: none; stroke: var(--warm); stroke-width: 3; stroke-dasharray: 7 6; stroke-linecap: round; }
+.map-ride-reveal { fill: none; stroke: #fff; stroke-width: 12; stroke-dasharray: 1; stroke-dashoffset: 1; animation: ride-draw 2.6s ease-in-out 0.4s forwards; }
+.map-ride-end { fill: var(--warm); stroke: var(--surface); stroke-width: 2; }
+@keyframes ride-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .map-ride-reveal { animation: none; stroke-dashoffset: 0; } }
 .map-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-top: 0.7rem; font-size: 0.88rem; color: var(--muted); }
 .key::before { content: ""; display: inline-block; width: 0.65rem; height: 0.65rem; margin-right: 0.4rem; border-radius: 50%; background: var(--pin); vertical-align: 0.02em; }
+.key-ride::before { width: 18px; height: 0; border-radius: 0; background: none; border-top: 3px dashed var(--warm); }
 .key-going { --pin: var(--warm); } .key-want { --pin: var(--accent); } .key-been { --pin: var(--been); }
 .key-count { color: var(--faint); font-variant-numeric: tabular-nums; }
 .map-been-list { margin: 0.45rem 0 0; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
@@ -396,6 +438,10 @@ picture { display: contents; }
 .beliefs .inspo-item, #how-i-want-to-live .inspo-item { border-bottom: 0; padding: 0.15rem 0 0.15rem 1rem; margin: 0 0 1rem; border-left: 2px solid color-mix(in srgb, var(--warm) 45%, var(--surface)); }
 .beliefs .inspo-item strong, #how-i-want-to-live .inspo-item strong { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.15rem; line-height: 1.45; color: var(--text); margin: 0; }
 .belief-panel + .belief-panel { margin-top: 2rem; }
+/* Current beliefs as pull quotes: larger, with a hanging quote mark instead of the rule */
+#beliefs-current .inspo-item { position: relative; border-left: 0; padding: 0.2rem 0 0.2rem 2.2rem; margin-bottom: 1.6rem; }
+#beliefs-current .inspo-item::before { content: "“"; position: absolute; left: 0; top: -0.55rem; font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--warm); opacity: 0.85; }
+#beliefs-current .inspo-item strong { font-size: 1.45rem; line-height: 1.35; margin-bottom: 0.25rem; }
 .beliefs .inspo-item strong { display: block; }  /* the belief on its own line, the reason under it */
 .beliefs.tabbed .belief-heading, .beliefs.single .belief-heading { display: none; }
 .beliefs.tabbed .belief-panel + .belief-panel { margin-top: 0; }

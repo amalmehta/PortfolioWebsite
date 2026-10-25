@@ -47,6 +47,9 @@ PINS = [
 # Countries tinted as visited (names as in the data)
 BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand"}
 KINDS = {"going": "Going", "want": "Want to go", "been": "Been"}
+# The cross-country ride, Seattle to Washington, DC: drawn as a gentle arc between the two ends,
+# not the exact roads.
+RIDE = ((47.61, -122.33), (38.91, -77.04))
 
 W = 1200
 NORTH, SOUTH = 84.0, -58.0  # Antarctica and the far Arctic are left off
@@ -151,6 +154,19 @@ def outline():
     return "M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in left + right) + "Z"
 
 
+def ride():
+    """The ride's arc: a quadratic curve between its ends, bowed a little north."""
+    (lat0, lon0), (lat1, lon1) = RIDE
+    (x0, y0), (x1, y1) = project(lon0, lat0), project(lon1, lat1)
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 - abs(x1 - x0) * 0.12
+    d = f"M{x0:.1f} {y0:.1f}Q{cx:.1f} {cy:.1f} {x1:.1f} {y1:.1f}"
+    return [f'    <g class="map-ride"><title>Seattle to Washington, DC, by bike</title>',
+            f'      <mask id="ride-reveal"><path class="map-ride-reveal" pathLength="1" d="{d}"/></mask>',
+            f'      <path class="map-ride-line" mask="url(#ride-reveal)" d="{d}"/>',
+            f'      <circle class="map-ride-end" cx="{x0:.1f}" cy="{y0:.1f}" r="4"/><circle class="map-ride-end" cx="{x1:.1f}" cy="{y1:.1f}" r="4"/>',
+            '    </g>']
+
+
 def build():
     counts = {k: sum(1 for p in PINS if p[0] == k) for k in KINDS}
     summary = (f"World map of my travels: {counts['going']} place I’m going, {counts['want']} places I’d like to go "
@@ -164,6 +180,7 @@ def build():
     for name, d in country_paths():
         cls = "map-land map-been" if name in BEEN_COUNTRIES else "map-land"
         lines.append(f'    <path class="{cls}" d="{d}"/>')
+    lines += ride()
     # Been first, then want, then going on top
     for kind in ("been", "want", "going"):
         for k, label, lat, lon, card in PINS:
@@ -177,7 +194,8 @@ def build():
             lines.append(f'    <a href="#{card}">{pin}</a>' if card else f"    {pin}")
     lines += ["  </svg>",
               '  <figcaption class="map-legend">' + " ".join(
-                  f'<span class="key key-{k}">{KINDS[k]} <span class="key-count">{counts[k]}</span></span>' for k in KINDS) + "</figcaption>",
+                  f'<span class="key key-{k}">{KINDS[k]} <span class="key-count">{counts[k]}</span></span>' for k in KINDS)
+              + ' <span class="key key-ride">Seattle to DC by bike</span></figcaption>',
               # Pin names show on hover, which phones don't have, so the places I've been are listed too
               # (the trip and wishlist places have their cards just below)
               '  <p class="map-been-list"><span class="key key-been">Been</span> '

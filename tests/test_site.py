@@ -614,6 +614,37 @@ class SubpagesTest(unittest.TestCase):
         self.assertNotIn('<script src="messi.js"', html)
         self.assertIn("openEgg ||= {}).messi =", (ROOT / "messi.js").read_text(encoding="utf-8"))
 
+    def test_tree_is_wired(self):
+        # What I live by's hidden extra: the first-principles line opens tree.js's growing tree,
+        # which eggs.js fetches on the first click.
+        html = (ROOT / "values.html").read_text(encoding="utf-8")
+        self.assertRegex(html, r'<span class="tree-plain">([^<]+)</span><button type="button" class="tree-egg" data-script="tree.js" aria-label="\1 \(opens a growing tree\)" hidden>\1</button>')
+        self.assertIn('<script src="eggs.js" defer></script>', html)
+        self.assertNotIn('<script src="tree.js"', html)
+        self.assertIn("openEgg ||= {}).tree =", (ROOT / "tree.js").read_text(encoding="utf-8"))
+
+    def test_word_eggs_are_wired(self):
+        # Hidden extras behind ordinary words: each page shows the plain words until eggs.js swaps in
+        # the button, and fetches the script only on the first click.
+        eggs = (ROOT / "eggs.js").read_text(encoding="utf-8")
+        for page, name in (("index.html", "maze"), ("interests.html", "world"), ("thinking.html", "swarm")):
+            with self.subTest(name):
+                html = (ROOT / page).read_text(encoding="utf-8")
+                self.assertRegex(html, rf'<span class="{name}-plain">([^<]+)</span><button type="button" class="{name}-egg" data-script="{name}.js" aria-label="\1 \(opens [^"]+\)" hidden>\1</button>')
+                self.assertIn('<script src="eggs.js" defer></script>', html)
+                self.assertNotIn(f'<script src="{name}.js"', html)
+                self.assertIn(f'[".{name}-egg", "{name}", ".{name}-plain"]', eggs)
+                self.assertIn(f"openEgg ||= {{}}).{name} =", (ROOT / f"{name}.js").read_text(encoding="utf-8"))
+
+    def test_footer_counts_the_secrets(self):
+        # The footer's hint names how many hidden extras there are: one per entry in eggs.js.
+        count = len(re.findall(r'\["\.[a-z-]+", "[a-z]+"', (ROOT / "eggs.js").read_text(encoding="utf-8")))
+        words = {6: "six"}
+        self.assertIn(count, words, "add the new count's word here")
+        for page in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "writings.html", "404.html"):
+            with self.subTest(page):
+                self.assertIn(f"There are {words[count]} secrets here.", (ROOT / page).read_text(encoding="utf-8"))
+
     def test_trips_have_dates(self):
         # Each trip under "Places I'm going" gives its first and last day, in order.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "photos.html").read_text(encoding="utf-8"), flags=re.S)

@@ -11,6 +11,7 @@ SITE = "https://amalmehta.github.io/PortfolioWebsite/"
 
 
 def text(fragment):
+    fragment = re.sub(r"<button[^>]*\bhidden\b[^>]*>.*?</button>", "", fragment, flags=re.S)  # a hidden extra repeats its words
     return html.unescape(re.sub(r"<[^>]+>", "", fragment)).strip()
 
 
