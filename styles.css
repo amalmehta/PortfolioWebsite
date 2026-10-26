@@ -417,7 +417,7 @@ picture { display: contents; }
 .events time { margin-left: auto; font-size: 0.9rem; color: var(--warm); font-variant-numeric: tabular-nums; }
 /* Profile: a short through-line above the Research & work timeline */
 .section-intro { max-width: 68ch; margin: 0 0 2rem; font-family: var(--serif); font-size: 1.12rem; line-height: 1.55; }
-@media (min-width: 720px) { #research .section-intro { margin-left: 11rem; max-width: 60ch; } #writeups .thanks { margin-left: 11rem; max-width: 60ch; } }  /* starts where the role titles do: years column plus gap */
+@media (min-width: 720px) { #research .section-intro { margin-left: 11rem; max-width: calc(860px - 11rem); } #writeups .thanks { margin-left: 11rem; max-width: calc(860px - 11rem); } }  /* starts where the role titles do: years column plus gap */
 /* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
 .travel-map { margin: 0 0 3rem; }
 .travel-map svg { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
@@ -570,6 +570,7 @@ picture { display: contents; }
 .tile-icon .write { stroke-dasharray: 11; stroke-dashoffset: 0; }
 .tile-icon .page { transform-origin: 12px 12px; }
 .tile-icon .trail { stroke-dasharray: 1.4 2.4; }
+.joys { margin-top: 3rem; }
 .tile-icon .wheel-a { transform-origin: 6px 16px; }
 .tile-icon .wheel-b { transform-origin: 18px 16px; }
 .tile-icon .roll { transform-origin: 12px 12px; }
