@@ -482,17 +482,18 @@ picture { display: contents; }
 .inspo-link { display: block; margin-top: 0.3rem; font-weight: 500; }
 .media { margin-top: 3rem; }
 .media-kind { display: inline-block; margin-right: 0.4rem; padding: 0 0.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 999px; background: var(--warm-soft); color: var(--warm); vertical-align: 0.1em; }
-/* Beliefs: two tabs (beliefs.js), What I believe currently and Outdated */
+/* Beliefs: tabs (beliefs.js), What I believe currently, My predictions and Outdated */
 .beliefs { margin-top: 3rem; }
 .belief-tabs { display: inline-flex; gap: 0.25rem; padding: 0.25rem; margin: 0 0 1.25rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
 .belief-tabs [role="tab"] { font: 600 0.88rem/1.2 var(--sans); padding: 0.5rem 0.95rem; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; }
 .belief-tabs [role="tab"]:hover { color: var(--text); }
 .belief-tabs [role="tab"][aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
 .belief-tabs[hidden] { display: none; }
-/* Small phones: the two tabs share the full width, so each label stays on one line. */
+/* Small phones: the three tabs share the full width, sized to their labels; on the narrowest
+   screens a long label wraps onto two lines rather than running off the edge. */
 @media (max-width: 420px) {
-  .belief-tabs { display: flex; width: 100%; }
-  .belief-tabs [role="tab"] { flex: 1; padding: 0.5rem 0.6rem; font-size: 0.82rem; white-space: nowrap; }
+  .belief-tabs { display: flex; width: 100%; border-radius: 1.4rem; }
+  .belief-tabs [role="tab"] { flex: 1 1 auto; min-width: 0; padding: 0.5rem 0.35rem; font-size: 0.76rem; line-height: 1.15; border-radius: 1.2rem; }
 }
 .belief-heading { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 0 0 0.6rem; }
 /* Beliefs and Ways I want to lead my life read as quotes: italic serif with a thin bar on the left, no dividers */

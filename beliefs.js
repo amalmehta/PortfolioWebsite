@@ -1,6 +1,6 @@
-// Values page: shows Beliefs as two tabs, "What I believe currently" and "Outdated".
-// Without JavaScript both lists show one after the other, each under its own heading.
-// Each tab has its own address (values.html#beliefs-outdated), so either can be linked to.
+// Values page: shows Beliefs as tabs, "What I believe currently", "My predictions" and "Outdated".
+// Without JavaScript the lists show one after the other, each under its own heading.
+// Each tab has its own address (values.html#beliefs-predictions), so any of them can be linked to.
 (() => {
   const section = document.querySelector(".beliefs");
   if (!section) return;

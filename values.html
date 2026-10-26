@@ -82,12 +82,13 @@
       </li>
     </ol>
 
-    <!-- Beliefs: what I believe now, and an archive of what I used to. beliefs.js turns the two
-         lists into tabs; without JavaScript they show one after the other. -->
+    <!-- Beliefs: what I believe now, my predictions, and an archive of what I used to believe. beliefs.js turns
+         the three lists into tabs; without JavaScript they show one after the other. -->
     <section class="beliefs" id="beliefs">
       <h2 class="section-title">Beliefs</h2>
       <div class="belief-tabs" role="tablist" aria-label="Beliefs" hidden>
         <button type="button" role="tab" id="tab-current" aria-controls="beliefs-current" aria-selected="true">What I believe currently</button>
+        <button type="button" role="tab" id="tab-predictions" aria-controls="beliefs-predictions" aria-selected="false" tabindex="-1">My predictions</button>
         <button type="button" role="tab" id="tab-outdated" aria-controls="beliefs-outdated" aria-selected="false" tabindex="-1">Outdated</button>
       </div>
       <div class="belief-panel" id="beliefs-current" role="tabpanel" aria-labelledby="tab-current">
@@ -101,10 +102,26 @@
           <li class="inspo-item"><strong>The biggest things are created by repeated small actions.</strong></li>
           <li class="inspo-item"><strong>Simple, but effective beats clever.</strong></li>
           <li class="inspo-item"><strong>Substance and skill over prestige and credentials.</strong></li>
+          <li class="inspo-item"><strong>Deep reading and writing are new-age skills.</strong></li>
           <!-- Saved for later, not shown yet (move a line above this comment to show it):
           <li class="inspo-item"><strong>Creation is a fundamental human need.</strong></li>
           The example once after "repeated small actions": An Ironman, or Seattle to DC, is just a lot of ordinary days in a row.
           -->
+        </ul>
+      </div>
+      <div class="belief-panel" id="beliefs-predictions" role="tabpanel" aria-labelledby="tab-predictions">
+        <h3 class="belief-heading">My predictions</h3>
+        <p class="belief-note">What I think will happen, written down so I can check back. Made in October 2026.</p>
+        <ul class="inspo">
+          <!-- New predictions go here, one per line:
+          <li class="inspo-item"><strong>The prediction</strong></li>
+          When one plays out, add how it went after it: <span class="changed">How it went: …</span>
+          -->
+          <li class="inspo-item"><strong>Robot hands and actuators, not models, will be what holds physical intelligence back.</strong></li>
+          <li class="inspo-item"><strong>The best robot models will come from teams that build their own hardware, because the body shapes what can be learned.</strong></li>
+          <li class="inspo-item"><strong>Brain–computer interfaces will be a routine treatment for paralysis within ten years.</strong></li>
+          <li class="inspo-item"><strong>The scarce skill won’t be building with AI but checking its work: knowing when a result is wrong.</strong></li>
+          <li class="inspo-item"><strong>As AI writes more, people who can read deeply and sit with one hard problem will become rare and valuable.</strong></li>
         </ul>
       </div>
       <div class="belief-panel" id="beliefs-outdated" role="tabpanel" aria-labelledby="tab-outdated">

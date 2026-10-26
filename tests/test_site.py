@@ -953,10 +953,10 @@ class ValuesPageTest(unittest.TestCase):
                 self.assertRegex(value.strip(), r"^<h3>")
 
     def test_beliefs_tabs_are_wired(self):
-        # Two tabs, each pointing at its own panel; beliefs.js is loaded to switch them.
+        # Three tabs, each pointing at its own panel; beliefs.js is loaded to switch them.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
         tabs = re.findall(r'<button type="button" role="tab" id="([^"]+)" aria-controls="([^"]+)"[^>]*>([^<]+)</button>', html)
-        self.assertEqual([t[2] for t in tabs], ["What I believe currently", "Outdated"])
+        self.assertEqual([t[2] for t in tabs], ["What I believe currently", "My predictions", "Outdated"])
         for tab_id, panel_id, _ in tabs:
             with self.subTest(tab=tab_id):
                 self.assertRegex(html, rf'<div class="belief-panel" id="{panel_id}" role="tabpanel" aria-labelledby="{tab_id}"( hidden)?>')
@@ -966,7 +966,7 @@ class ValuesPageTest(unittest.TestCase):
                 self.assertEqual(" hidden" in panel.group(0).split(">")[0], empty)
                 self.assertEqual(re.search(rf'id="{tab_id}"[^>]*\bhidden\b', html) is not None, empty)
         self.assertIn('<script src="beliefs.js" defer></script>', html)
-        # A link to either tab opens it, and the tab list stays hidden without JavaScript.
+        # A link to any tab opens it, and the tab list stays hidden without JavaScript.
         self.assertIn("location.hash", (ROOT / "beliefs.js").read_text(encoding="utf-8"))
         self.assertIn(".belief-tabs[hidden] { display: none; }", STYLES.read_text(encoding="utf-8"))
         self.assertTrue((ROOT / "beliefs.js").is_file())
