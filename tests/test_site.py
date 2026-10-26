@@ -802,11 +802,11 @@ class TravelMapTest(unittest.TestCase):
                          "the map is out of date: run python3 tools/make-map.py")
 
     def test_every_card_has_a_pin(self):
-        # Each trip and wishlist card has an id, and exactly the cards' ids are linked from pins.
+        # Each trip, wishlist and been card has an id, and exactly the cards' ids are linked from pins.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "photos.html").read_text(encoding="utf-8"), flags=re.S)
         cards = re.findall(r'<figure class="photo" id="(place-[a-z-]+)">', html)
         self.assertEqual(len(cards), html.count('src="images/places/'), "a place card without an id")
-        linked = re.findall(r'<a href="#(place-[a-z-]+)"><g class="pin pin-(?:going|want)">', html)
+        linked = re.findall(r'<a href="#(place-[a-z-]+)"><g class="pin pin-(?:going|want|been)">', html)
         self.assertEqual(sorted(linked), sorted(cards))
 
 

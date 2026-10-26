@@ -1,4 +1,4 @@
-"""Draws the Travel page's illustrations (Places I'm going, Places I'd like to go) as 1200x800 SVGs in images/places/.
+"""Draws the Travel page's illustrations (Places I'm going, Places I'd like to go, Places I've been) as 1200x800 SVGs in images/places/.
 
 Each is an original drawing of one iconic spot, not a photograph. Run from the
 repo root after changing a drawing:
@@ -578,10 +578,288 @@ def mexico_city():
     return svg("mexico-city", "".join(b), ("#7fb1e0", "#f3e9d8"))
 
 
+# ---------------------------------------------------------------- Azores: the twin lakes of Sete Cidades
+def azores():
+    rng = random.Random(27)
+    b = []
+    b.append(clouds(rng, 5, 60, 220, opacity=0.75))
+    b.append(f'<rect x="0" y="300" width="{W}" height="40" fill="#5d8fb8" opacity="0.5"/>')  # the Atlantic on the horizon
+    # The far crater rim, then the crater floor
+    b.append(poly(ridge(0, W, 420, rng, [(0.1, 0.2, 0.8), (0.5, 0.35, 0.55), (0.9, 0.2, 0.9)], 120, jag=3), "#4f7d4a"))
+    b.append(f'<path d="M0,420 C300,400 900,400 1200,420 L1200,640 L0,640 Z" fill="#6a9a52"/>')
+    # The two lakes, blue and green, joined by a narrow bridge
+    b.append(f'<path d="M150,500 C170,450 330,430 470,446 C540,454 560,480 548,510 C530,550 400,566 280,556 C190,548 140,530 150,500 Z" fill="#3f78a8"/>')
+    b.append(f'<path d="M560,500 C580,456 760,440 900,452 C1000,462 1040,486 1020,520 C990,560 840,574 700,562 C610,554 548,534 560,500 Z" fill="#3f8a63"/>')
+    for x0, x1, col in ((180, 520, "#7aa9cf"), (600, 990, "#78b58f")):
+        for _ in range(8):
+            x, y = rng.uniform(x0, x1 - 60), rng.uniform(470, 540)
+            b.append(f'<path d="M{x:.0f},{y:.0f} l{rng.uniform(20, 60):.0f},0" stroke="{col}" stroke-width="2.5" opacity="0.6" stroke-linecap="round"/>')
+    b.append(f'<path d="M540,502 L570,500" stroke="#d9d2c4" stroke-width="6"/>')
+    # The village on the shore: white houses with red roofs, and the church spire
+    for x in (380, 410, 440, 466, 500, 900, 930):
+        y = 560 + rng.uniform(-4, 8)
+        b.append(f'<rect x="{x}" y="{y - 14:.0f}" width="22" height="14" fill="#f4f1ea"/>{poly([(x - 2, y - 14), (x + 11, y - 22), (x + 24, y - 14)], "#b8513a")}')
+    b.append(f'<rect x="520" y="540" width="12" height="26" fill="#f4f1ea"/>{poly([(518, 540), (526, 524), (534, 540)], "#3b3a37")}')
+    # The near slope of the rim, and hydrangeas along the road
+    b.append(f'<path d="M0,620 C300,590 800,610 1200,590 L1200,800 L0,800 Z" fill="#3e6d3d"/>')
+    b.append(f'<path d="M0,690 C300,670 800,690 1200,680 L1200,800 L0,800 Z" fill="#335d34"/>')
+    for _ in range(70):
+        x, y = rng.uniform(-20, W + 20), rng.uniform(640, 800)
+        r = rng.uniform(16, 30)
+        b.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.0f}" fill="{rng.choice(("#6f8fd8", "#8a7fd0", "#a9b8ef", "#5a7cc9", "#b49ad9"))}" opacity="0.95"/>')
+        b.append(f'<circle cx="{x - r * 0.3:.0f}" cy="{y - r * 0.3:.0f}" r="{r * 0.35:.0f}" fill="#ffffff" opacity="0.18"/>')
+    return svg("azores", "".join(b), ("#8fb4d6", "#e6eef4"))
+
+
+# ================================================================ Places I've been
+
+def firs(b, rng, n, x0, x1, base, wave, h0, h1, colours):
+    for _ in range(n):
+        x = rng.uniform(x0, x1)
+        y = base + wave(x) + rng.uniform(-6, 18)
+        h = rng.uniform(h0, h1)
+        b.append(poly([(x - h * 0.24, y), (x, y - h), (x + h * 0.24, y)], rng.choice(colours)))
+
+
+# ---------------------------------------------------------------- Machu Picchu: the ruins below Huayna Picchu
+def machu_picchu():
+    rng = random.Random(21)
+    b = []
+    b.append(glow(300, 220, 520, 240, "#fde2bf", 0.6))
+    b.append(clouds(rng, 3, 60, 160, opacity=0.55))
+    # Ranges fading into the distance, cloud-forest green up close
+    b.append(poly(ridge(0, W, 470, rng, [(0.1, 0.12, 0.7), (0.35, 0.1, 0.9), (0.62, 0.12, 0.8), (0.9, 0.1, 1.0)], 230, jag=8), "#9fb3b8"))
+    b.append(poly(ridge(0, W, 520, rng, [(0.05, 0.1, 0.8), (0.3, 0.14, 0.6), (0.85, 0.15, 0.9)], 200, jag=6), "#6f8f84"))
+    # Huayna Picchu: the steep sugarloaf behind the city, with its smaller neighbour
+    b.append(poly([(560, 560), (640, 420), (700, 300), (735, 215), (760, 196), (790, 212), (830, 300), (880, 420), (960, 520), (1020, 560)], "#3f6b4c"))
+    b.append(poly([(760, 196), (790, 212), (830, 300), (880, 420), (960, 520), (1020, 560), (800, 560)], "#24364d", opacity="0.2"))
+    b.append(poly([(940, 560), (1010, 470), (1060, 440), (1110, 470), (1200, 540), (1200, 560)], "#4d7a58"))
+    # Cloud lying in the valley below
+    for cx, cy, rx in ((260, 560, 300), (1000, 575, 260), (620, 590, 220)):
+        b.append(glow(cx, cy, rx, 46, "#ffffff", 0.85))
+    # The saddle: green terraces stepping down, grey stone walls and roofless houses
+    b.append(f'<path d="M0,590 C200,540 420,515 640,518 S1000,555 1200,585 L1200,800 L0,800 Z" fill="#7fa35e"/>')
+    for k in range(7):
+        y = 610 + k * 28
+        b.append(f'<path d="M{-20 + k * 6},{y} C300,{y - 30} 700,{y - 24} {1220 - k * 4},{y + 6}" fill="none" stroke="#5c7f45" stroke-width="5" opacity="0.8"/>')
+        b.append(f'<path d="M{-20 + k * 6},{y + 6} C300,{y - 24} 700,{y - 18} {1220 - k * 4},{y + 12}" fill="none" stroke="#9cbc76" stroke-width="3" opacity="0.6"/>')
+    for x, y, w, h in ((300, 560, 70, 34), (380, 552, 56, 40), (450, 548, 80, 30), (545, 544, 60, 38), (620, 550, 90, 32),
+                       (720, 556, 64, 36), (800, 562, 70, 30), (420, 600, 90, 26), (560, 596, 70, 30), (690, 604, 80, 26)):
+        b.append(f'<rect x="{x}" y="{y - h}" width="{w}" height="{h}" fill="#b9b2a4"/>')
+        b.append(f'<rect x="{x}" y="{y - h}" width="{w}" height="5" fill="#d8d2c4"/>')
+        b.append(poly([(x + w * 0.2, y - h), (x + w * 0.5, y - h - w * 0.35), (x + w * 0.8, y - h)], "#b9b2a4"))  # a gable end
+        b.append(f'<rect x="{x + w * 0.42:.0f}" y="{y - h * 0.7:.0f}" width="{w * 0.14:.0f}" height="{h * 0.5:.0f}" fill="#6e675b"/>')
+    b.append(f'<path d="M300,575 C420,566 620,560 860,578" fill="none" stroke="#9a9384" stroke-width="3"/>')
+    # A llama on the near terrace
+    b.append('<g fill="#f3ece0"><ellipse cx="180" cy="712" rx="34" ry="16"/><rect x="200" y="672" width="11" height="40" rx="5"/>'
+             '<ellipse cx="212" cy="670" rx="13" ry="8"/><path d="M204,664 l2,-10 l4,9 M214,663 l3,-10 l3,9"/>'
+             '<rect x="156" y="722" width="6" height="26"/><rect x="170" y="724" width="6" height="26"/><rect x="190" y="722" width="6" height="26"/><rect x="202" y="720" width="6" height="26"/></g>')
+    return svg("machu-picchu", "".join(b), ("#a8c6dc", "#f4e6d2"))
+
+
+# ---------------------------------------------------------------- Seattle to DC: the open road across the plains
+def seattle_to_dc():
+    rng = random.Random(22)
+    b = []
+    b.append(glow(860, 470, 640, 260, "#ffd9a3", 0.75))
+    b.append(clouds(rng, 4, 80, 230, colour="#fff3e4", opacity=0.6))
+    # Rainier, faint behind us on the left; the plains ahead
+    b.append(poly([(-40, 470), (120, 360), (190, 318), (230, 310), (270, 322), (360, 380), (480, 470)], "#b7bfd0", opacity="0.85"))
+    b.append(poly([(150, 340), (190, 318), (230, 310), (270, 322), (300, 342), (262, 352), (230, 336), (200, 352)], "#f6f4f1"))
+    b.append(poly(ridge(0, W, 480, rng, [(0.3, 0.3, 0.5), (0.75, 0.3, 0.4)], 40, jag=2), "#c9a56b"))
+    # The Capitol dome, tiny where the road meets the sky
+    b.append(f'<g fill="#e9e1d4"><rect x="836" y="452" width="48" height="12"/><rect x="848" y="440" width="24" height="12"/>'
+             f'<path d="M846,440 a14,14 0 0 1 28,0 Z"/><rect x="858" y="418" width="4" height="10"/></g>')
+    # Fields, golden near the horizon, greener close by, with a red barn
+    b.append(f'<path d="M0,480 L{W},480 L{W},800 L0,800 Z" fill="#d6b56d"/>')
+    for k, col in enumerate(("#c7a75f", "#b8a052", "#9fa04c", "#869a48")):
+        y = 500 + k * 55
+        b.append(f'<path d="M0,{y} C300,{y - 10} 900,{y + 14} {W},{y} L{W},800 L0,800 Z" fill="{col}"/>')
+    for _ in range(60):
+        y = rng.uniform(560, 790); x = rng.uniform(0, W)
+        b.append(f'<path d="M{x:.0f},{y:.0f} l{rng.uniform(-4, 4):.0f},-{rng.uniform(8, 18):.0f}" stroke="#6f7a3a" stroke-width="2" opacity="0.5"/>')
+    b.append(f'<rect x="150" y="500" width="54" height="36" fill="#a83b2c"/><path d="M144,502 L177,478 L210,502 Z" fill="#7b2a20"/>'
+             f'<rect x="170" y="514" width="14" height="22" fill="#f2e6d3"/><rect x="214" y="488" width="14" height="48" rx="7" fill="#c9c2b6"/>')
+    # The road, straight to the horizon, with its centre line
+    b.append(poly([(840, 480), (880, 480), (1060, 800), (520, 800)], "#4b4a48"))
+    for k in range(9):
+        t0, t1 = (k / 9) ** 1.8, ((k + 0.5) / 9) ** 1.8
+        y0, y1 = 480 + 320 * t0, 480 + 320 * t1
+        x0, x1 = 860 - 70 * t0, 860 - 70 * t1
+        b.append(f'<path d="M{x0:.1f},{y0:.1f} L{x1:.1f},{y1:.1f}" stroke="#f1c76b" stroke-width="{1 + 7 * t1:.1f}"/>')
+    # A cyclist, heading east
+    cx, cy = 900, 650
+    b.append(f'<g fill="none" stroke="#1f2a36" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">'
+             f'<circle cx="{cx - 46}" cy="{cy + 40}" r="30"/><circle cx="{cx + 46}" cy="{cy + 40}" r="30"/>'
+             f'<path d="M{cx - 46},{cy + 40} L{cx - 8},{cy + 40} L{cx + 30},{cy + 2} L{cx - 20},{cy + 2} Z M{cx - 8},{cy + 40} L{cx - 26},{cy - 8} M{cx + 30},{cy + 2} L{cx + 46},{cy + 40} M{cx + 30},{cy + 2} L{cx + 34},{cy - 12} L{cx + 46},{cy - 12}"/></g>')
+    b.append(f'<g stroke-linecap="round" stroke-linejoin="round" fill="none">'
+             f'<path d="M{cx - 24},{cy - 14} L{cx + 20},{cy - 40} L{cx + 36},{cy - 14}" stroke="#c8402f" stroke-width="13"/>'
+             f'<path d="M{cx - 24},{cy - 12} L{cx - 4},{cy + 18} L{cx - 8},{cy + 40}" stroke="#24364d" stroke-width="11"/></g>')
+    b.append(f'<circle cx="{cx + 30}" cy="{cy - 58}" r="13" fill="#24364d"/><path d="M{cx + 16},{cy - 62} q14,-18 30,-2" fill="#f1c76b"/>')
+    return svg("seattle-to-dc", "".join(b), ("#8fb6db", "#fbe2c2"))
+
+
+# ---------------------------------------------------------------- Pakistan: the Karakoram Highway through Hunza
+def hunza():
+    rng = random.Random(23)
+    b = []
+    b.append(clouds(rng, 3, 60, 150, opacity=0.6))
+    # Rakaposhi: a huge snow face filling the sky
+    face = [(120, 520), (230, 420), (300, 380), (340, 330), (390, 300), (430, 250), (470, 236), (510, 170), (548, 150), (580, 110), (610, 96), (640, 118), (676, 112), (720, 160), (770, 190), (820, 250), (870, 262), (930, 320), (1000, 352), (1080, 420), (1200, 480), (1200, 560), (120, 560)]
+    b.append(poly(face, "#f2f5f8"))
+    b.append(poly([(610, 96), (640, 118), (676, 112), (720, 160), (770, 190), (820, 250), (870, 262), (930, 320), (1000, 352), (1080, 420), (1200, 480), (1200, 560), (700, 560)], "#7d93ad", opacity="0.28"))
+    for d in ("M560,130 C540,220 500,300 470,420", "M640,120 C660,220 700,300 760,420", "M420,260 C430,330 400,400 380,470"):
+        b.append(f'<path d="{d}" fill="none" stroke="#a4b4c6" stroke-width="5" stroke-linecap="round" opacity="0.6"/>')
+    # Bare brown valley walls either side
+    b.append(poly([(0, 260), (90, 300), (200, 380), (320, 460), (420, 540), (520, 620), (0, 640)], "#8d7258"))
+    b.append(poly([(1200, 330), (1120, 380), (1000, 450), (880, 530), (760, 620), (1200, 640)], "#9b7f62"))
+    b.append(poly([(0, 400), (160, 450), (300, 520), (420, 600), (0, 640)], "#735c47", opacity="0.6"))
+    # The valley floor: orchards and terraced fields
+    b.append(f'<path d="M0,600 C260,580 520,610 760,590 S1080,580 1200,600 L1200,800 L0,800 Z" fill="#8aa356"/>')
+    for k in range(4):
+        y = 640 + k * 38
+        b.append(f'<path d="M0,{y} C300,{y - 16} 800,{y + 12} {W},{y - 4}" fill="none" stroke="#6f8a43" stroke-width="4" opacity="0.7"/>')
+    # Tall poplars, turning gold, and apricot trees
+    for x in (70, 100, 128, 250, 276, 960, 990, 1016, 1100, 1130):
+        h = rng.uniform(140, 210); base = 640 + rng.uniform(-8, 10)
+        b.append(f'<ellipse cx="{x}" cy="{base - h / 2:.0f}" rx="{h * 0.08:.0f}" ry="{h / 2:.0f}" fill="{rng.choice(("#e0a93a", "#d18f2b", "#e9bd52"))}"/>')
+        b.append(f'<path d="M{x},{base:.0f} L{x},{base - h * 0.3:.0f}" stroke="#5a4632" stroke-width="3"/>')
+    for _ in range(14):
+        x, y = rng.uniform(320, 900), rng.uniform(610, 660)
+        b.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{rng.uniform(14, 22):.0f}" fill="{rng.choice(("#6f9a45", "#e7a36a", "#7fa84d"))}"/>')
+    # The highway, curving up the valley, and a painted truck on it
+    b.append('<path d="M-40,780 C260,740 520,720 640,680 S860,630 1000,610" fill="none" stroke="#5a5652" stroke-width="44" stroke-linecap="round"/>')
+    b.append('<path d="M-40,780 C260,740 520,720 640,680 S860,630 1000,610" fill="none" stroke="#e8e2d6" stroke-width="3" stroke-dasharray="26 22"/>')
+    tx, ty = 470, 700
+    b.append(f'<g transform="rotate(-7 {tx} {ty})">'
+             f'<rect x="{tx - 80}" y="{ty - 76}" width="110" height="64" rx="6" fill="#e4572e"/>'
+             f'<rect x="{tx - 80}" y="{ty - 76}" width="110" height="12" fill="#2a9d8f"/><rect x="{tx - 80}" y="{ty - 40}" width="110" height="8" fill="#f2c14e"/>'
+             f'<circle cx="{tx - 50}" cy="{ty - 56}" r="7" fill="#f2c14e"/><circle cx="{tx - 26}" cy="{ty - 56}" r="7" fill="#3d5a80"/><circle cx="{tx - 2}" cy="{ty - 56}" r="7" fill="#f2c14e"/>'
+             f'<path d="M{tx + 30},{ty - 12} L{tx + 30},{ty - 66} L{tx + 52},{ty - 66} Q{tx + 70},{ty - 66} {tx + 72},{ty - 40} L{tx + 72},{ty - 12} Z" fill="#2a9d8f"/>'
+             f'<rect x="{tx + 40}" y="{ty - 60}" width="22" height="18" rx="2" fill="#cfe6f2"/>'
+             f'<path d="M{tx - 84},{ty - 80} Q{tx - 25},{ty - 104} {tx + 34},{ty - 80}" fill="#f2c14e"/>'
+             f'<circle cx="{tx - 52}" cy="{ty - 8}" r="13" fill="#1f1d1b"/><circle cx="{tx + 50}" cy="{ty - 8}" r="13" fill="#1f1d1b"/></g>')
+    return svg("hunza", "".join(b), ("#5e9bd6", "#d7e8f5"))
+
+
+# ---------------------------------------------------------------- Yosemite: Tunnel View
+def yosemite():
+    rng = random.Random(24)
+    b = []
+    b.append(glow(620, 300, 560, 220, "#fff1dc", 0.5))
+    b.append(clouds(rng, 3, 70, 170, opacity=0.6))
+    # Half Dome, far up the valley, in haze
+    b.append('<path d="M556,470 L560,300 C562,276 590,262 622,268 C668,278 700,330 724,400 L748,470 Z" fill="#a8b4c4"/>')
+    b.append('<path d="M556,470 L560,300 C562,286 568,280 576,276 L572,470 Z" fill="#24364d" opacity="0.12"/>')
+    b.append(poly(ridge(380, 860, 480, rng, [(0.2, 0.2, 0.5), (0.8, 0.2, 0.6)], 90, jag=4), "#9aa9bb"))
+    # El Capitan: the sheer grey wall on the left
+    b.append(poly([(0, 640), (0, 190), (120, 168), (230, 172), (300, 190), (340, 260), (370, 400), (420, 560), (460, 640)], "#9a9a94"))
+    b.append(poly([(300, 190), (340, 260), (370, 400), (420, 560), (460, 640), (330, 640), (300, 400)], "#24364d", opacity="0.18"))
+    for x in (60, 120, 190, 250):
+        b.append(f'<path d="M{x},{180 + rng.uniform(0, 10):.0f} C{x + 10},300 {x - 6},420 {x + 14},620" fill="none" stroke="#7d7d78" stroke-width="3" opacity="0.45"/>')
+    # Cathedral Rocks on the right, with Bridalveil Fall
+    b.append(poly([(1200, 640), (1200, 220), (1120, 230), (1040, 270), (960, 330), (900, 420), (860, 520), (820, 640)], "#8f8c85"))
+    b.append(poly([(1040, 270), (1000, 300), (960, 330), (900, 420), (860, 520), (820, 640), (960, 640)], "#24364d", opacity="0.15"))
+    b.append(f'<path d="M940,372 C936,440 944,520 940,600" fill="none" stroke="#f4f8fb" stroke-width="9" stroke-linecap="round" opacity="0.9"/>')
+    b.append(glow(940, 600, 60, 26, "#ffffff", 0.8))
+    # The valley: pines all the way to the walls
+    b.append(f'<path d="M0,600 C300,570 900,570 1200,600 L1200,800 L0,800 Z" fill="#3d5a44"/>')
+    firs(b, rng, 120, -20, W + 20, 610, lambda x: 0, 40, 90, ("#2f4a3c", "#294235", "#365443", "#3e5e47"))
+    b.append(f'<path d="M0,700 C300,680 900,690 1200,700 L1200,800 L0,800 Z" fill="#263d30"/>')
+    firs(b, rng, 50, -20, W + 20, 720, lambda x: 0, 70, 140, ("#1f3328", "#233a2d"))
+    return svg("yosemite", "".join(b), ("#86b2dc", "#e8f1f8"))
+
+
+# ---------------------------------------------------------------- Japan: Mount Fuji behind the Chureito Pagoda
+def japan():
+    rng = random.Random(25)
+    b = []
+    b.append(glow(500, 360, 600, 240, "#ffe6e6", 0.55))
+    b.append(clouds(rng, 3, 70, 160, opacity=0.55))
+    # Fuji: a wide cone with its snowcap
+    cone = [(40, 580), (300, 400), (440, 240), (480, 206), (560, 206), (600, 240), (740, 400), (1000, 580)]
+    b.append(poly(cone, "#6f84a8"))
+    b.append(poly([(480, 206), (560, 206), (600, 240), (650, 300), (610, 292), (580, 316), (548, 288), (520, 320), (494, 290), (460, 312), (430, 296), (390, 300), (440, 240)], "#f6f8fb"))
+    b.append(poly([(520, 206), (560, 206), (600, 240), (740, 400), (1000, 580), (700, 580)], "#24364d", opacity="0.15"))
+    b.append(f'<ellipse cx="520" cy="470" rx="420" ry="24" fill="#ffffff" opacity="0.35"/>')
+    # Forested hills, then the pagoda on its slope at the right
+    b.append(poly(ridge(0, W, 620, rng, [(0.15, 0.2, 0.5), (0.85, 0.25, 1.0)], 200, jag=3), "#4f6b4c"))
+    b.append(f'<path d="M0,600 C300,580 900,590 1200,575 L1200,800 L0,800 Z" fill="#5f7d55"/>')
+    px, base = 900, 560
+    for k in range(5):
+        w = 130 - k * 16; y = base - k * 46
+        b.append(f'<rect x="{px - w * 0.36:.0f}" y="{y - 40:.0f}" width="{w * 0.72:.0f}" height="44" fill="#c8402f"/>')
+        b.append(f'<rect x="{px - w * 0.2:.0f}" y="{y - 32:.0f}" width="{w * 0.4:.0f}" height="20" fill="#f1e4cf" opacity="0.8"/>')
+        b.append(f'<path d="M{px - w * 0.72:.0f},{y - 36:.0f} Q{px},{y - 56:.0f} {px + w * 0.72:.0f},{y - 36:.0f} L{px + w * 0.5:.0f},{y - 48:.0f} L{px - w * 0.5:.0f},{y - 48:.0f} Z" fill="#3b3a37"/>')
+    b.append(f'<path d="M{px},{base - 5 * 46 - 40} L{px},{base - 5 * 46 - 84}" stroke="#3b3a37" stroke-width="5"/>')
+    for k in range(3):
+        b.append(f'<circle cx="{px}" cy="{base - 5 * 46 - 52 - k * 10}" r="4" fill="#3b3a37"/>')
+    # Cherry blossom in the foreground
+    for _ in range(80):
+        x = rng.choice((rng.uniform(-40, 380), rng.uniform(980, 1240)))
+        y = rng.uniform(560, 820)
+        b.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{rng.uniform(26, 50):.0f}" fill="{rng.choice(("#f6c6d0", "#f2b3c2", "#fbdde3", "#eea7b8"))}" opacity="0.92"/>')
+    b.append(f'<path d="M0,700 C60,680 120,690 200,650 M1200,720 C1140,700 1080,710 1020,670" fill="none" stroke="#5a3e33" stroke-width="10" stroke-linecap="round"/>')
+    for _ in range(40):
+        x, y = rng.uniform(0, W), rng.uniform(300, 760)
+        b.append(f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="4" ry="2.5" fill="#f6c6d0" transform="rotate({rng.uniform(0, 180):.0f} {x:.0f} {y:.0f})"/>')
+    return svg("japan", "".join(b), ("#9cbbe0", "#f7e5e2"))
+
+
+# ---------------------------------------------------------------- Florence: the Duomo over the rooftops
+def florence():
+    rng = random.Random(26)
+    b = []
+    b.append(glow(700, 420, 640, 260, "#ffd8a8", 0.7))
+    b.append(clouds(rng, 3, 70, 170, colour="#fff3e6", opacity=0.55))
+    # Tuscan hills, with cypresses
+    b.append(poly(ridge(0, W, 500, rng, [(0.15, 0.25, 0.7), (0.6, 0.3, 0.9), (0.95, 0.2, 0.6)], 130, jag=2), "#8f9f78"))
+    for x in (90, 110, 1040, 1064, 1150):
+        y = 500 - 130 * 0.6 + rng.uniform(-10, 20)
+        b.append(f'<ellipse cx="{x}" cy="{y:.0f}" rx="8" ry="34" fill="#3f5a3c"/>')
+    # Giotto's campanile
+    cx, top = 340, 230
+    b.append(f'<rect x="{cx - 34}" y="{top}" width="68" height="360" fill="#efe6d6"/>')
+    for k in range(5):
+        y = top + 30 + k * 66
+        b.append(f'<rect x="{cx - 34}" y="{y}" width="68" height="6" fill="#4f7a5c"/><rect x="{cx - 34}" y="{y + 10}" width="68" height="4" fill="#d88c8c"/>')
+    for y in (top + 40, top + 108):
+        b.append(f'<rect x="{cx - 16}" y="{y}" width="32" height="52" rx="16" fill="#5b5148"/>')
+    b.append(f'<rect x="{cx - 40}" y="{top - 10}" width="80" height="12" fill="#e2d6c2"/>')
+    # The cathedral and Brunelleschi's dome
+    b.append(f'<rect x="420" y="420" width="560" height="170" fill="#efe6d6"/>')
+    for x in range(430, 980, 46):
+        b.append(f'<rect x="{x}" y="430" width="6" height="160" fill="#4f7a5c" opacity="0.8"/>')
+    b.append(f'<rect x="420" y="452" width="560" height="6" fill="#d88c8c"/>')
+    b.append(f'<rect x="590" y="330" width="240" height="96" fill="#e7dcc8"/>')
+    for x in range(604, 830, 36):
+        b.append(f'<circle cx="{x + 8}" cy="372" r="9" fill="#5b5148"/>')
+    b.append(f'<path d="M580,334 C580,200 640,140 710,128 C780,140 840,200 840,334 Z" fill="#c96a3c"/>')
+    for d in ("M710,128 L710,334", "M710,128 C660,170 630,250 628,334", "M710,128 C760,170 790,250 792,334"):
+        b.append(f'<path d="{d}" fill="none" stroke="#f3ece0" stroke-width="7"/>')
+    b.append(f'<rect x="576" y="326" width="268" height="10" fill="#f3ece0"/>')
+    b.append(f'<rect x="694" y="96" width="32" height="34" fill="#f3ece0"/><path d="M690,96 Q710,76 730,96 Z" fill="#f3ece0"/>'
+             f'<path d="M710,80 L710,58" stroke="#d1a645" stroke-width="5"/><circle cx="710" cy="56" r="7" fill="#d1a645"/>')
+    # Terracotta rooftops crowding the foreground
+    for row, y0 in enumerate((560, 620, 690)):
+        x = -30 + row * 20
+        while x < W + 40:
+            w = rng.uniform(70, 140); h = rng.uniform(40, 80); y = y0 + rng.uniform(-10, 14)
+            wall = rng.choice(("#ecd9b8", "#e6c79a", "#f0e2c8", "#dcb98a"))
+            b.append(f'<rect x="{x:.0f}" y="{y:.0f}" width="{w:.0f}" height="{H - y:.0f}" fill="{wall}"/>')
+            b.append(poly([(x - 6, y + 2), (x + w * 0.5, y - h * 0.4), (x + w + 6, y + 2)], rng.choice(("#b85a36", "#c4683f", "#a94f30"))))
+            for k in range(int(w // 34)):
+                b.append(f'<rect x="{x + 12 + k * 34:.0f}" y="{y + 18:.0f}" width="12" height="20" fill="#6b5446" opacity="0.8"/>')
+            x += w + rng.uniform(-6, 4)
+    return svg("florence", "".join(b), ("#86b0d8", "#f6e2c8"))
+
+
 PLACES = (("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
           ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
-          ("mexico-city", mexico_city))
+          ("mexico-city", mexico_city), ("azores", azores),
+          ("machu-picchu", machu_picchu), ("seattle-to-dc", seattle_to_dc), ("hunza", hunza),
+          ("yosemite", yosemite), ("japan", japan), ("florence", florence))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:
