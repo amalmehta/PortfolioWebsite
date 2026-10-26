@@ -40,6 +40,7 @@ PINS = [
     ("been", "Yosemite", 37.75, -119.53, "place-yosemite"),
     ("been", "Channel Islands", 34.0, -119.8, None),
     ("been", "Lake Tahoe", 39.10, -120.03, None),
+    ("been", "Death Ride, Sierra Nevada", 38.69, -119.78, None),  # Markleeville, the ride's start
     ("been", "India", 22.5, 79.0, None),
     ("been", "Japan", 36.2, 138.3, "place-japan"),
     ("been", "Thailand", 15.5, 101.0, None),
