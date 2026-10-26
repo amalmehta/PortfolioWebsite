@@ -9,7 +9,7 @@ Run from the repo root after editing: python3 tools/make-case-studies.py
 import html, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = "https://amalmehta.github.io/PortfolioWebsite/"
+SITE = "https://amalmehta.com/"
 e = html.escape
 
 PAGES = [

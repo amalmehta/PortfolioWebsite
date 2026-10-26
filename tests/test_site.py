@@ -17,7 +17,7 @@ RESUME_TEX = ROOT / "resume" / "amal-mehta-resume.tex"
 RESUME_PDF = ROOT / "resume" / "amal-mehta-resume.pdf"
 MEDIA_DIR = ROOT / "assets" / "media"
 MAX_MEDIA_BYTES = 2 * 1024 * 1024
-SITE_URL = "https://amalmehta.github.io/PortfolioWebsite/"
+SITE_URL = "https://amalmehta.com/"
 
 
 class Page(HTMLParser):
@@ -374,7 +374,7 @@ class EmailTest(unittest.TestCase):
                 html = page.read_text(encoding="utf-8")
                 self.assertNotIn("amal.mehta@gmail.com", html)
                 if 'class="email"' in html:
-                    self.assertRegex(html, r'<script src="(https://amalmehta\.github\.io/PortfolioWebsite/)?email\.js" defer></script>')
+                    self.assertRegex(html, r'<script src="(https://amalmehta\.com/)?email\.js" defer></script>')
         self.assertTrue((ROOT / "email.js").is_file())
 
 
@@ -1107,7 +1107,7 @@ class PolishTest(unittest.TestCase):
         # The 404 page loads its files by full address (it's served at any depth), so it names the site too.
         for name in self.PAGES:
             html = (ROOT / name).read_text(encoding="utf-8")
-            source = "'self' https://amalmehta.github.io" if name == "404.html" else "'self'"
+            source = "'self' https://amalmehta.com" if name == "404.html" else "'self'"
             policy = f'<meta http-equiv="Content-Security-Policy" content="default-src {source}; object-src \'none\'; base-uri \'self\'; form-action \'none\'">'
             with self.subTest(page=name):
                 self.assertIn(policy, html)

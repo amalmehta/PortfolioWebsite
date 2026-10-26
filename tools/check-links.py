@@ -9,7 +9,7 @@ import pathlib, re, sys, urllib.request, urllib.error
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
-SITE = "https://amalmehta.github.io/PortfolioWebsite/"
+SITE = "https://amalmehta.com/"
 
 def links():
     found = {}

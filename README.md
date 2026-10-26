@@ -4,7 +4,7 @@
 
 My personal website. The profile has a North star, its four most vetted research projects, research and work, two supporting builds, two class writeups and a live skills list. Pages of its own cover what I'm thinking about (with an RSS feed), my live interests (hobbies, curiosities and media I love), travel (where I'm headed next and places I'd like to go) and what I live by (values, beliefs and how I want to lead my life). A Writings page waits, hidden, for its first piece. Two extras are hidden: a Pong game on the Travel page, and a replay of Messi's 2011 solo goal behind "soccer tournaments" on the profile.
 
-**Live:** [amalmehta.github.io/PortfolioWebsite](https://amalmehta.github.io/PortfolioWebsite/)
+**Live:** [amalmehta.com](https://amalmehta.com/)
 
 | Light | Dark |
 |---|---|

@@ -7,7 +7,7 @@ The tests fail if feed.xml no longer matches the page.
 import datetime, email.utils, html, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = "https://amalmehta.github.io/PortfolioWebsite/"
+SITE = "https://amalmehta.com/"
 
 
 def text(fragment):
