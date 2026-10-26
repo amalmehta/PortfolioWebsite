@@ -201,6 +201,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .app p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
 .app .app-meta { margin-top: 0.35rem; font-size: 0.82rem; color: var(--faint); }
 .app .links { margin-top: 0.75rem; }
+.soon { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.85rem; color: var(--warm); background: var(--warm-soft); }
 .buy { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; background: var(--accent-soft); transition: background-color 0.2s; }
 .buy:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
 .buy { white-space: nowrap; }

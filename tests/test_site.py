@@ -495,21 +495,26 @@ class ProjectsTest(unittest.TestCase):
         self.assertNotIn("<img", self.section("more-projects"))
 
     def test_apps_show_only_with_real_checkouts(self):
-        # Apps you can use comes right after Featured, and stays hidden while any Buy link is a placeholder;
-        # once shown, every Buy link is a Lemon Squeezy checkout and every app says its price and macOS.
+        # Apps you can use comes right after Featured. Each app either says "Coming soon" or has a $5 Buy link
+        # that is a real Lemon Squeezy checkout, never a placeholder; every app says its price and macOS.
         html = INDEX.read_text(encoding="utf-8")
         self.assertLess(html.index('<section id="featured"'), html.index('<section id="apps"'))
         self.assertLess(html.index('<section id="apps"'), html.index('<section id="research"'))
-        sec = self.section("apps")
+        sec = re.sub(r"<!--.*?-->", "", self.section("apps"), flags=re.S)
         apps = re.findall(r'<li class="app" id="[a-z0-9-]+">.*?</li>', sec, re.S)
         self.assertTrue(apps)
-        hidden = re.match(r'<section id="apps"[^>]*\bhidden\b', sec) is not None
-        buys = [re.search(r'<a class="buy" href="([^"]+)">Buy [^<]+ · \$5 →</a>', a) for a in apps]
-        self.assertTrue(all(buys), "each app has a $5 Buy link")
-        real = [re.fullmatch(r"https://[a-z0-9-]+\.lemonsqueezy\.com/(checkout/)?buy/[0-9a-f-]{8,}", b.group(1)) for b in buys]
-        self.assertTrue(hidden or all(real), "show Apps you can use only once every Buy link is a real checkout")
+        self.assertNotIn("REPLACE-ME", sec)
         for app in apps:
-            self.assertRegex(app, r'<p class="app-meta">Mac · macOS \d+ or later</p>')
+            with self.subTest(app=re.search(r"<h3>(.*?)</h3>", app).group(1)):
+                buy = re.search(r'<a class="buy" href="([^"]+)">Buy [^<]+ · \$5 →</a>', app)
+                if buy:
+                    self.assertRegex(buy.group(1), r"^https://[a-z0-9-]+\.lemonsqueezy\.com/(checkout/)?buy/[0-9a-f-]{8,}$")
+                else:
+                    self.assertIn('<span class="soon">Coming soon · $5</span>', app)
+                self.assertRegex(app, r'<p class="app-meta">Mac · macOS \d+ or later</p>')
+        # The intro promises an instant download only once every app can be bought.
+        if "Coming soon" in sec:
+            self.assertNotIn("The download comes straight after", sec)
 
     def test_every_project_has_public_code(self):
         # Only vetted, checkable work is on the profile: every Featured card and More projects line links its public code.
