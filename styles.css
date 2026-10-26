@@ -511,6 +511,8 @@ picture { display: contents; }
 /* Outdated: the old belief struck through, and what changed my mind on its own line below */
 #beliefs-outdated .inspo-item strong { display: block; color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
 #beliefs-outdated .changed { display: block; margin-top: 0.35rem; font-size: 0.95rem; }
+/* Predictions: upright serif at a calmer size, so a list of longer claims scans easily */
+#beliefs-predictions .inspo-item strong { font-style: normal; font-weight: 400; font-size: 1.1rem; line-height: 1.5; }
 .inspo-empty { padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .inspo + .section-title, .tiles + .section-title, .books + .section-title { margin-top: 3rem; }
 .tiles + .books, .photos + .books { margin-top: 3rem; }
@@ -579,10 +581,12 @@ picture { display: contents; }
 .tile-icon .roll { transform-origin: 12px 12px; }
 .tile-icon .sway { transform-origin: 13px 20.5px; }
 .tile-icon .reach { transform-origin: 7px 13.5px; }
+.tile-icon .twinkle { transform-origin: 19.5px 4px; }
 .tile:hover .wheel-a, .tile.is-live .wheel-a, .tile:hover .wheel-b, .tile.is-live .wheel-b { animation: tile-orbit 0.9s linear infinite; }
 .tile:hover .roll, .tile.is-live .roll { animation: tile-roll 1.6s ease-in-out infinite; }
 .tile:hover .sway, .tile.is-live .sway { animation: tile-sway 1.2s ease-in-out infinite; }
 .tile:hover .reach, .tile.is-live .reach { animation: tile-reach 1.4s ease-in-out infinite; }
+.tile:hover .twinkle, .tile.is-live .twinkle { animation: tile-pulse 1.2s ease-in-out infinite; }
 @keyframes tile-roll { 0%, 100% { transform: translateX(-1px) rotate(-30deg); } 50% { transform: translateX(1px) rotate(30deg); } }
 @keyframes tile-sway { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
 @keyframes tile-reach { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-14deg); } }
