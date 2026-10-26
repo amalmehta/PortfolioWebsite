@@ -479,14 +479,14 @@ picture { display: contents; }
 }
 .belief-heading { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 0 0 0.6rem; }
 /* Beliefs and Ways I want to lead my life read as quotes: italic serif with a thin bar on the left, no dividers */
-.beliefs .inspo-item, #how-i-want-to-live .inspo-item { border-bottom: 0; padding: 0.15rem 0 0.15rem 1rem; margin: 0 0 1rem; border-left: 2px solid color-mix(in srgb, var(--warm) 45%, var(--surface)); }
-.beliefs .inspo-item strong, #how-i-want-to-live .inspo-item strong { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.15rem; line-height: 1.45; color: var(--text); margin: 0; }
+.beliefs .inspo-item, #how-i-want-to-live .inspo-item, #how-i-lead .inspo-item { border-bottom: 0; padding: 0.15rem 0 0.15rem 1rem; margin: 0 0 1rem; border-left: 2px solid color-mix(in srgb, var(--warm) 45%, var(--surface)); }
+.beliefs .inspo-item strong, #how-i-want-to-live .inspo-item strong, #how-i-lead .inspo-item strong { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.15rem; line-height: 1.45; color: var(--text); margin: 0; }
 .belief-panel + .belief-panel { margin-top: 2rem; }
 /* Current beliefs as pull quotes: larger, with a hanging quote mark instead of the rule */
 #beliefs-current .inspo-item { position: relative; border-left: 0; padding: 0.2rem 0 0.2rem 2.2rem; margin-bottom: 1.6rem; }
 #beliefs-current .inspo-item::before { content: "“"; position: absolute; left: 0; top: -0.55rem; font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--warm); opacity: 0.85; }
 #beliefs-current .inspo-item strong { font-size: 1.45rem; line-height: 1.35; margin-bottom: 0.25rem; }
-.beliefs .inspo-item strong, #how-i-want-to-live .inspo-item strong { display: block; }  /* the belief on its own line, the reason under it */
+.beliefs .inspo-item strong, #how-i-want-to-live .inspo-item strong, #how-i-lead .inspo-item strong { display: block; }  /* the belief on its own line, the reason under it */
 .beliefs.tabbed .belief-heading, .beliefs.single .belief-heading { display: none; }
 .beliefs.tabbed .belief-panel + .belief-panel { margin-top: 0; }
 .belief-note { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.92rem; }
