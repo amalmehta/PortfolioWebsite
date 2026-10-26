@@ -805,10 +805,10 @@ body { hanging-punctuation: first last; }
   .skill-row, .skill-row:first-child { display: block; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); max-width: none; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
   .skill-row:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
   .skill-row h3 { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.75rem; font-size: 0.95rem; }
-  /* Each group's icon: inline SVG in the tile-icon style, so it draws in every browser */
-  .skill-icon { flex: none; width: 2.1rem; height: 2.1rem; padding: 0.45rem; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
-    fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s; }
-  .skill-icon .fill { fill: currentColor; stroke: none; opacity: 0.2; }
+  /* Each group's icon: a hand-drawn sketch (tools/draw-skill-icons.py), inline so it draws in every browser */
+  .skill-icon { flex: none; width: 1.9rem; height: 1.9rem; padding: 0.38rem; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+    fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s; }
+  .skill-icon .again { stroke-width: 0.9; opacity: 0.55; }  /* the second pass of the pen */
   .skill-row:nth-child(even) .skill-icon { background: var(--warm-soft); color: var(--warm); }
   .skill-row:hover .skill-icon { transform: rotate(-6deg) scale(1.08); }
   @media (prefers-reduced-motion: reduce) { .skill-row, .skill-icon { transition: none; } .skill-row:hover, .skill-row:hover .skill-icon { transform: none; } }
