@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Every public page; pages marked noindex (Writings until its first piece, 404) stay out. Built by tools/make-sitemap.py; the tests check this list. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/interests.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/photos.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-bci.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-drone.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-post-training.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-rewarding.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/thinking.html</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://amalmehta.github.io/PortfolioWebsite/values.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/interests.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/photos.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-bci.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-drone.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-post-training.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/project-rewarding.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/thinking.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://amalmehta.github.io/PortfolioWebsite/values.html</loc><lastmod>2026-10-26</lastmod></url>
 </urlset>

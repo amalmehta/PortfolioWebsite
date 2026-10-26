@@ -1,11 +1,11 @@
-// The six hidden extras: "soccer tournaments" (messi.js) and "reinforcement learning" (maze.js) on the
-// profile, the skier on the Travel page's Hokkaido drawing (pong.js), the first-principles line on
+// The seven hidden extras: "soccer tournaments" (messi.js), "reinforcement learning" (maze.js) and the
+// star by North star (nova.js) on the profile, the skier on the Travel page's Hokkaido drawing (pong.js), the first-principles line on
 // What I try to live by (tree.js), "Building worlds" on Interests (world.js) and "many agents" on
 // Things I'm thinking about (swarm.js). This shows their buttons, and fetches a game's
 // script only the first time its button is clicked, so most visits never download it.
 // Without JavaScript the buttons stay hidden and the words stay plain text.
 (() => {
-  for (const [selector, name, plain] of [[".messi-egg", "messi", ".messi-plain"], [".skier", "pong"], [".tree-egg", "tree", ".tree-plain"],
+  for (const [selector, name, plain] of [[".messi-egg", "messi", ".messi-plain"], [".skier", "pong"], [".tree-egg", "tree", ".tree-plain"], [".nova-egg", "nova"],
     [".maze-egg", "maze", ".maze-plain"], [".world-egg", "world", ".world-plain"], [".swarm-egg", "swarm", ".swarm-plain"]]) {
     const button = document.querySelector(selector);
     if (!button) continue;

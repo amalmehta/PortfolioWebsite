@@ -855,3 +855,12 @@ body { hanging-punctuation: first last; }
 .case-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-weight: 500; }
 .links a.deep { font-weight: 600; }
 @media (min-width: 640px) { .flow { grid-template-columns: repeat(3, 1fr); } }  /* 5 or 6 steps sit as 3 + 2 or 3 + 3 */
+
+/* Hidden supernova: the star by North star is a button once eggs.js shows it (nova.js) */
+.nova-egg { width: 0.95rem; height: 0.95rem; padding: 0; border: 0; cursor: pointer; background: var(--warm);
+  -webkit-mask: url("images/icons/north-star.svg") center / contain no-repeat; mask: url("images/icons/north-star.svg") center / contain no-repeat; transition: transform 0.4s; }
+.nova-egg:hover { transform: rotate(45deg) scale(1.25); }
+#north-star .section-title:has(.nova-egg:not([hidden]))::before { display: none; }
+.nova { width: min(800px, calc(100vw - 32px)); }
+.pong.nova canvas { cursor: default; aspect-ratio: 760 / 500; background: #04050c; }
+@media (prefers-reduced-motion: reduce) { .nova-egg { transition: none; } }

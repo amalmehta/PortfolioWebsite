@@ -77,14 +77,15 @@ The address is never written into a page in full, so bots can't harvest it: each
 
 ## Hidden extras
 
-Six easter eggs, all wired up by the tests, and the footer's "There are six secrets here." counts them (a test checks the number matches `eggs.js`):
+Seven easter eggs, all wired up by the tests, and the footer's "There are seven secrets here." counts them (a test checks the number matches `eggs.js`):
 
 - the skier on the Travel page's Hokkaido drawing opens Pong (`pong.js`);
 - "soccer tournaments" in the profile's Outside work opens a replay inspired by Messi's 2011 solo goal at the Bernabéu (`messi.js`);
 - "reinforcement learning" in the profile's intro opens two agents learning a maze, one linear and one with a ReLU (`maze.js`);
 - "Building worlds" on Interests opens a generated island (`world.js`);
 - "many agents" in the first question on Things I'm thinking about opens a swarm reaching a shared goal (`swarm.js`);
-- the first-principles line on What I try to live by opens a branching tree (`tree.js`).
+- the first-principles line on What I try to live by opens a branching tree (`tree.js`);
+- the star icon by "North star" on the profile opens a supernova (`nova.js`).
 
 `eggs.js` shows each button, swaps out the plain words, and fetches the egg's script on its first click. Without JavaScript they all stay invisible: the skier is hidden and the words are plain text. To add one, put its words in a `<span class="name-plain">` followed by a hidden `<button class="name-egg" data-script="name.js">`, add it to the list in `eggs.js`, and update the footer's count on every page.
 

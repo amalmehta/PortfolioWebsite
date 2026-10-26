@@ -261,7 +261,7 @@ def page(p, i):
 
   <footer class="wrap footer">
     <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a rel="me" href="https://github.com/amalmehta">GitHub</a> · <a href="thinking.html">Things I’m thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a href="values.html">What I try to live by</a> · <a href="feed.xml">RSS</a></p>
-    <p class="signoff">Thanks for stopping by. <span class="secrets">There are six secrets here.</span></p>
+    <p class="signoff">Thanks for stopping by. <span class="secrets">There are seven secrets here.</span></p>
   </footer>
 </body>
 </html>

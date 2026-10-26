@@ -629,6 +629,14 @@ class SubpagesTest(unittest.TestCase):
         self.assertNotIn('<script src="tree.js"', html)
         self.assertIn("openEgg ||= {}).tree =", (ROOT / "tree.js").read_text(encoding="utf-8"))
 
+    def test_supernova_is_wired(self):
+        # The star by North star is a hidden button until eggs.js shows it; nova.js loads on the first click.
+        html = INDEX.read_text(encoding="utf-8")
+        self.assertRegex(html, r'<h2 class="section-title"><button type="button" class="nova-egg" data-script="nova.js" aria-label="[^"]+" hidden></button>North star</h2>')
+        self.assertNotIn('<script src="nova.js"', html)
+        self.assertIn('[".nova-egg", "nova"]', (ROOT / "eggs.js").read_text(encoding="utf-8"))
+        self.assertIn("openEgg ||= {}).nova =", (ROOT / "nova.js").read_text(encoding="utf-8"))
+
     def test_word_eggs_are_wired(self):
         # Hidden extras behind ordinary words: each page shows the plain words until eggs.js swaps in
         # the button, and fetches the script only on the first click.
@@ -645,7 +653,7 @@ class SubpagesTest(unittest.TestCase):
     def test_footer_counts_the_secrets(self):
         # The footer's hint names how many hidden extras there are: one per entry in eggs.js.
         count = len(re.findall(r'\["\.[a-z-]+", "[a-z]+"', (ROOT / "eggs.js").read_text(encoding="utf-8")))
-        words = {6: "six"}
+        words = {7: "seven"}
         self.assertIn(count, words, "add the new count's word here")
         for page in ("index.html", "interests.html", "photos.html", "thinking.html", "values.html", "writings.html", "404.html"):
             with self.subTest(page):
