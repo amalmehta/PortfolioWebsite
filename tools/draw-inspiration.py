@@ -553,9 +553,66 @@ def jobs():
     body.append('<line x1="475" y1="398" x2="485" y2="398" stroke="#2a2420" stroke-width="3"/>')
     return wrap(defs, body)
 
+def iphone():
+    """The original iPhone, 2007: black glass and a brushed-aluminium edge, its grid of app icons
+    lit on the screen and the one round button below. The phone that became a computer in a pocket."""
+    defs = ('<radialGradient id="desk" cx="0.5" cy="0.45" r="0.75">'
+            '<stop offset="0" stop-color="#f1ebe1"/><stop offset="1" stop-color="#d9cfc0"/></radialGradient>'
+            '<linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#1d3550"/><stop offset="1" stop-color="#0d1824"/></linearGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#desk)"/>']
+    x, y, w, h = 470, 90, 260, 520
+    body.append(f'<rect x="{x + 14}" y="{y + 24}" width="{w}" height="{h}" rx="40" fill="#000" opacity="0.18"/>')
+    body.append(f'<rect x="{x - 4}" y="{y - 4}" width="{w + 8}" height="{h + 8}" rx="42" fill="#b9bcc0"/>')
+    body.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="38" fill="#141414"/>')
+    sx, sy, sw, sh = x + 20, y + 80, w - 40, h - 170
+    body.append(f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" fill="url(#screen)"/>')
+    colours = ["#4caf50", "#f5c33b", "#3d8be0", "#e8574a", "#9c6ad6", "#f08a3a", "#36b5a8", "#ec6f9b",
+               "#8bc34a", "#5aa3e8", "#f2a541", "#7d8a96", "#e05a5a", "#4db6ac", "#ffb74d", "#90a4ae"]
+    for i, c in enumerate(colours):
+        col, row = i % 4, i // 4
+        body.append(f'<rect x="{sx + 14 + col * 52}" y="{sy + 20 + row * 62}" width="38" height="38" rx="9" fill="{c}"/>')
+    body.append(f'<rect x="{sx}" y="{sy + sh - 58}" width="{sw}" height="58" fill="#ffffff" opacity="0.12"/>')
+    for i, c in enumerate(["#4caf50", "#3d8be0", "#f08a3a", "#e8574a"]):
+        body.append(f'<rect x="{sx + 14 + i * 52}" y="{sy + sh - 48}" width="38" height="38" rx="9" fill="{c}"/>')
+    body.append(f'<rect x="{x + w / 2 - 22}" y="{y + 40}" width="44" height="6" rx="3" fill="#2c2c2c"/>')
+    body.append(f'<circle cx="{x + w / 2}" cy="{y + h - 45}" r="22" fill="none" stroke="#3a3a3a" stroke-width="4"/>')
+    body.append(f'<rect x="{x + w / 2 - 7}" y="{y + h - 52}" width="14" height="14" rx="3" fill="none" stroke="#3a3a3a" stroke-width="2"/>')
+    return wrap(defs, body)
+
+def coding_agent():
+    """Claude Code: a laptop open on a desk at night, a terminal on its screen with a request typed
+    at the prompt and the code it's writing filling in below, line by line."""
+    defs = ('<linearGradient id="night" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#2b2a33"/><stop offset="1" stop-color="#3b3640"/></linearGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#night)"/>']
+    body.append(f'<rect y="610" width="{W}" height="190" fill="#5b4636"/>')
+    body.append('<ellipse cx="600" cy="420" rx="420" ry="260" fill="#f2b880" opacity="0.08"/>')
+    # The laptop: screen, then the base in front
+    body.append('<rect x="300" y="150" width="600" height="400" rx="18" fill="#c9ccd0"/>')
+    body.append('<rect x="318" y="168" width="564" height="364" rx="6" fill="#1b1a17"/>')
+    body.append('<path d="M250 552 L950 552 L990 600 Q600 618 210 600 Z" fill="#b6b9be"/>')
+    body.append('<rect x="540" y="552" width="120" height="10" rx="4" fill="#9a9da2"/>')
+    # The terminal: a prompt with the request, then code coming in
+    body.append('<circle cx="340" cy="188" r="6" fill="#e8574a"/><circle cx="360" cy="188" r="6" fill="#f5c33b"/><circle cx="380" cy="188" r="6" fill="#4caf50"/>')
+    body.append('<path d="M342 230 l12 8 -12 8" fill="none" stroke="#d97757" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>')
+    body.append('<rect x="366" y="231" width="300" height="14" rx="5" fill="#ece6da"/>')
+    rows = [(0, 180, "#d97757"), (1, 260, "#8fb8de"), (1, 210, "#a8d39b"), (2, 300, "#ece6da"), (2, 170, "#8fb8de"),
+            (1, 240, "#a8d39b"), (0, 140, "#d97757"), (1, 280, "#ece6da"), (2, 200, "#8fb8de")]
+    for i, (indent, width, colour) in enumerate(rows):
+        body.append(f'<rect x="{366 + indent * 28}" y="{272 + i * 26}" width="{width}" height="12" rx="5" fill="{colour}" opacity="0.85"/>')
+    body.append('<rect x="366" y="508" width="12" height="16" fill="#ece6da"/>')
+    # A spark beside the prompt: the agent at work
+    sx, sy = 820, 238
+    body.append(f'<path d="M{sx} {sy - 22} L{sx + 6} {sy - 6} L{sx + 22} {sy} L{sx + 6} {sy + 6} L{sx} {sy + 22} L{sx - 6} {sy + 6} L{sx - 22} {sy} L{sx - 6} {sy - 6} Z" fill="#d97757"/>')
+    # A mug on the desk
+    body.append('<rect x="1010" y="540" width="70" height="80" rx="10" fill="#e7e1d6"/><path d="M1080 560 q26 6 0 36" fill="none" stroke="#e7e1d6" stroke-width="8"/>')
+    return wrap(defs, body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
-            "neuralink-chess": neuralink, "jobs-empty-room": jobs}
+            "neuralink-chess": neuralink, "jobs-empty-room": jobs,
+            "original-iphone": iphone, "coding-agent": coding_agent}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
