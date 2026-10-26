@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Drone Autonomy · Amal Mehta</title>
+  <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131414" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="description" content="A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.">
+  <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/project-drone.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Amal Mehta">
+  <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/project-drone.html">
+  <meta property="og:title" content="Drone Autonomy · Amal Mehta">
+  <meta property="og:description" content="A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.">
+  <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og-project-drone.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Drone Autonomy: the deep dive, from the question to what didn’t work">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Drone Autonomy: the deep dive, from the question to what didn’t work">
+  <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="email.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#top">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="nav-name" href="index.html">Amal Mehta</a>
+      <div class="nav-links">
+        <a href="index.html">Profile</a>
+        <a href="index.html#featured" aria-current="true">Projects</a>
+        <a href="interests.html">Interests</a>
+        <a href="resume/amal-mehta-resume.pdf" type="application/pdf">Resume <span class="file">PDF</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Built by tools/make-case-studies.py; edit the content there, not here. -->
+  <main id="top" class="wrap page case">
+    <header class="page-head">
+      <p class="card-when">2026 · simulation only; paper draft</p>
+      <h1>Drone Autonomy</h1>
+      <p class="case-hook">A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.</p>
+      <p class="links"><a href="https://amalmehta.github.io/DroneAutonomy/">Live demo: replay the flights →</a> <a href="https://github.com/amalmehta/DroneAutonomy">Source on GitHub →</a> <a href="https://github.com/amalmehta/DroneAutonomy/blob/main/paper/Where%20Does%20Meta-Learning%20Help%20a%20Quadrotor.pdf">Paper draft (PDF) →</a></p>
+    </header>
+
+    <section class="case-part">
+      <h2 class="section-title">The question</h2>
+      <p>A quadrotor flying outside the lab meets conditions it wasn’t tuned for: extra payload, a worn motor, wind, command delay. Meta-learning, training a model that adapts from a few flights, promises to cope. Classical control stacks are dependable but fixed.</p>
+      <p>The question is where meta-learning actually helps once it’s combined with a classical stack.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">Setup</h2>
+      <p>A batched simulator modelled on a Holybro X500 V2 (2.0 kg, 500 Hz), commanded the way the PX4 flight stack is: collective thrust plus body rates. Each task draws payload ×0.85–1.3, one motor down to 75%, drag ×0.5–2, wind up to 2.5 m/s with gusts, and 0–30 ms of latency. Out-of-distribution tasks go beyond every range at once.</p>
+      <p>Seven meta-learners (MAML, FOMAML, ANIL, Meta-SGD, Reptile, PEARL and RL²) plug in as a learned residual added to the controller’s output, as the controller’s gains, or as the local planner. The baselines: the plain geometric controller, L1 adaptive control (estimates the disturbance online and cancels it), one policy trained across all conditions, and fine-tuning.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">How it works</h2>
+      <ol class="flow">
+        <li>Depth camera builds an occupancy map</li>
+        <li>A* plans a path through the map</li>
+        <li>Local planner turns it into velocity</li>
+        <li>Geometric controller: thrust and body rates</li>
+        <li>Learned residual or tuned gains adapt it</li>
+        <li>Tasks perturb payload, motors, wind, latency</li>
+      </ol>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">Results</h2>
+      <div class="stats">
+        <div class="stat"><strong>7.3 cm</strong><span>tracking error with a learned residual</span></div>
+        <div class="stat"><strong>14.0 cm</strong><span>tuned L1 adaptive control</span></div>
+        <div class="stat"><strong>15.8 → 10.8 cm</strong><span>Meta-SGD adapting the controller’s gains</span></div>
+        <div class="stat"><strong>73%</strong><span>navigation success, classical planner</span></div>
+      </div>
+      <p>On 32 held-out tracking tasks, a learned residual trained across all conditions reaches 7.3 cm error with no adaptation at all, against 14.0 cm for tuned L1 adaptive control and 21.4 cm for the plain controller. Meta-learning adds little to that residual: the gradient meta-learners land at 7.7–7.8 cm after adapting.</p>
+      <p>Meta-learning pays off when it adapts the classical gains instead: Meta-SGD goes from 15.8 to 10.8 cm, 3.5 cm better than tuning without it on paired tasks, and wins 83% of the pairs. For navigation in unseen rooms, the classical local planner reaches 73% success over 96 flights; learned planners reach 31–55%.</p>
+      <figure class="case-figure">
+        <picture><source type="image/avif" srcset="images/case/drone.avif"><source type="image/webp" srcset="images/case/drone.webp"><img src="images/case/drone.webp" alt="Two recorded flights: the map built from depth, the final A* plan and the track flown" loading="lazy" width="1200" height="441"></picture>
+        <figcaption>Two recorded flights: the map built from depth, the final A* plan and the track flown.</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">What didn’t work</h2>
+      <p>Out of distribution, every method fails: tracking error of at least 63.1 cm and navigation success of at most 17%, and the learned residuals crash more often (43–49% of episodes) than the plain controller (34%). Gradient adaptation at the meta-trained step size makes learned planners worse.</p>
+      <p>Everything is in simulation, with no real flights yet. Thrust-to-weight, motor lag and drag are estimates, state estimation is perfect, and the number of seeds was limited.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">What’s next</h2>
+      <p>Flight tests on the recommended platform, an X500 V2 with a Jetson Orin Nano Super and a RealSense D435i, in five stages: system identification, hover, tracking, known obstacles, then an unknown room.</p>
+    </section>
+
+    <nav class="case-nav" aria-label="Other projects">
+      <a href="project-post-training.html">← Post Training Lab</a>
+      <a href="index.html#drone-autonomy">Back to the profile</a>
+      <a href="project-rewarding.html">Rewarding What You Can’t Verify →</a>
+    </nav>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a rel="me" href="https://github.com/amalmehta">GitHub</a> · <a href="thinking.html">Things I’m thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a href="values.html">What I try to live by</a> · <a href="feed.xml">RSS</a></p>
+    <p class="signoff">Thanks for stopping by. <span class="secrets">There are six secrets here.</span></p>
+  </footer>
+</body>
+</html>

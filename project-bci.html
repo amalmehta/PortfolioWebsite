@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>BCI Projects · Amal Mehta</title>
+  <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131414" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="description" content="Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.">
+  <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/project-bci.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Amal Mehta">
+  <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/project-bci.html">
+  <meta property="og:title" content="BCI Projects · Amal Mehta">
+  <meta property="og:description" content="Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.">
+  <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og-project-bci.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="BCI Projects: the deep dive, from the question to what didn’t work">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="BCI Projects: the deep dive, from the question to what didn’t work">
+  <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="email.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#top">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="nav-name" href="index.html">Amal Mehta</a>
+      <div class="nav-links">
+        <a href="index.html">Profile</a>
+        <a href="index.html#featured" aria-current="true">Projects</a>
+        <a href="interests.html">Interests</a>
+        <a href="resume/amal-mehta-resume.pdf" type="application/pdf">Resume <span class="file">PDF</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Built by tools/make-case-studies.py; edit the content there, not here. -->
+  <main id="top" class="wrap page case">
+    <header class="page-head">
+      <p class="card-when">2026 · offline decoding on public data; closed loop simulated</p>
+      <h1>BCI Projects</h1>
+      <p class="case-hook">Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.</p>
+      <p class="links"><a href="https://github.com/amalmehta/BCIProjects">Code and write-ups on GitHub →</a> <a href="https://github.com/amalmehta/BCIProjects/blob/main/papers/Telepathy.pdf">Cursor decoding write-up (PDF) →</a> <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon follow-up →</a></p>
+    </header>
+
+    <section class="case-part">
+      <h2 class="section-title">The question</h2>
+      <p>A cursor brain–computer interface is only as useful as its worst day. The neurons an implant records drift from day to day, so a decoder trained once slowly stops working, and asking someone to recalibrate every morning is a real cost.</p>
+      <p>These four projects work on public neural recordings to see how far careful decoding gets without new labels, and where it stops.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">Setup</h2>
+      <p><strong>Telepathy</strong> decodes cursor movement across months from a monkey’s motor cortex (Zenodo 583331, 24 sessions), scored in simulated bits per second. <strong>Speech</strong> turns attempted speech into phonemes and words (Brain-to-Text ’25): 38.8% phoneme error with a causal Conformer on 426 held-out sentences.</p>
+      <p><strong>Assisted Robotic Arm</strong> decodes 7-DoF arm movement and adds shared autonomy that knows the decoder’s mistakes (FALCON H1): simulated grasp success goes from 2% to 100% with assistance. <strong>Blindsight</strong> goes the other way, a learned, safety-bounded stimulation encoder for 1,024 sites in visual cortex, in simulation because no public human V1 stimulation data exists: percept fidelity SSIM 0.84 against 0.73.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">How it works</h2>
+      <ol class="flow">
+        <li>Count spikes per electrode, every 20 ms</li>
+        <li>Re-centre each channel on the new day</li>
+        <li>Per-day adapter, starting as identity</li>
+        <li>Shared causal GRU latent model</li>
+        <li>Velocity head drives the cursor</li>
+      </ol>
+      <p class="flow-note">“No new labels” means re-centring: each channel’s mean and spread are recomputed from the new day’s unlabelled spikes, which costs nothing.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">Results</h2>
+      <div class="stats">
+        <div class="stat"><strong>0.72</strong><span>R² with no new labels, over 17 held-out days</span></div>
+        <div class="stat"><strong>0.42</strong><span>a re-centred Wiener filter, the same days</span></div>
+        <div class="stat"><strong>138</strong><span>days after calibration, the furthest tested</span></div>
+        <div class="stat"><strong>0.79</strong><span>R² within the calibration days</span></div>
+      </div>
+      <p>Calibrated on 5 days (days 0–15) and tested on 19 held-out days from day 20 to day 138. On the 17 days without an electrode re-mapping, the re-centred decoder averages R² 0.718, against 0.662 for a plain GRU, 0.422 for a re-centred Wiener filter and −0.037 for a Wiener filter left as it was trained.</p>
+      <p>Counting all 19 days, it’s 0.636 against 0.353.</p>
+      <figure class="case-figure">
+        <picture><source type="image/avif" srcset="images/case/bci.avif"><source type="image/webp" srcset="images/case/bci.webp"><img src="images/case/bci.webp" alt="R² on each held-out day with no new labels, for decoders left fixed, re-centred, and re-centred then aligned" loading="lazy" width="1200" height="591"></picture>
+        <figcaption>R² on each held-out day with no new labels, for decoders left fixed, re-centred, and re-centred then aligned.</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">What didn’t work</h2>
+      <p>Two held-out days (28 and 131), when the electrodes were re-mapped, break every re-centred decoder: R² near 0. Unsupervised alignment on top mostly didn’t help (0.706 against 0.718). Every bitrate is simulated, and it’s one animal, one arm, one array.</p>
+      <p>In the Neuro Falcon follow-up, even the best method reaches only 0.21 and 0.15 on the last two held-out days, against 0.42–0.45 on the earlier ones, and there are only 4 held-out days.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">What’s next</h2>
+      <p>Neuro Falcon: submit the re-normalising decoder to the FALCON leaderboard, test whether channel statistics alone explain the late-day gap, and try re-normalising continuously.</p>
+    </section>
+
+    <nav class="case-nav" aria-label="Other projects">
+      <a href="project-rewarding.html">← Rewarding What You Can’t Verify</a>
+      <a href="index.html#bci-projects">Back to the profile</a>
+      <a href="project-post-training.html">Post Training Lab →</a>
+    </nav>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a rel="me" href="https://github.com/amalmehta">GitHub</a> · <a href="thinking.html">Things I’m thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a href="values.html">What I try to live by</a> · <a href="feed.xml">RSS</a></p>
+    <p class="signoff">Thanks for stopping by. <span class="secrets">There are six secrets here.</span></p>
+  </footer>
+</body>
+</html>

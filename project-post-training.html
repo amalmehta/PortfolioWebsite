@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Post Training Lab · Amal Mehta</title>
+  <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131414" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="description" content="A 59k-parameter transformer learns a maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81% over 3 seeds.">
+  <link rel="canonical" href="https://amalmehta.github.io/PortfolioWebsite/project-post-training.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Amal Mehta">
+  <meta property="og:url" content="https://amalmehta.github.io/PortfolioWebsite/project-post-training.html">
+  <meta property="og:title" content="Post Training Lab · Amal Mehta">
+  <meta property="og:description" content="A 59k-parameter transformer learns a maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81% over 3 seeds.">
+  <meta property="og:image" content="https://amalmehta.github.io/PortfolioWebsite/images/og-project-post-training.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Post Training Lab: the deep dive, from the question to what didn’t work">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Post Training Lab: the deep dive, from the question to what didn’t work">
+  <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="email.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#top">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="nav-name" href="index.html">Amal Mehta</a>
+      <div class="nav-links">
+        <a href="index.html">Profile</a>
+        <a href="index.html#featured" aria-current="true">Projects</a>
+        <a href="interests.html">Interests</a>
+        <a href="resume/amal-mehta-resume.pdf" type="application/pdf">Resume <span class="file">PDF</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Built by tools/make-case-studies.py; edit the content there, not here. -->
+  <main id="top" class="wrap page case">
+    <header class="page-head">
+      <p class="card-when">2026 · toy maze, 3 seeds</p>
+      <h1>Post Training Lab</h1>
+      <p class="case-hook">A 59k-parameter transformer learns a maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81% over 3 seeds.</p>
+      <p class="links"><a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up on GitHub →</a></p>
+    </header>
+
+    <section class="case-part">
+      <h2 class="section-title">The question</h2>
+      <p>Can post-training fix a habit a model picked up from flawed demonstrations? Supervised fine-tuning (SFT) copies the demonstrations, habit included. GRPO and DPO are two ways to fix it afterwards. A third run checks the classic failure: a model that learns to game a subtly wrong reward.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">Setup</h2>
+      <p>Key & Door: a 7×7 grid with a wall and a locked door. The key is on the agent’s side and the goal is across, and the true reward is 1 − 0.01 × steps on success, within 30 steps. The model is a tiny transformer, about 59k parameters (3 layers, 4 heads, width 48), that reads 26 tokens and picks one of 4 moves.</p>
+      <p>The demonstrations come from a planner that 80% of the time walks straight at its target instead of planning: the habit to fix. GRPO is online RL, trying each level 8 times and pushing towards the attempts that beat the group’s average. DPO is offline, learning from pairs of a better and a worse attempt. Scoring uses 150 test levels and 150 harder ones with denser walls, all kept out of training.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">How it works</h2>
+      <ol class="flow">
+        <li>Planner demos with a bad habit</li>
+        <li>SFT: copy the demos</li>
+        <li>GRPO from SFT, kept close to it</li>
+        <li>DPO on SFT samples, same budget</li>
+        <li>Controls: a reward hacker, RL from scratch</li>
+        <li>Score on test and harder levels</li>
+      </ol>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">Results</h2>
+      <div class="stats">
+        <div class="stat"><strong>70% → 80%</strong><span>test success, SFT to GRPO</span></div>
+        <div class="stat"><strong>81%</strong><span>with DPO plus an NLL term</span></div>
+        <div class="stat"><strong>63% → 74%</strong><span>on the harder levels, SFT to GRPO</span></div>
+        <div class="stat"><strong>7%</strong><span>true success for the reward hacker</span></div>
+      </div>
+      <p>Means over 3 seeds on the 150 test levels: SFT 69.6%, GRPO 80.4%, DPO with an NLL term 81.3%. On the harder levels: 62.7%, 74.4% and 72.9%. Plain DPO collapsed (16.0%) until the NLL term was added. RL from scratch never solved a level.</p>
+      <p>The reward hacker, trained on a proxy that pays for getting closer to the goal each step with walls ignored, pushed its proxy score from about 0.26 to 0.58 within about 10 iterations, while its true success fell to 6.9%.</p>
+      <figure class="case-figure">
+        <picture><source type="image/avif" srcset="images/case/post-training.avif"><source type="image/webp" srcset="images/case/post-training.webp"><img src="images/case/post-training.webp" alt="Training curves across 3 seeds: GRPO climbs from the SFT starting point while RL from scratch stays at zero" loading="lazy" width="1200" height="635"></picture>
+        <figcaption>Training curves across 3 seeds: GRPO climbs from the SFT starting point while RL from scratch stays at zero.</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">What didn’t work</h2>
+      <p>Three seeds, so the bands show best and worst seed, not a confidence interval. The eval sets are small (150 levels each), so one level is worth about 0.7 points of success. The harder split only varies wall density: a mild shift, not a new task.</p>
+      <p>DPO and the reward hacker use settings picked from one short trial each. Along the way, uniform label noise (greedy decoding just removed it), a 9×9 grid (too noisy to train on a CPU) and plain DPO all failed.</p>
+    </section>
+
+    <section class="case-part">
+      <h2 class="section-title">What’s next</h2>
+      <p>The repo includes a page that runs the trained checkpoints in the browser: race them on the same maze, edit the walls and scrub through training. It isn’t online yet.</p>
+    </section>
+
+    <nav class="case-nav" aria-label="Other projects">
+      <a href="project-bci.html">← BCI Projects</a>
+      <a href="index.html#post-training-lab">Back to the profile</a>
+      <a href="project-drone.html">Drone Autonomy →</a>
+    </nav>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a rel="me" href="https://github.com/amalmehta">GitHub</a> · <a href="thinking.html">Things I’m thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a href="values.html">What I try to live by</a> · <a href="feed.xml">RSS</a></p>
+    <p class="signoff">Thanks for stopping by. <span class="secrets">There are six secrets here.</span></p>
+  </footer>
+</body>
+</html>

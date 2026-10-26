@@ -98,7 +98,7 @@
             "item": {
                 "@type": "SoftwareSourceCode",
                 "name": "BCI Projects",
-                "description": "Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to 138 days out, against 0.42 for a Wiener filter.",
+                "description": "Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.",
                 "url": "https://github.com/amalmehta/BCIProjects",
                 "codeRepository": "https://github.com/amalmehta/BCIProjects",
                 "author": {
@@ -147,6 +147,7 @@
   <script src="email.js" defer></script>
   <script src="anchors.js" defer></script>
   <script src="eggs.js" defer></script>
+  <script src="hero.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#top">Skip to content</a>
@@ -168,7 +169,7 @@
       <div class="hero-text">
       <a class="status-chip" href="interests.html#now"><span class="status-dot" aria-hidden="true"></span>Now: researching RL post-training</a>
       <h1>Amal Mehta</h1>
-      <p class="lede">Research engineer in <span class="maze-plain">reinforcement learning</span><button type="button" class="maze-egg" data-script="maze.js" aria-label="reinforcement learning (opens an agent learning a maze)" hidden>reinforcement learning</button>. I work on sim-to-real robot learning, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.</p>
+      <p class="lede">Research engineer in <span class="nowrap"><span class="maze-plain">reinforcement learning</span><button type="button" class="maze-egg" data-script="maze.js" aria-label="reinforcement learning (opens an agent learning a maze)" hidden>reinforcement learning</button>.</span> I work on sim-to-real robot learning, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.</p>
       <p class="hero-sub">Applied deep learning since 2020, from generative models and vision to control. My focus is learning from little data and adapting quickly to new settings. Based in the San Francisco Bay Area. In my spare time I build fictional worlds and write stories set in them.</p>
       <p class="hello">Hi! I’d love to hear from you. <a href="https://reachouts.me/?u=amal">Get in touch →</a></p>
       <p class="hello-more">If you’re getting into RL, robotics or brain–computer interfaces, student or not, I’m happy to chat. Ask me about RL and post-training, brain–computer interfaces, doing research outside a lab, or endurance races and trips.</p>
@@ -208,7 +209,7 @@
           <p class="card-results">50 pre-registered experiments: 21 supported, 15 refuted, 12 mixed, 2 deferred</p>
           <p class="card-miss"><span>What didn’t work</span> RL never improved honest repair above the SFT start, and 25% audits only delayed the hack.</p>
           <p class="tags"><span class="chip">Python</span> <span class="chip">GRPO</span> <span class="chip">Reward hacking</span> <span class="chip">Code agents</span> <span class="chip">Pre-registered experiments</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/long_term_horizon_planning/">Live demo: proposal and results →</a> <a href="https://github.com/amalmehta/long_term_horizon_planning">Source on GitHub →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/#log">Experiment log →</a></p>
+          <p class="links"><a class="deep" href="project-rewarding.html">Deep dive →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/">Live demo: proposal and results →</a> <a href="https://github.com/amalmehta/long_term_horizon_planning">Source on GitHub →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/#log">Experiment log →</a></p>
         </div>
       </article>
 
@@ -217,10 +218,10 @@
         <div class="project-text">
           <p class="card-when">2026 · offline decoding on public data; closed loop simulated</p>
           <h3>BCI Projects</h3>
-          <p>Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to 138 days out, against 0.42 for a Wiener filter.</p>
+          <p>Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.</p>
           <p class="card-miss"><span>What didn’t work</span> Adaptation still fades three to four weeks out: R² 0.21 and 0.15, against 0.42–0.45 on earlier days (Neuro Falcon).</p>
           <p class="tags"><span class="chip">PyTorch</span> <span class="chip">Neural decoding</span> <span class="chip">Shared autonomy</span> <span class="chip">Closed-loop simulation</span> <span class="chip">Real neural data</span></p>
-          <p class="links"><a href="https://github.com/amalmehta/BCIProjects">Code and write-ups on GitHub →</a> <a href="https://github.com/amalmehta/BCIProjects/blob/main/papers/Telepathy.pdf">Cursor decoding write-up (PDF) →</a> <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon follow-up →</a></p>
+          <p class="links"><a class="deep" href="project-bci.html">Deep dive →</a> <a href="https://github.com/amalmehta/BCIProjects">Code and write-ups on GitHub →</a> <a href="https://github.com/amalmehta/BCIProjects/blob/main/papers/Telepathy.pdf">Cursor decoding write-up (PDF) →</a> <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon follow-up →</a></p>
         </div>
       </article>
 
@@ -232,7 +233,7 @@
           <p>A 59k-parameter transformer learns a maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81% over 3 seeds.</p>
           <p class="card-miss"><span>What didn’t work</span> 150-level eval sets and 3 seeds, so one level is worth about 0.7 points.</p>
           <p class="tags"><span class="chip">PyTorch</span> <span class="chip">SFT → GRPO</span> <span class="chip">DPO</span> <span class="chip">Transformers</span> <span class="chip">Reward hacking</span></p>
-          <p class="links"><a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up on GitHub →</a></p>
+          <p class="links"><a class="deep" href="project-post-training.html">Deep dive →</a> <a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up on GitHub →</a></p>
         </div>
       </article>
 
@@ -242,9 +243,9 @@
           <p class="card-when">2026 · simulation only; paper draft</p>
           <h3>Drone Autonomy</h3>
           <p>A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.</p>
-          <p class="card-miss"><span>What didn’t work</span> Out of distribution every method fails (navigation success ≤ 21%), and learned residuals crash more often than the plain controller, 43–52% against 34%.</p>
+          <p class="card-miss"><span>What didn’t work</span> Out of distribution every method fails (navigation success ≤ 17%), and learned residuals crash more often than the plain controller, 43–49% against 34%.</p>
           <p class="tags"><span class="chip">Python</span> <span class="chip">Meta-learning (7 methods)</span> <span class="chip">L1 adaptive control</span> <span class="chip">A* planning</span> <span class="chip">Simulation</span></p>
-          <p class="links"><a href="https://amalmehta.github.io/DroneAutonomy/">Live demo: replay the flights →</a> <a href="https://github.com/amalmehta/DroneAutonomy">Source on GitHub →</a> <a href="https://github.com/amalmehta/DroneAutonomy/blob/main/paper/Where%20Does%20Meta-Learning%20Help%20a%20Quadrotor.pdf">Paper draft (PDF) →</a></p>
+          <p class="links"><a class="deep" href="project-drone.html">Deep dive →</a> <a href="https://amalmehta.github.io/DroneAutonomy/">Live demo: replay the flights →</a> <a href="https://github.com/amalmehta/DroneAutonomy">Source on GitHub →</a> <a href="https://github.com/amalmehta/DroneAutonomy/blob/main/paper/Where%20Does%20Meta-Learning%20Help%20a%20Quadrotor.pdf">Paper draft (PDF) →</a></p>
         </div>
       </article>
       </div>
@@ -322,7 +323,7 @@
           <p>The policy is PPO, trained in IsaacGym on a three-stage reward: reach the ball, kick it, then wait to see whether it scores. A reward gradient, a stage flag and masked inputs (the ball and goal positions are zeroed until they matter) let one network move between stages smoothly, and CPG-based gait tracking kept its walking steady. Also prototyped RLPD, SAC that learns from prior data, to fine-tune the simulation-trained policy on real robot runs and narrow the gap to hardware.</p>
           <figure class="shot"><img src="images/robot-soccer.svg" alt="Drawing: a four-legged robot dog kicks a soccer ball along an arc into a target in a goal, on a simulation grid" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">PPO</span> <span class="chip">IsaacGym</span> <span class="chip">Multi-stage rewards</span> <span class="chip">Sim-to-real</span> <span class="chip">RLPD</span> <span class="chip">ROS</span> <span class="chip">OpenCV</span> <span class="chip">RealSense</span></p>
-          <p class="links"><a href="papers/robot-soccer-thesis.pdf" type="application/pdf">Thesis (PDF, 330 KB) →</a></p>
+          <p class="links"><a href="papers/robot-soccer-thesis.pdf" type="application/pdf">Report (PDF, 330 KB) →</a></p>
         </div>
       </article>
 
@@ -396,8 +397,8 @@
         <p class="when">2023 – 2024</p>
         <div>
           <h3>Robot soccer with deep RL</h3>
-          <p class="where">Undergraduate thesis · Hybrid Robotics Lab, UC Berkeley · advisor Prof. Koushil Sreenath</p>
-          <p class="links"><a href="papers/robot-soccer-thesis.pdf" type="application/pdf">Thesis (PDF, 330 KB) →</a></p>
+          <p class="where">Research project report · Hybrid Robotics Lab, UC Berkeley · advisor Prof. Koushil Sreenath</p>
+          <p class="links"><a href="papers/robot-soccer-thesis.pdf" type="application/pdf">Report (PDF, 330 KB) →</a></p>
         </div>
       </article>
 

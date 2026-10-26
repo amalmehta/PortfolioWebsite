@@ -37,7 +37,7 @@ images/                       Project screenshots (and their WebP copies the car
   favicon-32.png              PNG copy of the tab icon, for browsers without SVG icons
   <project>.jpg               Full-size screenshot per project (the source for its poster)
   <project>-960.webp          960 px copy shown on the card (the poster, once it has a clip)
-papers/                       PDFs linked from the site: the robot soccer thesis and school reports
+papers/                       PDFs linked from the site: the robot soccer project report and school reports
 resume/
   amal-mehta-resume.tex       Resume source (latest resume, no phone number)
   amal-mehta-resume.pdf       Built resume, linked from the site
