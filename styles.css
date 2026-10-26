@@ -771,3 +771,53 @@ picture { display: contents; }
 @keyframes brush { to { clip-path: inset(0 0 0 0); } }
 @media (prefers-reduced-motion: reduce) { .hero h1::after { animation: none; clip-path: none; } }
 @media print { .hero h1 { color: #000; background: none; } .hero h1::after, .footer::before { display: none; } }
+
+/* ---- Nicer: typography, warmth, the status chip, the portrait, Skills as a map, the 404 ---- */
+::selection { background: color-mix(in srgb, var(--warm) 30%, transparent); }
+h1, h2, h3 { text-wrap: balance; }  /* not the intro: its secret button would let the full stop wrap alone */
+p, li, figcaption { text-wrap: pretty; }
+body { hanging-punctuation: first last; }
+.when, .card-when, .events time, .skills-updated { font-variant-numeric: tabular-nums lining-nums; }
+:focus-visible { box-shadow: 0 0 0 5px var(--accent-soft); }
+/* Each page's title gets the intro's soft wash */
+.page-head { position: relative; }
+.page-head::before { content: ""; position: absolute; inset: -4.5rem -20vw -1.5rem; z-index: -1; pointer-events: none;
+  background: radial-gradient(34rem 16rem at 12% 30%, color-mix(in srgb, var(--warm) 12%, transparent), transparent 70%), radial-gradient(34rem 18rem at 88% 10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%); }
+
+/* Now chip above the name */
+.status-chip { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0 0 1.1rem; padding: 0.32rem 0.8rem 0.32rem 0.65rem; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--surface) 80%, transparent); font-size: 0.82rem; font-weight: 500; color: var(--muted); text-decoration: none; backdrop-filter: blur(4px); }
+.status-chip:hover { text-decoration: none; color: var(--text); border-color: color-mix(in srgb, var(--warm) 40%, var(--line)); }
+.status-dot { position: relative; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #3fa364; }
+.status-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #3fa364; animation: status-ping 2s ease-out infinite; }
+@keyframes status-ping { from { transform: scale(1); opacity: 0.6; } to { transform: scale(2.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .status-dot::after { animation: none; } }
+@media print { .status-chip { display: none; } }
+
+/* Portrait: on hover the sketch warms and the rings swap colours */
+.portrait { transition: filter 0.6s ease, transform 0.6s ease, box-shadow 0.6s ease; }
+.portrait:hover { filter: sepia(0.35) saturate(1.3); transform: rotate(-2deg) scale(1.03);
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--warm), 0 0 0 9px var(--bg), 0 0 0 11px color-mix(in srgb, var(--accent) 70%, transparent); }
+@media (prefers-reduced-motion: reduce) { .portrait { transition: none; } .portrait:hover { transform: none; } }
+
+/* Skills as a map: a card per group, each with its own icon */
+@media screen {
+  .skills { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); max-width: none; }
+  .skill-row, .skill-row:first-child { display: block; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); max-width: none; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+  .skill-row:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
+  .skill-row h3 { position: relative; display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.7rem; font-size: 0.95rem; }
+  .skill-row h3::before { content: ""; flex: none; width: 1.9rem; height: 1.9rem; border-radius: 10px; background: var(--accent-soft); }
+  .skill-row h3::after { content: ""; position: absolute; left: 0.425rem; top: 50%; width: 1.05rem; height: 1.05rem; transform: translateY(-50%); background: var(--accent);
+    -webkit-mask: var(--skill-icon) center / contain no-repeat; mask: var(--skill-icon) center / contain no-repeat; }
+  .skill-row:nth-child(even) h3::before { background: var(--warm-soft); }
+  .skill-row:nth-child(even) h3::after { background: var(--warm); }
+  .skill-code { --skill-icon: url("images/icons/code.svg"); }
+  .skill-network { --skill-icon: url("images/icons/network.svg"); }
+  .skill-methods { --skill-icon: url("images/icons/methods.svg"); }
+  .skill-apps { --skill-icon: url("images/icons/apps.svg"); }
+  .skill-robot { --skill-icon: url("images/icons/robot.svg"); }
+  .skill-skills { --skill-icon: url("images/icons/skills.svg"); }
+  @media (prefers-reduced-motion: reduce) { .skill-row { transition: none; } .skill-row:hover { transform: none; } }
+}
+
+/* 404: the lost hiker */
+.lost { display: block; width: 100%; max-width: 900px; height: auto; margin: 0 0 1.5rem; border-radius: 16px; }
