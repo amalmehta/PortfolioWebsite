@@ -43,13 +43,20 @@ PINS = [
     ("been", "Japan", 36.2, 138.3, None),
     ("been", "Thailand", 15.5, 101.0, None),
     ("been", "Singapore", 1.35, 103.82, None),
+    ("been", "Pakistan", 28.3, 65.0, None),
+    ("been", "Salkantay trek to Machu Picchu, Peru", -13.16, -72.55, None),
 ]
 # Countries tinted as visited (names as in the data)
-BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand"}
+BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru"}
 KINDS = {"going": "Going", "want": "Want to go", "been": "Been"}
-# The cross-country ride, Seattle to Washington, DC: drawn as a gentle arc between the two ends,
-# not the exact roads.
-RIDE = ((47.61, -122.33), (38.91, -77.04))
+# Long trips drawn as lines: class, title, legend key, and the (lat, lon) points it passes through.
+# Two points make a gentle arc, more make a smooth curve through them; neither follows the exact roads.
+# (The Salkantay trek is a pin: at about 60 km it would be a single pixel at this scale.)
+ROUTES = [
+    ("ride", "Seattle to Washington, DC, by bike", "Seattle to DC by bike", [(47.61, -122.33), (38.91, -77.04)]),
+    ("road", "Road trip across Pakistan, Karachi to Hunza", "Road trip across Pakistan",
+     [(24.86, 67.01), (31.55, 74.34), (33.68, 73.05), (36.32, 74.66)]),
+]
 
 W = 1200
 NORTH, SOUTH = 84.0, -58.0  # Antarctica and the far Arctic are left off
@@ -154,17 +161,27 @@ def outline():
     return "M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in left + right) + "Z"
 
 
-def ride():
-    """The ride's arc: a quadratic curve between its ends, bowed a little north."""
-    (lat0, lon0), (lat1, lon1) = RIDE
-    (x0, y0), (x1, y1) = project(lon0, lat0), project(lon1, lat1)
-    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 - abs(x1 - x0) * 0.12
-    d = f"M{x0:.1f} {y0:.1f}Q{cx:.1f} {cy:.1f} {x1:.1f} {y1:.1f}"
-    return [f'    <g class="map-ride"><title>Seattle to Washington, DC, by bike</title>',
-            f'      <mask id="ride-reveal"><path class="map-ride-reveal" pathLength="1" d="{d}"/></mask>',
-            f'      <path class="map-ride-line" mask="url(#ride-reveal)" d="{d}"/>',
-            f'      <circle class="map-ride-end" cx="{x0:.1f}" cy="{y0:.1f}" r="4"/><circle class="map-ride-end" cx="{x1:.1f}" cy="{y1:.1f}" r="4"/>',
-            '    </g>']
+def routes():
+    """Each route as a line that draws itself in: two ends make a quadratic arc bowed a little north,
+    more points a curve through their midpoints."""
+    out = []
+    for kind, title, _, points in ROUTES:
+        xy = [project(lon, lat) for lat, lon in points]
+        (x0, y0), (x1, y1) = xy[0], xy[-1]
+        if len(xy) == 2:
+            cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 - abs(x1 - x0) * 0.12
+            d = f"M{x0:.1f} {y0:.1f}Q{cx:.1f} {cy:.1f} {x1:.1f} {y1:.1f}"
+        else:
+            # Each inner point bends the curve, which passes through the midpoints between them
+            d = f"M{x0:.1f} {y0:.1f}" + "".join(
+                f"Q{x:.1f} {y:.1f} {(x + nx) / 2:.1f} {(y + ny) / 2:.1f}" for (x, y), (nx, ny) in zip(xy[1:-2], xy[2:-1])
+            ) + f"Q{xy[-2][0]:.1f} {xy[-2][1]:.1f} {x1:.1f} {y1:.1f}"
+        out += [f'    <g class="map-route map-{kind}"><title>{html.escape(title)}</title>',
+                f'      <mask id="{kind}-reveal"><path class="map-route-reveal" pathLength="1" d="{d}"/></mask>',
+                f'      <path class="map-route-line" mask="url(#{kind}-reveal)" d="{d}"/>',
+                f'      <circle class="map-route-end" cx="{x0:.1f}" cy="{y0:.1f}" r="4"/><circle class="map-route-end" cx="{x1:.1f}" cy="{y1:.1f}" r="4"/>',
+                '    </g>']
+    return out
 
 
 def build():
@@ -180,7 +197,7 @@ def build():
     for name, d in country_paths():
         cls = "map-land map-been" if name in BEEN_COUNTRIES else "map-land"
         lines.append(f'    <path class="{cls}" d="{d}"/>')
-    lines += ride()
+    lines += routes()
     # Been first, then want, then going on top
     for kind in ("been", "want", "going"):
         for k, label, lat, lon, card in PINS:
@@ -195,7 +212,7 @@ def build():
     lines += ["  </svg>",
               '  <figcaption class="map-legend">' + " ".join(
                   f'<span class="key key-{k}">{KINDS[k]} <span class="key-count">{counts[k]}</span></span>' for k in KINDS)
-              + ' <span class="key key-ride">Seattle to DC by bike</span></figcaption>',
+              + "".join(f' <span class="key key-{kind}">{html.escape(key)}</span>' for kind, _, key, _ in ROUTES) + "</figcaption>",
               # Pin names show on hover, which phones don't have, so the places I've been are listed too
               # (the trip and wishlist places have their cards just below)
               '  <p class="map-been-list"><span class="key key-been">Been</span> '
