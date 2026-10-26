@@ -915,7 +915,7 @@ class LinkingTest(unittest.TestCase):
 
 
 class ValuesPageTest(unittest.TestCase):
-    """values.html: linked quietly from the profile footer once it has entries."""
+    """values.html: linked from the profile footer once it has entries."""
 
     def test_linked_only_once_filled(self):
         # While every list is still empty, nothing links to it.
