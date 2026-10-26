@@ -21,6 +21,8 @@
   --warm: #9c5636;
   --warm-soft: #f5ece7;
   --been: #4f8a5b;
+  --page: #efe9dd;  /* book page edges */
+  --page-line: #ddd5c4;
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: light dark;
@@ -39,6 +41,8 @@
     --warm: #d9a07f;
     --warm-soft: #2b2320;
     --been: #8cc79a;
+    --page: #3a3631;
+    --page-line: #2a2724;
   }
 }
 
@@ -132,6 +136,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .ridge { display: block; width: 100%; height: 56px; margin: 0 0 1.8rem; overflow: visible; }
 .ridge path { fill: none; stroke: color-mix(in srgb, var(--warm) 55%, var(--line)); stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; animation: ride-draw 2.4s ease-out 0.2s forwards; }
 @media (prefers-reduced-motion: reduce) { .ridge path { animation: none; stroke-dashoffset: 0; } }
+@media (max-width: 600px) { .ridge { height: 36px; margin-bottom: 1.3rem; } }
 /* A trail map's contour lines, faint, behind Outside work and the Endurance tile */
 .outside, .tile-grit { position: relative; isolation: isolate; }
 .outside::before, .tile-grit::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("images/contours.svg") right top / 480px repeat; opacity: 0.16; }
@@ -169,6 +174,14 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .card-miss span, .bet span { display: block; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--warm); }
 /* The image opens the live demo too; the text link is the one for keyboards and screen readers. */
 .shot-link { display: contents; }
+/* "Try it live" on cards whose demo runs in the browser */
+.shot.has-badge { position: relative; }
+.try-badge { display: inline-flex; align-items: center; gap: 0.35rem; font: 600 0.74rem/1 var(--sans); letter-spacing: 0.02em; padding: 0.42rem 0.7rem; border-radius: 999px; color: #fff; background: color-mix(in srgb, var(--warm) 92%, #000); text-decoration: none; box-shadow: 0 4px 12px -4px rgb(0 0 0 / 0.35); }
+.try-badge::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: #9be3a8; box-shadow: 0 0 0 3px rgb(155 227 168 / 0.3); }
+.shot .try-badge { position: absolute; top: 0.7rem; right: 0.7rem; }  /* the card's own links carry it for keyboards and screen readers */
+.try-badge:hover { text-decoration: none; background: var(--warm); }
+.try-badge.inline { vertical-align: 0.2em; margin-left: 0.4rem; font-size: 0.68rem; padding: 0.32rem 0.6rem; }
+@media (prefers-color-scheme: dark) { .try-badge { color: #1b1410; background: var(--warm); } .try-badge:hover { background: color-mix(in srgb, var(--warm) 85%, #fff); } }
 .shot:has(.shot-link) img { cursor: pointer; }
 /* More projects: one compact line each, two columns on wide screens, no pictures. */
 .minis { list-style: none; padding: 0; margin: 0; display: grid; column-gap: 2rem; }
@@ -492,11 +505,11 @@ picture { display: contents; }
 .book:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .book-cover { aspect-ratio: 2 / 3; border-radius: 4px 7px 7px 4px; padding: 0.5rem 0.35rem 0.5rem 0.55rem; display: flex; align-items: flex-end;
   background: linear-gradient(160deg, hsl(var(--hue, 210) 45% 46%), hsl(calc(var(--hue, 210) + 25) 50% 30%));
-  box-shadow: inset 5px 0 0 rgb(0 0 0 / 0.18), inset 6px 0 0 rgb(255 255 255 / 0.12), inset 9px 0 3px -2px rgb(0 0 0 / 0.12), 0 2px 6px rgb(0 0 0 / 0.15), 3px 3px 0 -1px #efe9dd, 3px 3px 0 0 rgb(0 0 0 / 0.08);
+  box-shadow: inset 5px 0 0 rgb(0 0 0 / 0.18), inset 6px 0 0 rgb(255 255 255 / 0.12), inset 9px 0 3px -2px rgb(0 0 0 / 0.12), 0 2px 6px rgb(0 0 0 / 0.15), 3px 3px 0 -1px var(--page), 3px 3px 0 0 rgb(0 0 0 / 0.08);
   position: relative; }
 /* A book, not a card: a sheen across the cover and page edges along the right */
 .book-cover::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.1) 45%, transparent 60%); }
-.book-cover::after { content: ""; position: absolute; top: 3px; bottom: 3px; right: -3px; width: 3px; border-radius: 0 2px 2px 0; pointer-events: none; background: repeating-linear-gradient(to bottom, #f4efe4 0 1px, #ddd5c4 1px 2px); }
+.book-cover::after { content: ""; position: absolute; top: 3px; bottom: 3px; right: -3px; width: 3px; border-radius: 0 2px 2px 0; pointer-events: none; background: repeating-linear-gradient(to bottom, var(--page) 0 1px, var(--page-line) 1px 2px); }
 /* Cover colours, picked per book by tools/make-books.py (inline styles are blocked by the content security policy) */
 .cover-0 { --hue: 210; }
 .cover-1 { --hue: 25; }
