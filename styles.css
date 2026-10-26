@@ -416,7 +416,7 @@ picture { display: contents; }
 .events .event-where { color: var(--muted); }
 .events time { margin-left: auto; font-size: 0.9rem; color: var(--warm); font-variant-numeric: tabular-nums; }
 /* Profile: a short through-line above the Research & work timeline */
-.section-intro { max-width: 68ch; margin: 0 0 2rem; font-family: var(--serif); font-size: 1.12rem; line-height: 1.55; }
+.section-intro { max-width: 68ch; margin: 0 0 2rem; font-family: var(--sans); font-size: 1.06rem; line-height: 1.75; color: var(--text); }  /* the body sans reads easier than the serif at this length */
 @media (min-width: 720px) { #research .section-intro { margin-left: 11rem; max-width: calc(860px - 11rem); } #writeups .thanks { margin-left: 11rem; max-width: calc(860px - 11rem); } }  /* starts where the role titles do: years column plus gap */
 /* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
 .travel-map { margin: 0 0 3rem; }
@@ -872,3 +872,19 @@ body { hanging-punctuation: first last; }
 .dragon { width: min(800px, calc(100vw - 32px)); }
 .pong.dragon canvas { cursor: default; aspect-ratio: 760 / 500; background: #090b1f; }
 @media (prefers-reduced-motion: reduce) { .dragon-egg .tile-icon { transition: none; } }
+
+/* Tiles with some colour: a soft wash in the corner that matches the icon, a bigger, brighter icon,
+   brighter text in dark mode, and a warmer glow on hover */
+.tile { background: radial-gradient(14rem 9rem at 0% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%), var(--surface); }
+.tile:nth-child(even) { background: radial-gradient(14rem 9rem at 0% 0%, color-mix(in srgb, var(--warm) 10%, transparent), transparent 70%), var(--surface); }
+.tile-icon { width: 42px; height: 42px; padding: 8px; background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+.tile:nth-child(even) .tile-icon { background: color-mix(in srgb, var(--warm) 18%, var(--surface)); }
+.tile:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 14px 30px -18px color-mix(in srgb, var(--accent) 55%, transparent); }
+.tile:nth-child(even):hover { border-color: color-mix(in srgb, var(--warm) 45%, var(--line)); box-shadow: 0 14px 30px -18px color-mix(in srgb, var(--warm) 55%, transparent); }
+@media (prefers-color-scheme: dark) {
+  .tile { border-color: #34342f; }
+  .tile h3 { color: #f1efe9; }
+  .tile p { color: #bcbab3; }
+  .tile-icon { background: color-mix(in srgb, var(--accent) 22%, var(--surface)); }
+  .tile:nth-child(even) .tile-icon { background: color-mix(in srgb, var(--warm) 24%, var(--surface)); }
+}
