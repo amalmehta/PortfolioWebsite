@@ -280,7 +280,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .messi-foot { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
 .messi-foot .pong-help { margin: 0; }
 .messi-again { flex-shrink: 0; font: 600 0.85rem var(--sans); color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
-/* Hidden tree: the first-principles line on What I live by opens it (tree.js); it looks like plain text */
+/* Hidden tree: the first-principles line on What I try to live by opens it (tree.js); it looks like plain text */
 .tree-egg, .maze-egg, .world-egg, .swarm-egg { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
 .tree-egg:hover, .maze-egg:hover, .world-egg:hover, .swarm-egg:hover { color: var(--accent); }
 .pong.tree canvas { cursor: default; aspect-ratio: 4 / 3; }
@@ -781,7 +781,8 @@ body { hanging-punctuation: first last; }
 :focus-visible { box-shadow: 0 0 0 5px var(--accent-soft); }
 /* Each page's title gets the intro's soft wash */
 .page-head { position: relative; }
-.page-head::before { content: ""; position: absolute; inset: -4.5rem -20vw -1.5rem; z-index: -1; pointer-events: none;
+.page-head::before { content: ""; position: absolute; inset: -4.5rem 0 -1.5rem; z-index: -1; pointer-events: none;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); mask-image: radial-gradient(closest-side, #000 55%, transparent);  /* the page column clips it, so fade every edge */
   background: radial-gradient(34rem 16rem at 12% 30%, color-mix(in srgb, var(--warm) 12%, transparent), transparent 70%), radial-gradient(34rem 18rem at 88% 10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%); }
 
 /* Now chip above the name */

@@ -621,7 +621,7 @@ class SubpagesTest(unittest.TestCase):
         self.assertIn("openEgg ||= {}).messi =", (ROOT / "messi.js").read_text(encoding="utf-8"))
 
     def test_tree_is_wired(self):
-        # What I live by's hidden extra: the first-principles line opens tree.js's growing tree,
+        # What I try to live by's hidden extra: the first-principles line opens tree.js's growing tree,
         # which eggs.js fetches on the first click.
         html = (ROOT / "values.html").read_text(encoding="utf-8")
         self.assertRegex(html, r'<span class="tree-plain">([^<]+)</span><button type="button" class="tree-egg" data-script="tree.js" aria-label="\1 \(opens a growing tree\)" hidden>\1</button>')

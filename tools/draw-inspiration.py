@@ -1,4 +1,4 @@
-"""Draws the What I live by page's Inspiration cards as 1200x800 SVGs in images/inspiration/.
+"""Draws the What I try to live by page's Inspiration cards as 1200x800 SVGs in images/inspiration/.
 
 Each is an original flat drawing in the style of the Travel page's places, not a
 photograph. Run from the repo root after changing a drawing:

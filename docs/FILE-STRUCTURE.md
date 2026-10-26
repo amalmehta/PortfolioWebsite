@@ -7,7 +7,7 @@ index.html                    The profile: intro, featured projects, research & 
 thinking.html                 "Things I'm thinking about": linked from Live interests and every footer
 photos.html                   Travel: places I'm going, places I'd like to go, then photos; linked from Live interests and every footer
 writings.html                 Writings: its own page, unlinked and noindex until the first piece is in
-values.html                   What I live by: values, beliefs, how to lead a life, inspiration; linked from the profile footer
+values.html                   What I try to live by: values, beliefs, how to lead a life, inspiration; linked from the profile footer
 interests.html                Live interests: hobby and curiosity tiles, Books (built from books.json), hidden My art; in every header
 books.json                    Books: reading now, read (stars and reviews) and want to read; run tools/make-books.py after editing
 404.html                      Page not found: GitHub Pages shows it for any missing address (full URLs only)

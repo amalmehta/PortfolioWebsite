@@ -1,6 +1,6 @@
 // The six hidden extras: "soccer tournaments" (messi.js) and "reinforcement learning" (maze.js) on the
 // profile, the skier on the Travel page's Hokkaido drawing (pong.js), the first-principles line on
-// What I live by (tree.js), "Building worlds" on Interests (world.js) and "many agents" on
+// What I try to live by (tree.js), "Building worlds" on Interests (world.js) and "many agents" on
 // Things I'm thinking about (swarm.js). This shows their buttons, and fetches a game's
 // script only the first time its button is clicked, so most visits never download it.
 // Without JavaScript the buttons stay hidden and the words stay plain text.

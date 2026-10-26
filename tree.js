@@ -1,4 +1,4 @@
-// Hidden on What I live by: click "Understand from first principles…" for a tree that grows from
+// Hidden on What I try to live by: click "Understand from first principles…" for a tree that grows from
 // one trunk and splits, again and again, into branches that all grow at the same time: one path
 // becoming many concurrent ones. The trunk goes straight; every branch after it bends through a
 // tanh, the way an activation function bends a network's straight lines. Each regrow is a new tree.

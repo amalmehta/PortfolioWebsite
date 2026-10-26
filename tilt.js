@@ -1,4 +1,4 @@
-// What I live by: each Inspiration drawing tilts a little toward the cursor, like a print held in
+// What I try to live by: each Inspiration drawing tilts a little toward the cursor, like a print held in
 // the hand, and settles back when the cursor leaves. Mouse and pen only; reduced motion turns it off.
 (() => {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches || !matchMedia("(hover: hover)").matches) return;
