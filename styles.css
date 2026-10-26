@@ -203,6 +203,12 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .app .app-meta { margin-top: 0.35rem; font-size: 0.82rem; color: var(--faint); }
 .app .links { margin-top: 0.75rem; }
 .soon { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.85rem; color: var(--warm); background: var(--warm-soft); }
+.download { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.42rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; color: #fff; background: var(--accent); transition: background-color 0.2s; }
+.download::before { content: "↓"; font-weight: 700; }
+.download:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 85%, #000); }
+@media (prefers-color-scheme: dark) { .download { color: #0f1a24; } .download:hover { background: color-mix(in srgb, var(--accent) 85%, #fff); } }
+.app .links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1rem; }
+.app .app-note { margin-top: 0.45rem; font-size: 0.8rem; color: var(--faint); }
 .buy { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; background: var(--accent-soft); transition: background-color 0.2s; }
 .buy:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
 .buy { white-space: nowrap; }
@@ -410,7 +416,7 @@ picture { display: contents; }
 .events time { margin-left: auto; font-size: 0.9rem; color: var(--warm); font-variant-numeric: tabular-nums; }
 /* Profile: a short through-line above the Research & work timeline */
 .section-intro { max-width: 68ch; margin: 0 0 2rem; font-family: var(--serif); font-size: 1.12rem; line-height: 1.55; }
-@media (min-width: 720px) { #research .section-intro { margin-left: 11rem; max-width: 60ch; } }  /* starts where the role titles do: years column plus gap */
+@media (min-width: 720px) { #research .section-intro { margin-left: 11rem; max-width: 60ch; } #writeups .thanks { margin-left: 11rem; max-width: 60ch; } }  /* starts where the role titles do: years column plus gap */
 /* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
 .travel-map { margin: 0 0 3rem; }
 .travel-map svg { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
@@ -732,7 +738,10 @@ picture { display: contents; }
 /* Card links: the underline grows from the left on hover */
 .links a, .page-link a, .nav-links a { background: linear-gradient(currentColor, currentColor) left calc(100% - 0.15em) / 0 1px no-repeat; transition: background-size 0.3s ease, color 0.2s; }
 .links a:hover, .page-link a:hover, .nav-links a:hover { text-decoration: none; background-size: 100% 1px; }
-.links a.buy, .try-badge { background-image: none; }
+.links a.buy, .links a.download, .try-badge { background-image: none; }
+.links a.download { background-color: var(--accent); }  /* the underline rule above would clear it */
+.links a.download:hover { background-color: color-mix(in srgb, var(--accent) 85%, #000); }
+@media (prefers-color-scheme: dark) { .links a.download:hover { background-color: color-mix(in srgb, var(--accent) 85%, #fff); } }
 @media (prefers-reduced-motion: reduce) { .links a, .page-link a, .nav-links a { transition: none; } }
 
 /* Featured cards: a soft blue-to-terracotta glow around the image on hover */
