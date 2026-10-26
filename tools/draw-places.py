@@ -854,12 +854,51 @@ def florence():
     return svg("florence", "".join(b), ("#86b0d8", "#f6e2c8"))
 
 
+# ---------------------------------------------------------------- Kilimanjaro: Kibo above the clouds and the savanna
+def kilimanjaro():
+    rng = random.Random(28)
+    b = []
+    b.append(glow(620, 380, 700, 260, "#ffd6a0", 0.7))
+    # Kibo: the broad, flat-topped cone, with Mawenzi's ragged peak to its left
+    b.append(poly([(60, 470), (180, 380), (230, 330), (250, 300), (270, 316), (290, 296), (310, 330), (340, 360), (420, 420), (480, 470)], "#6b6f86"))
+    kibo = [(160, 500), (380, 380), (520, 300), (600, 262), (640, 250), (820, 248), (880, 262), (960, 300), (1100, 380), (1260, 500)]
+    b.append(poly(kibo, "#5d6480"))
+    b.append(poly([(820, 248), (880, 262), (960, 300), (1100, 380), (1260, 500), (900, 500)], "#24364d", opacity="0.2"))
+    # The summit snowcap: white along the crater rim, its lower edge broken into the remaining icefields
+    edge = [(960, 300), (930, 318), (912, 300), (890, 336), (860, 300), (836, 322), (810, 290), (780, 312), (752, 286), (724, 300), (700, 280), (672, 298), (640, 284), (612, 310), (590, 292), (560, 318), (548, 306)]
+    b.append(poly([(548, 306), (600, 262), (640, 250), (820, 248), (880, 262), (960, 300)] + edge, "#f4f7fa"))
+    b.append(poly([(820, 248), (880, 262), (960, 300), (930, 318), (912, 300), (890, 336), (860, 300), (836, 322), (820, 280)], "#c9d4e2", opacity="0.6"))
+    # A sea of cloud around the mountain's waist
+    for _ in range(26):
+        x, y = rng.uniform(-60, W + 60), rng.uniform(420, 500)
+        b.append(f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{rng.uniform(80, 160):.0f}" ry="{rng.uniform(20, 36):.0f}" fill="#fbf3ea" opacity="0.92"/>')
+    # The savanna, golden, and flat-topped acacias
+    b.append(f'<path d="M0,520 C300,505 900,515 1200,505 L1200,800 L0,800 Z" fill="#c9a45c"/>')
+    b.append(f'<path d="M0,610 C300,590 900,620 1200,600 L1200,800 L0,800 Z" fill="#b48f4a"/>')
+    for _ in range(90):
+        x, y = rng.uniform(0, W), rng.uniform(530, 790)
+        b.append(f'<path d="M{x:.0f},{y:.0f} l{rng.uniform(-4, 4):.0f},-{rng.uniform(8, 16):.0f}" stroke="#8a6b32" stroke-width="2" opacity="0.45"/>')
+    for x, base, s in ((140, 640, 1.0), (1010, 620, 1.25), (640, 560, 0.5), (420, 580, 0.6)):
+        b.append(f'<path d="M{x},{base} L{x + 4 * s:.0f},{base - 90 * s:.0f} M{x + 2 * s:.0f},{base - 60 * s:.0f} L{x - 30 * s:.0f},{base - 96 * s:.0f} M{x + 3 * s:.0f},{base - 70 * s:.0f} L{x + 40 * s:.0f},{base - 100 * s:.0f}" stroke="#3b2f25" stroke-width="{6 * s:.1f}" stroke-linecap="round"/>')
+        b.append(f'<ellipse cx="{x + 4 * s:.0f}" cy="{base - 104 * s:.0f}" rx="{110 * s:.0f}" ry="{16 * s:.0f}" fill="#4a5a32"/>')
+        b.append(f'<ellipse cx="{x + 4 * s:.0f}" cy="{base - 110 * s:.0f}" rx="{86 * s:.0f}" ry="{10 * s:.0f}" fill="#5d6e3c"/>')
+    # Two elephants crossing below the mountain
+    for ex, ey, s in ((560, 690, 1.0), (790, 700, 0.75)):
+        b.append(f'<g fill="#6c6660"><ellipse cx="{ex}" cy="{ey}" rx="{56 * s:.0f}" ry="{34 * s:.0f}"/>'
+                 f'<circle cx="{ex + 54 * s:.0f}" cy="{ey - 14 * s:.0f}" r="{22 * s:.0f}"/>'
+                 f'<path d="M{ex + 70 * s:.0f},{ey - 6 * s:.0f} q{12 * s:.0f},{26 * s:.0f} {2 * s:.0f},{46 * s:.0f}" stroke="#6c6660" stroke-width="{9 * s:.0f}" fill="none" stroke-linecap="round"/>'
+                 + "".join(f'<rect x="{ex + dx * s:.0f}" y="{ey + 20 * s:.0f}" width="{14 * s:.0f}" height="{30 * s:.0f}"/>' for dx in (-44, -24, 18, 34)) + '</g>'
+                 f'<ellipse cx="{ex + 44 * s:.0f}" cy="{ey - 12 * s:.0f}" rx="{14 * s:.0f}" ry="{18 * s:.0f}" fill="#5a544f"/>')
+    return svg("kilimanjaro", "".join(b), ("#7fa9d6", "#f6dcc0"))
+
+
 PLACES = (("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
           ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
           ("mexico-city", mexico_city), ("azores", azores),
           ("machu-picchu", machu_picchu), ("seattle-to-dc", seattle_to_dc), ("hunza", hunza),
-          ("yosemite", yosemite), ("japan", japan), ("florence", florence))
+          ("yosemite", yosemite), ("japan", japan), ("florence", florence),
+          ("kilimanjaro", kilimanjaro))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:

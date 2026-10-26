@@ -46,9 +46,10 @@ PINS = [
     ("been", "Singapore", 1.35, 103.82, None),
     ("been", "Pakistan", 28.3, 65.0, "place-hunza"),
     ("been", "Salkantay trek to Machu Picchu, Peru", -13.16, -72.55, "place-machu-picchu"),
+    ("been", "Kilimanjaro, Tanzania", -3.08, 37.35, "place-kilimanjaro"),
 ]
 # Countries tinted as visited (names as in the data)
-BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru"}
+BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru", "Tanzania"}
 KINDS = {"going": "Going", "want": "Want to go", "been": "Been"}
 # Long trips drawn as lines: class, title, legend key, and the (lat, lon) points it passes through.
 # Two points make a gentle arc, more make a smooth curve through them; neither follows the exact roads.
