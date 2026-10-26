@@ -403,7 +403,7 @@ picture { display: contents; }
 .photos-empty { grid-column: 1 / -1; margin: 0; padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
 .photo-log { margin-top: 3.5rem; }
 .wishlist-note { margin: -1.25rem 0 1.5rem; color: var(--muted); font-size: 0.92rem; }
-.wishlist.going { margin-bottom: 3rem; }
+.wishlist.going, .wishlist.expeditions { margin-bottom: 3rem; }
 /* Interests: Now, a few lines on what I'm doing this month */
 .now { margin-bottom: 3rem; }
 .now-list { margin: 0; padding-left: 1.2rem; }
@@ -426,6 +426,7 @@ picture { display: contents; }
 .map-land { fill: color-mix(in srgb, var(--text) 13%, var(--surface)); stroke: var(--surface); stroke-width: 0.7; }
 @media (prefers-color-scheme: dark) { .map-land { fill: color-mix(in srgb, var(--text) 22%, var(--surface)); } .map-ocean { fill: color-mix(in srgb, var(--accent) 7%, var(--bg)); } }
 .map-been { fill: color-mix(in srgb, var(--been) 38%, var(--surface)); }
+.pin-expedition { --pin: var(--text); }  /* ink, so the serious ones stand apart */
 .pin-going { --pin: var(--warm); }
 .pin-want { --pin: var(--accent); }
 .pin-been { --pin: var(--been); }
@@ -450,7 +451,7 @@ picture { display: contents; }
 .key::before { content: ""; display: inline-block; width: 0.65rem; height: 0.65rem; margin-right: 0.4rem; border-radius: 50%; background: var(--pin); vertical-align: 0.02em; }
 .key-ride::before { width: 18px; height: 0; border-radius: 0; background: none; border-top: 3px dashed var(--warm); }
 .key-road::before { width: 18px; height: 0; border-radius: 0; background: none; border-top: 3px dotted var(--warm); }
-.key-going { --pin: var(--warm); } .key-want { --pin: var(--accent); } .key-been { --pin: var(--been); }
+.key-expedition { --pin: var(--text); } .key-going { --pin: var(--warm); } .key-want { --pin: var(--accent); } .key-been { --pin: var(--been); }
 .key-count { color: var(--faint); font-variant-numeric: tabular-nums; }
 .map-been-list { margin: 0.45rem 0 0; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
 .map-been-list .key { color: var(--text); font-weight: 500; margin-right: 0.3rem; }

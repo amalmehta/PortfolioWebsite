@@ -892,7 +892,59 @@ def kilimanjaro():
     return svg("kilimanjaro", "".join(b), ("#7fa9d6", "#f6dcc0"))
 
 
-PLACES = (("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
+# ---------------------------------------------------------------- Cerro Torre: the needle and its ice mushroom
+def cerro_torre():
+    rng = random.Random(31)
+    b = []
+    # Patagonian wind: stacked lenticular clouds over the range
+    for cx, cy, rx in ((300, 120, 210), (900, 150, 240)):
+        for k in range(4):
+            b.append(f'<ellipse cx="{cx + k * 6}" cy="{cy + k * 11}" rx="{rx - k * 34}" ry="{14 - k * 2}" fill="#ffffff" opacity="{0.8 - k * 0.15:.2f}"/>')
+    back = ridge(0, W, 600, rng, [(0.12, 0.14, 0.6), (0.9, 0.12, 0.55), (0.5, 0.3, 0.3)], 310, jag=6)
+    b.append(poly(back, "#93a0b2"))
+    # Standhardt and Torre Egger, smaller towers to the right of the needle
+    for cx, top, w, lit in ((860, 250, 120, "#a99f92"), (735, 175, 110, "#b3a99a")):
+        b.append(poly([(cx - w, 520), (cx - w * 0.35, top + 60), (cx - w * 0.12, top), (cx + w * 0.15, top + 20), (cx + w * 0.4, top + 90), (cx + w, 520)], lit))
+        b.append(poly([(cx - w * 0.12, top), (cx + w * 0.15, top + 20), (cx + w * 0.4, top + 90), (cx + w, 520), (cx + w * 0.05, 520)], "#7e766c"))
+        b.append(f'<ellipse cx="{cx:.0f}" cy="{top + 4}" rx="{w * 0.2:.0f}" ry="9" fill="#f4f7fa"/>')
+    # Cerro Torre: a sheer granite needle, lit on its left face, shaded on its right
+    lit = [(470, 520), (540, 330), (566, 210), (582, 128), (596, 104), (612, 112), (622, 150)]
+    shade = [(622, 150), (640, 250), (668, 380), (720, 520)]
+    b.append(poly(lit + shade, "#cbc1b0"))
+    b.append(poly([(596, 104), (612, 112), (622, 150)] + shade + [(610, 520)], "#8f8577"))
+    for y in range(170, 500, 46):  # cracks and ledges on the face
+        b.append(f'<path d="M{560 - (y - 170) * 0.22:.0f},{y} l{rng.uniform(20, 44):.0f},{rng.uniform(4, 10):.0f}" stroke="#8a8072" stroke-width="2.5" opacity="0.6"/>')
+    # The rime-ice mushroom on the summit, and ice smeared down the headwall
+    b.append('<path d="M570,112 C566,86 588,70 606,74 C628,70 644,90 636,112 C626,120 584,122 570,112 Z" fill="#f6f9fc"/>')
+    b.append('<path d="M612,112 C628,110 640,102 636,112 C626,120 614,120 612,112 Z" fill="#d3dce8"/>')
+    for x, y, h in ((586, 128, 40), (600, 140, 54), (612, 150, 30)):
+        b.append(f'<path d="M{x},{y} l-3,{h}" stroke="#eef3f8" stroke-width="5" stroke-linecap="round" opacity="0.85"/>')
+    # One small climber on the face, alone
+    b.append('<g transform="translate(556,262)"><circle cx="0" cy="-9" r="3.2" fill="#2a2522"/>'
+             '<path d="M0,-6 l1,10" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/>'
+             '<path d="M0,-4 l-7,-7 M1,-3 l6,-8 M1,4 l-5,8 M1,4 l5,7" stroke="#2a2522" stroke-width="2" stroke-linecap="round"/></g>')
+    # The glacier pouring down to Laguna Torre, with icebergs on the grey water
+    b.append('<path d="M330,520 C430,505 560,512 700,505 C820,500 940,512 1040,520 L1100,600 L250,600 Z" fill="#e8eef4"/>')
+    for _ in range(14):
+        x = rng.uniform(320, 1020)
+        b.append(f'<path d="M{x:.0f},{rng.uniform(515, 590):.0f} l{rng.uniform(-30, 30):.0f},{rng.uniform(8, 18):.0f}" stroke="#b9c8d8" stroke-width="2.5" opacity="0.8"/>')
+    b.append(f'<rect x="0" y="590" width="{W}" height="90" fill="#7d99a6"/>')
+    for _ in range(7):
+        x, y, s = rng.uniform(150, 1050), rng.uniform(605, 660), rng.uniform(0.6, 1.3)
+        b.append(poly([(x, y + 12 * s), (x + 10 * s, y), (x + 34 * s, y + 2 * s), (x + 44 * s, y + 12 * s)], "#eef4f8"))
+    for _ in range(22):
+        x, y = rng.uniform(0, W), rng.uniform(600, 675)
+        b.append(f'<path d="M{x:.0f},{y:.0f} l{rng.uniform(30, 70):.0f},0" stroke="#a8bfca" stroke-width="2" opacity="0.6" stroke-linecap="round"/>')
+    # Dark moraine in front, and wind-bent lenga trees
+    b.append(f'<path d="M0,680 C260,650 520,700 800,670 S1100,660 1200,675 L1200,800 L0,800 Z" fill="#4c4a46"/>')
+    b.append(f'<path d="M0,740 C300,715 650,760 1000,730 S1160,725 1200,735 L1200,800 L0,800 Z" fill="#3a3835"/>')
+    for x, base, s in ((90, 720, 1.0), (1090, 715, 1.2), (220, 745, 0.7)):
+        b.append(f'<path d="M{x},{base} q{8 * s:.0f},-{40 * s:.0f} {34 * s:.0f},-{70 * s:.0f}" stroke="#3b2d22" stroke-width="{6 * s:.1f}" fill="none" stroke-linecap="round"/>')
+        b.append(f'<ellipse cx="{x + 46 * s:.0f}" cy="{base - 76 * s:.0f}" rx="{48 * s:.0f}" ry="{18 * s:.0f}" fill="#55613a"/>')
+    return svg("cerro-torre", "".join(b), ("#6f8fb3", "#dfe7ef"))
+
+
+PLACES = (("cerro-torre", cerro_torre), ("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
           ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
           ("mexico-city", mexico_city), ("azores", azores),

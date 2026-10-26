@@ -17,8 +17,9 @@ DATA = ROOT / "tools/data/world-atlas-countries-110m.json"
 START, END = "<!-- map:start (built by tools/make-map.py; don't edit by hand) -->", "<!-- map:end -->"
 I = "    "
 
-# kind, label, latitude, longitude, card id (going and want only). Soonest trips and favourites first.
+# kind, label, latitude, longitude, card id. Soonest trips and favourites first.
 PINS = [
+    ("expedition", "Soloing Cerro Torre, Argentina", -49.29, -73.10, "place-cerro-torre"),
     ("going", "Chamonix, France", 45.92, 6.87, "place-chamonix"),
     ("want", "Hokkaido, Japan", 42.83, 140.81, "place-hokkaido"),
     ("want", "Lofoten, Norway", 67.93, 13.09, "place-lofoten"),
@@ -51,7 +52,7 @@ PINS = [
 ]
 # Countries tinted as visited (names as in the data)
 BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru", "Tanzania"}
-KINDS = {"going": "Going", "want": "Want to go", "been": "Been"}
+KINDS = {"expedition": "Expeditions", "going": "Going", "want": "Want to go", "been": "Been"}
 # Long trips drawn as lines: class, title, legend key, and the (lat, lon) points it passes through.
 # Two points make a gentle arc, more make a smooth curve through them; neither follows the exact roads.
 # (The Salkantay trek is a pin: at about 60 km it would be a single pixel at this scale.)
@@ -189,7 +190,7 @@ def routes():
 
 def build():
     counts = {k: sum(1 for p in PINS if p[0] == k) for k in KINDS}
-    summary = (f"World map of my travels: {counts['going']} place I’m going, {counts['want']} places I’d like to go "
+    summary = (f"World map of my travels: {counts['expedition']} expedition I’m working toward, {counts['going']} place I’m going, {counts['want']} places I’d like to go "
                f"and {counts['been']} places I’ve been")
     lines = [START,
              '<figure class="travel-map">',
@@ -201,14 +202,14 @@ def build():
         cls = "map-land map-been" if name in BEEN_COUNTRIES else "map-land"
         lines.append(f'    <path class="{cls}" d="{d}"/>')
     lines += routes()
-    # Been first, then want, then going on top
-    for kind in ("been", "want", "going"):
+    # Been first, then want, then going, with expeditions on top
+    for kind in ("been", "want", "going", "expedition"):
         for k, label, lat, lon, card in PINS:
             if k != kind:
                 continue
             x, y = project(lon, lat)
-            tip = html.escape(f"{label}: {KINDS[k].lower()}")
-            r = {"going": 11, "want": 9, "been": 7}[k]  # big enough to see and tap at phone width
+            tip = html.escape(f"{label}: {'expedition' if k == 'expedition' else KINDS[k].lower()}")
+            r = {"expedition": 11, "going": 11, "want": 9, "been": 7}[k]  # big enough to see and tap at phone width
             pin = (f'<g class="pin pin-{k}"><title>{tip}</title><circle class="pin-halo" cx="{x:.1f}" cy="{y:.1f}" r="{r * 2.2:.0f}"/>'
                    f'<circle class="pin-dot" cx="{x:.1f}" cy="{y:.1f}" r="{r}"/></g>')
             lines.append(f'    <a href="#{card}">{pin}</a>' if card else f"    {pin}")
