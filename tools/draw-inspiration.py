@@ -507,50 +507,52 @@ def neuralink():
     return wrap(defs, body)
 
 def jobs():
-    """Steve Jobs at home in 1982, cross-legged on the floor of a nearly empty room with a cup of tea,
-    the Tiffany lamp beside him and a record player on the floor. Drawn as a scene, not a copy of the
-    photograph, and kept as bare as the room: no more than the photograph has in it."""
-    defs = ('<linearGradient id="room" x1="0" y1="0" x2="0" y2="1">'
-            '<stop offset="0" stop-color="#3a3029"/><stop offset="1" stop-color="#55463a"/></linearGradient>'
-            '<radialGradient id="lamplight" cx="0.5" cy="0.5" r="0.5">'
-            '<stop offset="0" stop-color="#ffd58a" stop-opacity="0.5"/><stop offset="0.5" stop-color="#f4b860" stop-opacity="0.15"/>'
-            '<stop offset="1" stop-color="#f4b860" stop-opacity="0"/></radialGradient>')
-    body = [f'<rect width="{W}" height="{H}" fill="url(#room)"/>']
-    # A bare wall and a plain wooden floor
-    body.append(f'<rect y="560" width="{W}" height="240" fill="#7a5a3c"/>')
-    body.append('<circle cx="760" cy="340" r="430" fill="url(#lamplight)"/>')
-    # The record player on the floor, with one speaker beside it
-    body.append('<rect x="880" y="628" width="190" height="40" rx="4" fill="#cfc8bb"/>')
-    body.append('<ellipse cx="955" cy="626" rx="52" ry="8" fill="#1b1815"/><ellipse cx="955" cy="626" rx="12" ry="3" fill="#c2463a"/>')
-    body.append('<rect x="1095" y="500" width="90" height="168" rx="6" fill="#2a2420"/><circle cx="1140" cy="598" r="28" fill="#3a332d"/>')
-    # The Tiffany lamp: a bronze stem and a leaded-glass dome in a few calm bands
-    cx, top = 720, 250
-    body.append(f'<rect x="{cx - 7}" y="{top + 110}" width="14" height="300" fill="#6b4a26"/>')
-    body.append(f'<ellipse cx="{cx}" cy="{top + 410}" rx="50" ry="11" fill="#5a3d1f"/>')
-    body.append(f'<path d="M{cx - 150} {top + 120} Q{cx} {top - 80} {cx + 150} {top + 120} Z" fill="#e7a33b"/>')
-    body.append(f'<path d="M{cx - 150} {top + 120} Q{cx} {top + 50} {cx + 150} {top + 120} Z" fill="#4f8a4e"/>')
-    for x in (-90, -30, 30, 90):  # the leading between the panes
-        body.append(f'<path d="M{cx + x * 1.5} {top + 120} Q{cx + x * 0.9} {top + 40} {cx + x * 0.25} {top + 22}" fill="none" stroke="#3a2a18" stroke-width="3"/>')
-    body.append(f'<path d="M{cx - 150} {top + 120} Q{cx} {top - 80} {cx + 150} {top + 120}" fill="none" stroke="#3a2a18" stroke-width="5"/>')
-    body.append(f'<rect x="{cx - 156}" y="{top + 116}" width="312" height="12" rx="4" fill="#4a3218"/>')
-    body.append(f'<ellipse cx="{cx}" cy="{top + 132}" rx="120" ry="14" fill="#ffe2a0" opacity="0.75"/>')
-
-    # Him, cross-legged on the floor: dark hair, round glasses, a sweater, jeans, a cup in his hands
-    skin, hair, sweater, jeans = "#e0b48e", "#2e231c", "#d9d2c3", "#3e5a7a"
-    body.append(f'<path d="M300 690 Q330 610 430 620 L480 650 L530 620 Q630 610 660 690 Q600 712 480 700 Q360 712 300 690 Z" fill="{jeans}"/>')
-    body.append(f'<ellipse cx="330" cy="690" rx="34" ry="14" fill="#cfc7b8"/><ellipse cx="630" cy="690" rx="34" ry="14" fill="#cfc7b8"/>')
-    body.append(f'<path d="M392 640 Q384 520 420 470 Q480 440 540 470 Q576 520 568 640 Z" fill="{sweater}"/>')
-    body.append(f'<path d="M420 490 Q395 560 450 600 L490 598" fill="none" stroke="#c4bcac" stroke-width="40" stroke-linecap="round"/>')
-    body.append(f'<path d="M540 490 Q565 560 510 600 L470 598" fill="none" stroke="#c4bcac" stroke-width="40" stroke-linecap="round"/>')
-    body.append(f'<circle cx="452" cy="598" r="14" fill="{skin}"/><circle cx="508" cy="598" r="14" fill="{skin}"/>')
-    body.append(f'<rect x="462" y="572" width="38" height="40" rx="6" fill="#f3efe6"/>')
-    body.append(f'<rect x="465" y="430" width="30" height="34" rx="10" fill="{skin}"/>')
-    body.append(f'<ellipse cx="480" cy="396" rx="44" ry="54" fill="{skin}"/>')
-    body.append(f'<path d="M434 392 Q430 336 480 334 Q534 334 528 392 Q522 362 500 356 Q470 352 446 366 Q438 376 434 392 Z" fill="{hair}"/>')
-    body.append(f'<path d="M442 410 Q446 452 480 452 Q514 452 518 410 Q512 440 480 442 Q448 440 442 410 Z" fill="{hair}" opacity="0.85"/>')
-    for gx in (462, 498):
-        body.append(f'<circle cx="{gx}" cy="398" r="13" fill="none" stroke="#2a2420" stroke-width="3"/>')
-    body.append('<line x1="475" y1="398" x2="485" y2="398" stroke="#2a2420" stroke-width="3"/>')
+    """Steve Jobs at home in 1982: a bare room at night, a tall Tiffany floor lamp as the only light,
+    and him cross-legged on a small mat beneath it with a cup of tea. A scene, not a copy of the photograph."""
+    defs = ('<radialGradient id="pool" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0" stop-color="#ffd896" stop-opacity="0.75"/><stop offset="0.55" stop-color="#e0a85a" stop-opacity="0.22"/>'
+            '<stop offset="1" stop-color="#e0a85a" stop-opacity="0"/></radialGradient>'
+            '<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#5a3c22"/><stop offset="1" stop-color="#1c120a"/></linearGradient>'
+            '<radialGradient id="dark" cx="0.55" cy="0.55" r="0.75">'
+            '<stop offset="0.55" stop-color="#0a0806" stop-opacity="0"/><stop offset="1" stop-color="#0a0806" stop-opacity="0.85"/></radialGradient>'
+            '<radialGradient id="shade" cx="0.5" cy="0.75" r="0.75">'
+            '<stop offset="0" stop-color="#fff6dc"/><stop offset="1" stop-color="#e9cf98"/></radialGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="#14100c"/>']
+    # The back wall, lit faintly by the lamp, with tall windows onto the night
+    body.append('<rect x="0" y="40" width="1200" height="470" fill="#3a2e22"/>')
+    body.append('<circle cx="740" cy="250" r="560" fill="url(#pool)" opacity="0.55"/>')
+    for x0 in (260, 410, 560):  # three tall windows, six panes each
+        body.append(f'<rect x="{x0}" y="150" width="130" height="300" fill="#101421"/>')
+        body.append(f'<path d="M{x0 + 65} 150v300M{x0} 250h130M{x0} 350h130" stroke="#3a2e22" stroke-width="8"/>')
+    for y in (40, 92):  # the ceiling beams
+        body.append(f'<rect x="0" y="{y}" width="1200" height="26" fill="#0e0b08"/>')
+    # The floor: dark wood, with the lamp's light pooled on it
+    body.append('<rect y="500" width="1200" height="300" fill="url(#floor)"/>')
+    body.append('<ellipse cx="700" cy="640" rx="430" ry="120" fill="url(#pool)"/>')
+    # The lamp, the centerpiece: a bronze stem rising from a round foot to a pale leaded-glass dome
+    cx, top = 760, 175
+    body.append(f'<ellipse cx="{cx}" cy="642" rx="58" ry="14" fill="#2a1c10"/>')
+    body.append(f'<rect x="{cx - 6}" y="{top + 95}" width="12" height="{642 - top - 95}" fill="#5a3e22"/>')
+    body.append(f'<circle cx="{cx}" cy="{top + 4}" r="7" fill="#5a3e22"/>')
+    body.append(f'<path d="M{cx - 135} {top + 100} Q{cx - 120} {top + 8} {cx} {top} Q{cx + 120} {top + 8} {cx + 135} {top + 100} Z" fill="url(#shade)"/>')
+    for k in range(-3, 4):  # the leading between the panes of glass
+        body.append(f'<path d="M{cx} {top} Q{cx + k * 30} {top + 30} {cx + k * 42} {top + 100}" fill="none" stroke="#b8925a" stroke-width="2" opacity="0.7"/>')
+    body.append(f'<path d="M{cx - 128} {top + 70} Q{cx} {top + 52} {cx + 128} {top + 70}" fill="none" stroke="#b8925a" stroke-width="2" opacity="0.7"/>')
+    body.append(f'<path d="M{cx - 140} {top + 100} H{cx + 140}" stroke="#8a6a3a" stroke-width="6" stroke-linecap="round"/>')
+    body.append(f'<ellipse cx="{cx}" cy="{top + 104}" rx="118" ry="10" fill="#fff3d0" opacity="0.9"/>')
+    # Him, small in the room: cross-legged on a pale mat, dark sweater, a cup of tea in both hands
+    skin, hair, sweater, jeans = "#d9a882", "#2a1d14", "#1d1a1c", "#2c3d58"
+    body.append('<path d="M470 640 L700 640 L690 668 L460 668 Z" fill="#e7dfcf"/>')
+    body.append(f'<path d="M500 652 Q530 600 575 606 L590 622 L605 606 Q650 600 680 652 Q640 664 590 658 Q540 664 500 652 Z" fill="{jeans}"/>')
+    body.append(f'<path d="M548 618 Q540 545 562 512 Q590 498 618 512 Q640 545 632 618 Z" fill="{sweater}"/>')
+    body.append(f'<path d="M560 530 Q548 575 582 592 M620 530 Q632 575 598 592" fill="none" stroke="{sweater}" stroke-width="22" stroke-linecap="round"/>')
+    body.append(f'<rect x="580" y="574" width="20" height="22" rx="4" fill="#f3efe6"/>')
+    body.append(f'<rect x="582" y="488" width="16" height="18" rx="5" fill="{skin}"/>')
+    body.append(f'<ellipse cx="590" cy="470" rx="24" ry="29" fill="{skin}"/>')
+    body.append(f'<path d="M565 470 Q562 438 590 436 Q620 436 616 470 Q610 450 590 448 Q572 450 565 470 Z" fill="{hair}"/>')
+    # Dark corners, as the lamp is the only light
+    body.append(f'<rect width="{W}" height="{H}" fill="url(#dark)"/>')
     return wrap(defs, body)
 
 def iphone():
