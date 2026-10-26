@@ -390,7 +390,22 @@ picture { display: contents; }
 .photos { display: grid; gap: 1.5rem; }
 @media (min-width: 640px) { .photos { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 960px) { .photos { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 960px) { .photos.pair { grid-template-columns: repeat(2, 1fr); } }  /* two items: fill the row */
+/* Rows always end full. On a 3-wide grid (6 tracks, 2 per card) a last row of two shares the row, and a
+   last row of one turns the last four into two rows of two; on a 2-wide grid an odd last card spans the row. */
+@media (min-width: 640px) and (max-width: 959px) { .photos > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (min-width: 960px) {
+  .photos { grid-template-columns: repeat(6, 1fr); }
+  .photos > * { grid-column: span 2; }
+  .photos > :nth-child(3n+1):nth-last-child(2), .photos > :nth-child(3n+1):nth-last-child(2) ~ *,
+  .photos > :nth-child(3n+1):nth-last-child(4), .photos > :nth-child(3n+1):nth-last-child(4) ~ * { grid-column: span 3; }
+}
+/* A section with one card shows it wide, the drawing beside its caption */
+@media (min-width: 640px) {
+  .inspo > .inspo-card:only-child { grid-column: 1 / -1; }
+  .photos > .photo:only-child, .inspo > .inspo-card:only-child > .photo { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 1.75rem; align-items: center; }
+  .photos > .photo:only-child figcaption, .inspo > .inspo-card:only-child figcaption { margin: 0; font-size: 1rem; }
+  .photos > .photo:only-child figcaption strong, .inspo > .inspo-card:only-child figcaption strong { font-family: var(--serif); font-size: 1.5rem; line-height: 1.25; margin-bottom: 0.35rem; }
+}
 .photo { margin: 0; }
 /* Inspiration drawings tilt toward the cursor (tilt.js sets the angles) */
 .inspo-card .photo { perspective: 900px; }
@@ -421,7 +436,7 @@ picture { display: contents; }
 /* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
 .travel-map { margin: 0 0 3rem; }
 .travel-map svg { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
-.map-ocean { fill: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.map-ocean { fill: color-mix(in srgb, var(--accent) 10%, var(--surface)); stroke: color-mix(in srgb, var(--accent) 30%, var(--surface)); stroke-width: 1.5; }
 .map-grid { fill: none; stroke: color-mix(in srgb, var(--accent) 16%, var(--surface)); stroke-width: 0.8; }
 .map-land { fill: color-mix(in srgb, var(--text) 13%, var(--surface)); stroke: var(--surface); stroke-width: 0.7; }
 @media (prefers-color-scheme: dark) { .map-land { fill: color-mix(in srgb, var(--text) 22%, var(--surface)); } .map-ocean { fill: color-mix(in srgb, var(--accent) 7%, var(--bg)); } }
@@ -453,8 +468,10 @@ picture { display: contents; }
 .key-road::before { width: 18px; height: 0; border-radius: 0; background: none; border-top: 3px dotted var(--warm); }
 .key-expedition { --pin: var(--text); } .key-going { --pin: var(--warm); } .key-want { --pin: var(--accent); } .key-been { --pin: var(--been); }
 .key-count { color: var(--faint); font-variant-numeric: tabular-nums; }
-.map-been-list { margin: 0.45rem 0 0; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
-.map-been-list .key { color: var(--text); font-weight: 500; margin-right: 0.3rem; }
+.map-been { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--line); font-size: 0.88rem; }
+.map-been .key { margin: 0 0 0.45rem; color: var(--text); font-weight: 600; }
+.map-been-list { list-style: none; margin: 0; padding: 0; columns: 3 9.5rem; column-gap: 1.5rem; color: var(--muted); line-height: 1.6; }
+.map-been-list li { break-inside: avoid; margin-bottom: 0.35rem; line-height: 1.35; }
 /* A pin's link lands on its card below the sticky header */
 .photo[id^="place-"] { scroll-margin-top: 5rem; }
 .trip-dates { display: block; margin-top: 0.2rem; color: var(--accent); font-weight: 500; }
@@ -522,6 +539,7 @@ picture { display: contents; }
 .book-group { margin: 1.75rem 0 0.75rem; font: 600 0.8rem/1.4 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .book-group:first-of-type { margin-top: 0; }
 .book-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.book-grid > .book:last-child:nth-child(odd) { grid-column: 1 / -1; }  /* a lone last book takes the whole row */
 .book { display: grid; grid-template-columns: 84px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 .book:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .book-cover { aspect-ratio: 2 / 3; border-radius: 4px 7px 7px 4px; padding: 0.5rem 0.35rem 0.5rem 0.55rem; display: flex; align-items: flex-end;
@@ -554,6 +572,13 @@ picture { display: contents; }
 .tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 /* Three across on desktop, two on tablets, one on phones; a pair sits two across */
 .tiles.pair { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+@media (min-width: 640px) {
+  .tiles:not(.pair) { grid-template-columns: repeat(6, 1fr); }
+  .tiles:not(.pair) > li { grid-column: span 2; }
+  .tiles:not(.pair) > li:nth-child(3n+1):nth-last-child(2), .tiles:not(.pair) > li:nth-child(3n+1):nth-last-child(2) ~ li,
+  .tiles:not(.pair) > li:nth-child(3n+1):nth-last-child(4), .tiles:not(.pair) > li:nth-child(3n+1):nth-last-child(4) ~ li { grid-column: span 3; }
+  .tiles.pair > li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 .tile-icon .think { transform-origin: 12px 12px; }
 .tile-icon .antenna { transform-origin: 12px 6.5px; }
 .tile-icon .eyes { transform-origin: 12px 11.5px; }
@@ -843,6 +868,13 @@ body { hanging-punctuation: first last; }
 .case-part { margin: 0 0 2.75rem; }
 .case-part p { max-width: 68ch; margin: 0 0 0.9rem; }
 .flow { list-style: none; counter-reset: flow; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; padding: 0; margin: 0 0 0.9rem; }
+@media (max-width: 639px) { .flow > li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (min-width: 640px) {  /* three steps a row, a last row of two or one spread to fill it */
+  .flow { grid-template-columns: repeat(6, 1fr); }
+  .flow > li { grid-column: span 2; }
+  .flow > li:nth-child(3n+1):nth-last-child(2), .flow > li:nth-child(3n+1):nth-last-child(2) ~ li,
+  .flow > li:nth-child(3n+1):nth-last-child(4), .flow > li:nth-child(3n+1):nth-last-child(4) ~ li { grid-column: span 3; }
+}
 .flow li { counter-increment: flow; position: relative; padding: 0.8rem 0.9rem 0.85rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); font-size: 0.92rem; line-height: 1.45; }
 .flow li::before { content: counter(flow); display: grid; place-items: center; width: 1.5rem; height: 1.5rem; margin-bottom: 0.45rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.78rem; font-weight: 600; }
 .flow li:nth-child(even)::before { background: var(--warm-soft); color: var(--warm); }
@@ -860,7 +892,7 @@ body { hanging-punctuation: first last; }
 .case-figure figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted); }
 .case-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-weight: 500; }
 .links a.deep { font-weight: 600; }
-@media (min-width: 640px) { .flow { grid-template-columns: repeat(3, 1fr); } }  /* 5 or 6 steps sit as 3 + 2 or 3 + 3 */
+@media (min-width: 640px) { .flow { grid-template-columns: repeat(6, 1fr); } }  /* six tracks, two per step (see .flow above) */
 
 /* Hidden supernova: the star by North star is a button once eggs.js shows it (nova.js) */
 .nova-egg { width: 0.95rem; height: 0.95rem; padding: 0; border: 0; cursor: pointer; background: var(--warm);

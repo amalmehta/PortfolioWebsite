@@ -32,6 +32,7 @@ PINS = [
     ("want", "Moorea, French Polynesia", -17.53, -149.83, "place-moorea"),
     ("want", "Mexico City, Mexico", 19.44, -99.14, "place-mexico-city"),
     ("want", "Azores (São Miguel), Portugal", 37.86, -25.78, "place-azores"),
+    ("want", "Swimming with humpback whales, Tonga", -18.65, -173.98, "place-tonga"),  # Vava'u
     ("been", "London", 51.51, -0.13, None),
     ("been", "Rome", 41.90, 12.50, None),
     ("been", "Florence", 43.77, 11.26, "place-florence"),
@@ -49,9 +50,11 @@ PINS = [
     ("been", "Pakistan", 28.3, 65.0, "place-hunza"),
     ("been", "Salkantay trek to Machu Picchu, Peru", -13.16, -72.55, "place-machu-picchu"),
     ("been", "Kilimanjaro, Tanzania", -3.08, 37.35, "place-kilimanjaro"),
+    ("been", "Scuba diving in Sipadan, Malaysia", 4.11, 118.63, None),
+    ("been", "Scuba diving in Palau", 7.50, 134.60, None),
 ]
 # Countries tinted as visited (names as in the data)
-BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru", "Tanzania"}
+BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru", "Tanzania", "Malaysia"}
 KINDS = {"expedition": "Expeditions", "going": "Going", "want": "Want to go", "been": "Been"}
 # Long trips drawn as lines: class, title, legend key, and the (lat, lon) points it passes through.
 # Two points make a gentle arc, more make a smooth curve through them; neither follows the exact roads.
@@ -63,7 +66,8 @@ ROUTES = [
 ]
 
 W = 1200
-NORTH, SOUTH = 84.0, -58.0  # Antarctica and the far Arctic are left off
+NORTH, SOUTH = 84.0, -62.0  # Antarctica and the far Arctic are left off
+PAD = 28  # room around the map so it sits inside its frame and edge pins aren't clipped
 
 # Equal Earth projection (Šavrič, Patterson and Jenny, 2018)
 A1, A2, A3, A4 = 1.340264, -0.081106, 0.000893, 0.003796
@@ -194,7 +198,7 @@ def build():
                f"and {counts['been']} places I’ve been")
     lines = [START,
              '<figure class="travel-map">',
-             f'  <svg viewBox="0 0 {W} {H}" role="img" aria-labelledby="map-title">',
+             f'  <svg viewBox="{-PAD} {-PAD} {W + 2 * PAD} {H + 2 * PAD}" role="img" aria-labelledby="map-title">',
              f'    <title id="map-title">{html.escape(summary)}</title>',
              f'    <path class="map-ocean" d="{outline()}"/>',
              f'    <path class="map-grid" d="{graticule()}"/>']
@@ -219,8 +223,8 @@ def build():
               + "".join(f' <span class="key key-{kind}">{html.escape(key)}</span>' for kind, _, key, _ in ROUTES) + "</figcaption>",
               # Pin names show on hover, which phones don't have, so the places I've been are listed too
               # (the trip and wishlist places have their cards just below)
-              '  <p class="map-been-list"><span class="key key-been">Been</span> '
-              + html.escape(" · ".join(label for k, label, *_ in PINS if k == "been")) + "</p>",
+              '  <div class="map-been"><p class="key key-been">Been</p><ul class="map-been-list">'
+              + "".join(f"<li>{html.escape(label)}</li>" for k, label, *_ in PINS if k == "been") + "</ul></div>",
               "</figure>", END]
     return "\n".join(I + line for line in lines)
 

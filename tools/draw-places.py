@@ -944,10 +944,60 @@ def cerro_torre():
     return svg("cerro-torre", "".join(b), ("#6f8fb3", "#dfe7ef"))
 
 
-PLACES = (("cerro-torre", cerro_torre), ("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
+# ---------------------------------------------------------------- Tonga: swimming with a humpback mother and calf
+def humpback(x, y, s, tilt=0, flip=False):
+    """A humpback in side view, facing left, nose at (x, y), scaled by s; a negative tilt dips the nose to dive."""
+    body = ("M0,0 C30,-40 120,-60 220,-60 C340,-60 460,-40 560,0 C600,15 640,25 670,25 "
+            "L710,-20 C722,0 716,20 690,35 C716,50 722,70 710,90 L670,45 "
+            "C630,50 580,60 520,65 C400,80 260,90 150,75 C80,65 20,35 0,0 Z")
+    belly = "M20,20 C90,62 230,82 380,72 C460,66 520,60 560,52 C470,74 300,96 150,85 C80,78 40,52 20,20 Z"
+    grooves = '<path d="M40,34 C130,66 260,78 380,70 M70,46 C150,72 260,82 360,78" fill="none" stroke="#9fb6c4" stroke-width="3" stroke-linecap="round"/>'
+    far_fin = '<path d="M190,60 C170,120 130,170 80,200 C120,190 190,140 230,70 Z" fill="#9fb3c2"/>'
+    near_fin = ('<path d="M150,60 C120,130 70,180 20,210 C60,205 150,150 190,70 Z" fill="#e4edf2" stroke="#2a3d4f" stroke-width="2"/>'
+                + "".join(f'<circle cx="{150 - k * 26:.0f}" cy="{80 + k * 24:.0f}" r="5" fill="#c3d2dc"/>' for k in range(5)))
+    knobs = "".join(f'<circle cx="{18 + k * 22}" cy="{-20 - k * 5 + (k % 2) * 4}" r="5" fill="#3c5266"/>' for k in range(5))
+    hump = '<path d="M440,-48 C460,-62 480,-58 495,-38 Z" fill="#2a3d4f"/>'
+    eye = '<circle cx="125" cy="12" r="5" fill="#0d1620"/>'
+    flip_t = " scale(-1,1)" if flip else ""
+    return (f'<g transform="translate({x},{y}) rotate({tilt}) scale({s}){flip_t}">{far_fin}'
+            f'<path d="{body}" fill="#2f4558"/><path d="{belly}" fill="#c9d6de"/>{grooves}{hump}{knobs}{eye}{near_fin}</g>')
+
+
+def tonga():
+    rng = random.Random(21)
+    b = []
+    # Water from the bright surface down to deep blue
+    b.append(f'<rect y="120" width="{W}" height="{H - 120}" fill="url(#tonga-water)"/>')
+    b.append(clouds(rng, 3, 30, 90, opacity=0.8))
+    # The surface seen from just below, and light shafts reaching down
+    for _ in range(9):
+        x, w = rng.uniform(-100, W), rng.uniform(30, 90)
+        b.append(poly([(x, 120), (x + w, 120), (x + w * 2.6 + 160, H), (x + 140, H)], "#ffffff", opacity="0.07"))
+    b.append(f'<path d="M0,120 C150,108 300,132 450,120 S750,108 900,122 S1100,130 1200,118 L1200,134 C1050,146 900,130 750,140 S450,132 300,140 S100,130 0,138 Z" fill="#bfe7f6" opacity="0.8"/>')
+    # A snorkeler at the surface, looking down
+    b.append('<g transform="translate(830,150)">'
+             '<path d="M-90,6 L-130,-6 L-128,14 Z M-90,14 L-126,24 L-118,36 Z" fill="#f2c94c"/>'
+             '<rect x="-92" y="0" width="70" height="18" rx="9" fill="#1d2a36"/>'
+             '<rect x="-30" y="-4" width="64" height="26" rx="13" fill="#23506e"/>'
+             '<path d="M0,20 C-10,40 -20,50 -36,56 M10,20 C14,42 4,56 -6,64" stroke="#d9a07a" stroke-width="7" fill="none" stroke-linecap="round"/>'
+             '<circle cx="46" cy="10" r="13" fill="#d9a07a"/>'
+             '<rect x="44" y="6" width="18" height="12" rx="4" fill="#7fd0f0" stroke="#1d2a36" stroke-width="3"/>'
+             '<path d="M40,0 L40,-26" stroke="#f2c94c" stroke-width="4" stroke-linecap="round"/></g>')
+    # Mother diving, calf following just above her
+    b.append(humpback(250, 650, 0.95, tilt=-24))
+    b.append(humpback(400, 360, 0.42, tilt=-20))
+    # Bubbles rising from the calf's blowhole and drifting motes
+    for k in range(8):
+        b.append(f'<circle cx="{455 + rng.uniform(-8, 8):.0f}" cy="{300 - k * 20:.0f}" r="{3 + k * 0.6:.1f}" fill="none" stroke="#d6f1fb" stroke-width="2" opacity="0.7"/>')
+    for _ in range(70):
+        b.append(f'<circle cx="{rng.uniform(0, W):.0f}" cy="{rng.uniform(150, H):.0f}" r="{rng.uniform(1, 2.6):.1f}" fill="#e6f6fb" opacity="{rng.uniform(0.15, 0.45):.2f}"/>')
+    return svg("tonga", "".join(b), ("#7fc0e6", "#e6f4fa"), grad("tonga-water", "#3aa3d2", "#0a2c52"))
+
+
+PLACES = (("cerro-torre", cerro_torre),("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
           ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
-          ("mexico-city", mexico_city), ("azores", azores),
+          ("mexico-city", mexico_city), ("azores", azores), ("tonga", tonga),
           ("machu-picchu", machu_picchu), ("seattle-to-dc", seattle_to_dc), ("hunza", hunza),
           ("yosemite", yosemite), ("japan", japan), ("florence", florence),
           ("kilimanjaro", kilimanjaro))
