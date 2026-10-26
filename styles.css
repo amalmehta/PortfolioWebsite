@@ -864,3 +864,11 @@ body { hanging-punctuation: first last; }
 .nova { width: min(800px, calc(100vw - 32px)); }
 .pong.nova canvas { cursor: default; aspect-ratio: 760 / 500; background: #04050c; }
 @media (prefers-reduced-motion: reduce) { .nova-egg { transition: none; } }
+
+/* Hidden dragon: the ring on The Lord of the Rings tile is a button once eggs.js shows it (dragon.js) */
+.dragon-egg { display: block; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 12px; }
+.dragon-egg .tile-icon { margin-bottom: 0.75rem; transition: transform 0.3s; }
+.dragon-egg:hover .tile-icon { transform: rotate(-12deg) scale(1.12); }
+.dragon { width: min(800px, calc(100vw - 32px)); }
+.pong.dragon canvas { cursor: default; aspect-ratio: 760 / 500; background: #090b1f; }
+@media (prefers-reduced-motion: reduce) { .dragon-egg .tile-icon { transition: none; } }
