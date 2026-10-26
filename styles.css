@@ -888,3 +888,8 @@ body { hanging-punctuation: first last; }
   .tile-icon { background: color-mix(in srgb, var(--accent) 22%, var(--surface)); }
   .tile:nth-child(even) .tile-icon { background: color-mix(in srgb, var(--warm) 24%, var(--surface)); }
 }
+/* …and the quote closes after the belief, in the same warm serif */
+#beliefs-current .inspo-item strong::after { content: "”"; font-family: var(--serif); font-style: normal; font-size: 2em; line-height: 0; vertical-align: -0.38em; margin-left: 0.08em; color: var(--warm); opacity: 0.85; }
+/* A way of living that links to an example of it: the line reads as text, with only a faint underline that warms on hover */
+.quiet-link, #how-i-want-to-live .tree-egg { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--warm) 30%, transparent); text-decoration-thickness: 1px; text-underline-offset: 0.22em; transition: text-decoration-color 0.2s, color 0.2s; }
+.quiet-link:hover, .quiet-link:focus-visible, #how-i-want-to-live .tree-egg:hover, #how-i-want-to-live .tree-egg:focus-visible { color: var(--warm); text-decoration-color: currentColor; }
