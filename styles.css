@@ -186,7 +186,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .mini .links { display: flex; flex-wrap: wrap; gap: 0 1rem; margin-top: 0.35rem; font-size: 0.88rem; }
 .mini .links.private { display: block; font-size: 0.82rem; color: var(--faint); }
 /* Apps you can use: an icon, a line, and a Buy button that goes to the Lemon Squeezy checkout */
-.apps-intro { color: var(--muted); margin: 0 0 1.25rem; }
+.apps-intro, .joys-intro { color: var(--muted); margin: 0 0 1.25rem; }
 .apps { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
 @media (min-width: 720px) { .apps { grid-template-columns: 1fr 1fr; } }
 .app { display: grid; grid-template-columns: 64px 1fr; gap: 1rem; align-items: start; align-content: start; padding: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
