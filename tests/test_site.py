@@ -511,7 +511,7 @@ class ProjectsTest(unittest.TestCase):
                 dl = re.search(r'<a class="download" href="https://github\.com/amalmehta/([A-Za-z0-9_.-]+)/releases/latest/download/[^"]+\.zip">Download for Mac · free</a>', app)
                 if dl:
                     self.assertIn(f'<a href="https://github.com/amalmehta/{dl.group(1)}">Code →</a>', app)
-                    self.assertIn('<p class="app-note">First open: right-click it and choose Open', app)
+                    self.assertIn('<p class="app-note">macOS will warn you because it isn’t notarized yet. To open it, right-click and choose Open', app)
                 else:
                     self.assertIn('<span class="soon">Coming soon · free</span>', app)
                 self.assertRegex(app, r'<p class="app-meta">Mac · macOS \d+ or later')

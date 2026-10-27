@@ -98,7 +98,7 @@
             "item": {
                 "@type": "SoftwareSourceCode",
                 "name": "BCI Projects",
-                "description": "Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.",
+                "description": "Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 (1 is perfect) on held-out days up to day 138, against 0.42 for a Wiener filter, the classic linear decoder.",
                 "url": "https://github.com/amalmehta/BCIProjects",
                 "codeRepository": "https://github.com/amalmehta/BCIProjects",
                 "author": {
@@ -114,7 +114,7 @@
             "item": {
                 "@type": "SoftwareSourceCode",
                 "name": "Post Training Lab",
-                "description": "A 59k-parameter transformer learns a maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81% over 3 seeds.",
+                "description": "A 59k-parameter transformer learns a maze by copying demonstrations (SFT), then two kinds of post-training, GRPO and DPO, lift held-out success from 70% to 80% and 81% over 3 seeds.",
                 "url": "https://github.com/amalmehta/PostTrainingLab",
                 "codeRepository": "https://github.com/amalmehta/PostTrainingLab",
                 "author": {
@@ -130,7 +130,7 @@
             "item": {
                 "@type": "SoftwareSourceCode",
                 "name": "Drone Autonomy",
-                "description": "A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.",
+                "description": "A simulated quadrotor that maps unknown rooms, plans with A* (a shortest-path search) and adapts to payload, wind and worn motors; a learned correction on top of the controller (a residual) roughly halves tuned adaptive control’s error on held-out tasks.",
                 "url": "https://amalmehta.github.io/DroneAutonomy/",
                 "codeRepository": "https://github.com/amalmehta/DroneAutonomy",
                 "author": {
@@ -172,7 +172,7 @@
       <p class="lede">Independent research engineer in <span class="nowrap"><span class="maze-plain">reinforcement learning</span><button type="button" class="maze-egg" data-script="maze.js" aria-label="reinforcement learning (opens an agent learning a maze)" hidden>reinforcement learning</button>.</span> I work on sim-to-real robot learning, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.</p>
       <p class="hero-sub">Applied deep learning since 2020, from generative models and vision to control. My focus is learning from little data and adapting quickly to new settings. Based in the San Francisco Bay Area. In my spare time I build fictional worlds and write stories set in them.</p>
       <p class="hello">Hi! I’d love to hear from you. <a href="https://reachouts.me/?u=amal">Get in touch →</a></p>
-      <p class="hello-more">If you’re getting into RL, robotics or brain–computer interfaces, student or not, I’m happy to chat.</p>
+      <p class="hello-more">If you’re getting into RL, robotics or brain–computer interfaces, student or not, I’m happy to chat. A line on what you’re working on, or stuck on, is plenty.</p>
       <ul class="contact">
         <li><a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a></li>
         <li><a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></li>
@@ -207,7 +207,7 @@
           <h3>Rewarding What You Can’t Verify</h3>
           <p>A code agent trained only on visible tests learns to delete untested code until real correctness falls to 2%; random audits stopped it in the pilot but only delayed it in follow-ups.</p>
           <p class="card-results">50 follow-ups: 21 supported, 15 refuted, 12 mixed, 2 deferred</p>
-          <p class="card-miss"><span>What didn’t work</span> RL never improved honest repair above the SFT start, and 25% audits only delayed the hack.</p>
+          <p class="card-miss"><span>What didn’t work</span> RL never improved honest repair above where supervised fine-tuning (SFT) left it, and 25% audits only delayed the hack.</p>
           <p class="tags"><span class="chip">Python</span> <span class="chip">GRPO</span> <span class="chip">Reward hacking</span> <span class="chip">Code agents</span> <span class="chip">Predictions written first</span></p>
           <p class="links"><a class="deep" href="project-rewarding.html">Deep dive →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/">Live demo: proposal and results →</a> <a href="https://github.com/amalmehta/long_term_horizon_planning">Source on GitHub →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/#log">Experiment log →</a></p>
         </div>
@@ -218,7 +218,7 @@
         <div class="project-text">
           <p class="card-when">2026 · offline decoding on public data; closed loop simulated</p>
           <h3>BCI Projects</h3>
-          <p>Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.</p>
+          <p>Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 (1 is perfect) on held-out days up to day 138, against 0.42 for a Wiener filter, the classic linear decoder.</p>
           <p class="card-miss"><span>What didn’t work</span> Adaptation still fades three to four weeks out: R² 0.21 and 0.15, against 0.42–0.45 on earlier days (Neuro Falcon).</p>
           <p class="tags"><span class="chip">PyTorch</span> <span class="chip">Neural decoding</span> <span class="chip">Shared autonomy</span> <span class="chip">Closed-loop simulation</span> <span class="chip">Real neural data</span></p>
           <p class="links"><a class="deep" href="project-bci.html">Deep dive →</a> <a href="https://github.com/amalmehta/BCIProjects">Code and write-ups on GitHub →</a> <a href="https://github.com/amalmehta/BCIProjects/blob/main/papers/Telepathy.pdf">Cursor decoding write-up (PDF) →</a> <a href="https://github.com/amalmehta/NeuroFalcon">Neuro Falcon follow-up →</a></p>
@@ -230,7 +230,7 @@
         <div class="project-text">
           <p class="card-when">2026 · toy maze, 3 seeds</p>
           <h3>Post Training Lab</h3>
-          <p>A 59k-parameter transformer learns a maze by SFT, then GRPO and DPO lift held-out success from 70% to 80% and 81% over 3 seeds.</p>
+          <p>A 59k-parameter transformer learns a maze by copying demonstrations (SFT), then two kinds of post-training, GRPO and DPO, lift held-out success from 70% to 80% and 81% over 3 seeds.</p>
           <p class="card-miss"><span>What didn’t work</span> 150-level eval sets and 3 seeds, so one level is worth about 0.7 points.</p>
           <p class="tags"><span class="chip">PyTorch</span> <span class="chip">SFT → GRPO</span> <span class="chip">DPO</span> <span class="chip">Transformers</span> <span class="chip">Reward hacking</span></p>
           <p class="links"><a class="deep" href="project-post-training.html">Deep dive →</a> <a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up on GitHub →</a></p>
@@ -242,7 +242,7 @@
         <div class="project-text">
           <p class="card-when">2026 · simulation only; paper draft</p>
           <h3>Drone Autonomy</h3>
-          <p>A simulated quadrotor that maps unknown rooms, plans with A* and adapts to payload, wind and worn motors; a learned residual roughly halves tuned adaptive control’s error on held-out tasks.</p>
+          <p>A simulated quadrotor that maps unknown rooms, plans with A* (a shortest-path search) and adapts to payload, wind and worn motors; a learned correction on top of the controller (a residual) roughly halves tuned adaptive control’s error on held-out tasks.</p>
           <p class="card-miss"><span>What didn’t work</span> Out of distribution every method fails (navigation success ≤ 17%), and learned residuals crash more often than the plain controller, 43–49% against 34%.</p>
           <p class="tags"><span class="chip">Python</span> <span class="chip">Meta-learning (7 methods)</span> <span class="chip">L1 adaptive control</span> <span class="chip">A* planning</span> <span class="chip">Simulation</span></p>
           <p class="links"><a class="deep" href="project-drone.html">Deep dive →</a> <a href="https://amalmehta.github.io/DroneAutonomy/">Live demo: replay the flights →</a> <a href="https://github.com/amalmehta/DroneAutonomy">Source on GitHub →</a> <a href="https://github.com/amalmehta/DroneAutonomy/blob/main/paper/Where%20Does%20Meta-Learning%20Help%20a%20Quadrotor.pdf">Paper draft (PDF) →</a></p>
@@ -256,7 +256,7 @@
          A paid Pro version may come later. Until an app's first release is out it says "Coming soon · free";
          then swap that line for its download (docs/INSTRUCTIONS.md, "Apps you can use"):
          <p class="links"><a class="download" href="https://github.com/amalmehta/REPO/releases/latest/download/App.zip">Download for Mac · free</a> <a href="https://github.com/amalmehta/REPO">Code →</a></p>
-         <p class="app-note">First open: right-click it and choose Open (it isn’t notarized yet).</p> -->
+         <p class="app-note">macOS will warn you because it isn’t notarized yet. To open it, right-click and choose Open; the code is public if you’d like to check it first.</p> -->
     <section id="apps" class="wrap section">
       <h2 class="section-title">Apps you can use</h2>
       <p class="apps-intro">Mac apps, free to download.</p>
@@ -269,7 +269,7 @@
             <p>A menu bar app that spots apps eating memory you aren’t using, asks before quitting them, and learns which ones you need.</p>
             <p class="app-meta">Mac · macOS 14 or later · Apple silicon and Intel</p>
             <p class="links"><a class="download" href="https://github.com/amalmehta/RamClean/releases/latest/download/RamClean.zip">Download for Mac · free</a> <a href="https://github.com/amalmehta/RamClean">Code →</a></p>
-            <p class="app-note">First open: right-click it and choose Open (it isn’t notarized yet).</p>
+            <p class="app-note">macOS will warn you because it isn’t notarized yet. To open it, right-click and choose Open; the code is public if you’d like to check it first.</p>
           </div>
         </li>
         <li class="app" id="messaging-graph">
@@ -280,7 +280,7 @@
             <p>Reads your Messages history on your Mac and shows who you’ve drifted from, plans that never got a date, and messages worth sending; your messages never leave your Mac.</p>
             <p class="app-meta">Mac · macOS 13 or later · Intel, and Apple silicon through Rosetta</p>
             <p class="links"><a class="download" href="https://github.com/amalmehta/MessagingGraph/releases/latest/download/Messaging-Graph.zip">Download for Mac · free</a> <a href="https://github.com/amalmehta/MessagingGraph">Code →</a></p>
-            <p class="app-note">First open: right-click it and choose Open (it isn’t notarized yet).</p>
+            <p class="app-note">macOS will warn you because it isn’t notarized yet. To open it, right-click and choose Open; the code is public if you’d like to check it first.</p>
           </div>
         </li>
       </ul>
