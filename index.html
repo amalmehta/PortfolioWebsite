@@ -203,10 +203,10 @@
       <article class="project" id="unverifiable-rewards">
         <figure class="shot has-badge"><a class="shot-link" href="https://amalmehta.github.io/long_term_horizon_planning/" tabindex="-1" aria-hidden="true"><picture><source type="image/avif" srcset="images/unverifiable-rewards-960.avif 960w, images/unverifiable-rewards-1600.avif 1600w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><source type="image/webp" srcset="images/unverifiable-rewards-960.webp 960w, images/unverifiable-rewards-1600.webp 1600w" sizes="(min-width: 1040px) 472px, (min-width: 820px) 46vw, 100vw"><img src="images/unverifiable-rewards-960.webp" alt="Rewarding What You Can’t Verify, Figure 1: during GRPO the share of programs passing the visible checks climbs to 58% while the share actually correct falls to 2%, with the gap shaded as false success" loading="lazy" width="960" height="604"></picture></a><a class="try-badge" href="https://amalmehta.github.io/long_term_horizon_planning/" tabindex="-1" aria-hidden="true">Try it live</a></figure>
         <div class="project-text">
-          <p class="card-when">2026 · pilot, then 50 follow-ups, each predicted first</p>
+          <p class="card-when">2026 · pilot, then 50 follow-ups</p>
           <h3>Rewarding What You Can’t Verify</h3>
           <p>A code agent trained only on visible tests learns to delete untested code until real correctness falls to 2%; random audits stopped it in the pilot but only delayed it in follow-ups.</p>
-          <p class="card-results">50 follow-ups, each with its prediction written first: 21 supported, 15 refuted, 12 mixed, 2 deferred</p>
+          <p class="card-results">50 follow-ups: 21 supported, 15 refuted, 12 mixed, 2 deferred</p>
           <p class="card-miss"><span>What didn’t work</span> RL never improved honest repair above the SFT start, and 25% audits only delayed the hack.</p>
           <p class="tags"><span class="chip">Python</span> <span class="chip">GRPO</span> <span class="chip">Reward hacking</span> <span class="chip">Code agents</span> <span class="chip">Predictions written first</span></p>
           <p class="links"><a class="deep" href="project-rewarding.html">Deep dive →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/">Live demo: proposal and results →</a> <a href="https://github.com/amalmehta/long_term_horizon_planning">Source on GitHub →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/#log">Experiment log →</a></p>
@@ -305,7 +305,7 @@
         <div>
           <h3>Deep Learning Scientist · PhysicsAI</h3>
           <p class="where">DARPA-funded · remote</p>
-          <p>Turned synthetic-data generation into a closed RL loop: agents (TD3, PPO, DDPG) set an image generator’s parameters, a spatiotemporal object detector retrained on what it produced, and the detector’s accuracy on real drone imagery came back as the reward. Real-world performance, not hand-tuned rendering, drove every iteration.</p>
+          <p>Turned synthetic-data generation into a closed RL loop: agents (TD3, PPO, DDPG) set an image generator’s parameters, a spatiotemporal object detector retrained on what it produced, and the detector’s accuracy on real drone imagery came back as the reward.<!-- once: Real-world performance, not hand-tuned rendering, drove every iteration. --></p>
           <!-- Saved for later, the sentence once ended: …drove every iteration and closed the sim-to-real gap. -->
           <p>Owned the meta-RL codebase: a PEARL agent over TD3 that learns a probabilistic embedding of each generator task, so it adapts to a new one in a few tries, and that was also applied to a fighter-jet simulation. Ran and monitored its multi-week GPU training runs.</p>
           <p>Also implemented domain adaptation from scratch to hold the detector’s accuracy with scarce real labels and mostly synthetic data (10–15 GB datasets), and built and benchmarked the GAN pipelines (DCGAN, InfoGAN, FineGAN) that produced its training images.</p>
