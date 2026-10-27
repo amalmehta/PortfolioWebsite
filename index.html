@@ -334,7 +334,7 @@
           <p class="where">BAIR, UC Berkeley · Prof. Avideh Zakhor</p>
           <p>Built a deep-learning pipeline that outlines invasive melanoma pixel by pixel in very large tissue images, to help pathologists measure how far a cancer has spread.</p>
           <p>Invasive and in-situ melanoma look alike under the microscope; what matters is whether the tumour has crossed below the epidermis. So the pipeline segments the epidermis and the melanoma separately, at four magnifications, and keeps the melanoma outside the epidermis. Trained on slides from 57 UCSF patients outlined by two pathologists, it raised F1 on invasive melanoma to 0.44, from 0.14 for the previous best.</p>
-          <p>Most of the work was engineering around the slides: cutting very large images into patches that fit on two GPUs, dropping empty ones, removing glue stains, and rebalancing rare classes with flips and rotations. HRNet+OCR started from Cityscapes weights and was benchmarked against HookNet, U-Net and the earlier published model.</p>
+          <!-- Saved for later: Most of the work was engineering around the slides: cutting very large images into patches that fit on two GPUs, dropping empty ones, removing glue stains, and rebalancing rare classes with flips and rotations. HRNet+OCR started from Cityscapes weights and was benchmarked against HookNet, U-Net and the earlier published model. -->
           <figure class="shot"><img src="images/vip-lab.svg" alt="Drawing: a whole-slide tissue image with the predicted melanoma region outlined, and a zoomed-in square showing the tumour boundary cell by cell" loading="lazy" width="1280" height="720"></figure>
           <p class="tags pubs">Published: <em>SPIE Medical Imaging</em> 2023 · <em>USCAP</em> 2022, Stowell-Orbison Award Poster Session</p>
           <p class="links"><a href="https://doi.org/10.1117/12.2654672">Paper (SPIE Digital Library) →</a></p>
@@ -363,7 +363,7 @@
         <li class="mini" id="alphago-lite">
           <h3>AlphaGo Lite <a class="try-badge inline" href="https://amalmehta.github.io/AlphaGoLite/">Play it</a></h3>
           <p>A 9×9 Go engine that taught itself by self-play in 11 hours on one laptop, and shows which moves it’s weighing as you play.</p>
-          <p class="links"><a href="https://amalmehta.github.io/AlphaGoLite/">Demo →</a> <a href="https://github.com/amalmehta/AlphaGoLite">Code →</a></p>
+          <p class="links"><a href="project-alphago.html">Deep dive →</a> <a href="https://amalmehta.github.io/AlphaGoLite/">Demo →</a> <a href="https://github.com/amalmehta/AlphaGoLite">Code →</a></p>
         </li>
         <li class="mini" id="researcher-pal">
           <h3>Researcher Pal</h3>
