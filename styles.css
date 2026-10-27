@@ -498,7 +498,7 @@ picture { display: contents; }
 /* Inspiration: a card per person or thing, with a drawing, in a grid like the photos */
 .inspo:has(.inspo-card) { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .inspo-link { display: block; margin-top: 0.3rem; font-weight: 500; }
-.media { margin-top: 3rem; }
+.media, .tools { margin-top: 3rem; }
 .media-kind { display: inline-block; margin-right: 0.4rem; padding: 0 0.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 999px; background: var(--warm-soft); color: var(--warm); vertical-align: 0.1em; }
 /* Beliefs: tabs (beliefs.js), What I believe currently, My predictions and Outdated */
 .beliefs { margin-top: 3rem; }
