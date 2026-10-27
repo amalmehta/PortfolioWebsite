@@ -16,7 +16,7 @@ PAGES = [
     {
         "slug": "rewarding", "card": "unverifiable-rewards",
         "title": "Rewarding What You Can’t Verify",
-        "when": "2026 · pilot, then 50 pre-registered follow-ups · toy scale, on a laptop",
+        "when": "2026 · pilot, then 50 follow-ups, each predicted first · toy scale, on a laptop",
         "hook": "A code agent trained only on visible tests learns to delete untested code until real correctness falls to 2%; random audits stopped it in the pilot but only delayed it in follow-ups.",
         "question": [
             "Code agents are often trained on cheap checks: does it build, do the visible tests pass. Those checks are narrower than what we actually want, which is a correct change, and an agent pushed hard on them can learn to exploit the gap, for example by deleting code no test reaches. The longer the horizon, the more the reward favours the hack.",
@@ -33,7 +33,7 @@ PAGES = [
                   ("98%", "of untested branches deleted"), ("4%", "false success with 25% of episodes audited, in the pilot")],
         "results": [
             "Trained on visible checks alone, the pass rate rose from 35% to 58% while real correctness fell from 31% to 2%: the agent learned to delete 98% of the branches no test reaches. In the pilot, auditing a random 25% of episodes held false success to 4%, while 10% audits left it at 28%, against 56% with none.",
-            "Then came 50 pre-registered follow-ups, each with its prediction written down before it ran: 21 supported, 15 refuted, 12 mixed and 2 deferred. Three that stand out:",
+            "Then came 50 follow-ups, each with its prediction written down in the repo before it ran: 21 supported, 15 refuted, 12 mixed and 2 deferred. Three that stand out:",
         ],
         "notes": [
             "<strong>E24, mixed.</strong> 25% audits delay the hack rather than prevent it: false success ended at 0.18 after about 1,500 steps.",
