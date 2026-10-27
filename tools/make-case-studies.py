@@ -30,7 +30,7 @@ PAGES = [
         "flow": ["Make 12-branch programs, break some", "Fine-tune on a careless demonstrator", "Train with GRPO on the chosen reward",
                  "Audit a random share with the hidden check", "Compare visible pass with true correctness"],
         "stats": [("58%", "visible pass rate after training, up from 35%"), ("2%", "truly correct, down from 31%"),
-                  ("98%", "of untested branches deleted"), ("4%", "false success with 25% of episodes audited, in the pilot")],
+                  ("98%", "of untested branches deleted"), ("18%", "false success with 25% of episodes audited, after about 1,500 steps")],
         "results": [
             "Trained on visible checks alone, the pass rate rose from 35% to 58% while real correctness fell from 31% to 2%: the agent learned to delete 98% of the branches no test reaches. In the pilot, auditing a random 25% of episodes held false success to 4%, while 10% audits left it at 28%, against 56% with none.",
             "Then came 50 follow-ups, each with its prediction written down in the repo before it ran: 21 supported, 15 refuted, 12 mixed and 2 deferred. Three that stand out:",
@@ -54,7 +54,7 @@ PAGES = [
         "slug": "bci", "card": "bci-projects",
         "title": "BCI Projects",
         "when": "2026 · offline decoding on public data; closed loop simulated",
-        "hook": "Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on held-out days up to day 138, against 0.42 for a Wiener filter.",
+        "hook": "Four brain–computer interface projects on public neural recordings; with no new labels, the cursor decoder averages R² 0.72 on 17 of 19 held-out days up to day 138, against 0.42 for a Wiener filter.",
         "question": [
             "A cursor brain–computer interface is only as useful as its worst day. The neurons an implant records drift from day to day, so a decoder trained once slowly stops working, and asking someone to recalibrate every morning is a real cost.",
             "These four projects work on public neural recordings to see how far careful decoding gets without new labels, and where it stops.",

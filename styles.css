@@ -828,9 +828,6 @@ body { hanging-punctuation: first last; }
 .status-chip { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0 0 1.1rem; padding: 0.32rem 0.8rem 0.32rem 0.65rem; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--surface) 80%, transparent); font-size: 0.82rem; font-weight: 500; color: var(--muted); text-decoration: none; backdrop-filter: blur(4px); }
 .status-chip:hover { text-decoration: none; color: var(--text); border-color: color-mix(in srgb, var(--warm) 40%, var(--line)); }
 .status-dot { position: relative; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #3fa364; }
-.status-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #3fa364; animation: status-ping 2s ease-out infinite; }
-@keyframes status-ping { from { transform: scale(1); opacity: 0.6; } to { transform: scale(2.8); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .status-dot::after { animation: none; } }
 @media print { .status-chip { display: none; } }
 
 /* Portrait: on hover the sketch warms and the rings swap colours */
