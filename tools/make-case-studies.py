@@ -106,9 +106,9 @@ PAGES = [
             "Three seeds, so the bands show best and worst seed, not a confidence interval. The eval sets are small (150 levels each), so one level is worth about 0.7 points of success. The harder split only varies wall density: a mild shift, not a new task.",
             "DPO and the reward hacker use settings picked from one short trial each. Along the way, uniform label noise (greedy decoding just removed it), a 9×9 grid (too noisy to train on a CPU) and plain DPO all failed.",
         ],
-        "next": ["The repo includes a page that runs the trained checkpoints in the browser: race them on the same maze, edit the walls and scrub through training. It isn’t online yet."],
+        "next": ["Test whether GRPO’s lead over SFT holds on a real distribution shift, such as new layouts or a bigger grid, not just denser walls."],
         "figure": ("post-training", 1200, 635, "Training curves across 3 seeds: GRPO climbs from the SFT starting point while RL from scratch stays at zero"),
-        "links": [("Code and write-up on GitHub", "https://github.com/amalmehta/PostTrainingLab")],
+        "links": [("Live demo: race the checkpoints", "https://amalmehta.github.io/PostTrainingLab/"), ("Code and write-up on GitHub", "https://github.com/amalmehta/PostTrainingLab")],
     },
     {
         "slug": "drone", "card": "drone-autonomy",
