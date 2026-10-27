@@ -660,7 +660,8 @@ class SubpagesTest(unittest.TestCase):
                 self.assertIn(f"openEgg ||= {{}}).{name} =", (ROOT / f"{name}.js").read_text(encoding="utf-8"))
 
     def test_footer_counts_the_secrets(self):
-        # The footer's hint names how many hidden extras there are: one per entry in eggs.js.
+        # The footer keeps a count of the hidden extras, one per entry in eggs.js, in a comment
+        # (the visible hint was taken out to keep the footer quiet).
         count = len(re.findall(r'\["\.[a-z-]+", "[a-z]+"', (ROOT / "eggs.js").read_text(encoding="utf-8")))
         words = {8: "eight"}
         self.assertIn(count, words, "add the new count's word here")
