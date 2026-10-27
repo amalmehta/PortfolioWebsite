@@ -18,7 +18,7 @@
       <link>https://amalmehta.com/thinking.html#tools-for-anyone</link>
       <guid>https://amalmehta.com/thinking.html#tools-for-anyone</guid>
       <pubDate>Sun, 11 Oct 2026 12:00:00 +0000</pubDate>
-      <description>The best tools shrink the distance between wanting to do something and being able to: spreadsheets let anyone model, phones let anyone film. AI and robots could close that distance for almost anything, from writing software to running an experiment to making a physical thing. The hard parts are keeping people in charge of what they’re making, having the tool understand what they mean rather than only what they said, and making it work the first time for someone who isn’t an expert. A few of my projects are small tries at this, like a 3D viewer that takes any object apart, a course on how language models are trained, and a webcam coach for sport technique.</description>
+      <description>The best tools shrink the distance between wanting to do something and being able to: spreadsheets let anyone model, phones let anyone film. AI and robots could close that distance for almost anything, from writing software to running an experiment to making a physical thing. The hard parts are keeping people in charge of what they’re making, having the tool understand what they mean rather than only what they said, and making it work the first time for someone who isn’t an expert. A few of my projects are small tries at this, like a 3D viewer that takes any object apart and a course on how language models are trained.</description>
     </item>
     <item>
       <title>How do we build tools that help people escape inequity?</title>
@@ -39,7 +39,7 @@
       <link>https://amalmehta.com/thinking.html#vla-and-physical-intelligence</link>
       <guid>https://amalmehta.com/thinking.html#vla-and-physical-intelligence</guid>
       <pubDate>Sun, 11 Oct 2026 12:00:00 +0000</pubDate>
-      <description>VLAs bring internet-scale pretraining to robot control: one model that sees, reads an instruction and outputs actions. What I keep wondering is how much of the hard part that covers (contact, balance, recovering when the world doesn’t match the plan) and how much still needs reinforcement learning, simulation and real-world experience. Training a robot dog in simulation that then hit its target about 60% of the time on hardware made that gap concrete for me. I’m curious where the two approaches meet: VLAs for breadth, RL for the last stretch of skill.</description>
+      <description>VLAs bring internet-scale pretraining to robot control: one model that sees, reads an instruction and outputs actions. What I keep wondering is how much of the hard part that covers (contact, balance, recovering when the world doesn’t match the plan) and how much still needs reinforcement learning, simulation and real-world experience. Training a robot dog in simulation that then hit its target about 60% of the time on hardware made that gap concrete for me.</description>
     </item>
   </channel>
 </rss>
