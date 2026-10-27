@@ -11,14 +11,14 @@
   <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta name="description" content="Amal Mehta, independent research engineer in reinforcement learning: sim-to-real robot learning, reward hacking in RL post-training, and neural decoding. Research and projects.">
+  <meta name="description" content="Amal Mehta, independent research engineer in reinforcement learning: robot learning in simulation and on hardware, reward hacking in RL post-training, and neural decoding. Research and projects.">
   <link rel="alternate" type="application/rss+xml" title="Things I’m thinking about" href="feed.xml">
   <link rel="canonical" href="https://amalmehta.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Amal Mehta">
   <meta property="og:url" content="https://amalmehta.com/">
   <meta property="og:title" content="Amal Mehta · RL and robotics">
-  <meta property="og:description" content="Independent research engineer in reinforcement learning: sim-to-real robot learning, reward hacking in RL post-training, and decoding movement from neural recordings.">
+  <meta property="og:description" content="Independent research engineer in reinforcement learning: robot learning in simulation and on hardware, reward hacking in RL post-training, and decoding movement from neural recordings.">
   <meta property="og:image" content="https://amalmehta.com/images/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
     "@type": "Person",
     "name": "Amal Mehta",
     "jobTitle": "Research engineer",
-    "description": "Independent research engineer in reinforcement learning. I work on sim-to-real robot learning, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.",
+    "description": "Independent research engineer in reinforcement learning. I work on robot learning in simulation and how it transfers to hardware, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.",
     "url": "https://amalmehta.com/",
     "image": "https://amalmehta.com/images/portrait.jpg",
     "address": {
@@ -169,7 +169,7 @@
       <div class="hero-text">
       <a class="status-chip" href="interests.html#now"><span class="status-dot" aria-hidden="true"></span>Now: researching RL post-training</a>
       <h1>Amal Mehta</h1>
-      <p class="lede">Independent research engineer in <span class="nowrap"><span class="maze-plain">reinforcement learning</span><button type="button" class="maze-egg" data-script="maze.js" aria-label="reinforcement learning (opens an agent learning a maze)" hidden>reinforcement learning</button>.</span> I work on sim-to-real robot learning, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.</p>
+      <p class="lede">Independent research engineer in <span class="nowrap"><span class="maze-plain">reinforcement learning</span><button type="button" class="maze-egg" data-script="maze.js" aria-label="reinforcement learning (opens an agent learning a maze)" hidden>reinforcement learning</button>.</span> I work on robot learning in simulation and how it transfers to hardware, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.</p>
       <p class="hero-sub">Applied deep learning since 2020, from generative models and vision to control. <!-- once: My focus now is RL post-training. Before that: My focus is learning from little data and adapting quickly to new settings. -->Based in the San Francisco Bay Area. Open to research engineer roles in RL and robotics. I love making things from scratch, and in my spare time I build fictional worlds and write stories set in them.</p>
       <p class="hello">Hi. If you’d like to talk, I’m here. <a href="https://reachouts.me/?u=amal">Get in touch →</a><!-- once: Hi! I’d love to hear from you. --></p>
       <p class="hello-more">If you’re getting into RL, robotics or brain–computer interfaces, student or not, I’m happy to chat. A line on what you’re working on, or stuck on, is plenty.</p>
@@ -307,7 +307,7 @@
           <p class="where">DARPA-funded · remote</p>
           <p>Turned synthetic-data generation into a closed RL loop: agents (TD3, PPO, DDPG) set an image generator’s parameters, a spatiotemporal object detector retrained on what it produced, and the detector’s accuracy on real drone imagery came back as the reward.<!-- once: Real-world performance, not hand-tuned rendering, drove every iteration. --></p>
           <!-- Saved for later, the sentence once ended: …drove every iteration and closed the sim-to-real gap. -->
-          <p>Owned the meta-RL codebase: a PEARL agent over TD3 that learns a probabilistic embedding of each generator task, so it adapts to a new one in a few tries, and that was also applied to a fighter-jet simulation. Ran and monitored its multi-week GPU training runs.</p>
+          <p>Built the meta-RL codebase: a PEARL agent over TD3 that learns a probabilistic embedding of each generator task, so it adapts to a new one in a few tries. Ran its multi-week GPU training runs.<!-- once: Owned the meta-RL codebase: …in a few tries, and that was also applied to a fighter-jet simulation. Ran and monitored its multi-week GPU training runs. --></p>
           <p>Also implemented domain adaptation from scratch to hold the detector’s accuracy with scarce real labels and mostly synthetic data (10–15 GB datasets), and built and benchmarked the GAN pipelines (DCGAN, InfoGAN, FineGAN) that produced its training images.</p>
           <figure class="shot"><img src="images/physicsai.svg" alt="Drawing: a drone’s camera looks down on a city block with cars boxed by a detector, beside the generator settings an RL agent tunes and its rising reward" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">TD3</span> <span class="chip">PPO</span> <span class="chip">DDPG</span> <span class="chip">PEARL meta-RL</span> <span class="chip">Domain adaptation</span> <span class="chip">GANs</span></p>
