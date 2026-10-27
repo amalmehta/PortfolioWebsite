@@ -107,8 +107,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .lede { font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.4; max-width: 38ch; margin: 0 0 1rem; }
 .hero-sub { color: var(--muted); max-width: 52ch; margin: 0 0 1.75rem; }
 .hello { margin: 0 0 0.6rem; font-weight: 500; }
-.hello a { white-space: nowrap; padding: 0.15rem 0.8rem; border-radius: 999px; background: var(--accent-soft); transition: background-color 0.2s; }
-.hello a:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
+.hello a { white-space: nowrap; }
 .contact { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.95rem; }
 .copy-email { margin-left: 0.45rem; padding: 0.1rem 0.55rem; font: 600 0.72rem/1.4 var(--sans); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; vertical-align: 0.1em; }
 /* On touch screens the button keeps its size but gets a fingertip-sized tap area (about 45 px tall). */
@@ -116,21 +115,15 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .copy-email:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
 
 /* Sections */
-.section { padding-top: 4.5rem; padding-bottom: 2.2rem; }
+.section { padding-top: 5.5rem; padding-bottom: 2.6rem; }
 .section-title {
   font-family: var(--sans); font-size: 0.82rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm);
   display: flex; align-items: center; gap: 0.6rem; position: relative;
   margin: 0 0 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
 }
-/* A short warm underline on the rule, drawn in as the title scrolls into view where browsers can */
-.section-title::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 3.5rem; height: 2px; background: var(--warm); transform-origin: left; }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .section-title::after { animation: title-draw linear both; animation-timeline: view(); animation-range: entry 10% cover 25%; }
-  }
-}
-@keyframes title-draw { from { transform: scaleX(0); } }
+/* A short warm underline on the rule, still */
+.section-title::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 3.5rem; height: 2px; background: var(--warm); }
 /* Outside work: an elevation profile of five passes instead of the plain rule, drawn in on load */
 #outside .section-title { border-bottom: 0; padding-bottom: 0.2rem; margin-bottom: 0.3rem; }
 #outside .section-title::after { display: none; }
@@ -452,9 +445,6 @@ picture { display: contents; }
 .travel-map a:focus-visible { outline: none; }
 .travel-map a:focus-visible .pin-halo { opacity: 1; fill-opacity: 0.25; stroke: var(--pin); stroke-width: 4; animation: none; }
 .travel-map a:focus-visible .pin-dot { stroke: var(--text); }
-.pin-going .pin-halo { transform-box: fill-box; transform-origin: center; animation: pin-pulse 2.4s ease-out infinite; }
-@keyframes pin-pulse { 0% { transform: scale(0.6); opacity: 0.5; } 100% { transform: scale(1.8); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .pin-going .pin-halo { animation: none; } }
 /* Long trips (the Seattle-to-DC ride, the road across Pakistan): a line that draws itself in once, revealed by an animated mask */
 .map-route-line { fill: none; stroke: var(--warm); stroke-width: 3; stroke-dasharray: 7 6; stroke-linecap: round; }
 .map-road .map-route-line { stroke-dasharray: 0.1 5.5; stroke-width: 3.5; }  /* dotted, so it reads apart from the bike */
@@ -691,7 +681,7 @@ picture { display: contents; }
 /* Reduced motion everywhere else: links jump instead of gliding, and hovered cards don't lift. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .shot, .hello a { transition: none; }
+  .shot { transition: none; }
   .project:hover .shot { transform: none; }
 }
 /* Dark mode: bright drawings and screenshots are dimmed a touch so they don't glare, and brighten on hover. */

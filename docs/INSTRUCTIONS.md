@@ -65,7 +65,7 @@ Each Featured project has its own page, `project-<slug>.html` (rewarding, bci, p
 
 ## The living hero
 
-`hero.js` draws a faint five-pass ridge along the bottom of the profile's intro, with a few dots learning to cross it by the cross-entropy method: each dot is a plan of how hard to push on each stretch, and each round the best plans seed the next. The physics was tuned offline so crossing takes about 40–70 rounds; once most dots cross three rounds running, it pauses and starts again from nothing. It pauses off screen, and reduced motion shows only the ridge.
+`hero.js` draws a faint five-pass ridge along the bottom of the profile's intro, with a few dots learning to cross it by the cross-entropy method: each dot is a plan of how hard to push on each stretch, and each round the best plans seed the next. The physics was tuned offline so crossing takes about 40–70 rounds; once most dots cross three rounds running, they rest across the ridge and it stops for good. It pauses off screen, and reduced motion shows only the ridge.
 
 ## Security policy
 

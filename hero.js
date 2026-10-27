@@ -2,7 +2,7 @@
 // Each dot is a plan: how hard to push on each stretch of the ridge. Gravity slows them on the climbs
 // and pushing costs energy. After every round the best few plans become the starting point for the
 // next (the cross-entropy method), so the group gets further the longer you watch. Once they cross
-// reliably, it starts again from nothing. Pauses off screen; reduced motion shows just the ridge.
+// reliably, they rest where they are and the page goes still. Pauses off screen; reduced motion shows just the ridge.
 (() => {
   const hero = document.querySelector(".hero");
   if (!hero) return;
@@ -21,7 +21,7 @@
   const slope = x => (height(x + 0.001) - height(x - 0.001)) / 0.002;
 
   const SEGMENTS = 12, POP = 14, ELITE = 3, DT = 1 / 240, GRAVITY = 0.25, PUSH = 1, DRAG = 0.6;  // tuned offline: about 40–70 rounds to cross
-  let mean, spread, gen, plans, runners, best, wins, frame, w = 0, h = 0, visible = true, resting = false;
+  let mean, spread, gen, plans, runners, best, wins, frame, w = 0, h = 0, visible = true, settled = false;
 
   function reset() {
     mean = new Array(SEGMENTS).fill(0.1); spread = new Array(SEGMENTS).fill(0.35);
@@ -53,7 +53,7 @@
     spread = spread.map((_, k) => Math.max(0.02, Math.sqrt(ranked.reduce((s, p) => s + (p[k] - mean[k]) ** 2, 0) / ELITE) * 0.9 + 0.01));
     best = Math.max(best, ...runners.map(r => Math.min(r.far, 1)));
     wins = runners.filter(r => r.crossed).length >= POP / 2 ? wins + 1 : 0;
-    if (wins >= 3) { resting = true; setTimeout(() => { resting = false; reset(); }, 2500); }  // a pause on success, then again from nothing
+    if (wins >= 3) settled = true;  // learned: the dots rest across the ridge and nothing moves again
     else round();
   }
 
@@ -72,24 +72,22 @@
       ctx.beginPath(); ctx.arc(px(Math.min(r.x, 1)), py(Math.min(r.x, 1)) - 4, 3, 0, Math.PI * 2); ctx.fill();
     }
     ctx.globalAlpha = 0.7; ctx.fillStyle = faint; ctx.font = "11px " + s.getPropertyValue("--sans"); ctx.textAlign = "right";
-    ctx.fillText(`learning to cross · round ${gen} · furthest ${Math.round(best * 100)}%`, w - 4, h - 4);
+    ctx.fillText(settled ? `learned to cross in ${gen} rounds` : `learning to cross · round ${gen} · furthest ${Math.round(best * 100)}%`, w - 4, h - 4);
     ctx.globalAlpha = 1;
   }
 
   function tick() {
-    if (!resting) {
-      for (let k = 0; k < 6; k++) runners.forEach((r, i) => step(r, plans[i]));
-      if (runners.every(r => r.done)) learn();
-    }
+    for (let k = 0; k < 6; k++) runners.forEach((r, i) => step(r, plans[i]));
+    if (runners.every(r => r.done)) learn();
     draw();
-    frame = visible && !document.hidden ? requestAnimationFrame(tick) : null;
+    frame = !settled && visible && !document.hidden ? requestAnimationFrame(tick) : null;
   }
   function resize() {
     const dpr = Math.min(devicePixelRatio || 1, 2), box = canvas.getBoundingClientRect();
     w = box.width; h = box.height; canvas.width = w * dpr; canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); draw();
   }
-  const go = () => { if (!still && !frame && visible && !document.hidden) frame = requestAnimationFrame(tick); };
+  const go = () => { if (!still && !settled && !frame && visible && !document.hidden) frame = requestAnimationFrame(tick); };
   new ResizeObserver(resize).observe(canvas);
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; go(); }).observe(hero);
   document.addEventListener("visibilitychange", go);
