@@ -19,7 +19,7 @@ I = "    "
 
 # kind, label, latitude, longitude, card id. Soonest trips and favourites first.
 PINS = [
-    ("expedition", "Soloing Cerro Torre, Argentina", -49.29, -73.10, "place-cerro-torre"),
+    ("expedition", "Climbing Cerro Torre, Argentina", -49.29, -73.10, "place-cerro-torre"),
     ("going", "Chamonix, France", 45.92, 6.87, "place-chamonix"),
     ("want", "Hokkaido, Japan", 42.83, 140.81, "place-hokkaido"),
     ("want", "Lofoten, Norway", 67.93, 13.09, "place-lofoten"),
