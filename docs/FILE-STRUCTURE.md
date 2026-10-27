@@ -19,7 +19,7 @@ media.js                      Lazy-loads and plays looping clips; on the page on
 messi.js                      Hidden replay of Messi's 2011 solo goal at the Bernabéu, behind "soccer tournaments" on the profile
 email.js                      Turns the bot-proofed "name [at] domain" email links back into real ones
 anchors.js                    Adds the "#" link beside each entry's heading on the profile and Thinking
-beliefs.js                    Switches the Values page's Beliefs between its two tabs: current and Outdated
+beliefs.js                    Switches the Values page's Beliefs between its two tabs: current and Let go
 tiles.js                      Plays the Live interests tile icons once on scroll-in and on tap (phones have no hover)
 pong.js                       Hidden Pong game behind the skier on the Hokkaido drawing (photos.html)
 fonts/                        Self-hosted Newsreader and Inter (WOFF2) and their OFL licences

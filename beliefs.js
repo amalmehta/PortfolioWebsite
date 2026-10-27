@@ -1,4 +1,4 @@
-// Values page: shows Beliefs as tabs, "What I believe currently", "My predictions" and "Outdated".
+// Values page: shows Beliefs as tabs, "What I believe currently", "My predictions" and "Let go".
 // Without JavaScript the lists show one after the other, each under its own heading.
 // Each tab has its own address (values.html#beliefs-predictions), so any of them can be linked to.
 (() => {

@@ -957,7 +957,7 @@ class ValuesPageTest(unittest.TestCase):
         # Three tabs, each pointing at its own panel; beliefs.js is loaded to switch them.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
         tabs = re.findall(r'<button type="button" role="tab" id="([^"]+)" aria-controls="([^"]+)"[^>]*>([^<]+)</button>', html)
-        self.assertEqual([t[2] for t in tabs], ["What I believe currently", "My predictions", "Outdated"])
+        self.assertEqual([t[2] for t in tabs], ["What I believe currently", "My predictions", "Let go"])
         for tab_id, panel_id, _ in tabs:
             with self.subTest(tab=tab_id):
                 self.assertRegex(html, rf'<div class="belief-panel" id="{panel_id}" role="tabpanel" aria-labelledby="{tab_id}"( hidden)?>')
