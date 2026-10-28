@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+<style>
+.bird{fill:none;stroke:#5b4a3a;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;animation:drift 14s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(26px,-8px)}}
+.haze{opacity:.35;animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.25}50%{opacity:.42}}
+@media (prefers-reduced-motion: reduce){.bird,.haze{animation:none}}
+</style>
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fb6c6"/><stop offset=".55" stop-color="#e9d7b6"/><stop offset="1" stop-color="#f3dcae"/></linearGradient>
+<radialGradient id="sun" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff2cf"/><stop offset=".35" stop-color="#ffe2a3" stop-opacity=".8"/><stop offset="1" stop-color="#ffe2a3" stop-opacity="0"/></radialGradient>
+<linearGradient id="path" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8d2a6"/><stop offset="1" stop-color="#d6b37c"/></linearGradient>
+<linearGradient id="mist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4dc" stop-opacity="0"/><stop offset=".6" stop-color="#fff4dc"/><stop offset="1" stop-color="#fff4dc" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#sky)"/>
+<circle cx="860" cy="230" r="230" fill="url(#sun)"/>
+<circle cx="860" cy="230" r="46" fill="#fff3d6"/>
+<!-- far peaks -->
+<path d="M0 380 L120 300 L210 350 L330 230 L440 330 L540 280 L640 345 L760 250 L880 335 L980 275 L1090 330 L1200 290 L1200 800 L0 800 Z" fill="#b7bccb"/>
+<path d="M330 230 L300 258 L322 252 L338 268 L352 248 Z M760 250 L732 276 L752 272 L770 288 L784 268 Z" fill="#eef0f4"/>
+<rect class="haze" x="0" y="250" width="1200" height="160" fill="url(#mist)"/>
+<!-- mid hills -->
+<path d="M0 430 C140 380 260 410 380 385 C500 360 600 405 720 380 C850 352 980 400 1200 370 L1200 800 L0 800 Z" fill="#8fa38a"/>
+<!-- a small village on the far ridge -->
+<g fill="#efe3cf">
+<rect x="520" y="372" width="16" height="12"/><path d="M518 373 L528 364 L538 373 Z" fill="#a8574a"/>
+<rect x="542" y="368" width="20" height="16"/><path d="M540 369 L552 358 L564 369 Z" fill="#a8574a"/>
+<rect x="568" y="374" width="14" height="10"/><path d="M566 375 L575 367 L584 375 Z" fill="#a8574a"/>
+<rect x="590" y="360" width="8" height="24"/><path d="M588 361 L594 348 L600 361 Z" fill="#8e4a3f"/>
+</g>
+<!-- trees on mid hills -->
+<g fill="#5f7a5c">
+<path d="M150 415 l10 -34 l10 34 Z"/><path d="M172 418 l8 -26 l8 26 Z"/>
+<path d="M880 392 l11 -36 l11 36 Z"/><path d="M905 395 l8 -26 l8 26 Z"/><path d="M1030 392 l10 -32 l10 32 Z"/>
+</g>
+<!-- near hills -->
+<path d="M0 540 C180 480 340 520 520 495 C700 470 860 520 1200 470 L1200 800 L0 800 Z" fill="#6f8a66"/>
+<path d="M0 640 C220 590 420 630 640 600 C860 572 1020 610 1200 585 L1200 800 L0 800 Z" fill="#587453"/>
+<!-- winding trail toward the village -->
+<path d="M430 800 C470 730 640 700 610 650 C585 610 470 600 520 560 C560 530 650 525 620 495 C600 476 560 470 575 440 C585 420 570 400 560 388 C568 400 580 420 572 440 C560 468 596 478 612 496 C636 524 552 532 512 562 C462 602 572 614 596 650 C622 692 520 720 500 800 Z" fill="url(#path)"/>
+<!-- signpost at the bend -->
+<g>
+<rect x="676" y="560" width="8" height="86" fill="#6b4e33"/>
+<path d="M684 568 L760 568 L774 580 L760 592 L684 592 Z" fill="#b98a5a"/>
+<path d="M676 600 L606 600 L592 612 L606 624 L676 624 Z" fill="#a8794a"/>
+<g stroke="#6b4e33" stroke-width="3" stroke-linecap="round"><line x1="698" y1="580" x2="748" y2="580"/><line x1="612" y1="612" x2="662" y2="612"/></g>
+</g>
+<!-- foreground grass -->
+<g fill="none" stroke="#45603f" stroke-width="3" stroke-linecap="round">
+<path d="M80 780 q6 -30 -4 -56"/><path d="M92 782 q2 -26 14 -48"/><path d="M110 784 q-4 -22 4 -40"/>
+<path d="M1040 776 q6 -30 -4 -56"/><path d="M1054 778 q2 -26 14 -48"/><path d="M1070 780 q-4 -22 4 -40"/>
+</g>
+<!-- open map and compass in the foreground -->
+<g transform="translate(150 640) rotate(-6)">
+<path d="M0 0 L90 14 L180 0 L270 14 L270 120 L180 106 L90 120 L0 106 Z" fill="#f4ead6"/>
+<path d="M90 14 L90 120 M180 0 L180 106" stroke="#d6c6a6" stroke-width="2"/>
+<path d="M20 86 C60 60 80 90 120 64 C160 40 200 76 250 40" fill="none" stroke="#b23a2b" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round"/>
+<path d="M30 30 C50 20 70 36 60 50 C48 66 26 52 30 30 Z" fill="#cfdcc8"/>
+<path d="M196 70 C214 60 236 72 228 88 C220 100 196 92 196 70 Z" fill="#cfdcc8"/>
+<g transform="translate(250 40)" stroke="#b23a2b" stroke-width="3" stroke-linecap="round"><line x1="-6" y1="-6" x2="6" y2="6"/><line x1="6" y1="-6" x2="-6" y2="6"/></g>
+</g>
+<g transform="translate(470 712)">
+<circle r="40" fill="#c9a24a"/><circle r="33" fill="#f6f1e6"/>
+<path d="M0 -26 L7 0 L0 26 L-7 0 Z" fill="#9aa3a8"/><path d="M0 -26 L7 0 L-7 0 Z" fill="#b23a2b"/>
+<circle r="3.5" fill="#5b4a3a"/>
+<circle cy="-44" r="7" fill="none" stroke="#c9a24a" stroke-width="4"/>
+</g>
+<!-- birds -->
+<g class="bird"><path d="M700 170 q10 -10 20 0 q10 -10 20 0"/><path d="M760 200 q8 -8 16 0 q8 -8 16 0"/><path d="M670 215 q7 -7 14 0 q7 -7 14 0"/></g>
+</svg>
