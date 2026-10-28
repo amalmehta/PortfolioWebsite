@@ -977,11 +977,11 @@ class ValuesPageTest(unittest.TestCase):
                 self.assertEqual("Coming soon." in panel, 'class="inspo-item"' not in panel)
 
     def test_empty_sections_say_coming_soon(self):
-        # Ways I want to lead my life, How I lead, Inspiration, Products that inspire me and Things I care about
-        # show "Coming soon." exactly while they're empty.
+        # Ways I want to lead my life, How I lead, Inspiration, Products that inspire me, Things I care about
+        # and Grateful for show "Coming soon." exactly while they're empty.
         html = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
         groups = re.findall(r'<section class="inspo-group"([^>]*)>(.*?)</section>', html, flags=re.S)
-        self.assertEqual(len(groups), 5)
+        self.assertEqual(len(groups), 6)
         for attrs, body in groups:
             with self.subTest(section=re.search(r"<h2[^>]*>(.*?)</h2>", body).group(1)):
                 empty = re.search(r'class="inspo-(?:item|card)"', body) is None
