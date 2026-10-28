@@ -567,6 +567,9 @@ picture { display: contents; }
 .tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 /* Three across on desktop, two on tablets, one on phones; a pair sits two across */
 .tiles.pair { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+/* A drawing in place of the icon, for People I’m watching */
+.tile-drawing { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 0.8rem; }
+.tile .tile-moment { margin-top: 0.4rem; font-size: 0.82rem; color: var(--faint); }
 @media (min-width: 640px) {
   .tiles:not(.pair) { grid-template-columns: repeat(6, 1fr); }
   .tiles:not(.pair) > li { grid-column: span 2; }
