@@ -203,6 +203,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 @media (prefers-color-scheme: dark) { .download { color: #0f1a24; } .download:hover { background: color-mix(in srgb, var(--accent) 85%, #fff); } }
 .app .links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1rem; }
 .app .app-note { margin-top: 0.45rem; font-size: 0.8rem; color: var(--faint); }
+.apps-note { margin: 0.9rem 0 0; font-size: 0.8rem; color: var(--faint); }
 .buy { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; background: var(--accent-soft); transition: background-color 0.2s; }
 .buy:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
 .buy { white-space: nowrap; }

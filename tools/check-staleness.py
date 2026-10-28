@@ -6,7 +6,7 @@ once its last day has passed.
 
 Run from the repo root: python3 tools/check-staleness.py
 The weekly Links workflow runs it too, so GitHub emails a reminder when the
-"Kept current · updated <month>" line on the profile stops being true.
+"Updated <month>" line under the profile's Skills stops being true.
 """
 import datetime, pathlib, re, sys
 

@@ -496,8 +496,8 @@ class ProjectsTest(unittest.TestCase):
 
     def test_apps_have_real_downloads(self):
         # Apps you can use comes right after Featured. The apps are free: each one either says
-        # "Coming soon · free" or links its latest GitHub release and its public code, with the
-        # first-open note (they aren't notarized yet). Every app says its macOS.
+        # "Coming soon · free" or links its latest GitHub release and its public code, and one
+        # first-open note under the list covers them all (they aren't notarized yet). Every app says its macOS.
         html = INDEX.read_text(encoding="utf-8")
         self.assertLess(html.index('<section id="featured"'), html.index('<section id="apps"'))
         self.assertLess(html.index('<section id="apps"'), html.index('<section id="research"'))
@@ -511,7 +511,7 @@ class ProjectsTest(unittest.TestCase):
                 dl = re.search(r'<a class="download" href="https://github\.com/amalmehta/([A-Za-z0-9_.-]+)/releases/latest/download/[^"]+\.zip">Download for Mac · free</a>', app)
                 if dl:
                     self.assertIn(f'<a href="https://github.com/amalmehta/{dl.group(1)}">Code →</a>', app)
-                    self.assertIn('<p class="app-note">macOS will warn you because it isn’t notarized yet. To open it, right-click and choose Open', app)
+                    self.assertIn('<p class="app-note apps-note">macOS will warn you because these apps aren’t notarized yet.', sec)
                 else:
                     self.assertIn('<span class="soon">Coming soon · free</span>', app)
                 self.assertRegex(app, r'<p class="app-meta">Mac · macOS \d+ or later')
