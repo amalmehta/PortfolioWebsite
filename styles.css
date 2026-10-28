@@ -746,6 +746,7 @@ picture { display: contents; }
 .footer .signoff { margin-top: 1.4rem; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text); }
 /* A quiet privacy note under the sign-off */
 .footer .footer-note { margin-top: 0.5rem; font-size: 0.8rem; color: var(--faint); }
+.footer .footer-note + .footer-note { margin-top: 0.15rem; }
 /* An ensō beside the sign-off: one brushstroke, left open */
 .footer .signoff::after { content: ""; display: inline-block; width: 1.05em; height: 1.05em; margin-left: 0.5em; vertical-align: -0.18em; background: var(--warm); opacity: 0.45; -webkit-mask: url("images/ink/enso.svg") no-repeat center / contain; mask: url("images/ink/enso.svg") no-repeat center / contain; }
 .footer .secrets { display: block; margin-top: 0.2rem; font-family: var(--sans); font-style: normal; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
