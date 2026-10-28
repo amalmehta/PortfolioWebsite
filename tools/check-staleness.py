@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fail if a "kept current" date on the site is more than six months old:
-the profile's Skills list, the Live interests page, and the newest entry on
+the profile's Skills list and Now chip, the Live interests page, and the newest entry on
 Things I'm thinking about. Also flags a trip under Travel's "Places I'm going"
 once its last day has passed.
 
@@ -16,6 +16,7 @@ MAX_MONTHS = 6
 DATES = [  # (page, what it is, pattern before the <time datetime="YYYY-MM">)
     ("index.html", "Skills list", r'class="skills-updated">[^<]*'),
     ("interests.html", "Live interests", r'class="page-updated">[^<]*'),
+    ("index.html", "Now chip", r'class="status-dot" aria-hidden="true"></span><span>Now, '),
 ]
 NEWEST = [  # pages dated per entry: the most recent entry is what counts
     ("thinking.html", "Things I'm thinking about"),
