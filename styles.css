@@ -515,6 +515,16 @@ picture { display: contents; }
 #beliefs-current .inspo-item strong { font-size: 1.45rem; line-height: 1.35; margin-bottom: 0.25rem; }
 .beliefs .inspo-item strong, #how-i-lead .inspo-item strong { display: block; }  /* the belief on its own line, the reason under it */
 /* Ways I want to lead my life: short upright cards, two to a row, so the list reads at a glance */
+/* How I work: Before, During and After side by side, the motto centred under them */
+.work-stages { display: grid; gap: 0.9rem; }
+@media (min-width: 720px) { .work-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.work-stage { padding: 1.1rem 1.2rem 1.2rem; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid color-mix(in srgb, var(--warm) 55%, var(--surface)); border-radius: 12px; }
+.work-stage h3 { margin: 0 0 0.7rem; font-family: var(--sans); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm); }
+.work-stage ol { list-style: none; margin: 0; padding: 0; }
+.work-stage li { padding: 0.55rem 0; border-top: 1px solid var(--line); font-weight: 500; line-height: 1.4; color: var(--text); }
+.work-stage li:first-child { border-top: 0; padding-top: 0; }
+.work-motto { margin: 1.6rem 0 0; text-align: center; font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--text); }
+.work-motto .sep { margin: 0 0.7rem; color: var(--warm); font-style: normal; }
 #how-i-want-to-live .inspo { display: grid; gap: 0.75rem; }
 @media (min-width: 640px) { #how-i-want-to-live .inspo { grid-template-columns: repeat(2, minmax(0, 1fr)); } #how-i-want-to-live .inspo-item:last-child:nth-child(odd) { grid-column: 1 / -1; } }
 #how-i-want-to-live .inspo-item { display: flex; align-items: center; margin: 0; padding: 0.85rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid color-mix(in srgb, var(--warm) 55%, var(--surface)); border-radius: 12px; }
