@@ -967,6 +967,7 @@ body { hanging-punctuation: first last; }
   #open-to .inspo-item:nth-child(4n+2) .skill-icon, #open-to .inspo-item:nth-child(4n+3) .skill-icon { background: var(--warm-soft); color: var(--warm); }
   #open-to .inspo-item strong { margin: 0; line-height: 1.4; }
   #open-to .more { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--text); }
+  #open-to .more { margin-bottom: 0; } #open-to .more + .more { margin-top: 0.4rem; }
 }
 @media (prefers-reduced-motion: reduce) { #papers .inspo-item, #open-to .inspo-item { transition: none; } #papers .inspo-item:hover, #open-to .inspo-item:hover { transform: none; } }
 
