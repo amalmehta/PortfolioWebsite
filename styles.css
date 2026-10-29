@@ -977,3 +977,11 @@ body { hanging-punctuation: first last; }
 .section.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .section.reveal.in { opacity: 1; transform: none; }
 @media print { .section.reveal { opacity: 1; transform: none; } }
+
+/* Thinking: other topics on my mind, small cards with an icon each, above the questions */
+.other-thoughts { margin: 0 0 3rem; }
+.topics { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 720px) { .topics { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.topic { display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.topic strong { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+.topic:nth-child(even) .skill-icon { background: var(--warm-soft); color: var(--warm); }
