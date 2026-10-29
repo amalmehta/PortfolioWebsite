@@ -22,7 +22,6 @@ PINS = [
     ("expedition", "Climbing Cerro Torre, Argentina", -49.29, -73.10, "place-cerro-torre"),
     ("going", "Lassen Volcanic, California", 40.54, -121.56, "place-lassen"),  # Manzanita Lake
     ("going", "Chamonix, France", 45.92, 6.87, "place-chamonix"),
-    ("want", "Hokkaido, Japan", 42.83, 140.81, "place-hokkaido"),
     ("want", "Lofoten, Norway", 67.93, 13.09, "place-lofoten"),
     ("want", "Patagonia, Chile", -50.94, -73.41, "place-patagonia"),
     ("want", "Bhutan", 27.49, 89.36, "place-bhutan"),
@@ -46,6 +45,8 @@ PINS = [
     ("been", "Death Ride, Sierra Nevada", 38.69, -119.78, None),  # Markleeville, the ride's start
     ("been", "India", 22.5, 79.0, None),
     ("been", "Japan", 36.2, 138.3, "place-japan"),
+    ("been", "Skiing in Niseko, Japan", 42.86, 140.70, "place-niseko"),
+    ("been", "Skiing in Whistler, British Columbia", 50.12, -122.95, "place-whistler"),
     ("been", "Thailand", 15.5, 101.0, None),
     ("been", "Singapore", 1.35, 103.82, None),
     ("been", "Pakistan", 28.3, 65.0, "place-hunza"),
@@ -55,7 +56,7 @@ PINS = [
     ("been", "Scuba diving in Palau", 7.50, 134.60, None),
 ]
 # Countries tinted as visited (names as in the data)
-BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru", "Tanzania", "Malaysia"}
+BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru", "Tanzania", "Malaysia", "Canada"}
 KINDS = {"expedition": "Expeditions", "going": "Going", "want": "Want to go", "been": "Been"}
 # Long trips drawn as lines: class, title, legend key, and the (lat, lon) points it passes through.
 # Two points make a gentle arc, more make a smooth curve through them; neither follows the exact roads.

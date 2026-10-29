@@ -1033,13 +1033,57 @@ def lassen():
     return svg("lassen", "".join(b), ("#3f4f7a", "#f2b893"))
 
 
+# ---------------------------------------------------------------- Whistler: Whistler and Blackcomb, with the Peak 2 Peak gondola between them
+def whistler():
+    rng = random.Random(53)
+    b = []
+    b.append(glow(600, 260, 640, 220, "#ffffff", 0.5))
+    b.append(clouds(rng, 3, 60, 160, opacity=0.6))
+    # The far Coast Mountains, then the two peaks: Whistler on the left, Blackcomb on the right.
+    b.append(poly(ridge(0, W, 500, rng, [(0.5, 0.25, 0.6)], 160, jag=8), "#b4c3d4"))
+    whis = [(-20, 600), (120, 360), (240, 250), (330, 200), (380, 214), (470, 300), (560, 420), (640, 600)]
+    black = [(520, 600), (640, 420), (760, 260), (850, 170), (900, 180), (980, 240), (1100, 340), (1220, 470), (1220, 600)]
+    for pk, shade in ((whis, [(330, 200), (380, 214), (470, 300), (560, 420), (640, 600), (420, 600)]),
+                      (black, [(850, 170), (900, 180), (980, 240), (1100, 340), (1220, 470), (1220, 600), (900, 600)])):
+        b.append(poly(pk, "#f3f6f9"))
+        b.append(poly(shade, "#24364d", opacity="0.10"))
+    b.append(poly([(840, 178), (850, 170), (900, 180), (870, 230), (846, 210)], "#6b737d"))  # Blackcomb's rocky summit
+    b.append(poly([(320, 206), (330, 200), (380, 214), (360, 250), (334, 236)], "#6b737d"))  # Whistler's
+    # Ski runs: groomed lines down through the trees.
+    for x0, y0, x1, y1 in ((300, 260, 200, 560), (360, 270, 420, 560), (820, 240, 720, 560), (900, 230, 960, 560), (880, 260, 860, 560)):
+        b.append(f'<path d="M{x0},{y0} Q{(x0 + x1) / 2 + rng.uniform(-30, 30):.0f},{(y0 + y1) / 2:.0f} {x1},{y1}" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round" opacity="0.9"/>')
+    # Forest on the lower slopes, leaving the runs open.
+    for i in range(140):
+        x = rng.uniform(0, W)
+        y = rng.uniform(430, 600)
+        if any(abs(x - (x0 + (x1 - x0) * (y - y0) / (y1 - y0))) < 18 for x0, y0, x1, y1 in ((300, 260, 200, 560), (360, 270, 420, 560), (820, 240, 720, 560), (900, 230, 960, 560), (880, 260, 860, 560)) if y0 < y < y1):
+            continue
+        h = rng.uniform(26, 50)
+        b.append(poly([(x - h * 0.25, y), (x, y - h), (x + h * 0.25, y)], rng.choice(("#2f4a3c", "#294235", "#365443"))))
+    # The Peak 2 Peak gondola, spanning the valley, one red cabin on it.
+    b.append('<path d="M410,290 Q610,360 790,280" fill="none" stroke="#3b3a37" stroke-width="1.8" opacity="0.75"/>')
+    b.append('<rect x="586" y="330" width="22" height="16" rx="3" fill="#c8402f"/><path d="M597,322 L597,330" stroke="#3b3a37" stroke-width="2"/>')
+    b.append('<rect x="400" y="278" width="20" height="14" fill="#3b3a37"/><rect x="782" y="268" width="20" height="14" fill="#3b3a37"/>')
+    # The village at the bottom: snow and lit chalets.
+    b.append('<path d="M0,620 C300,590 900,600 1200,620 L1200,800 L0,800 Z" fill="#fbfcfd"/>')
+    for cx, cy, w in ((420, 676, 70), (510, 664, 58), (640, 680, 80), (760, 666, 60), (860, 682, 72)):
+        h = w * 0.6
+        b.append(f'<rect x="{cx - w / 2:.0f}" y="{cy - h:.0f}" width="{w}" height="{h:.0f}" fill="#7a5038"/>')
+        b.append(f'<rect x="{cx - w * 0.2:.0f}" y="{cy - h * 0.6:.0f}" width="{w * 0.14:.0f}" height="{h * 0.28:.0f}" fill="#f1c76b"/>')
+        b.append(f'<rect x="{cx + w * 0.08:.0f}" y="{cy - h * 0.6:.0f}" width="{w * 0.14:.0f}" height="{h * 0.28:.0f}" fill="#f1c76b"/>')
+        b.append(poly([(cx - w * 0.66, cy - h + 2), (cx, cy - h - w * 0.4), (cx + w * 0.66, cy - h + 2)], "#f7f9fb"))
+    firs(b, rng, 30, -20, 330, 740, lambda x: 0, 70, 130, ("#1f3328", "#233a2d"))
+    firs(b, rng, 30, 930, W + 20, 740, lambda x: 0, 70, 130, ("#1f3328", "#233a2d"))
+    return svg("whistler", "".join(b), ("#7fb0dc", "#e9f2fa"))
+
+
 PLACES = (("cerro-torre", cerro_torre),("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
           ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
           ("mexico-city", mexico_city), ("azores", azores), ("tonga", tonga),
           ("machu-picchu", machu_picchu), ("seattle-to-dc", seattle_to_dc), ("hunza", hunza),
           ("yosemite", yosemite), ("japan", japan), ("florence", florence),
-          ("kilimanjaro", kilimanjaro), ("lassen", lassen))
+          ("kilimanjaro", kilimanjaro), ("lassen", lassen), ("whistler", whistler))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:
