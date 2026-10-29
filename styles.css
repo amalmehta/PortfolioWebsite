@@ -94,7 +94,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 640px) { .hero { padding: 7rem 32px 3.3rem; } }
 .hero h1 {
   position: relative; width: fit-content;
-  font-family: var(--serif); font-weight: 500;
+  font-family: var(--serif); font-weight: 600;
   font-size: clamp(2.6rem, 7vw, 4.2rem); line-height: 1.05; letter-spacing: -0.02em;
   margin: 0 0 1.25rem;
 }
@@ -109,7 +109,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .hello { margin: 0 0 0.6rem; font-weight: 500; }
 .hello a { white-space: nowrap; }
 .contact { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.95rem; }
-.copy-email { margin-left: 0.45rem; padding: 0.1rem 0.55rem; font: 600 0.72rem/1.4 var(--sans); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; vertical-align: 0.1em; }
+.copy-email { margin-left: 0.45rem; padding: 0.1rem 0.55rem; font: 600 0.72rem/1.4 var(--sans); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; cursor: pointer; vertical-align: 0.1em; }
 /* On touch screens the button keeps its size but gets a fingertip-sized tap area (about 45 px tall). */
 @media (pointer: coarse) { .copy-email { position: relative; } .copy-email::after { content: ""; position: absolute; inset: -12px -8px; } }
 .copy-email:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
@@ -123,7 +123,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   margin: 0 0 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
 }
 /* A short warm underline on the rule, still */
-.section-title::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 3.5rem; height: 4px; background: var(--warm); -webkit-mask: url("images/ink/brush.svg") no-repeat 0 0 / 100% 100%; mask: url("images/ink/brush.svg") no-repeat 0 0 / 100% 100%; }
+.section-title::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 3.5rem; height: 3px; background: var(--warm); }
 /* Outside work: an elevation profile of five passes instead of the plain rule, drawn in on load */
 #outside .section-title { border-bottom: 0; padding-bottom: 0.2rem; margin-bottom: 0.3rem; }
 #outside .section-title::after { display: none; }
@@ -147,7 +147,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .north-star { padding-top: 2.5rem; padding-bottom: 0; }
 .ns-lines { display: grid; gap: 1rem; }
 @media (min-width: 820px) { .ns-lines { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
-.ns-line { padding: 1.2rem 1.4rem 1.3rem; border: 1px solid var(--line); border-left: 3px solid var(--warm); border-radius: 14px; background: var(--surface); }
+.ns-line { padding: 1.2rem 1.4rem 1.3rem; border: 1px solid var(--line); border-left: 3px solid var(--warm); border-radius: 6px; background: var(--surface); }
 .ns-line + .ns-line { border-left-color: var(--accent); }
 .ns-kind { margin: 0 0 0.35rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .ns-text { margin: 0; font-family: var(--serif); font-size: clamp(1.15rem, 2vw, 1.35rem); line-height: 1.4; color: var(--text); }
@@ -170,7 +170,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .shot-link { display: contents; }
 /* "Try it live" on cards whose demo runs in the browser */
 .shot.has-badge { position: relative; }
-.try-badge { display: inline-flex; align-items: center; gap: 0.35rem; font: 600 0.74rem/1 var(--sans); letter-spacing: 0.02em; padding: 0.42rem 0.7rem; border-radius: 999px; color: #fff; background: color-mix(in srgb, var(--warm) 92%, #000); text-decoration: none; box-shadow: 0 4px 12px -4px rgb(0 0 0 / 0.35); }
+.try-badge { display: inline-flex; align-items: center; gap: 0.35rem; font: 600 0.74rem/1 var(--sans); letter-spacing: 0.02em; padding: 0.42rem 0.7rem; border-radius: 4px; color: #fff; background: color-mix(in srgb, var(--warm) 92%, #000); text-decoration: none; box-shadow: 0 4px 12px -4px rgb(0 0 0 / 0.35); }
 .try-badge::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: #9be3a8; box-shadow: 0 0 0 3px rgb(155 227 168 / 0.3); }
 .shot .try-badge { position: absolute; top: 0.7rem; right: 0.7rem; }  /* the card's own links carry it for keyboards and screen readers */
 .try-badge:hover { text-decoration: none; background: var(--warm); }
@@ -189,22 +189,22 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .apps-intro, .joys-intro { color: var(--muted); margin: 0 0 1.25rem; }
 .apps { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
 @media (min-width: 720px) { .apps { grid-template-columns: 1fr 1fr; } }
-.app { display: grid; grid-template-columns: 64px 1fr; gap: 1rem; align-items: start; align-content: start; padding: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.app { display: grid; grid-template-columns: 64px 1fr; gap: 1rem; align-items: start; align-content: start; padding: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
 .app-icon { width: 64px; height: 64px; }
 .app .app-shot { grid-column: 1 / -1; margin: 0 0 0.2rem; }  /* a screenshot across the top of the card */
 .app h3 { font-size: 1.15rem; margin: 0.1rem 0 0.25rem; }
 .app p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
 .app .app-meta { margin-top: 0.35rem; font-size: 0.82rem; color: var(--faint); }
 .app .links { margin-top: 0.75rem; }
-.soon { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.85rem; color: var(--warm); background: var(--warm-soft); }
-.download { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.42rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; color: #fff; background: var(--accent); transition: background-color 0.2s; }
+.soon { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 4px; font-weight: 600; font-size: 0.85rem; color: var(--warm); background: var(--warm-soft); }
+.download { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.42rem 0.95rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; color: #fff; background: var(--accent); transition: background-color 0.2s; }
 .download::before { content: "↓"; font-weight: 700; }
 .download:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 85%, #000); }
 @media (prefers-color-scheme: dark) { .download { color: #0f1a24; } .download:hover { background: color-mix(in srgb, var(--accent) 85%, #fff); } }
 .app .links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1rem; }
 .app .app-note { margin-top: 0.45rem; font-size: 0.8rem; color: var(--faint); }
 .apps-note { margin: 0.9rem 0 0; font-size: 0.8rem; color: var(--faint); }
-.buy { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; background: var(--accent-soft); transition: background-color 0.2s; }
+.buy { display: inline-block; padding: 0.4rem 0.95rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; background: var(--accent-soft); transition: background-color 0.2s; }
 .buy:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 16%, var(--accent-soft)); }
 .buy { white-space: nowrap; }
 @media (max-width: 480px) { .app { grid-template-columns: 48px 1fr; gap: 0.8rem; padding: 1rem 0.9rem; } .app-icon { width: 48px; height: 48px; } }
@@ -218,7 +218,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .fun[open] > summary::before { transform: rotate(45deg); }
 .fun > summary:hover { color: var(--text); }
 .fun-count { font-weight: 500; letter-spacing: 0.02em; text-transform: none; color: var(--faint); }
-.shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+.shot { margin: 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 10; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 /* The card's <picture> (AVIF with a WebP fallback) lays out as if it were just the image. */
 .shot picture { display: contents; }
 .shot img, .shot video { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
@@ -273,7 +273,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .pong.messi canvas { cursor: default; aspect-ratio: 672 / 576; width: auto; max-width: 100%; max-height: 70vh; margin-inline: auto; }  /* its own shape, not Pong's 16:10, and short enough to fit */
 .messi-foot { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
 .messi-foot .pong-help { margin: 0; }
-.messi-again { flex-shrink: 0; font: 600 0.85rem var(--sans); color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; }
+.messi-again { flex-shrink: 0; font: 600 0.85rem var(--sans); color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 4px; padding: 0.4rem 0.9rem; cursor: pointer; }
 /* Hidden tree: the first-principles line on What I try to live by opens it (tree.js); it looks like plain text */
 .tree-egg, .maze-egg, .world-egg, .swarm-egg { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
 .tree-egg:hover, .maze-egg:hover, .world-egg:hover, .swarm-egg:hover { color: var(--accent); }
@@ -300,8 +300,8 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 .hero::before {
   content: ""; position: absolute; inset: 0 -20vw; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(40rem 22rem at 85% 35%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
-    radial-gradient(40rem 24rem at 14% 22%, color-mix(in srgb, var(--warm) 14%, transparent), transparent 70%);
+    radial-gradient(40rem 22rem at 85% 35%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 70%),
+    radial-gradient(40rem 24rem at 14% 22%, color-mix(in srgb, var(--warm) 7%, transparent), transparent 70%);
 }
 /* A soft paper grain over the intro's wash, fading out at the bottom so it never meets a hard edge */
 .hero::after {
@@ -312,7 +312,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 main { overflow-x: clip; }
 .section-title::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--warm); }
 .tags.pubs { display: block; }
-.chip { font-size: 0.78rem; line-height: 1.5; padding: 0.1rem 0.55rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.chip { font-size: 0.78rem; line-height: 1.5; padding: 0.1rem 0.55rem; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
 .project .chip { background: var(--warm-soft); color: var(--warm); }
 .credit { font-size: 0.75rem; color: var(--faint); }
 .project:hover .shot { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
@@ -345,7 +345,7 @@ picture { display: contents; }
 /* Musings: short notes in three groups, side by side on wide screens */
 .musings { display: grid; gap: 1.25rem; }
 @media (min-width: 820px) { .musings { grid-template-columns: repeat(3, 1fr); } }
-.musing-group { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem 1.25rem 0.4rem; }
+.musing-group { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1.25rem 1.25rem 0.4rem; }
 .musing-group h3 { font-size: 1.3rem; margin: 0 0 0.15rem; }
 .musing-blurb { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--muted); }
 .musing { border-top: 1px solid var(--line); padding: 0.9rem 0; }
@@ -406,7 +406,7 @@ picture { display: contents; }
 .inspo-card .photo img { transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transition: transform 0.25s ease-out, box-shadow 0.25s; will-change: transform; }
 .inspo-card .photo:hover img { box-shadow: 0 18px 36px -20px rgb(0 0 0 / 0.45); }
 @media (prefers-reduced-motion: reduce) { .inspo-card .photo img { transform: none; transition: none; } }
-.photo img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); }
+.photo img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
 .photo figcaption { margin-top: 0.55rem; font-size: 0.92rem; color: var(--muted); line-height: 1.45; }
 .photo figcaption strong { display: block; color: var(--text); font-weight: 600; }
 .photos-empty { grid-column: 1 / -1; margin: 0; padding: 1rem 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--muted); font-style: italic; }
@@ -429,7 +429,7 @@ picture { display: contents; }
 @media (min-width: 720px) { #research .section-intro { margin-left: 11rem; max-width: calc(860px - 11rem); } #writeups .thanks { margin-left: 11rem; max-width: calc(860px - 11rem); } }  /* starts where the role titles do: years column plus gap */
 /* Travel map (built by tools/make-map.py): countries I've been to tinted, a pin per place, coloured by kind */
 .travel-map { margin: 0 0 3rem; }
-.travel-map svg { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
+.travel-map svg { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
 .map-ocean { fill: color-mix(in srgb, var(--accent) 10%, var(--surface)); stroke: color-mix(in srgb, var(--accent) 30%, var(--surface)); stroke-width: 1.5; }
 .map-grid { fill: none; stroke: color-mix(in srgb, var(--accent) 16%, var(--surface)); stroke-width: 0.8; }
 .map-land { fill: color-mix(in srgb, var(--text) 13%, var(--surface)); stroke: var(--surface); stroke-width: 0.7; }
@@ -490,24 +490,24 @@ picture { display: contents; }
 .inspo:has(.inspo-card) { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .inspo-link { display: block; margin-top: 0.3rem; font-weight: 500; }
 .media, .watching, .tools { margin-top: 3rem; }
-.media-kind { display: inline-block; margin-right: 0.4rem; padding: 0 0.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 999px; background: var(--warm-soft); color: var(--warm); vertical-align: 0.1em; }
+.media-kind { display: inline-block; margin-right: 0.4rem; padding: 0 0.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 4px; background: var(--warm-soft); color: var(--warm); vertical-align: 0.1em; }
 /* Beliefs: tabs (beliefs.js), What I believe currently, My predictions and Outdated */
 .beliefs { margin-top: 3rem; }
-.belief-tabs { display: inline-flex; gap: 0.25rem; padding: 0.25rem; margin: 0 0 1.25rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
-.belief-tabs [role="tab"] { font: 600 0.88rem/1.2 var(--sans); padding: 0.5rem 0.95rem; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; }
+.belief-tabs { display: inline-flex; gap: 0.25rem; padding: 0.25rem; margin: 0 0 1.25rem; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+.belief-tabs [role="tab"] { font: 600 0.88rem/1.2 var(--sans); padding: 0.5rem 0.95rem; border: 0; border-radius: 4px; background: none; color: var(--muted); cursor: pointer; }
 .belief-tabs [role="tab"]:hover { color: var(--text); }
 .belief-tabs [role="tab"][aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
 .belief-tabs[hidden] { display: none; }
 /* Small phones: the three tabs share the full width, sized to their labels; on the narrowest
    screens a long label wraps onto two lines rather than running off the edge. */
 @media (max-width: 420px) {
-  .belief-tabs { display: flex; width: 100%; border-radius: 1.4rem; }
-  .belief-tabs [role="tab"] { flex: 1 1 auto; min-width: 0; padding: 0.5rem 0.35rem; font-size: 0.76rem; line-height: 1.15; border-radius: 1.2rem; }
+  .belief-tabs { display: flex; width: 100%; border-radius: 6px; }
+  .belief-tabs [role="tab"] { flex: 1 1 auto; min-width: 0; padding: 0.5rem 0.35rem; font-size: 0.76rem; line-height: 1.15; border-radius: 4px; }
 }
 .belief-heading { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 0 0 0.6rem; }
 /* Beliefs read as quotes: italic serif with a thin bar on the left, no dividers */
 .beliefs .inspo-item, #how-i-lead .inspo-item { border-bottom: 0; padding: 0.15rem 0 0.15rem 1rem; margin: 0 0 1rem; border-left: 2px solid color-mix(in srgb, var(--warm) 45%, var(--surface)); }
-.beliefs .inspo-item strong, #how-i-lead .inspo-item strong { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.15rem; line-height: 1.45; color: var(--text); margin: 0; }
+.beliefs .inspo-item strong, #how-i-lead .inspo-item strong { font-family: var(--serif); font-style: normal; font-weight: 500; font-size: 1.15rem; line-height: 1.45; color: var(--text); margin: 0; }
 .belief-panel + .belief-panel { margin-top: 2rem; }
 /* Current beliefs as pull quotes: larger, with a hanging quote mark instead of the rule */
 #beliefs-current .inspo-item { position: relative; border-left: 0; padding: 0.2rem 0 0.2rem 2.2rem; margin-bottom: 1.6rem; }
@@ -518,7 +518,7 @@ picture { display: contents; }
 /* How I work: Before, During and After side by side, the motto centred under them */
 .work-stages { display: grid; gap: 0.9rem; }
 @media (min-width: 720px) { .work-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.work-stage { padding: 1.1rem 1.2rem 1.2rem; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid color-mix(in srgb, var(--warm) 55%, var(--surface)); border-radius: 12px; }
+.work-stage { padding: 1.1rem 1.2rem 1.2rem; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid color-mix(in srgb, var(--warm) 55%, var(--surface)); border-radius: 6px; }
 .work-stage h3 { margin: 0 0 0.7rem; font-family: var(--sans); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm); }
 .work-stage ol { list-style: none; margin: 0; padding: 0; }
 .work-stage li { padding: 0.55rem 0; border-top: 1px solid var(--line); font-weight: 500; line-height: 1.4; color: var(--text); }
@@ -527,7 +527,7 @@ picture { display: contents; }
 .work-motto .sep { margin: 0 0.7rem; color: var(--warm); font-style: normal; }
 #how-i-want-to-live .inspo { display: grid; gap: 0.75rem; }
 @media (min-width: 640px) { #how-i-want-to-live .inspo { grid-template-columns: repeat(2, minmax(0, 1fr)); } #how-i-want-to-live .inspo-item:last-child:nth-child(odd) { grid-column: 1 / -1; } }
-#how-i-want-to-live .inspo-item { display: flex; align-items: center; margin: 0; padding: 0.85rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid color-mix(in srgb, var(--warm) 55%, var(--surface)); border-radius: 12px; }
+#how-i-want-to-live .inspo-item { display: flex; align-items: center; margin: 0; padding: 0.85rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid color-mix(in srgb, var(--warm) 55%, var(--surface)); border-radius: 6px; }
 #how-i-want-to-live .inspo-item strong { flex: 1; font-family: var(--serif); font-weight: 500; font-size: 1.06rem; line-height: 1.4; color: var(--text); }
 .beliefs.tabbed .belief-heading, .beliefs.single .belief-heading { display: none; }
 .beliefs.tabbed .belief-panel + .belief-panel { margin-top: 0; }
@@ -546,7 +546,7 @@ picture { display: contents; }
 .book-group:first-of-type { margin-top: 0; }
 .book-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 .book-grid > .book:last-child:nth-child(odd) { grid-column: 1 / -1; }  /* a lone last book takes the whole row */
-.book { display: grid; grid-template-columns: 84px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+.book { display: grid; grid-template-columns: 84px 1fr; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 .book:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
 .book-cover { aspect-ratio: 2 / 3; border-radius: 4px 7px 7px 4px; padding: 0.5rem 0.35rem 0.5rem 0.55rem; display: flex; align-items: flex-end;
   background: linear-gradient(160deg, hsl(var(--hue, 210) 45% 46%), hsl(calc(var(--hue, 210) + 25) 50% 30%));
@@ -579,7 +579,7 @@ picture { display: contents; }
 /* Three across on desktop, two on tablets, one on phones; a pair sits two across */
 .tiles.pair { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 /* A drawing in place of the icon, for People I’m watching */
-.tile-drawing { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 0.8rem; }
+.tile-drawing { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); margin-bottom: 0.8rem; }
 .tile .tile-moment { margin-top: 0.4rem; font-size: 0.82rem; color: var(--faint); }
 @media (min-width: 640px) {
   .tiles:not(.pair) { grid-template-columns: repeat(6, 1fr); }
@@ -595,9 +595,9 @@ picture { display: contents; }
 .tile:hover .antenna, .tile.is-live .antenna { animation: tile-swing 1s ease-in-out infinite; }
 .tile:hover .eyes, .tile.is-live .eyes { animation: tile-blink 2.2s ease-in-out infinite; }
 @keyframes tile-blink { 0%, 44%, 52%, 100% { transform: scaleY(1); } 48% { transform: scaleY(0.1); } }
-.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.1rem 1.1rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
 .tile:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
-.tile-icon { display: block; width: 36px; height: 36px; padding: 7px; margin-bottom: 0.75rem; border-radius: 12px; background: var(--accent-soft); color: var(--accent);
+.tile-icon { display: block; width: 36px; height: 36px; padding: 7px; margin-bottom: 0.75rem; border-radius: 6px; background: var(--accent-soft); color: var(--accent);
   fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .tile:nth-child(even) .tile-icon { background: var(--warm-soft); color: var(--warm); }
 /* Icons: a soft fill under the line drawing, and a small motion of their own on hover */
@@ -652,7 +652,7 @@ picture { display: contents; }
 /* A tile with somewhere to go: its title is the link, and the whole tile is clickable */
 .tile { position: relative; }
 .tile-link { color: inherit; }
-.tile-link::after { content: ""; position: absolute; inset: 0; border-radius: 16px; }
+.tile-link::after { content: ""; position: absolute; inset: 0; border-radius: 6px; }
 .tile-link:hover { text-decoration: none; }
 .tile:has(.tile-link) h3::after { content: " →"; color: var(--accent); transition: margin 0.2s; }
 .tile:has(.tile-link):hover h3::after { margin-left: 0.2rem; }
@@ -681,7 +681,7 @@ picture { display: contents; }
   100% { left: 35%; top: 45.5%; opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .skier { animation: none; } }
-.pong { width: min(680px, calc(100vw - 32px)); padding: 1rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--text); }
+.pong { width: min(680px, calc(100vw - 32px)); padding: 1rem; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--text); }
 .pong::backdrop { background: rgb(0 0 0 / 0.55); }
 .pong-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
 .pong-score { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -757,7 +757,7 @@ picture { display: contents; }
 .minis-note, .thanks { max-width: 68ch; margin: 1.4rem 0 0; color: var(--muted); }
 .thanks { font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
 .minis-note a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.footer .signoff { margin-top: 1.4rem; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text); }
+.footer .signoff { margin-top: 1.4rem; font-family: var(--serif); font-style: normal; font-size: 1.15rem; color: var(--text); }
 /* A quiet privacy note under the sign-off */
 .footer .footer-note { margin-top: 0.5rem; font-size: 0.8rem; color: var(--faint); }
 .footer .footer-note + .footer-note { margin-top: 0.15rem; }
@@ -811,8 +811,7 @@ picture { display: contents; }
 #outside { --icon: url("images/icons/outside.svg"); }
 #musings { --icon: url("images/icons/musings.svg"); }
 
-/* The name in the hero: ink that deepens towards terracotta, and a brush stroke drawn in under it */
-.hero h1 { background: linear-gradient(100deg, var(--text) 35%, color-mix(in srgb, var(--text) 72%, var(--warm))); -webkit-background-clip: text; background-clip: text; color: transparent; }
+/* The name in the hero: solid ink, and a brush stroke drawn in under it */
 .hero h1::after { content: ""; position: absolute; left: 0.02em; right: -0.1em; bottom: -0.12em; height: 0.16em; background: color-mix(in srgb, var(--warm) 75%, transparent);
   -webkit-mask: url("images/brush.svg") center / 100% 100% no-repeat; mask: url("images/brush.svg") center / 100% 100% no-repeat;
   clip-path: inset(0 100% 0 0); animation: brush 1.1s cubic-bezier(0.3, 0.6, 0.2, 1) 0.35s forwards; }
@@ -834,7 +833,7 @@ body { hanging-punctuation: first last; }
   background: radial-gradient(34rem 16rem at 12% 30%, color-mix(in srgb, var(--warm) 12%, transparent), transparent 70%), radial-gradient(34rem 18rem at 88% 10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%); }
 
 /* Now chip above the name */
-.status-chip { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0 0 1.1rem; padding: 0.32rem 0.8rem 0.32rem 0.65rem; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--surface) 80%, transparent); font-size: 0.82rem; font-weight: 500; color: var(--muted); text-decoration: none; backdrop-filter: blur(4px); }
+.status-chip { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0 0 1.1rem; padding: 0.32rem 0.8rem 0.32rem 0.65rem; border: 1px solid var(--line); border-radius: 4px; background: color-mix(in srgb, var(--surface) 80%, transparent); font-size: 0.82rem; font-weight: 500; color: var(--muted); text-decoration: none; backdrop-filter: blur(4px); }
 .status-chip:hover { text-decoration: none; color: var(--text); border-color: color-mix(in srgb, var(--warm) 40%, var(--line)); }
 .status-dot { position: relative; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #3fa364; }
 /* The Now chip with the Open to chip under it */
@@ -852,11 +851,11 @@ body { hanging-punctuation: first last; }
 /* Skills as a map: a card per group, each with its own icon */
 @media screen {
   .skills { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); max-width: none; }
-  .skill-row, .skill-row:first-child { display: block; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); max-width: none; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+  .skill-row, .skill-row:first-child { display: block; padding: 1rem 1.1rem 1.1rem; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); max-width: none; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
   .skill-row:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.28); transform: translateY(-2px); }
   .skill-row h3 { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.75rem; font-size: 0.95rem; }
   /* Each group's icon: a hand-drawn sketch (tools/draw-skill-icons.py), inline so it draws in every browser */
-  .skill-icon { flex: none; width: 1.9rem; height: 1.9rem; padding: 0.38rem; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+  .skill-icon { flex: none; width: 1.9rem; height: 1.9rem; padding: 0.38rem; border-radius: 6px; background: var(--accent-soft); color: var(--accent);
     fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s; }
   .skill-icon .again { stroke-width: 0.9; opacity: 0.55; }  /* the second pass of the pen */
   .skill-row:nth-child(even) .skill-icon { background: var(--warm-soft); color: var(--warm); }
@@ -865,7 +864,7 @@ body { hanging-punctuation: first last; }
 }
 
 /* 404: the lost hiker */
-.lost { display: block; width: 100%; max-width: 900px; height: auto; margin: 0 0 1.5rem; border-radius: 16px; }
+.lost { display: block; width: 100%; max-width: 900px; height: auto; margin: 0 0 1.5rem; border-radius: 6px; }
 
 /* Keeps a hidden extra's button and the punctuation after it on one line */
 .nowrap { white-space: nowrap; }
@@ -890,12 +889,12 @@ body { hanging-punctuation: first last; }
   .flow > li:nth-child(3n+1):nth-last-child(2), .flow > li:nth-child(3n+1):nth-last-child(2) ~ li,
   .flow > li:nth-child(3n+1):nth-last-child(4), .flow > li:nth-child(3n+1):nth-last-child(4) ~ li { grid-column: span 3; }
 }
-.flow li { counter-increment: flow; position: relative; padding: 0.8rem 0.9rem 0.85rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); font-size: 0.92rem; line-height: 1.45; }
+.flow li { counter-increment: flow; position: relative; padding: 0.8rem 0.9rem 0.85rem; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); font-size: 0.92rem; line-height: 1.45; }
 .flow li::before { content: counter(flow); display: grid; place-items: center; width: 1.5rem; height: 1.5rem; margin-bottom: 0.45rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.78rem; font-weight: 600; }
 .flow li:nth-child(even)::before { background: var(--warm-soft); color: var(--warm); }
 .flow-note { font-size: 0.92rem; color: var(--muted); }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; margin: 0 0 1.4rem; }
-.stat { padding: 0.9rem 1rem; border-radius: 14px; background: var(--accent-soft); }
+.stat { padding: 0.9rem 1rem; border-radius: 6px; background: var(--accent-soft); }
 .stat:nth-child(even) { background: var(--warm-soft); }
 .stat strong { display: block; font-family: var(--serif); font-size: 1.7rem; font-weight: 600; line-height: 1.1; color: var(--text); font-variant-numeric: lining-nums; }
 .stat span { display: block; margin-top: 0.3rem; font-size: 0.85rem; line-height: 1.4; color: var(--muted); }
@@ -903,7 +902,7 @@ body { hanging-punctuation: first last; }
 .case-notes li { margin-bottom: 0.5rem; color: var(--muted); }
 .case-notes strong { color: var(--text); }
 .case-figure { margin: 1.5rem 0 0; }
-.case-figure img { display: block; width: 100%; height: auto; max-height: 720px; object-fit: contain; border-radius: 14px; border: 1px solid var(--line); background: #fcfcfa; }
+.case-figure img { display: block; width: 100%; height: auto; max-height: 720px; object-fit: contain; border-radius: 6px; border: 1px solid var(--line); background: #fcfcfa; }
 .case-figure figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted); }
 .case-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-weight: 500; }
 .links a.deep { font-weight: 600; }
@@ -919,7 +918,7 @@ body { hanging-punctuation: first last; }
 @media (prefers-reduced-motion: reduce) { .nova-egg { transition: none; } }
 
 /* Hidden dragon: the ring on The Lord of the Rings tile is a button once eggs.js shows it (dragon.js) */
-.dragon-egg { display: block; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 12px; }
+.dragon-egg { display: block; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 6px; }
 .dragon-egg .tile-icon { margin-bottom: 0.75rem; transition: transform 0.3s; }
 .dragon-egg:hover .tile-icon { transform: rotate(-12deg) scale(1.12); }
 .dragon { width: min(800px, calc(100vw - 32px)); }
