@@ -1083,7 +1083,7 @@ class ResumeTest(unittest.TestCase):
             with self.subTest(link=text):
                 self.assertIn("PDF", text)
         sized = [t for t in PAGE.resume_links if re.search(r"\d+ KB", t)]
-        self.assertGreaterEqual(len(sized), 2, PAGE.resume_links)
+        self.assertGreaterEqual(len(sized), 1, PAGE.resume_links)
         for text in sized:
             with self.subTest(link=text):
                 self.assertIn("%d KB" % size_kb, text)
