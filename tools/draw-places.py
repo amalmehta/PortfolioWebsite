@@ -994,13 +994,52 @@ def tonga():
     return svg("tonga", "".join(b), ("#7fc0e6", "#e6f4fa"), grad("tonga-water", "#3aa3d2", "#0a2c52"))
 
 
+# ---------------------------------------------------------------- Lassen: Lassen Peak in alpenglow over Manzanita Lake
+def lassen():
+    rng = random.Random(41)
+    b = []
+    b.append(glow(600, 470, 700, 260, "#ffd2a8", 0.6))
+    for _ in range(3):  # long thin sunset clouds
+        y, x = rng.uniform(90, 200), rng.uniform(80, 900)
+        b.append(f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{rng.uniform(160, 260):.0f}" ry="{rng.uniform(6, 10):.0f}" fill="#f4a98f" opacity="0.55"/>')
+    # Far ridges, then Lassen Peak: a broad, lumpy lava dome with snow in its gullies, lit pink.
+    b.append(poly(ridge(0, W, 470, rng, [(0.1, 0.15, 0.4), (0.9, 0.18, 0.5)], 110, jag=4), "#a58fa0"))
+    peak = [(260, 470), (380, 360), (470, 280), (540, 214), (590, 196), (640, 186), (690, 198), (740, 230), (820, 300), (900, 360), (1000, 420), (1080, 470)]
+    b.append(poly(peak, "#e9a99c"))
+    b.append(poly([(640, 186), (690, 198), (740, 230), (820, 300), (900, 360), (1000, 420), (1080, 470), (700, 470)], "#5a4660", opacity="0.28"))
+    for x0, y0, dx, dy in ((560, 214, -30, 70), (612, 194, -12, 90), (668, 194, 18, 80), (718, 222, 34, 66), (500, 262, -34, 52)):
+        b.append(f'<path d="M{x0},{y0} q{dx * 0.9:.0f},{dy * 0.35:.0f} {dx},{dy}" fill="none" stroke="#fdf1ec" stroke-width="{rng.uniform(3, 6):.0f}" stroke-linecap="round" opacity="0.6"/>')
+    b.append(poly([(540, 214), (590, 196), (640, 186), (690, 198), (720, 214), (680, 222), (640, 212), (600, 222), (560, 226)], "#fbeee9", opacity="0.85"))  # snow on the summit
+    # Chaos Crags on the left, darker.
+    b.append(poly([(0, 470), (0, 380), (90, 350), (150, 318), (210, 340), (300, 400), (360, 470)], "#7d6676"))
+    # Shore pines, then the still lake with the peak mirrored in it.
+    b.append(f'<rect x="0" y="470" width="{W}" height="330" fill="#6f7f9e"/>')
+    mirror = [(x, 940 - y) for x, y in peak]
+    b.append(poly(mirror, "#d99a95", opacity="0.55"))
+    b.append(poly([(x, 940 - y) for x, y in [(0, 470), (0, 380), (90, 350), (150, 318), (210, 340), (300, 400), (360, 470)]], "#5e5068", opacity="0.5"))
+    firs(b, rng, 70, -20, W + 20, 478, lambda x: 0, 36, 92, ("#1f3328", "#233a2d", "#2a4234"))
+    b.append(f'<rect x="0" y="474" width="{W}" height="8" fill="#26372e"/>')
+    for i in range(14):  # ripples
+        y = rng.uniform(520, 780)
+        x = rng.uniform(0, W)
+        b.append(f'<path d="M{x:.0f},{y:.0f} h{rng.uniform(60, 180):.0f}" stroke="#f3d6cf" stroke-width="2" opacity="0.35" stroke-linecap="round"/>')
+    # The first stars coming out, high up.
+    for _ in range(26):
+        x, y, r = rng.uniform(0, W), rng.uniform(10, 120), rng.uniform(0.8, 2)
+        b.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.1f}" fill="#ffffff" opacity="{rng.uniform(0.5, 0.9):.2f}"/>')
+    # Near shore: a dark bank of pines on the right.
+    b.append(f'<path d="M820,800 C900,720 1060,690 1200,700 L1200,800 Z" fill="#17261d"/>')
+    firs(b, rng, 12, 900, W + 20, 712, lambda x: 0, 110, 190, ("#14231a", "#18291f"))
+    return svg("lassen", "".join(b), ("#3f4f7a", "#f2b893"))
+
+
 PLACES = (("cerro-torre", cerro_torre),("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
           ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
           ("mexico-city", mexico_city), ("azores", azores), ("tonga", tonga),
           ("machu-picchu", machu_picchu), ("seattle-to-dc", seattle_to_dc), ("hunza", hunza),
           ("yosemite", yosemite), ("japan", japan), ("florence", florence),
-          ("kilimanjaro", kilimanjaro))
+          ("kilimanjaro", kilimanjaro), ("lassen", lassen))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:

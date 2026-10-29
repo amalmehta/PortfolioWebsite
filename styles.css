@@ -985,3 +985,20 @@ body { hanging-punctuation: first last; }
 .topic { display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
 .topic strong { font-weight: 600; font-size: 0.95rem; color: var(--text); }
 .topic:nth-child(even) .skill-icon { background: var(--warm-soft); color: var(--warm); }
+
+/* Travel: a trip's stops as a timeline. timeline.js draws the line down and lights each stop in turn. */
+.trip-timeline { --dot: 0.7rem; position: relative; list-style: none; margin: 1rem 0 0; padding: 0 0 0 1.6rem; font-size: 0.9rem; line-height: 1.45; color: var(--muted); }
+.trip-timeline::before { content: ""; position: absolute; left: calc(var(--dot) / 2 - 1px); top: 0.45rem; bottom: 0.6rem; width: 2px; border-radius: 2px;
+  background: linear-gradient(var(--warm), color-mix(in srgb, var(--accent) 70%, var(--warm))); transform-origin: top; }
+.trip-timeline li { position: relative; padding: 0 0 0.85rem; }
+.trip-timeline li:last-child { padding-bottom: 0; }
+.trip-timeline li::before { content: ""; position: absolute; left: -1.6rem; top: 0.35rem; width: var(--dot); height: var(--dot); border-radius: 50%; background: var(--surface); border: 2px solid var(--warm); box-sizing: border-box; }
+.trip-timeline li:last-child::before { background: var(--accent); border-color: var(--accent); }  /* the stars */
+.trip-timeline strong { display: block; color: var(--text); font-weight: 600; }
+.trip-timeline.animated::before { transform: scaleY(0); }
+.trip-timeline.animated li { opacity: 0; transform: translateX(-6px); }
+.trip-timeline.animated li::before { transform: scale(0); }
+.trip-timeline.play::before { transform: scaleY(1); transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.trip-timeline.play li { opacity: 1; transform: none; transition: opacity 0.5s ease, transform 0.5s ease; transition-delay: calc(var(--i) * 0.32s + 0.1s); }
+.trip-timeline.play li::before { transform: scale(1); transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: calc(var(--i) * 0.32s); }
+@media print { .trip-timeline.animated::before, .trip-timeline.animated li, .trip-timeline.animated li::before { opacity: 1; transform: none; } }
