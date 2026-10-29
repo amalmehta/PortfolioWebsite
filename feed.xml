@@ -7,6 +7,13 @@
     <description>Open questions Amal Mehta keeps coming back to: tools that let anyone build what they want, what brains can teach robots, and physical intelligence.</description>
     <language>en</language>
     <item>
+      <title>How do we make touch a first-class part of how people use computers?</title>
+      <link>https://amalmehta.com/thinking.html#touch-as-an-interface</link>
+      <guid>https://amalmehta.com/thinking.html#touch-as-an-interface</guid>
+      <pubDate>Wed, 28 Oct 2026 12:00:00 +0000</pubDate>
+      <description>Almost everything we do with computers runs through our eyes and a fingertip on glass. Touch is how people learn to handle objects, feel a grip start to slip, and correct themselves without looking, and most interfaces throw it away. The gap shows up wherever people act through a machine: someone steering or teaching a robot can’t feel what it’s touching, and someone using a brain–computer interface moves a cursor or a prosthetic hand with no sense of contact at all. I want to know what feedback people actually need to act through a machine as naturally as through their own hands, and how to give it to them.</description>
+    </item>
+    <item>
       <title>How do we train many agents to work together over long horizons?</title>
       <link>https://amalmehta.com/thinking.html#long-horizon-multi-agent-rl</link>
       <guid>https://amalmehta.com/thinking.html#long-horizon-multi-agent-rl</guid>
