@@ -692,11 +692,54 @@ def spreadsheet():
     body.append('<path d="M736 598h376" stroke="#6d756a" stroke-width="4"/>')
     return wrap("", body)
 
+def ramanujan():
+    """Srinivasa Ramanujan's slate: he worked in chalk, copying only results into his notebooks.
+    A slate on a wooden table, covered in his formulas, with chalk and an open notebook beside it. A scene, no portrait."""
+    defs = ('<linearGradient id="rtable" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0" stop-color="#8a5e3a"/><stop offset="1" stop-color="#5f3e26"/></linearGradient>'
+            '<linearGradient id="rslate" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0" stop-color="#2f3638"/><stop offset="1" stop-color="#22282a"/></linearGradient>')
+    body = ['<rect width="1200" height="800" fill="url(#rtable)"/>']
+    for y in (130, 310, 505, 690):  # the table's grain
+        body.append(f'<path d="M0 {y} C300 {y - 18} 800 {y + 20} 1200 {y - 6}" fill="none" stroke="#4e3320" stroke-width="3" opacity="0.5"/>')
+    # The slate in its wooden frame
+    body.append('<rect x="88" y="78" width="780" height="644" rx="10" fill="#2a1a10" opacity="0.35"/>')
+    body.append('<rect x="70" y="60" width="780" height="644" rx="10" fill="#b98a58"/>')
+    body.append('<rect x="96" y="86" width="728" height="592" rx="4" fill="url(#rslate)"/>')
+    # Chalk smudges left by rubbing out with an elbow, as he did
+    for x, y, rx, ry in ((300, 250, 170, 44), (620, 430, 150, 54), (260, 590, 130, 34)):
+        body.append(f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{ry}" fill="#8d9698" opacity="0.1"/>')
+    # His results, in chalk
+    chalk = 'font-family="Georgia, \'Times New Roman\', serif" font-style="italic" fill="#eceae0"'
+    lines = ((132, 178, 46, "1729 = 1³ + 12³ = 9³ + 10³"), (132, 270, 46, "p(5n + 4) ≡ 0  (mod 5)"),
+             (132, 362, 46, "1 + 2 + 3 + 4 + ⋯ = −1/12"))
+    for x, y, size, text in lines:
+        body.append(f'<text x="{x}" y="{y}" font-size="{size}" {chalk}>{text}</text>')
+    # The series for 1/π, set out with its long fraction bar
+    body.append(f'<text x="132" y="520" font-size="40" {chalk}>1/π = (2√2/9801) Σ</text>')
+    body.append('<path d="M500 507 H796" stroke="#eceae0" stroke-width="3.5" stroke-linecap="round"/>')
+    body.append(f'<text x="506" y="486" font-size="30" {chalk}>(4k)! (1103 + 26390k)</text>')
+    body.append(f'<text x="570" y="548" font-size="30" {chalk}>(k!)⁴ 396⁴ᵏ</text>')
+    # A half-finished line, still being worked out
+    body.append(f'<text x="132" y="638" font-size="40" {chalk} opacity="0.75">q = e^(−π√n) …</text>')
+    # Stubs of chalk on the frame's edge and the table
+    body.append('<rect x="640" y="618" width="86" height="20" rx="9" fill="#f4f1e6" transform="rotate(-14 683 628)"/>')
+    body.append('<rect x="905" y="628" width="62" height="18" rx="8" fill="#f4f1e6" transform="rotate(24 936 637)"/>')
+    # The open notebook, its pages holding the results that survived
+    body.append('<path d="M900 150 L1040 132 L1040 560 L900 578 Z" fill="#f2e8d0"/>')
+    body.append('<path d="M1040 132 L1160 160 L1160 586 L1040 560 Z" fill="#e6dbc0"/>')
+    body.append('<path d="M1040 132 V560" stroke="#a8966f" stroke-width="3"/>')
+    for i in range(10):
+        y = 186 + i * 34
+        body.append(f'<path d="M920 {y - i * 0.2:.1f} L{1020 - (i % 3) * 16} {y - 12:.1f}" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round"/>')
+        body.append(f'<path d="M1058 {y - 10:.1f} L{1142 - (i % 4) * 14} {y + 7:.1f}" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round"/>')
+    return wrap(defs, body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
             "neuralink-chess": neuralink, "jobs-empty-room": jobs,
             "original-iphone": iphone, "coding-agent": coding_agent,
-            "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet}
+            "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet, "ramanujan-slate": ramanujan}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
