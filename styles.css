@@ -418,7 +418,7 @@ picture { display: contents; }
 .now-list { margin: 0; padding-left: 1.2rem; }
 .now-list li { margin-bottom: 0.4rem; }
 .now-list a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.now-sub { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 1.6rem 0 0.6rem; }
+.now-sub { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; margin: 2.8rem 0 0.6rem; }
 .events { list-style: none; margin: 0; padding: 0; }
 .events li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
 .events strong { font-weight: 600; }
