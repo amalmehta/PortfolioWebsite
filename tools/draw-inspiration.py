@@ -735,11 +735,59 @@ def ramanujan():
         body.append(f'<path d="M1058 {y - 10:.1f} L{1142 - (i % 4) * 14} {y + 7:.1f}" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round"/>')
     return wrap(defs, body)
 
+def maps_earth():
+    """Google Maps and Google Earth let anyone see anywhere: the whole globe in space, and a beam
+    zooming from one spot on it down to a street map with a pin."""
+    rng = random.Random(23)
+    defs = ('<radialGradient id="eocean" cx="0.38" cy="0.32" r="0.8">'
+            '<stop offset="0" stop-color="#3f8fc9"/><stop offset="0.65" stop-color="#1c5a93"/><stop offset="1" stop-color="#0c2f55"/></radialGradient>'
+            '<radialGradient id="eglow" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0.78" stop-color="#7cc0f0" stop-opacity="0.45"/><stop offset="1" stop-color="#7cc0f0" stop-opacity="0"/></radialGradient>'
+            '<clipPath id="eball"><circle cx="340" cy="400" r="250"/></clipPath>'
+            '<clipPath id="emap"><rect x="700" y="170" width="430" height="460" rx="14"/></clipPath>')
+    body = ['<rect width="1200" height="800" fill="#080d1c"/>']
+    for _ in range(130):
+        x, y = rng.uniform(0, W), rng.uniform(0, H)
+        body.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rng.uniform(0.8, 2.2):.1f}" fill="#f4f6f8" opacity="{rng.uniform(0.3, 0.9):.2f}"/>')
+    # The globe, its land and clouds clipped to the sphere
+    body.append('<circle cx="340" cy="400" r="292" fill="url(#eglow)"/>')
+    body.append('<circle cx="340" cy="400" r="250" fill="url(#eocean)"/>')
+    body.append('<g clip-path="url(#eball)">')
+    land = "#5f9a58"
+    body.append(f'<path d="M160 210 C220 170 310 180 350 225 C385 265 345 305 300 322 C275 335 268 375 240 372 C200 368 170 330 138 300 C118 270 130 232 160 210 Z" fill="{land}"/>')
+    body.append(f'<path d="M285 395 C330 380 380 405 388 455 C396 510 360 590 322 628 C300 600 296 545 280 505 C266 465 258 415 285 395 Z" fill="{land}"/>')
+    body.append(f'<path d="M455 250 C505 235 575 275 598 340 C615 395 590 455 548 462 C505 468 470 420 452 372 C438 330 425 268 455 250 Z" fill="#7a9a58"/>')
+    for x, y, rx, ry in ((230, 250, 110, 13), (420, 330, 130, 12), (260, 470, 120, 12), (470, 540, 100, 11), (350, 180, 80, 10)):
+        body.append(f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{ry}" fill="#f4f6f8" opacity="0.5"/>')
+    body.append('</g>')
+    # The beam: from a spot on the globe out to the map
+    body.append('<path d="M498 360 L700 170 V630 Z" fill="#fff4c2" opacity="0.13"/>')
+    body.append('<circle cx="498" cy="360" r="8" fill="#fff4c2"/>')
+    # The map: blocks, a park, a river and streets
+    body.append('<rect x="700" y="170" width="430" height="460" rx="14" fill="#efeadf"/>')
+    body.append('<g clip-path="url(#emap)">')
+    body.append('<path d="M840 170 h130 v120 h-130 Z" fill="#b9d8a8"/>')
+    body.append('<path d="M1130 380 C1040 400 980 470 950 560 C940 590 930 615 925 640 H1000 C1010 590 1040 520 1130 480 Z" fill="#a4cfe8"/>')
+    for x in (780, 860, 980, 1060):
+        body.append(f'<path d="M{x} 170 V630" stroke="#fff" stroke-width="11"/>')
+    for y in (240, 340, 430, 540):
+        body.append(f'<path d="M700 {y} H1130" stroke="#fff" stroke-width="11"/>')
+    body.append('<path d="M700 600 C790 540 840 460 900 390 C950 330 1040 300 1130 230" fill="none" stroke="#f0c75e" stroke-width="16"/>')
+    # The route to the pin
+    body.append('<path d="M780 540 V430 H860 V340" fill="none" stroke="#3f7fd9" stroke-width="9" stroke-linejoin="round"/>')
+    body.append('<circle cx="780" cy="540" r="10" fill="#fff" stroke="#3f7fd9" stroke-width="5"/>')
+    body.append('</g>')
+    # The pin
+    body.append('<path d="M860 340 C840 305 822 288 822 262 A38 38 0 01898 262 C898 288 880 305 860 340 Z" fill="#c8452f"/>')
+    body.append('<circle cx="860" cy="262" r="13" fill="#fff"/>')
+    return wrap(defs, body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
             "neuralink-chess": neuralink, "jobs-empty-room": jobs,
             "original-iphone": iphone, "coding-agent": coding_agent,
-            "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet, "ramanujan-slate": ramanujan}
+            "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet, "ramanujan-slate": ramanujan,
+            "maps-earth": maps_earth}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
