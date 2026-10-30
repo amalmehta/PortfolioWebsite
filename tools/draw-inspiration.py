@@ -650,11 +650,53 @@ def suzuki():
     body.append('<path d="M1030 445 C1018 420 1044 400 1030 376 C1018 354 1040 336 1032 314" fill="none" stroke="#9a9086" stroke-width="2.5" opacity="0.55"/>')
     return wrap(defs, body)
 
+def spreadsheet():
+    """Spreadsheets let anyone model: a sheet filling the frame, a green header row, a grid of
+    numbers with one cell selected, and a small bar chart rising beside the columns."""
+    rng = random.Random(7)
+    body = ['<rect width="1200" height="800" fill="#f7f8f5"/>']
+    # Toolbar and formula bar
+    body.append('<rect width="1200" height="64" fill="#1f6e4a"/>')
+    for x in (40, 84, 128):
+        body.append(f'<rect x="{x}" y="22" width="28" height="20" rx="3" fill="#bfe0cd"/>')
+    body.append('<rect y="64" width="1200" height="46" fill="#e9ece6"/>')
+    body.append('<rect x="96" y="76" width="420" height="22" rx="3" fill="#fff" stroke="#c6cbc2" stroke-width="2"/>')
+    body.append('<path d="M110 87h230" stroke="#6d756a" stroke-width="5" stroke-linecap="round"/>')
+    # The grid: row numbers on the left, column letters along the top
+    left, top, cw, rh, cols, rows = 60, 110, 148, 54, 4, 12
+    body.append(f'<rect y="{top}" width="1200" height="{rh}" fill="#d9e8df"/>')
+    body.append(f'<rect y="{top}" width="{left}" height="{H - top}" fill="#e9ece6"/>')
+    for c in range(cols):
+        body.append(f'<path d="M{left + c * cw + 56} {top + 27}h36" stroke="#2c6a4a" stroke-width="7" stroke-linecap="round"/>')
+    # Numbers: right-aligned dashes of varying length, as figures read from a distance
+    for r in range(1, rows):
+        y = top + r * rh + 27
+        body.append(f'<path d="M20 {y}h20" stroke="#8d948a" stroke-width="5" stroke-linecap="round"/>')
+        for c in range(cols):
+            w = rng.randint(44, 104)
+            end = left + (c + 1) * cw - 18
+            body.append(f'<path d="M{end - w} {y}h{w}" stroke="#4e564c" stroke-width="6" stroke-linecap="round"/>')
+    for r in range(rows + 1):
+        body.append(f'<path d="M0 {top + r * rh}H1200" stroke="#cfd4cb" stroke-width="2"/>')
+    for c in range(cols + 1):
+        body.append(f'<path d="M{left + c * cw} {top}V800" stroke="#cfd4cb" stroke-width="2"/>')
+    # The selected cell, with its fill handle
+    sx, sy = left + 2 * cw, top + 5 * rh
+    body.append(f'<rect x="{sx}" y="{sy}" width="{cw}" height="{rh}" fill="#1f6e4a" fill-opacity="0.1" stroke="#1f6e4a" stroke-width="5"/>')
+    body.append(f'<rect x="{sx + cw - 7}" y="{sy + rh - 7}" width="14" height="14" fill="#1f6e4a" stroke="#fff" stroke-width="2"/>')
+    # A small chart floating over the sheet, its bars climbing
+    body.append('<rect x="704" y="214" width="440" height="430" rx="8" fill="#fff" stroke="#c6cbc2" stroke-width="3"/>')
+    body.append('<path d="M744 262h170" stroke="#4e564c" stroke-width="8" stroke-linecap="round"/>')
+    for i, h in enumerate((70, 112, 96, 158, 204, 262)):
+        body.append(f'<rect x="{748 + i * 60}" y="{598 - h}" width="42" height="{h}" rx="3" fill="{"#1f6e4a" if i == 5 else "#7fb898"}"/>')
+    body.append('<path d="M736 598h376" stroke="#6d756a" stroke-width="4"/>')
+    return wrap("", body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
             "neuralink-chess": neuralink, "jobs-empty-room": jobs,
             "original-iphone": iphone, "coding-agent": coding_agent,
-            "suzuki-zendo": suzuki}
+            "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
