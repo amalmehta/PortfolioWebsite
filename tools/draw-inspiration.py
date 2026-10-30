@@ -611,10 +611,50 @@ def coding_agent():
     body.append('<rect x="1010" y="540" width="70" height="80" rx="10" fill="#e7e1d6"/><path d="M1080 560 q26 6 0 36" fill="none" stroke="#e7e1d6" stroke-width="8"/>')
     return wrap(defs, body)
 
+def suzuki():
+    """Shunryu Suzuki's beginner's mind: an empty zendo in the morning, a round cushion on the tatami
+    facing a plain wall, and an enso brushed on the hanging scroll. A scene, no portrait."""
+    defs = ('<linearGradient id="zwall" x1="0" y1="0" x2="1" y2="0">'
+            '<stop offset="0" stop-color="#efe6d4"/><stop offset="1" stop-color="#ddd0b8"/></linearGradient>'
+            '<linearGradient id="zlight" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0" stop-color="#fff6e0" stop-opacity="0.75"/><stop offset="1" stop-color="#fff6e0" stop-opacity="0"/></linearGradient>')
+    body = ['<rect width="1200" height="800" fill="url(#zwall)"/>']
+    # Shoji screen on the left: a lattice of paper panes, glowing with morning light
+    body.append('<rect x="40" y="60" width="300" height="470" fill="#fbf6ea"/>')
+    for x in range(40, 341, 75):
+        body.append(f'<path d="M{x} 60v470" stroke="#8a6a48" stroke-width="6"/>')
+    for y in range(60, 531, 94):
+        body.append(f'<path d="M40 {y}h300" stroke="#8a6a48" stroke-width="6"/>')
+    body.append('<path d="M340 120 L900 560 L900 640 L340 640 Z" fill="url(#zlight)"/>')  # light falling across the room
+    # Tokonoma alcove with a hanging scroll and its ensō
+    body.append('<rect x="640" y="70" width="440" height="460" fill="#e2d6be"/>')
+    body.append('<rect x="760" y="100" width="200" height="380" fill="#f8f3e6" stroke="#b49a72" stroke-width="5"/>')
+    body.append('<path d="M760 100h200M760 480h200" stroke="#5a4632" stroke-width="12" stroke-linecap="round"/>')
+    body.append('<path d="M904 238 C908 190 870 166 838 172 C800 180 784 224 796 262 C808 300 852 316 884 298 C904 286 912 266 908 250" '
+                'fill="none" stroke="#1c1b19" stroke-width="16" stroke-linecap="round" opacity="0.9"/>')
+    body.append('<circle cx="868" cy="410" r="9" fill="#b8402e"/>')  # the red seal
+    body.append('<rect x="640" y="520" width="440" height="16" fill="#6b5238"/>')
+    # Tatami floor, in perspective, with dark borders
+    body.append('<path d="M0 560 H1200 V800 H0 Z" fill="#cdbf8e"/>')
+    for x0, x1 in ((0, -260), (400, 300), (800, 860), (1200, 1420)):
+        body.append(f'<path d="M{x0} 560 L{x1} 800" stroke="#3c4a32" stroke-width="7"/>')
+    body.append('<path d="M0 660 H1200" stroke="#3c4a32" stroke-width="7"/>')
+    body.append('<path d="M0 560 H1200" stroke="#5a4632" stroke-width="10"/>')
+    # The round black zafu on a square mat, waiting for someone to sit
+    body.append('<path d="M420 690 L760 690 L800 740 L380 740 Z" fill="#2a2522"/>')
+    body.append('<ellipse cx="590" cy="690" rx="120" ry="34" fill="#1d1a18"/>')
+    body.append('<path d="M470 690 Q470 640 590 638 Q710 640 710 690 Q650 714 590 712 Q530 714 470 690 Z" fill="#26221f"/>')
+    body.append('<path d="M500 664 Q590 650 680 664" fill="none" stroke="#3a3430" stroke-width="3"/>')
+    # A single stick of incense, smoke curling up
+    body.append('<rect x="1010" y="505" width="40" height="18" rx="4" fill="#4a3a2a"/><path d="M1030 505v-60" stroke="#6b4a2a" stroke-width="3"/>')
+    body.append('<path d="M1030 445 C1018 420 1044 400 1030 376 C1018 354 1040 336 1032 314" fill="none" stroke="#9a9086" stroke-width="2.5" opacity="0.55"/>')
+    return wrap(defs, body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
             "neuralink-chess": neuralink, "jobs-empty-room": jobs,
-            "original-iphone": iphone, "coding-agent": coding_agent}
+            "original-iphone": iphone, "coding-agent": coding_agent,
+            "suzuki-zendo": suzuki}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
