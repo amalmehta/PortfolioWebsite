@@ -782,12 +782,47 @@ def maps_earth():
     body.append('<circle cx="860" cy="262" r="13" fill="#fff"/>')
     return wrap(defs, body)
 
+def grateful_garden():
+    """The backdrop of Grateful for: a garden at dusk, with stars and a low moon, layered hills,
+    dark trees framing it, a path winding up through the grass and a few fireflies. Kept dark
+    through the middle, where the lanterns and their lines sit."""
+    rng = random.Random(31)
+    defs = ('<linearGradient id="gsky" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#141b3a"/><stop offset="0.55" stop-color="#2a2550"/>'
+            '<stop offset="0.8" stop-color="#5a3560"/><stop offset="1" stop-color="#a65a55"/></linearGradient>'
+            '<radialGradient id="gglow" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0" stop-color="#ffd98a" stop-opacity="0.8"/><stop offset="1" stop-color="#ffd98a" stop-opacity="0"/></radialGradient>')
+    body = ['<rect width="1200" height="800" fill="url(#gsky)"/>']
+    for _ in range(120):
+        x, y = rng.uniform(0, W), rng.uniform(0, 470)
+        body.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rng.uniform(0.6, 1.8):.1f}" fill="#f4efdc" opacity="{rng.uniform(0.25, 0.85):.2f}"/>')
+    body.append('<circle cx="1010" cy="96" r="30" fill="#f4e6bd" opacity="0.9"/><circle cx="1022" cy="88" r="27" fill="#1b2042"/>')  # a crescent moon
+    # Hills, far to near
+    body.append('<path d="M0 640 C160 590 330 610 520 640 C720 670 930 590 1200 625 V800 H0 Z" fill="#33284f"/>')
+    body.append('<path d="M0 690 C220 640 420 680 620 700 C820 720 1010 660 1200 690 V800 H0 Z" fill="#231f3f"/>')
+    body.append('<path d="M0 730 C260 700 480 725 700 735 C900 745 1060 715 1200 730 V800 H0 Z" fill="#181a30"/>')
+    # The path, winding up through the grass and narrowing away
+    body.append('<path d="M500 800 C560 770 690 760 670 738 C658 726 610 722 600 712 L622 712 C640 724 730 730 745 750 C762 772 720 790 700 800 Z" fill="#6d5a70" opacity="0.8"/>')
+    # Trees framing the garden on both sides
+    for cx, base, r in ((46, 760, 112), (170, 780, 80), (1156, 760, 118), (1040, 785, 78)):
+        body.append(f'<rect x="{cx - 8}" y="{base - r}" width="16" height="{r + 40}" fill="#0f1024"/>')
+        for dx, dy, s in ((0, -r * 1.25, 1), (-r * 0.55, -r * 0.8, 0.8), (r * 0.55, -r * 0.8, 0.8), (0, -r * 0.55, 0.9)):
+            body.append(f'<circle cx="{cx + dx:.1f}" cy="{base + dy:.1f}" r="{r * 0.72 * s:.1f}" fill="#101226"/>')
+    # Grass tufts along the front, and fireflies low in the garden
+    for _ in range(70):
+        x, y = rng.uniform(0, W), rng.uniform(748, 796)
+        h = rng.uniform(8, 18)
+        body.append(f'<path d="M{x:.1f} {y:.1f} q{rng.uniform(-4, 4):.1f} {-h / 2:.1f} {rng.uniform(-5, 5):.1f} {-h:.1f}" fill="none" stroke="#2e3a48" stroke-width="2"/>')
+    for x, y in ((240, 665), (330, 720), (455, 690), (800, 705), (905, 670), (985, 725), (130, 705), (1095, 690)):
+        body.append(f'<circle cx="{x}" cy="{y}" r="14" fill="url(#gglow)"/><circle cx="{x}" cy="{y}" r="2.2" fill="#fff0b8"/>')
+    return wrap(defs, body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
             "neuralink-chess": neuralink, "jobs-empty-room": jobs,
             "original-iphone": iphone, "coding-agent": coding_agent,
             "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet, "ramanujan-slate": ramanujan,
-            "maps-earth": maps_earth}
+            "maps-earth": maps_earth, "grateful-garden": grateful_garden}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)

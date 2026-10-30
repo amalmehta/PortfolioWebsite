@@ -28,9 +28,11 @@
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script src="email.js" defer></script>
+  <script src="mischief.js" defer></script>
   <script src="beliefs.js" defer></script>
   <script src="eggs.js" defer></script>
   <script src="tilt.js" defer></script>
+  <script src="haven.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#top">Skip to content</a>
@@ -65,21 +67,13 @@
         <p>If you don’t like something, change it. If you don’t have something, make it.</p>
         <!-- once: If something matters, I find a way to make it happen instead of waiting for permission. -->
       </li>
-      <li class="value">
-        <h3>Ambition</h3>
-        <!-- once: Picking problems big enough that getting halfway is still worth it. -->
-      </li>
+      <!-- Saved for later: <li class="value"><h3>Ambition</h3></li> (once: Picking problems big enough that getting halfway is still worth it.) -->
       <li class="value">
         <h3>Deep curiosity</h3>
         <!-- once: Following a question until I understand it from the bottom up. -->
       </li>
-      <li class="value">
-        <h3>Caring</h3>
-        <!-- once: Showing up for people, and taking their problems as seriously as my own. -->
-      </li>
-      <li class="value">
-        <h3>Deep gratitude</h3>
-      </li>
+      <!-- Saved for later: <li class="value"><h3>Caring</h3></li> (once: Showing up for people, and taking their problems as seriously as my own.) -->
+      <!-- Saved for later: <li class="value"><h3>Deep gratitude</h3></li> -->
       <li class="value">
         <h3>Courage</h3>
         <!-- once: Starting before I feel ready, and saying what I think. -->
@@ -88,10 +82,7 @@
         <h3>Rigor</h3>
         <!-- once: Thinking it through. --><!-- once: It can’t just be vibes, you have to use your brain. -->
       </li>
-      <li class="value">
-        <h3>Clarity</h3>
-        <!-- once: Accurate communication, crisp when appropriate. -->
-      </li>
+      <!-- Saved for later: <li class="value"><h3>Clarity</h3></li> (once: Accurate communication, crisp when appropriate.) -->
     </ol>
 
     <!-- Beliefs: what I believe now, my predictions, and an archive of what I used to believe. beliefs.js turns
@@ -112,14 +103,16 @@
           -->
           <li class="inspo-item"><strong>Learning rate is a higher quality signal than experience.</strong></li>
           <li class="inspo-item"><strong>Autodidactism is the highest quality form of learning.</strong></li>
-          <li class="inspo-item"><strong>The biggest things are created by repeated small actions.</strong></li>
           <li class="inspo-item"><strong>Deep reading and writing are rare skills.</strong><!-- once: Deep reading and writing are new-age skills. --></li>
           <li class="inspo-item"><strong><span class="tree-plain">Understand from first principles, but do from accumulated skill.</span><button type="button" class="tree-egg" data-script="tree.js" aria-label="Understand from first principles, but do from accumulated skill. (opens a growing tree)" hidden>Understand from first principles, but do from accumulated skill.</button></strong></li>
-          <li class="inspo-item"><strong>Little details are sometimes the most important.</strong></li>
           <li class="inspo-item"><strong>Intuition over analysis.</strong></li>
           <li class="inspo-item"><strong>Our schools were built for a world that no longer exists.</strong></li>
           <li class="inspo-item"><strong>The world is a malleable place.</strong></li>
           <li class="inspo-item"><strong>Adventure is the antidote.</strong></li>
+          <!-- Saved for later, not shown yet (move a line above this comment to show it):
+          <li class="inspo-item"><strong>The biggest things are created by repeated small actions.</strong></li>
+          <li class="inspo-item"><strong>Little details are sometimes the most important.</strong></li>
+          -->
           <!-- Saved for later, not shown yet (move a line above this comment to show it):
           <li class="inspo-item"><strong>Anything is possible.</strong></li>
           <li class="inspo-item"><strong>Everything is connected, if you look closely enough.</strong></li>
@@ -173,22 +166,23 @@
         <!-- New entries go here, one per line, in your own words:
         <li class="inspo-item"><strong>The way</strong></li> -->
         <li class="inspo-item"><strong>Make things, often, and share them.</strong></li>
+        <li class="inspo-item"><strong>Allow yourself to be disliked, but don’t do things that make you dislike yourself.</strong></li>
+        <li class="inspo-item herd-dodge"><strong>Question herd mentality.</strong></li>
+        <li class="inspo-item"><strong>Don’t over-optimize.</strong></li>
+        <li class="inspo-item"><strong>Say what’s on your mind as frequently as possible.</strong></li>
+        <li class="inspo-item"><strong>Short is sweet, but depth is neat.</strong></li>
+        <li class="inspo-item"><strong>For the love of the games.</strong></li>
+        <li class="inspo-item"><strong><span class="serious-plain">It’s not that serious.</span><button type="button" class="serious-egg" hidden>It’s not that serious.</button></strong></li>
+        <!-- Saved for later, not shown yet (move a line above this comment to show it):
+        <li class="inspo-item"><strong>Do one thing very well at a time.</strong>(once: Do one thing really, really, really well at a time.)</li>
+        <li class="inspo-item"><strong>Lean into your own unique style.</strong></li>
         <li class="inspo-item"><strong>It’s not what you do, but how you do it.</strong></li>
         <li class="inspo-item"><strong>Live life with urgency.</strong></li>
         <li class="inspo-item"><strong>Experiences over things.</strong></li>
         <li class="inspo-item"><strong>Process over outcomes.</strong></li>
         <li class="inspo-item"><strong>Be willing to take and give feedback.</strong></li>
-        <li class="inspo-item"><strong>Allow yourself to be disliked, but don’t do things that make you dislike yourself.</strong></li>
-        <li class="inspo-item"><strong>Question herd mentality.</strong></li>
-        <li class="inspo-item"><strong>Do one thing very well at a time.</strong><!-- once: Do one thing really, really, really well at a time. --></li>
         <li class="inspo-item"><strong>Never sacrifice quality for quantity.</strong></li>
         <li class="inspo-item"><strong>Show your work.</strong></li>
-        <li class="inspo-item"><strong>Lean into your own unique style.</strong></li>
-        <li class="inspo-item"><strong>Don’t over-optimize.</strong></li>
-        <li class="inspo-item"><strong>Say what’s on your mind as frequently as possible.</strong></li>
-        <li class="inspo-item"><strong>Short is sweet, but depth is neat.</strong></li>
-        <li class="inspo-item"><strong>It’s not that serious.</strong></li>
-        <!-- Saved for later, not shown yet (move a line above this comment to show it):
         <li class="inspo-item"><strong>Stay physically, mentally and spiritually fit.</strong></li>
         <li class="inspo-item"><strong>Seek deep understanding, not just shallow usage.</strong></li>
         <li class="inspo-item"><strong>Say yes to hard, beautiful things: mountains, long races, the open road.</strong></li>
@@ -341,7 +335,7 @@
         <li class="inspo-item"><strong>The thing</strong> One line on why it matters to you.</li>
         -->
         <li class="inspo-item"><strong>Helping others access good tools</strong> Putting good tools in the hands of people without money or connections.</li>
-        <li class="inspo-item"><strong>The outdoors</strong> Wild places, and keeping them open for the next people.</li>
+        <!-- Saved for later: <li class="inspo-item"><strong>The outdoors</strong> Wild places, and keeping them open for the next people.</li> -->
         <li class="inspo-item"><strong>Education</strong> Learning that fits how people actually learn.</li>
         <!-- Moved to Grateful for: <li class="inspo-item"><strong>Family and friends</strong> Cherish them.</li> -->
         <!-- Saved for later, Alex Honnold’s caption (Inspiration) once read: Fear shrinks with preparation: a decade of rehearsal for four hours of climbing. -->
