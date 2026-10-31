@@ -313,11 +313,12 @@
         <p class="when">2025 – now</p>
         <div>
           <h3>Independent ML &amp; Robotics Research</h3>
-          <p class="where">San Francisco Bay Area</p>
-          <p>My focus is RL post-training when rewards can’t be checked: trained only on visible tests, a code agent learned to delete untested code until real correctness fell from 31% to 2%, and random audits only delayed it across 50 follow-ups.</p><!-- once: Running four research programs end to end on my own: decoding hand movement from motor-cortex spikes, post-training a small transformer with GRPO and DPO, testing sim-to-real transfer of meta-learned drone control, and training a Go engine from scratch by self-play. -->
-          <p>Alongside it: decoding cursor movement from public motor-cortex recordings with no new labels (R² 0.72 on 17 of 19 later days, against 0.42 for a linear decoder), meta-learned control for a simulated quadrotor, and a 9×9 Go engine trained by self-play.</p>
+          <!-- Saved for later: <p class="where">San Francisco Bay Area</p> -->
+          <p>My focus is RL post-training when rewards can’t be checked. In a toy repair task, GRPO on visible tests raised the pass rate from 35% to 58% while true correctness fell from 31% to 2%: the agent learned to delete 98% of the branches no test reaches.</p><!-- once: Running four research programs end to end on my own: decoding hand movement from motor-cortex spikes, post-training a small transformer with GRPO and DPO, testing sim-to-real transfer of meta-learned drone control, and training a Go engine from scratch by self-play. -->
+          <p>I wrote down a prediction before each of 50 follow-ups, and 15 were refuted. Auditing a random 25% of episodes delayed the hack rather than preventing it; choosing which 10% to audit held false success to 0.04, against 0.24 at random. RL still never beat the fine-tuned starting point on honest repair.</p>
+          <p>Alongside it: re-centring each channel on a new day’s unlabelled spikes keeps a cursor decoder at R² 0.72 on 17 of 19 later days, against 0.42 for a linear decoder, though the two days the electrodes were re-mapped break it. In simulation, a learned residual cuts quadrotor tracking error from adaptive control’s 14.0 cm to 7.3 cm, and meta-learning adds little to it.</p><!-- Saved for later, once also: a 9×9 Go engine trained by self-play. -->
           <p>Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience, and mentor to undergraduate scholars from UC Berkeley.</p>
-          <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">GRPO</span> <span class="chip">Sim-to-real</span> <span class="chip">Meta-learning</span> <span class="chip">Self-play RL</span></p>
+          <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">GRPO</span> <span class="chip">Sim-to-real</span> <span class="chip">Meta-learning</span></p>
         </div>
       </article>
 
