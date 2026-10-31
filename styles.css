@@ -146,7 +146,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.55rem; line-heigh
 /* North star: two guiding lines under the intro, human and technical, side by side on wide screens */
 .north-star { padding-top: 2.5rem; padding-bottom: 0; }
 .ns-lines { display: grid; gap: 1rem; }
-@media (min-width: 820px) { .ns-lines { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+@media (min-width: 820px) { .ns-lines { grid-template-columns: 1fr 1fr; gap: 1.5rem; } .ns-line:nth-child(3) { grid-column: 1 / -1; } }
 .ns-line { padding: 1.2rem 1.4rem 1.3rem; border: 1px solid var(--line); border-left: 3px solid var(--warm); border-radius: 10px; background: var(--surface); }
 .ns-line + .ns-line { border-left-color: var(--accent); }
 .ns-kind { margin: 0 0 0.35rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
