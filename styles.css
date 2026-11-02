@@ -766,7 +766,7 @@ picture { display: contents; }
 
 /* Warm notes: chat offer under the hello, a line after More projects, advisor thanks, footer sign-off */
 .hello-more { max-width: 60ch; margin: 0 0 0.9rem; color: var(--muted); font-size: 0.95rem; }
-.minis-note, .thanks { max-width: 68ch; margin: 1.4rem 0 0; color: var(--muted); }
+.minis-note, .thanks, .inspo-note { max-width: 68ch; margin: 1.4rem 0 0; color: var(--muted); }
 .thanks { font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
 .minis-note a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .footer .signoff { margin-top: 1.4rem; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text); }
