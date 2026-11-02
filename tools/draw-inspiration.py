@@ -817,12 +817,81 @@ def grateful_garden():
         body.append(f'<circle cx="{x}" cy="{y}" r="14" fill="url(#gglow)"/><circle cx="{x}" cy="{y}" r="2.2" fill="#fff0b8"/>')
     return wrap(defs, body)
 
+def waymo():
+    """Waymo puts safety and reliability first: a white driverless car with its roof sensor, stopped at a
+    crosswalk at dusk while someone crosses, the sensor's rings sweeping around it."""
+    rng = random.Random(41)
+    defs = ('<linearGradient id="wsky" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#27406f"/><stop offset="0.7" stop-color="#d98f73"/><stop offset="1" stop-color="#f4c79a"/></linearGradient>'
+            '<linearGradient id="wbody" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cdd3da"/></linearGradient>'
+            '<radialGradient id="wbeam" cx="0" cy="0.5" r="1">'
+            '<stop offset="0" stop-color="#fff2c4" stop-opacity="0.55"/><stop offset="1" stop-color="#fff2c4" stop-opacity="0"/></radialGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#wsky)"/>']
+    # A row of San Francisco houses stepping up a hill, windows lit
+    x, top = -20, 330
+    while x < W + 20:
+        w, h = rng.randint(96, 136), rng.randint(0, 34)
+        col = rng.choice(("#54506a", "#6b5a68", "#4a5670", "#7a6468", "#5d6578"))
+        body.append(f'<rect x="{x}" y="{top - h}" width="{w}" height="{520 - top + h}" fill="{col}"/>')
+        body.append(f'<rect x="{x - 3}" y="{top - h - 9}" width="{w + 6}" height="10" fill="#39384a"/>')
+        for wy in range(top - h + 16, 480, 52):
+            for wx in range(x + 14, x + w - 24, 34):
+                lit = rng.random() < 0.5
+                body.append(f'<rect x="{wx}" y="{wy}" width="20" height="32" fill="{"#ffd98e" if lit else "#34384c"}"/>')
+        x, top = x + w, top - rng.randint(4, 12)
+    # The pavement and the road
+    body.append(f'<rect y="505" width="{W}" height="30" fill="#8b8a8c"/>')
+    body.append(f'<rect y="535" width="{W}" height="265" fill="#3a3d45"/>')
+    body.append(f'<rect y="535" width="{W}" height="6" fill="#6d6e72"/>')
+    # The crosswalk ahead of the car, in perspective
+    for i in range(6):
+        y0, y1 = 556 + i * 40, 556 + i * 40 + 22
+        body.append(f'<polygon points="{880 - i * 7},{y0} {1085 + i * 7},{y0} {1085 + i * 8},{y1} {880 - i * 8},{y1}" fill="#ecebe4"/>')
+    # The sensor's rings, sweeping out around the car
+    for r, op in ((180, 0.42), (290, 0.28), (410, 0.18), (540, 0.1)):
+        body.append(f'<ellipse cx="430" cy="640" rx="{r * 1.3:.0f}" ry="{r * 0.34:.0f}" fill="none" stroke="#7fe0d4" stroke-width="3" opacity="{op}"/>')
+    # Headlight on the crosswalk
+    body.append('<path d="M760 610 L1140 540 V760 Z" fill="url(#wbeam)"/>')
+    # The car: a rounded white electric SUV, side on, facing right
+    body.append('<ellipse cx="465" cy="712" rx="345" ry="24" fill="#16181d" opacity="0.5"/>')
+    body.append('<path d="M130 690 C118 640 128 590 172 572 L300 548 C352 498 412 462 492 458 C572 454 626 480 684 548 L760 568 C800 582 812 626 804 690 Z" fill="url(#wbody)"/>')
+    body.append('<path d="M318 548 C360 506 414 480 480 478 V548 Z" fill="#26303d"/>')
+    body.append('<path d="M498 478 C560 476 606 498 652 548 H498 Z" fill="#26303d"/>')
+    body.append('<path d="M130 640 H804" stroke="#b3bac3" stroke-width="3"/>')
+    body.append('<path d="M488 480 V688" stroke="#b3bac3" stroke-width="3"/>')
+    body.append('<rect x="520" y="572" width="44" height="9" rx="4" fill="#9aa3ad"/><rect x="330" y="572" width="44" height="9" rx="4" fill="#9aa3ad"/>')
+    body.append('<path d="M770 586 C790 590 802 604 804 622 L772 616 Z" fill="#fff2c4"/>')
+    body.append('<path d="M132 600 L160 592 V628 L130 632 Z" fill="#c8452f"/>')
+    for cx in (262, 672):
+        body.append(f'<circle cx="{cx}" cy="690" r="58" fill="#1b1d22"/><circle cx="{cx}" cy="690" r="33" fill="#aeb4bc"/><circle cx="{cx}" cy="690" r="10" fill="#555b64"/>')
+    # The sensor dome on the roof, and small sensors at the front and on the mirror
+    body.append('<rect x="462" y="438" width="62" height="24" rx="6" fill="#e9edf1"/>')
+    body.append('<rect x="472" y="396" width="42" height="44" rx="12" fill="#22303c"/>')
+    body.append('<rect x="466" y="388" width="54" height="12" rx="6" fill="#f4f6f8"/>')
+    body.append('<circle cx="493" cy="418" r="8" fill="#7fe0d4"/>')
+    body.append('<rect x="790" y="640" width="18" height="26" rx="5" fill="#22303c"/>')
+    # Someone crossing with a dog, safely in front of the stopped car
+    px, py = 985, 660
+    body.append(f'<ellipse cx="{px}" cy="{py + 8}" rx="38" ry="8" fill="#16181d" opacity="0.45"/>')
+    body.append(f'<path d="M{px - 12} {py} L{px - 22} {py - 70} H{px + 18} L{px + 14} {py} H{px + 2} L{px} {py - 46} L{px - 2} {py} Z" fill="#26334a"/>')
+    body.append(f'<rect x="{px - 25}" y="{py - 142}" width="48" height="78" rx="16" fill="#c8583f"/>')
+    body.append(f'<circle cx="{px}" cy="{py - 164}" r="21" fill="{SKIN}"/>')
+    body.append(f'<path d="M{px - 21} {py - 168} A21 21 0 0 1 {px + 21} {py - 168} Z" fill="{HAIR}"/>')
+    body.append(f'<path d="M{px + 16} {py - 124} L{px + 44} {py - 84}" stroke="#c8583f" stroke-width="13" stroke-linecap="round"/>')
+    body.append(f'<path d="M{px + 44} {py - 84} C{px + 62} {py - 62} {px + 72} {py - 52} {px + 80} {py - 36}" fill="none" stroke="#2a2a2a" stroke-width="2.5"/>')
+    body.append(f'<rect x="{px + 62}" y="{py - 34}" width="52" height="22" rx="10" fill="#b98a56"/>')
+    body.append(f'<circle cx="{px + 112}" cy="{py - 40}" r="14" fill="#b98a56"/><path d="M{px + 118} {py - 52} l9 -8 l2 13 Z" fill="#8b6438"/>')
+    for dx in (68, 78, 98, 108):
+        body.append(f'<rect x="{px + dx}" y="{py - 16}" width="6" height="22" fill="#a57a48"/>')
+    return wrap(defs, body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
             "neuralink-chess": neuralink, "jobs-empty-room": jobs,
             "original-iphone": iphone, "coding-agent": coding_agent,
             "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet, "ramanujan-slate": ramanujan,
-            "maps-earth": maps_earth, "grateful-garden": grateful_garden}
+            "maps-earth": maps_earth, "grateful-garden": grateful_garden, "waymo-crosswalk": waymo}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)

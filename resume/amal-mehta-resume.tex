@@ -13,7 +13,7 @@
 \setlist[itemize]{leftmargin=1.2em,itemsep=0.2pt,topsep=1pt,parsep=0pt}
 \newcommand{\role}[4]{\textbf{#1}\hfill\textbf{#2}\\\textit{#3}\hfill\textit{#4}}
 
-\begin{document}\fontsize{9.8}{11.4}\selectfont
+\begin{document}\fontsize{9.8}{11.2}\selectfont
 
 \begin{center}
 {\LARGE\bfseries Amal Mehta}\\[3pt]
@@ -37,8 +37,8 @@ Research engineer with six years of applied deep learning, from generative model
 \role{Deep Learning Scientist}{Sept 2021 -- Aug 2025}{PhysicsAI (DARPA-funded)}{Pacifica, CA (remote)}
 \begin{itemize}
 \item Formulated synthetic-data generation as RL: policies (TD3, PPO, DDPG) set image-generator parameters, rewarded by detector performance on real drone imagery, without hand-tuned rendering.
-\item Built a PEARL meta-RL agent (probabilistic task embeddings over TD3) for fast few-shot adaptation across generator tasks.
-\item Implemented domain adaptation from scratch to hold detector performance in the low-real-label, high-synthetic-data regime.
+\item Built the PEARL meta-RL codebase (task embeddings over TD3) and ran its multi-week GPU training, for few-shot generator adaptation.
+\item Implemented domain adaptation from scratch to hold detector accuracy with scarce real labels, on 10--15\,GB mostly synthetic datasets.
 \item Built GAN-based synthesis pipelines (DCGAN, InfoGAN, FineGAN) producing training data for downstream detection models.
 \end{itemize}
 
@@ -51,11 +51,12 @@ Research engineer with six years of applied deep learning, from generative model
 \role{Research Assistant}{June 2020 -- Dec 2022}{Video \& Image Processing Lab, BAIR --- adv.\ Prof.\ Avideh Zakhor}{UC Berkeley}
 \begin{itemize}
 \item Developed a deep CNN segmentation pipeline for invasive melanoma in large-scale histopathological images (F1 0.44 vs.\ 0.14 for the prior best); published at SPIE Medical Imaging 2023; Stowell-Orbison Award Poster Session at USCAP 2022.
+\item Segmented the epidermis and melanoma separately at four magnifications, on slides from 57 UCSF patients.
 \end{itemize}
 
 \role{Researcher}{June 2020 -- Aug 2020}{Abbasi-Asl Lab, UCSF --- adv.\ Prof.\ Reza Abbasi-Asl}{San Francisco, CA}
 \begin{itemize}
-\item Built empirical mode decomposition (EMD) pipelines for 2D and 3D brain image registration.
+\item Built empirical mode decomposition (EMD) pipelines to align 2D and 3D brain scans across visits and to a common template.
 \end{itemize}
 
 \section*{Education}

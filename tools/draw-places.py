@@ -1077,13 +1077,152 @@ def whistler():
     return svg("whistler", "".join(b), ("#7fb0dc", "#e9f2fa"))
 
 
+# ---------------------------------------------------------------- Dublin: the Ha'penny Bridge over the Liffey at dusk
+def dublin():
+    rng = random.Random(53)
+    b = []
+    b.append(glow(600, 400, 800, 260, "#ffd7a8", 0.7))
+    b.append(clouds(rng, 4, 60, 190, colour="#f6d2c4", opacity=0.45))
+    quay = 500
+    # The north quays: Georgian terraces in brick and painted plaster, windows lit for the evening
+    town = []
+    town.append(poly(ridge(-20, W + 20, quay, rng, [(0.2, 0.2, 0.7), (0.65, 0.25, 0.9)], 300, step=30), "#7c8aa6", opacity="0.5"))
+    x = -30
+    colours = ("#8f4a3a", "#a65a42", "#c9a35f", "#e7dcc6", "#3f6f73", "#7f3f39", "#b98a56", "#51627f")
+    while x < W + 10:
+        w, h = rng.randint(92, 138), rng.randint(190, 285)
+        top = quay - h
+        town.append(f'<rect x="{x}" y="{top}" width="{w}" height="{h}" fill="{rng.choice(colours)}"/>')
+        town.append(poly([(x - 3, top), (x + 10, top - 20), (x + w - 10, top - 20), (x + w + 3, top)], "#39414f"))
+        town.append(f'<rect x="{x + w * 0.72:.0f}" y="{top - 36}" width="16" height="22" fill="#4c4640"/>')
+        cols, rows = max(2, w // 38), max(3, (h - 50) // 54)
+        for r in range(rows):
+            for c in range(cols):
+                wx = x + (w / cols) * (c + 0.5) - 8
+                wy = top + 20 + r * 52
+                lit = rng.random() < 0.55
+                town.append(f'<rect x="{wx:.0f}" y="{wy}" width="16" height="30" fill="{"#ffd98e" if lit else "#2f3a4c"}"/>')
+                town.append(f'<line x1="{wx + 8:.0f}" y1="{wy}" x2="{wx + 8:.0f}" y2="{wy + 30}" stroke="#f3ecdc" stroke-width="1.5" opacity="0.7"/>')
+        town.append(f'<rect x="{x}" y="{quay - 46}" width="{w}" height="46" fill="#2e2a2c" opacity="0.72"/>')  # shopfronts
+        town.append(f'<rect x="{x + 8}" y="{quay - 36}" width="{w - 16}" height="24" fill="#f5c67a" opacity="0.85"/>')
+        x += w
+    town.append(f'<rect x="0" y="{quay}" width="{W}" height="26" fill="#5f6062"/>')  # the granite quay wall
+    b.extend(town)
+    # The Liffey, holding the terraces' colour upside down
+    b.append(f'<defs>{grad("dublin-river", "#6c6f88", "#26344f")}</defs>')
+    b.append(f'<rect x="0" y="{quay + 26}" width="{W}" height="{H - quay - 26}" fill="url(#dublin-river)"/>')
+    b.append(f'<g transform="translate(0,{2 * quay + 52}) scale(1,-1)" opacity="0.32">{"".join(town)}</g>')
+
+    # The bridge: one low elliptical span of white cast iron, with three lamp arches
+    left, right, spring, rise = 150, 1050, 545, 112
+    def deck(x, lift=0):
+        t = (x - 600) / ((right - left) / 2)
+        return spring - rise * (1 - t * t) - lift
+    def curve(lift, width, colour="#f4f0e7"):
+        points = " ".join(f"{x},{deck(x, lift):.1f}" for x in range(left, right + 1, 15))
+        return f'<polyline points="{points}" fill="none" stroke="{colour}" stroke-width="{width}" stroke-linecap="round"/>'
+    bridge = []
+    bridge.append(curve(-32, 7))  # the arch's lower rib
+    for x in range(left + 20, right, 30):  # ironwork between the ribs
+        bridge.append(f'<circle cx="{x}" cy="{deck(x, -16):.1f}" r="11" fill="none" stroke="#f4f0e7" stroke-width="3"/>')
+    bridge.append(curve(0, 9))
+    bridge.append(curve(44, 5))  # the handrail
+    for x in range(left + 10, right, 18):
+        bridge.append(f'<line x1="{x}" y1="{deck(x):.1f}" x2="{x}" y2="{deck(x, 44):.1f}" stroke="#f4f0e7" stroke-width="2.5"/>')
+    for x in (375, 600, 825):  # the lamp arches
+        y = deck(x, 44)
+        bridge.append(f'<path d="M{x - 42},{y:.0f} Q{x},{y - 74:.0f} {x + 42},{y:.0f}" fill="none" stroke="#f4f0e7" stroke-width="5"/>')
+        bridge.append(f'<line x1="{x}" y1="{y - 37:.0f}" x2="{x}" y2="{y - 66:.0f}" stroke="#f4f0e7" stroke-width="4"/>')
+        bridge.append(f'<rect x="{x - 8}" y="{y - 84:.0f}" width="16" height="20" rx="3" fill="#ffe6a6" stroke="#f4f0e7" stroke-width="2"/>')
+    water_glow = "".join(glow(x, deck(x, 118), 70, 70, "#ffe6a6", 0.75) for x in (375, 600, 825))
+    b.append(f'<g transform="translate(0,{2 * spring}) scale(1,-1)" opacity="0.28">{"".join(bridge)}</g>')
+    b.append(water_glow)
+    b.extend(bridge)
+    # The stone abutments, and two people crossing
+    b.append(poly([(60, spring + 38), (left + 34, spring + 38), (left + 14, spring - 22), (60, spring - 22)], "#5f6062"))
+    b.append(poly([(W - 60, spring + 38), (right - 34, spring + 38), (right - 14, spring - 22), (W - 60, spring - 22)], "#5f6062"))
+    for x, tall in ((535, 42), (558, 38)):
+        y = deck(x)
+        b.append(f'<rect x="{x - 6}" y="{y - tall + 8:.0f}" width="12" height="{tall - 8}" rx="5" fill="#27303f"/><circle cx="{x}" cy="{y - tall + 2:.0f}" r="6" fill="#27303f"/>')
+    # Ripples, and lamplight breaking up on the water
+    for _ in range(110):
+        x, y, w = rng.uniform(0, W), rng.uniform(quay + 40, H), rng.uniform(40, 170)
+        b.append(f'<line x1="{x:.0f}" y1="{y:.0f}" x2="{x + w:.0f}" y2="{y:.0f}" stroke="#dfe6f2" stroke-width="2" opacity="{rng.uniform(0.08, 0.26):.2f}"/>')
+    for lamp in (375, 600, 825):
+        for k in range(18):
+            y = 625 + k * 9
+            w = rng.uniform(16, 58)
+            b.append(f'<line x1="{lamp - w / 2:.0f}" y1="{y}" x2="{lamp + w / 2:.0f}" y2="{y}" stroke="#ffd98e" stroke-width="3" opacity="{0.62 - k * 0.028:.2f}"/>')
+    return svg("dublin", "".join(b), ("#3d5a8a", "#f4c9a4"))
+
+
+# ---------------------------------------------------------------- Boston: Back Bay over the Charles in autumn
+def boston():
+    rng = random.Random(1630)
+    b = []
+    b.append(glow(600, 440, 760, 220, "#fff0d8", 0.6))
+    b.append(clouds(rng, 4, 70, 210, opacity=0.7))
+    shore = 470
+    city = []
+    # Far towers, then the Prudential and the Hancock's blue glass slab
+    for x, w, h, col in ((70, 78, 150, "#a9b7c9"), (170, 60, 205, "#9dacc0"), (262, 90, 130, "#b4c0cf"), (850, 70, 180, "#a4b2c5"),
+                         (946, 88, 225, "#98a8bd"), (1060, 76, 140, "#b0bccc")):
+        city.append(f'<rect x="{x}" y="{shore - h}" width="{w}" height="{h}" fill="{col}"/>')
+    city.append(f'<rect x="478" y="{shore - 330}" width="118" height="330" fill="#7f8c9e"/>')  # the Prudential
+    city.append(f'<rect x="498" y="{shore - 352}" width="78" height="24" fill="#6f7c8e"/>')
+    city.append(f'<rect x="534" y="{shore - 412}" width="6" height="62" fill="#5f6b7c"/>')
+    for y in range(shore - 322, shore - 40, 14):
+        city.append(f'<line x1="484" y1="{y}" x2="590" y2="{y}" stroke="#9ba7b6" stroke-width="3"/>')
+    city.append(poly([(640, shore), (640, shore - 410), (736, shore - 390), (736, shore)], "#5f93bd"))  # the Hancock
+    city.append(poly([(640, shore), (640, shore - 410), (668, shore - 404), (668, shore)], "#8cb9d9"))
+    for y in range(shore - 370, shore - 30, 26):
+        city.append(f'<line x1="670" y1="{y}" x2="736" y2="{y}" stroke="#7aa8cc" stroke-width="2"/>')
+    # Brownstones along the river, the State House's gold dome on Beacon Hill to the left
+    city.append(f'<rect x="150" y="{shore - 98}" width="130" height="98" fill="#b6805d"/>')
+    city.append(f'<rect x="196" y="{shore - 134}" width="38" height="38" fill="#e8e0d0"/>')
+    city.append(f'<path d="M186,{shore - 134} A29,34 0 0 1 244,{shore - 134} Z" fill="#e0ac3a"/>')
+    city.append(f'<rect x="213" y="{shore - 184}" width="4" height="20" fill="#c8982f"/>')
+    x = 0
+    while x < W:
+        w, h = rng.randint(50, 84), rng.randint(58, 96)
+        if not 150 < x + w / 2 < 280:
+            city.append(f'<rect x="{x}" y="{shore - h}" width="{w}" height="{h}" fill="{rng.choice(("#a35f47", "#8e4f3d", "#b6805d", "#c49a7a"))}"/>')
+            city.append(f'<rect x="{x}" y="{shore - h - 5}" width="{w}" height="6" fill="#4d4a4b"/>')
+            for wy in range(shore - h + 10, shore - 16, 22):
+                for wx in range(x + 8, x + w - 10, 16):
+                    city.append(f'<rect x="{wx}" y="{wy}" width="8" height="13" fill="#f3e6c8" opacity="0.85"/>')
+        x += w
+    # A line of autumn trees on the far bank
+    for x in range(-10, W + 20, 26):
+        city.append(f'<circle cx="{x}" cy="{shore - rng.randint(6, 22)}" r="{rng.randint(18, 28)}" fill="{rng.choice(("#c9682b", "#d98a2e", "#b5472d", "#a9772f", "#6f7a3a"))}"/>')
+    b.extend(city)
+    # The Charles, holding the skyline
+    b.append(f'<defs>{grad("boston-river", "#7ea6c4", "#2f5f86")}</defs>')
+    b.append(f'<rect x="0" y="{shore}" width="{W}" height="{H - shore}" fill="url(#boston-river)"/>')
+    b.append(f'<g transform="translate(0,{2 * shore}) scale(1,-1)" opacity="0.28">{"".join(city)}</g>')
+    for _ in range(130):
+        x, y, w = rng.uniform(0, W), rng.uniform(shore + 8, H), rng.uniform(30, 150)
+        b.append(f'<line x1="{x:.0f}" y1="{y:.0f}" x2="{x + w:.0f}" y2="{y:.0f}" stroke="#eaf3f9" stroke-width="2" opacity="{rng.uniform(0.1, 0.3):.2f}"/>')
+    # Sailboats out from the Esplanade
+    for x, y, s, sail in ((300, 560, 1.0, "#fbf8f0"), (470, 525, 0.62, "#fbf8f0"), (860, 590, 1.2, "#f6e7d2"), (1040, 535, 0.7, "#fbf8f0")):
+        b.append(poly([(x, y - 104 * s), (x, y - 8 * s), (x + 58 * s, y - 8 * s)], sail))
+        b.append(poly([(x - 4 * s, y - 92 * s), (x - 4 * s, y - 8 * s), (x - 38 * s, y - 8 * s)], "#e9e3d5"))
+        b.append(poly([(x - 44 * s, y - 2 * s), (x + 64 * s, y - 2 * s), (x + 48 * s, y + 13 * s), (x - 30 * s, y + 13 * s)], "#27415c"))
+    # Maple boughs on the near bank frame it
+    for cx, cy, r, n in ((-20, 90, 210, 60), (1230, 120, 230, 66), (40, 700, 170, 34), (1170, 720, 160, 32)):
+        for _ in range(n):
+            a, d = rng.uniform(0, 6.28), rng.uniform(0, r)
+            b.append(f'<circle cx="{cx + d * math.cos(a):.0f}" cy="{cy + d * 0.7 * math.sin(a):.0f}" r="{rng.randint(20, 40)}" fill="{rng.choice(("#d9622b", "#e8932e", "#c2402a", "#f0b13c"))}" opacity="0.93"/>')
+    return svg("boston", "".join(b), ("#6ba3d6", "#f1eadc"))
+
+
 PLACES = (("cerro-torre", cerro_torre),("hokkaido", hokkaido), ("lofoten", lofoten), ("patagonia", patagonia),
           ("bhutan", bhutan), ("samarkand", samarkand), ("faroe-islands", faroe),
           ("chamonix", chamonix), ("garibaldi", garibaldi), ("glacier-national-park", glacier), ("moorea", moorea),
           ("mexico-city", mexico_city), ("azores", azores), ("tonga", tonga),
           ("machu-picchu", machu_picchu), ("seattle-to-dc", seattle_to_dc), ("hunza", hunza),
           ("yosemite", yosemite), ("japan", japan), ("florence", florence),
-          ("kilimanjaro", kilimanjaro), ("lassen", lassen), ("whistler", whistler))
+          ("kilimanjaro", kilimanjaro), ("lassen", lassen), ("whistler", whistler), ("dublin", dublin), ("boston", boston))
 os.makedirs(OUT, exist_ok=True)
 for name, fn in PLACES:
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:

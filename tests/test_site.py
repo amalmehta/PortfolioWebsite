@@ -924,6 +924,28 @@ class LinkingTest(unittest.TestCase):
         newest = max(re.findall(r'<p class="when" hidden>Added <time datetime="(\d{4}-\d{2})-\d{2}">', html))
         self.assertEqual(shown, newest)
 
+    def test_rotating_belief_lines_are_current_beliefs(self):
+        from html import unescape
+        import json
+        # The North star's Belief card (rotate.js) only says what Values says I believe now.
+        html = INDEX.read_text(encoding="utf-8")
+        self.assertIn('<script src="rotate.js" defer></script>', html)
+        lines = json.loads(unescape(re.search(r'<p class="ns-text" data-lines="([^"]+)">', html).group(1)))
+        self.assertGreater(len(lines), 1)
+        values = re.sub(r"<!--.*?-->", "", (ROOT / "values.html").read_text(encoding="utf-8"), flags=re.S)
+        values = values[values.index("What I believe currently"):]
+        values = values[:values.index("</ul>")]
+        for line in lines:
+            self.assertIn(line, unescape(values))
+
+    def test_places_im_going_is_a_reel(self):
+        # reel.js rolls Places I'm going past on its own; without it the row still scrolls by hand.
+        html = (ROOT / "photos.html").read_text(encoding="utf-8")
+        self.assertIn('<script src="reel.js" defer></script>', html)
+        going = html[html.index('<section class="wishlist going">'):]
+        self.assertIn('class="photos reel"', going[:going.index("</section>")])
+        self.assertIn("prefers-reduced-motion", (ROOT / "reel.js").read_text(encoding="utf-8"))
+
     def test_next_trip_is_a_planned_trip(self):
         # "Next: …" on Live interests names a trip under Travel's Places I'm going.
         nxt = re.search(r'<span class="next-trip">Next: ([^<]+?) in [A-Z][a-z]+\.</span>', (ROOT / "interests.html").read_text(encoding="utf-8"))

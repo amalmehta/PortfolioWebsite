@@ -20,6 +20,7 @@ I = "    "
 # kind, label, latitude, longitude, card id. Soonest trips and favourites first.
 PINS = [
     ("expedition", "Climbing Cerro Torre, Argentina", -49.29, -73.10, "place-cerro-torre"),
+    ("going", "Boston, Massachusetts", 42.36, -71.06, "place-boston"),
     ("going", "Lassen Volcanic, California", 40.54, -121.56, "place-lassen"),  # Manzanita Lake
     ("going", "Chamonix, France", 45.92, 6.87, "place-chamonix"),
     ("want", "Lofoten, Norway", 67.93, 13.09, "place-lofoten"),
@@ -33,6 +34,7 @@ PINS = [
     ("want", "Mexico City, Mexico", 19.44, -99.14, "place-mexico-city"),
     ("want", "Azores (São Miguel), Portugal", 37.86, -25.78, "place-azores"),
     ("want", "Swimming with humpback whales, Tonga", -18.65, -173.98, "place-tonga"),  # Vava'u
+    ("want", "Dublin, Ireland", 53.35, -6.26, "place-dublin"),
     ("been", "London", 51.51, -0.13, None),
     ("been", "Rome", 41.90, 12.50, None),
     ("been", "Florence", 43.77, 11.26, "place-florence"),
@@ -42,8 +44,6 @@ PINS = [
     ("been", "Yosemite", 37.75, -119.53, "place-yosemite"),
     ("been", "Channel Islands", 34.0, -119.8, None),
     ("been", "Lake Tahoe", 39.10, -120.03, None),
-    ("been", "Death Ride, Sierra Nevada", 38.69, -119.78, None),  # Markleeville, the ride's start
-    ("been", "India", 22.5, 79.0, None),
     ("been", "Japan", 36.2, 138.3, "place-japan"),
     ("been", "Skiing in Niseko, Japan", 42.86, 140.70, "place-niseko"),
     ("been", "Skiing in Whistler, British Columbia", 50.12, -122.95, "place-whistler"),
@@ -54,6 +54,7 @@ PINS = [
     ("been", "Kilimanjaro, Tanzania", -3.08, 37.35, "place-kilimanjaro"),
     ("been", "Scuba diving in Sipadan, Malaysia", 4.11, 118.63, None),
     ("been", "Scuba diving in Palau", 7.50, 134.60, None),
+    ("been", "Jaipur, India", 26.92, 75.79, None),
 ]
 # Countries tinted as visited (names as in the data)
 BEEN_COUNTRIES = {"United Kingdom", "Italy", "United States of America", "India", "Japan", "Thailand", "Pakistan", "Peru", "Tanzania", "Malaysia", "Canada"}

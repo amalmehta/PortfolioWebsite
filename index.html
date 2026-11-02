@@ -11,14 +11,14 @@
   <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta name="description" content="Amal Mehta, independent research engineer in reinforcement learning: robot learning in simulation and on hardware, reward hacking in RL post-training, and neural decoding. Research and projects.">
+  <meta name="description" content="Amal Mehta, independent research engineer in reinforcement learning: reward hacking in RL post-training, robot learning in simulation and on hardware, and neural decoding. Research and projects.">
   <link rel="alternate" type="application/rss+xml" title="Things I’m thinking about" href="feed.xml">
   <link rel="canonical" href="https://amalmehta.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Amal Mehta">
   <meta property="og:url" content="https://amalmehta.com/">
   <meta property="og:title" content="Amal Mehta · RL and robotics">
-  <meta property="og:description" content="Independent research engineer in reinforcement learning: robot learning in simulation and on hardware, reward hacking in RL post-training, and decoding movement from neural recordings.">
+  <meta property="og:description" content="Independent research engineer in reinforcement learning: reward hacking in RL post-training, robot learning in simulation and on hardware, and decoding movement from neural recordings.">
   <meta property="og:image" content="https://amalmehta.com/images/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
     "@type": "Person",
     "name": "Amal Mehta",
     "jobTitle": "Research engineer",
-    "description": "Independent research engineer in reinforcement learning. I work on robot learning in simulation and how it transfers to hardware, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.",
+    "description": "Independent research engineer in reinforcement learning. I work on how RL post-training goes wrong when rewards can’t be checked, on robot learning in simulation and how it transfers to hardware, and on decoding movement from neural recordings. The question I can’t put down is how intelligence learns from experience, in brains and machines.",
     "url": "https://amalmehta.com/",
     "image": "https://amalmehta.com/images/portrait.jpg",
     "address": {
@@ -150,6 +150,7 @@
   <script src="eggs.js" defer></script>
   <script src="hero.js" defer></script>
   <script src="reveal.js" defer></script>
+  <script src="rotate.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#top">Skip to content</a>
@@ -170,15 +171,15 @@
       <picture><source type="image/avif" srcset="images/portrait-240.avif 240w, images/portrait-480.avif 480w" sizes="(min-width: 820px) 220px, 120px"><source type="image/webp" srcset="images/portrait-240.webp 240w, images/portrait-480.webp 480w" sizes="(min-width: 820px) 220px, 120px"><img class="portrait" src="images/portrait.jpg" fetchpriority="high" alt="Pencil-sketch portrait of Amal Mehta" width="480" height="480"></picture>
       <div class="hero-text">
       <div class="status-chips">
-      <a class="status-chip" href="interests.html#now"><span class="status-dot" aria-hidden="true"></span><span>Now, <time datetime="2026-10">October 2026</time>: researching RL post-training</span></a>
+      <a class="status-chip" href="interests.html#now"><span class="status-dot" aria-hidden="true"></span><span>Now, <time datetime="2026-11">November 2026</time>: researching RL post-training</span></a>
       <a class="status-chip" href="#open-to"><span class="status-dot open" aria-hidden="true"></span><span>Open to new roles →</span></a>
       </div>
       <h1>Amal Mehta</h1>
-      <p class="lede">Independent research engineer in <span class="nowrap"><span class="maze-plain">reinforcement learning</span><button type="button" class="maze-egg" data-script="maze.js" aria-label="reinforcement learning (opens an agent learning a maze)" hidden>reinforcement learning</button>.</span> I work on robot learning in simulation and how it transfers to hardware, on how RL post-training goes wrong when rewards can’t be checked, and on decoding movement from neural recordings.</p>
+      <p class="lede">Independent research engineer in <span class="nowrap"><span class="maze-plain">reinforcement learning</span><button type="button" class="maze-egg" data-script="maze.js" aria-label="reinforcement learning (opens an agent learning a maze)" hidden>reinforcement learning</button>.</span> I work on how RL post-training goes wrong when rewards can’t be checked, on robot learning in simulation and how it transfers to hardware, and on decoding movement from neural recordings. The question I can’t put down is how intelligence learns from experience, in brains and machines.</p>
       <p class="hero-sub">Deep learning research since 2020 at Berkeley AI Research, Berkeley’s Hybrid Robotics Lab, UCSF and a DARPA-funded RL team. <!-- once: My focus now is RL post-training. Before that: My focus is learning from little data and adapting quickly to new settings. -->Based in the San Francisco Bay Area. I love making things from scratch, and I’m a storyteller at heart.<!-- Saved for later, once ended the line above: , and in my spare time I build fictional worlds and write stories set in them. --></p>
       <p class="hello">If you’d like to talk, <a href="https://reachouts.me/?u=amal">get in touch →</a><!-- once: Hi! I’d love to hear from you. --></p>
       <p class="hello-more">If you’re getting into RL, robotics or brain–computer interfaces, student or not, I’m happy to chat. A line on what you’re working on, or stuck on, is plenty.</p>
-      <p class="hello-more">If you need help, with anything at all, please reach out!</p>
+      <!-- once: <p class="hello-more">If you need help, with anything at all, please reach out!</p> -->
       <ul class="contact">
         <li><a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a></li>
         <li><a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a></li>
@@ -201,10 +202,11 @@
         </div>
         <div class="ns-line">
           <p class="ns-kind">Belief</p>
-          <p class="ns-text">Learning rate is a higher quality signal than experience.</p>
+          <p class="ns-text" data-lines="[&quot;Learning rate is a higher quality signal than experience.&quot;, &quot;Autodidactism is the highest quality form of learning.&quot;, &quot;Deep reading and writing are rare skills.&quot;, &quot;Understand from first principles, but do from accumulated skill.&quot;, &quot;Intuition over analysis.&quot;, &quot;Our schools were built for a world that no longer exists.&quot;, &quot;The world is a malleable place.&quot;, &quot;Adventure is the antidote.&quot;]">Learning rate is a higher quality signal than experience.</p>
         </div>
       </div>
       <p class="more"><a href="values.html">What I try to live by, and who inspires me →</a></p>
+      <p class="more"><a href="thinking.html">Questions I can’t stop thinking about →</a></p>
     </section>
 
     <section id="featured" class="wrap section">
@@ -217,7 +219,7 @@
           <h3>Rewarding What You Can’t Verify</h3>
           <p>A code agent trained only on visible tests learns to delete untested code until real correctness falls to 2%; random audits stopped it in the pilot but only delayed it in follow-ups.</p>
           <p class="card-results">50 follow-ups: 21 supported, 15 refuted, 12 mixed, 2 deferred</p>
-          <p class="card-miss"><span>What didn’t work</span> RL never improved honest repair above where supervised fine-tuning (SFT) left it.</p><!-- Saved for later, after "left it": , and 25% audits only delayed the hack -->
+          <p class="card-miss"><span>What didn’t work</span> RL never improved honest repair above where supervised fine-tuning (SFT) left it, when the agent picks its single best answer.</p><!-- Saved for later, after "left it": , and 25% audits only delayed the hack -->
           <p class="tags"><span class="chip">Python</span> <span class="chip">GRPO</span> <span class="chip">Reward hacking</span> <span class="chip">Code agents</span> <span class="chip">Predictions written first</span></p>
           <p class="links"><a class="deep" href="project-rewarding.html">Deep dive →</a> <a href="https://amalmehta.github.io/long_term_horizon_planning/">Live demo: proposal and results →</a> <a href="https://github.com/amalmehta/long_term_horizon_planning">Source on GitHub →</a></p>
         </div>
@@ -241,7 +243,7 @@
           <p class="card-when">2026 · toy maze, 3 seeds</p>
           <h3>Post Training Lab</h3>
           <p>A 59k-parameter transformer learns a maze by copying demonstrations (SFT), then two kinds of post-training, GRPO and DPO, lift held-out success from 70% to 80% and 81% over 3 seeds.</p>
-          <p class="card-miss"><span>What didn’t work</span> 150-level eval sets and 3 seeds, so one level is worth about 0.7 points.</p>
+          <p class="card-miss"><span>What didn’t work</span> 150-level eval sets and 3 seeds can’t separate GRPO from DPO: one level is worth about 0.7 points.</p>
           <p class="tags"><span class="chip">PyTorch</span> <span class="chip">SFT → GRPO</span> <span class="chip">DPO</span> <span class="chip">Transformers</span> <span class="chip">Reward hacking</span></p>
           <p class="links"><a class="deep" href="project-post-training.html">Deep dive →</a> <a href="https://amalmehta.github.io/PostTrainingLab/">Live demo: race the checkpoints →</a> <a href="https://github.com/amalmehta/PostTrainingLab">Code and write-up on GitHub →</a></p>
         </div>
@@ -276,7 +278,7 @@
           <img class="app-icon" src="images/apps/ramclean-128.webp" width="128" height="128" alt="RamClean’s icon: a smiling ram" loading="lazy">
           <div>
             <h3>RamClean</h3>
-            <p>A menu bar app that spots apps eating memory you aren’t using, asks before quitting them, and learns which ones you need.</p>
+            <p>A menu bar app that spots apps eating memory you aren’t using, asks before quitting them, and learns which ones you need. It also warns before your disk fills and finds space you can clear.</p>
             <p class="app-meta">Mac · macOS 14 or later · Apple silicon and Intel</p>
             <p class="links"><a class="download" href="https://github.com/amalmehta/RamClean/releases/latest/download/RamClean.zip">Download for Mac · free</a> <a href="https://github.com/amalmehta/RamClean">Code →</a></p>
           </div>
@@ -286,8 +288,8 @@
           <img class="app-icon" src="images/apps/messaging-graph-128.webp" width="128" height="128" alt="Messaging Graph’s icon: three linked dots" loading="lazy">
           <div>
             <h3>Messaging Graph</h3>
-            <p>Reads your Messages history on your Mac and shows who you’ve drifted from, plans that never got a date, and messages worth sending; your messages never leave your Mac.</p>
-            <p class="app-meta">Mac · macOS 13 or later · Intel, and Apple silicon through Rosetta</p>
+            <p>Reads your Messages history on your Mac and shows who you’ve drifted from, plans that never got a date, messages worth sending and how your friends connect, with a weekly digest; your messages never leave your Mac.</p>
+            <p class="app-meta">Mac · macOS 13 or later · Intel, and Apple silicon through Rosetta · Needs Full Disk Access</p>
             <p class="links"><a class="download" href="https://github.com/amalmehta/MessagingGraph/releases/latest/download/Messaging-Graph.zip">Download for Mac · free</a> <a href="https://github.com/amalmehta/MessagingGraph">Code →</a></p>
           </div>
         </li>
@@ -296,13 +298,23 @@
           <img class="app-icon" src="images/apps/ai-advances-128.webp" width="128" height="128" alt="AI Advances’ icon" loading="lazy">
           <div>
             <h3>AI Advances</h3>
-            <p>Tracks where AI is heading: the latest models, what each lab is working on, and dated forecasts that update themselves from public data.</p>
+            <p>Tracks where AI is heading: the latest models, what each lab is working on, and dated forecasts that update themselves every morning from public data.</p>
             <p class="app-meta">Mac · macOS 14 or later · Apple silicon and Intel</p>
             <p class="links"><a class="download" href="https://github.com/amalmehta/ai-advances/releases/latest/download/AI-Advances-v1.4.zip">Download for Mac · free</a> <a href="https://amalmehta.github.io/ai-advances/">Website →</a> <a href="https://github.com/amalmehta/ai-advances">Code →</a></p>
           </div>
         </li>
+        <li class="app" id="avengers-assemble">
+          <figure class="shot app-shot"><picture><source type="image/avif" srcset="images/avengers-assemble-960.avif"><source type="image/webp" srcset="images/avengers-assemble-960.webp"><img src="images/avengers-assemble-960.webp" alt="Avengers Assemble on a finished run: ten tasks with the agent and model that took each, reviewer scores, your ratings, and why that agent was chosen" loading="lazy" width="960" height="600"></picture></figure>
+          <img class="app-icon" src="images/apps/avengers-assemble-128.webp" width="128" height="128" alt="Avengers Assemble’s icon: a central node joined to six agents" loading="lazy">
+          <div>
+            <h3>Avengers Assemble</h3>
+            <p>Give it a goal and a company of AI agents gets to work, while multi-armed bandits learn which specialist, on which Claude model, should do each task.</p>
+            <p class="app-meta">Mac · macOS 14 or later · Apple silicon and Intel · Needs uv, plus your Anthropic API key or the free offline mock</p>
+            <p class="links"><a class="download" href="https://github.com/amalmehta/AvengersAssemble/releases/latest/download/AvengersAssemble.zip">Download for Mac · free</a> <a href="https://amalmehta.github.io/AvengersAssemble/">Website →</a> <a href="https://github.com/amalmehta/AvengersAssemble">Code →</a></p>
+          </div>
+        </li>
       </ul>
-      <p class="app-note apps-note">macOS will warn you because these apps aren’t notarized yet. To open one the first time, right-click it and choose Open, or click Open Anyway in System Settings › Privacy &amp; Security; the code is public if you’d like to check it first.</p>
+      <p class="app-note apps-note">macOS will warn you because these apps aren’t notarized yet. To open one the first time, click Open Anyway in System Settings › Privacy &amp; Security (on macOS 14 or earlier, you can also right-click it and choose Open); the code is public if you’d like to check it first.</p>
     </section>
 
     <section id="research" class="wrap section">
@@ -314,8 +326,8 @@
         <div>
           <h3>Independent ML &amp; Robotics Research</h3>
           <!-- Saved for later: <p class="where">San Francisco Bay Area</p> -->
-          <p>My focus is RL post-training when rewards can’t be checked. In a toy repair task, GRPO on visible tests raised the pass rate from 35% to 58% while true correctness fell from 31% to 2%: the agent learned to delete 98% of the branches no test reaches.</p><!-- once: Running four research programs end to end on my own: decoding hand movement from motor-cortex spikes, post-training a small transformer with GRPO and DPO, testing sim-to-real transfer of meta-learned drone control, and training a Go engine from scratch by self-play. -->
-          <p>I wrote down a prediction before each of 50 follow-ups, and 15 were refuted. Auditing a random 25% of episodes delayed the hack rather than preventing it; choosing which 10% to audit held false success to 0.04, against 0.24 at random. RL still never beat the fine-tuned starting point on honest repair.</p>
+          <p>The result that hooked me: in a toy repair task, GRPO on visible tests raised the pass rate from 35% to 58% while true correctness fell from 31% to 2%, because the agent learned to delete 98% of the branches no test reaches. My focus is RL post-training when rewards can’t be checked.</p><!-- once: Running four research programs end to end on my own: decoding hand movement from motor-cortex spikes, post-training a small transformer with GRPO and DPO, testing sim-to-real transfer of meta-learned drone control, and training a Go engine from scratch by self-play. -->
+          <p>I wrote down a prediction before each of 50 follow-ups, and 15 were refuted. Auditing a random 25% of episodes delayed the hack rather than preventing it; choosing which 10% to audit held false success to 0.04, against 0.24 at random. RL still never beat the fine-tuned starting point on honest repair when the agent picks its single best answer.</p>
           <p>Alongside it: re-centring each channel on a new day’s unlabelled spikes keeps a cursor decoder at R² 0.72 on 17 of 19 later days, against 0.42 for a linear decoder, though the two days the electrodes were re-mapped break it. In simulation, a learned residual cuts quadrotor tracking error from adaptive control’s 14.0 cm to 7.3 cm, and meta-learning adds little to it.</p><!-- Saved for later, once also: a 9×9 Go engine trained by self-play. -->
           <p>Member of the Sensorimotor AI journal club at Berkeley’s Redwood Center for Theoretical Neuroscience, and mentor to undergraduate scholars from UC Berkeley.</p>
           <p class="tags"><span class="chip">Neural decoding</span> <span class="chip">GRPO</span> <span class="chip">Sim-to-real</span> <span class="chip">Meta-learning</span></p>
@@ -342,7 +354,7 @@
         <div>
           <h3>Deep RL Researcher · Hybrid Robotics Lab</h3>
           <p class="where">UC Berkeley · Prof. Koushil Sreenath</p>
-          <p>Trained one RL policy that runs a Unitree Go1 robot dog through a whole soccer task (walk to the ball, kick it at a target, stay balanced) with no real-world training, and it hit the target about 60% of the time on the real robot. It learned entirely in simulation, which can’t fully reproduce the ball’s friction on the ground, how it deforms when kicked, or sensor noise.<!-- once: Took graduate classes in RL and control theory alongside. --></p>
+          <p>Trained one RL policy that runs a Unitree Go1 robot dog through a whole soccer task (walk to the ball, kick it at a target, stay balanced) with no real-world training, and it hit the target about 60% of the time on the real robot. It replaced the multi-policy hierarchical framework used in prior work. It learned entirely in simulation, which can’t fully reproduce the ball’s friction on the ground, how it deforms when kicked, or sensor noise.<!-- once: Took graduate classes in RL and control theory alongside. --></p>
           <p>The policy is PPO, trained in IsaacGym on a three-stage reward: reach the ball, kick it, then wait to see whether it scores. A reward gradient, a stage flag and masked inputs (the ball and goal positions are zeroed until they matter) let one network move between stages smoothly, and CPG-based gait tracking kept its walking steady. Also prototyped RLPD, SAC that learns from prior data, to fine-tune the simulation-trained policy on real robot runs and narrow the gap to hardware.</p>
           <figure class="shot"><img src="images/robot-soccer.svg" alt="Drawing: a four-legged robot dog kicks a soccer ball along an arc into a target in a goal, on a simulation grid" loading="lazy" width="1280" height="720"></figure>
           <p class="tags"><span class="chip">PPO</span> <span class="chip">IsaacGym</span> <span class="chip">Multi-stage rewards</span> <span class="chip">Sim-to-real</span> <span class="chip">RLPD</span> <span class="chip">ROS</span> <span class="chip">OpenCV</span> <span class="chip">RealSense</span></p>
@@ -376,7 +388,7 @@
         </div>
       </article>
 
-      <p class="more">B.A. in Computer Science from UC Berkeley, focused on robotics and linear system theory, with Regents, merit and leadership awards.</p><!-- Saved for later, once ended the line above: Education is in the <a href="resume/amal-mehta-resume.pdf" type="application/pdf">resume (PDF, 93 KB)</a>, and an up-to-date list of skills is below. -->
+      <p class="more">B.A. in Computer Science from UC Berkeley, focused on robotics and linear system theory, with Regents, merit and leadership awards. Graduate coursework at Stanford (non-degree) in autonomous systems and AI, including CS231N, CS330, AA271A/B and AA273.</p><!-- Saved for later, once ended the line above: Education is in the <a href="resume/amal-mehta-resume.pdf" type="application/pdf">resume (PDF, 93 KB)</a>, and an up-to-date list of skills is below. -->
     </section>
 
     <section id="more-projects" class="wrap section">
@@ -447,6 +459,7 @@
         <li class="inspo-item"><strong><a href="https://doi.org/10.1038/nature24270">Mastering the game of Go without human knowledge</a></strong> Silver et al., 2017</li>
         <li class="inspo-item"><strong><a href="https://arxiv.org/abs/1707.06347">Proximal Policy Optimization Algorithms</a></strong> Schulman et al., 2017</li>
         <li class="inspo-item"><strong><a href="https://arxiv.org/abs/1703.03400">Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks</a></strong> Finn et al., 2017</li>
+        <li class="inspo-item"><strong><a href="https://arxiv.org/abs/1903.08254">Efficient Off-Policy Meta-Reinforcement Learning via Probabilistic Context Variables</a></strong> Rakelly et al., 2019</li>
         <li class="inspo-item"><strong><a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a></strong> Vaswani et al., 2017</li>
         <li class="inspo-item"><strong><a href="https://arxiv.org/abs/2402.03300">DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</a></strong> Shao et al., 2024</li>
         <li class="inspo-item"><strong><a href="https://arxiv.org/abs/1606.06565">Concrete Problems in AI Safety</a></strong> Amodei et al., 2016</li>
@@ -496,7 +509,7 @@
       <h2 class="section-title">Skills</h2>
       <!-- The most current list of skills: update it here first; the resume's
            Technical Skills is a subset (the tests check every one is listed here). -->
-      <p class="skills-updated">Updated <time datetime="2026-10">October 2026</time></p>
+      <p class="skills-updated">Updated <time datetime="2026-11">November 2026</time></p>
       <div class="skills">
         <div class="skill-row skill-code">
           <h3><svg class="skill-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.74 7.19C7.84 8.01 3.37 10.43 3.34 12.10C3.32 13.76 7.73 16.33 8.61 17.17M15.48 7.02C16.29 7.82 20.35 10.10 20.36 11.79C20.37 13.49 16.33 16.30 15.53 17.21M13.51 4.97C13.29 6.10 12.71 9.43 12.23 11.76C11.75 14.09 10.89 17.77 10.62 18.98"/><path class="again" d="M8.83 7.23C7.98 8.03 3.80 10.35 3.73 11.98C3.65 13.61 7.61 16.18 8.38 17.02M15.41 7.25C16.31 8.10 20.74 10.77 20.80 12.33C20.86 13.89 16.61 15.91 15.78 16.62M13.66 4.43C13.34 5.62 12.25 9.17 11.71 11.57C11.16 13.97 10.62 17.61 10.41 18.82"/></svg>Languages</h3>
@@ -508,7 +521,7 @@
         </div>
         <div class="skill-row skill-methods">
           <h3><svg class="skill-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.22 6.75C5.57 6.73 10.41 6.16 12.34 6.66C14.28 7.15 14.55 9.20 15.85 9.70C17.14 10.20 19.41 9.66 20.12 9.65M4.07 17.41C5.45 17.46 10.38 18.15 12.35 17.66C14.31 17.18 14.62 15.00 15.86 14.51C17.09 14.03 19.10 14.70 19.75 14.74M17.68 7.77C18.11 8.04 20.24 8.79 20.24 9.36C20.24 9.93 18.09 10.90 17.66 11.21M17.80 12.42C18.17 12.73 20.04 13.67 20.00 14.32C19.97 14.97 17.99 15.98 17.58 16.32"/><path class="again" d="M3.76 6.36C5.17 6.38 10.20 5.94 12.22 6.49C14.24 7.03 14.58 9.11 15.87 9.62C17.16 10.14 19.28 9.57 19.96 9.56M4.40 17.42C5.76 17.50 10.60 18.34 12.55 17.87C14.50 17.40 14.86 15.13 16.10 14.60C17.33 14.07 19.34 14.68 19.98 14.69M17.82 7.58C18.19 7.94 20.11 9.17 20.08 9.78C20.04 10.40 18.00 11.01 17.58 11.25M17.59 12.78C18.05 13.00 20.38 13.57 20.35 14.13C20.33 14.70 17.94 15.82 17.46 16.15"/></svg>Methods</h3>
-          <p class="tags"><span class="chip">PPO, SAC, TD3</span> <span class="chip">SFT, GRPO, DPO</span> <span class="chip">Meta-RL (MAML, PEARL)</span> <span class="chip">MCTS self-play</span> <span class="chip">CTC decoding</span> <span class="chip">GANs</span> <span class="chip">Segmentation</span> <span class="chip">Domain adaptation</span> <span class="chip">Neural decoding</span> <span class="chip">L1 adaptive control</span> <span class="chip">A* planning</span></p>
+          <p class="tags"><span class="chip">PPO, SAC, TD3</span> <span class="chip">SFT, GRPO, DPO</span> <span class="chip">Meta-RL (MAML, PEARL)</span> <span class="chip">MCTS self-play</span> <span class="chip">CTC decoding</span> <span class="chip">GANs</span> <span class="chip">Segmentation</span> <span class="chip">Domain adaptation</span> <span class="chip">Multi-armed bandits (Thompson sampling)</span> <span class="chip">Neural decoding</span> <span class="chip">L1 adaptive control</span> <span class="chip">A* planning</span></p>
         </div>
         <div class="skill-row skill-apps">
           <h3><svg class="skill-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.60 4.70C7.14 4.71 17.27 2.33 19.81 4.76C22.36 7.20 22.55 16.91 19.89 19.30C17.23 21.70 6.43 21.63 3.86 19.12C1.28 16.61 4.34 6.71 4.44 4.23M4.19 8.95C5.46 8.90 9.19 8.68 11.83 8.66C14.46 8.64 18.63 8.80 19.99 8.83M6.89 6.08C6.90 6.10 6.92 6.19 6.94 6.21C6.96 6.24 6.98 6.21 7.01 6.24C7.04 6.28 7.05 6.32 7.12 6.40C7.20 6.47 7.45 6.60 7.44 6.70C7.42 6.80 7.10 6.96 7.05 7.00C7.00 7.03 7.17 6.89 7.13 6.92C7.10 6.95 6.84 7.10 6.82 7.17C6.81 7.24 7.08 7.30 7.03 7.33C6.98 7.36 6.56 7.35 6.51 7.34C6.47 7.33 6.73 7.27 6.75 7.27C6.76 7.27 6.64 7.41 6.60 7.32C6.55 7.24 6.50 6.82 6.48 6.76C6.46 6.70 6.46 6.98 6.47 6.95C6.48 6.93 6.51 6.70 6.52 6.63C6.53 6.56 6.54 6.58 6.54 6.53C6.54 6.48 6.49 6.35 6.51 6.34C6.53 6.32 6.61 6.45 6.68 6.46C6.74 6.47 6.86 6.40 6.90 6.38M9.04 6.11C9.06 6.12 9.16 6.13 9.19 6.18C9.22 6.23 9.17 6.34 9.21 6.41C9.25 6.47 9.35 6.54 9.43 6.56C9.51 6.59 9.74 6.50 9.71 6.58C9.67 6.66 9.27 6.93 9.22 7.05C9.16 7.18 9.38 7.31 9.40 7.32C9.42 7.32 9.34 7.14 9.32 7.10C9.31 7.06 9.36 7.05 9.30 7.07C9.23 7.10 9.04 7.23 8.92 7.24C8.80 7.25 8.66 7.18 8.57 7.13C8.48 7.08 8.37 6.94 8.37 6.94C8.37 6.95 8.51 7.19 8.56 7.16C8.61 7.13 8.64 6.84 8.67 6.77C8.70 6.69 8.73 6.74 8.74 6.71C8.74 6.68 8.64 6.62 8.68 6.60C8.71 6.58 8.92 6.63 8.94 6.58C8.95 6.52 8.70 6.33 8.78 6.29C8.85 6.25 9.29 6.32 9.40 6.33M8.18 13.67C8.81 13.70 10.72 13.89 12.00 13.84C13.28 13.79 15.22 13.46 15.86 13.38M7.92 16.14C8.37 16.15 9.77 16.22 10.62 16.23C11.46 16.24 12.60 16.20 13.00 16.20"/><path class="again" d="M4.76 4.64C7.34 4.67 17.75 2.36 20.22 4.83C22.70 7.31 22.36 17.15 19.60 19.51C16.84 21.86 6.27 21.54 3.66 18.97C1.05 16.39 3.90 6.53 3.94 4.05M4.45 9.16C5.76 9.16 9.75 9.16 12.34 9.17C14.93 9.18 18.73 9.21 20.01 9.22M7.27 6.29C7.27 6.25 7.26 6.06 7.28 6.06C7.29 6.07 7.34 6.27 7.38 6.34C7.42 6.40 7.53 6.44 7.53 6.46C7.52 6.48 7.34 6.32 7.36 6.47C7.37 6.62 7.64 7.26 7.61 7.38C7.58 7.49 7.27 7.13 7.17 7.17C7.06 7.22 7.03 7.61 6.97 7.62C6.90 7.64 6.79 7.34 6.77 7.26C6.74 7.18 6.82 7.23 6.80 7.17C6.78 7.11 6.78 6.96 6.67 6.90C6.56 6.85 6.24 6.86 6.13 6.86C6.03 6.86 5.98 6.92 6.04 6.91C6.11 6.89 6.43 6.79 6.52 6.76C6.62 6.73 6.61 6.79 6.63 6.72C6.65 6.66 6.67 6.41 6.64 6.35C6.61 6.30 6.43 6.41 6.44 6.42C6.45 6.44 6.59 6.50 6.69 6.44C6.78 6.37 6.97 6.12 7.03 6.05M8.73 6.66C8.83 6.55 9.23 6.08 9.32 6.00C9.42 5.93 9.33 6.14 9.30 6.22C9.27 6.30 9.16 6.41 9.14 6.49C9.13 6.57 9.16 6.63 9.20 6.69C9.24 6.75 9.36 6.72 9.41 6.86C9.45 6.99 9.52 7.42 9.46 7.50C9.41 7.59 9.11 7.43 9.09 7.37C9.08 7.32 9.39 7.13 9.38 7.17C9.36 7.22 9.07 7.59 9.01 7.64C8.95 7.68 9.13 7.58 9.02 7.45C8.91 7.32 8.44 6.99 8.35 6.85C8.26 6.72 8.42 6.60 8.48 6.64C8.54 6.68 8.68 7.16 8.70 7.10C8.73 7.05 8.67 6.43 8.63 6.31C8.60 6.20 8.44 6.40 8.50 6.43C8.56 6.47 8.88 6.57 9.01 6.53C9.14 6.49 9.23 6.21 9.28 6.19C9.33 6.18 9.31 6.39 9.31 6.43M8.04 13.56C8.63 13.61 10.29 13.77 11.55 13.82C12.81 13.87 14.94 13.84 15.62 13.85M8.30 16.36C8.69 16.37 9.87 16.44 10.61 16.41C11.35 16.38 12.39 16.22 12.75 16.18"/></svg>Product &amp; apps</h3>
@@ -568,7 +581,6 @@
     <section id="outside" class="wrap section outside">
       <h2 class="section-title">Outside work</h2>
       <svg class="ridge" viewBox="0 0 1000 56" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 53.5L4 52.9L8 52.4L12 51.9L16 51.5L20 51.1L24 50.8L28 50.5L32 50.3L36 50.0L40 49.7L44 49.3L48 48.7L52 48.0L56 47.1L60 46.1L64 44.9L68 43.5L72 42.0L76 40.4L80 38.8L84 37.1L88 35.4L92 33.6L96 31.7L100 29.6L104 32.0L108 34.2L112 36.2L116 38.0L120 39.5L124 40.8L128 41.9L132 42.7L136 43.4L140 44.0L144 44.4L148 44.8L152 45.2L156 45.6L160 46.0L164 46.4L168 46.9L172 47.3L176 47.7L180 48.0L184 48.1L188 48.2L192 48.0L196 47.7L200 47.3L204 46.7L208 45.9L212 45.1L216 44.2L220 43.3L224 42.3L228 41.3L232 40.4L236 39.3L240 38.3L244 37.1L248 35.8L252 34.2L256 32.5L260 30.4L264 28.1L268 25.4L272 22.4L276 19.1L280 15.4L284 18.5L288 21.4L292 24.1L296 26.6L300 29.0L304 31.2L308 33.4L312 35.4L316 37.3L320 39.0L324 40.5L328 41.8L332 42.9L336 43.8L340 44.5L344 45.0L348 45.4L352 45.7L356 46.0L360 46.2L364 46.4L368 46.7L372 46.9L376 47.2L380 47.5L384 47.8L388 48.0L392 48.1L396 48.0L400 47.8L404 47.5L408 46.9L412 46.2L416 45.4L420 44.4L424 43.4L428 42.3L432 41.1L436 40.0L440 38.8L444 37.6L448 36.3L452 34.9L456 33.3L460 31.6L464 29.6L468 27.3L472 27.3L476 29.6L480 31.6L484 33.4L488 34.9L492 36.3L496 37.5L500 38.6L504 39.7L508 40.8L512 41.8L516 42.8L520 43.8L524 44.7L528 45.5L532 46.2L536 46.7L540 47.1L544 47.3L548 47.3L552 47.2L556 46.9L560 46.5L564 46.1L568 45.6L572 45.1L576 44.7L580 44.2L584 43.8L588 43.3L592 42.8L596 42.2L600 41.4L604 40.5L608 39.4L612 38.0L616 36.4L620 34.5L624 32.4L628 30.1L632 27.5L636 24.8L640 21.8L644 18.7L648 15.4L652 11.9L656 8.1L660 4.0L664 8.6L668 12.9L672 16.7L676 20.2L680 23.3L684 26.0L688 28.4L692 30.5L696 32.3L700 33.9L704 35.4L708 36.7L712 38.0L716 39.2L720 40.4L724 41.5L728 42.7L732 43.7L736 44.7L740 45.5L744 46.2L748 46.8L752 47.1L756 47.3L760 47.3L764 47.2L768 47.0L772 46.7L776 46.3L780 46.0L784 45.6L788 45.3L792 45.0L796 44.7L800 44.4L804 44.0L808 43.4L812 42.8L816 41.9L820 40.9L824 39.6L828 38.1L832 36.3L836 34.4L840 32.2L844 29.9L848 27.4L852 24.8L856 22.1L860 19.1L864 22.4L868 25.5L872 28.3L876 31.0L880 33.4L884 35.6L888 37.5L892 39.2L896 40.6L900 41.8L904 42.8L908 43.7L912 44.5L916 45.3L920 46.0L924 46.8L928 47.5L932 48.3L936 49.2L940 50.0L944 50.8L948 51.5L952 52.2L956 52.7L960 53.1L964 53.4L968 53.6L972 53.6L976 53.6L980 53.6L984 53.6L988 53.6L992 53.6L996 53.8L1000 54.0"/></svg>
-      <p>I compete in <span class="messi-plain">soccer tournaments</span><button type="button" class="messi-egg" data-script="messi.js" aria-label="soccer tournaments (opens a replay of Messi’s goal)" hidden>soccer tournaments</button>.</p>
       <!-- Saved for later, the race list once after "outdoors": I’ve finished Ironman-distance triathlons, the Lake Tahoe Marathon, the San Francisco Ultra and the Death Ride, competed in soccer tournaments and climbed Kilimanjaro. I’ve also led trips to Half Dome and the Channel Islands, and a team in the Lake Tahoe relay. -->
       <p>The summer after my freshman year at Berkeley, I biked across the country from Seattle to DC with a group of fellow Eagle Scouts.</p>
       <!-- Saved for later, cut from the paragraphs above:
@@ -577,9 +589,11 @@
            Independent research: Some of these projects are featured above, and the rest are below.
            Seattle to DC: The lesson I took from it: you don’t have to be perfectly ready to start. -->
       <p>I’ve summited Kilimanjaro, trekked the Salkantay trail to Machu Picchu, and led trips to Half Dome and the Channel Islands.</p>
+      <p>I dream about climbing <a href="photos.html#place-cerro-torre">Cerro Torre</a>.</p>
       <p>In winter I ski, including Niseko and Whistler with Chamonix next, and climb frozen waterfalls.</p>
-      <p>Someday I want to climb <a href="photos.html#place-cerro-torre">Cerro Torre</a>.</p>
+      <p>I love to compete in <span class="messi-plain">soccer tournaments</span><button type="button" class="messi-egg" data-script="messi.js" aria-label="soccer tournaments (opens a replay of Messi’s goal)" hidden>soccer tournaments</button>.</p>
       <p>When I travel, I go for the history, art, architecture, cuisine and people, which so far has taken me across <a href="photos.html">Europe, Asia, Africa and the Americas</a>.</p>
+      <p>For the love of the games.</p>
     </section>
 
     <section id="open-to" class="wrap section">
@@ -600,7 +614,8 @@
   <footer class="wrap footer">
     <p>Amal Mehta · <a href="https://reachouts.me/?u=amal">Get in touch</a> · <a class="email" href="https://reachouts.me/?u=amal" data-u="amal.mehta" data-d="gmail.com">amal.mehta [at] gmail.com</a> · <a rel="me" href="https://www.linkedin.com/in/amal-mehta-264413a9/">LinkedIn</a> · <a rel="me" href="https://github.com/amalmehta">GitHub</a></p>
     <p class="footer-pages"><a href="thinking.html">Things I’m thinking about</a> · <a href="photos.html">Travel</a> · <a href="interests.html">Interests</a> · <a href="values.html">What I try to live by</a> · <a href="feed.xml">RSS</a></p>
-    <!-- Saved for later, the footer's sign-off: <p class="signoff">Thanks for stopping by.</p> (once also: <span class="secrets">There are eight secrets here.</span>) -->
+    <p class="signoff">Thanks for stopping by.</p>
+    <!-- Saved for later, once beside the sign-off: <span class="secrets">There are eight secrets here.</span> -->
     <!-- Saved for later, the footer notes: <p class="footer-note">No trackers, no cookies.</p> <p class="footer-note">Plain HTML and CSS, tested on every push. <a href="https://github.com/amalmehta/PortfolioWebsite">Source on GitHub</a>.</p> -->
   </footer>
 </body>
