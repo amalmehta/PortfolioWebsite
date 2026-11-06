@@ -79,7 +79,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .nav-brand { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.6rem; min-width: 0; }
 .nav-status { font-family: var(--serif); font-style: italic; font-size: 0.92rem; color: var(--warm); white-space: nowrap; }
 @media (max-width: 640px) { .nav-brand { flex-direction: column; row-gap: 0; line-height: 1.2; } .nav-status { font-size: 0.8rem; } }
-@media (max-width: 420px) { .nav-updated { display: none; } }  /* the nav links need the room on a phone */
+.nav-status:hover { color: var(--warm); text-decoration: underline; text-underline-offset: 0.2em; }
 .site-header {
   position: sticky; top: 0; z-index: 10;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
