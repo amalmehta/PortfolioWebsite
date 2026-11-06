@@ -920,7 +920,7 @@ class LinkingTest(unittest.TestCase):
 
     def test_thinking_updated_matches_newest_thought(self):
         html = re.sub(r"<!--.*?-->", "", THINKING.read_text(encoding="utf-8"), flags=re.S)
-        shown = re.search(r'class="page-updated">Updated <time datetime="(\d{4}-\d{2})">', html).group(1)
+        shown = re.search(r'class="page-updated">Newest question <time datetime="(\d{4}-\d{2})">', html).group(1)
         newest = max(re.findall(r'<p class="when" hidden>Added <time datetime="(\d{4}-\d{2})-\d{2}">', html))
         self.assertEqual(shown, newest)
 
