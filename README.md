@@ -15,3 +15,7 @@ My personal website. The profile has a North star, its four most vetted research
 - [Instructions](docs/INSTRUCTIONS.md): preview locally, edit content, rebuild the resume, publish
 - [System design](docs/SYSTEM-DESIGN.md): how it's built, decisions, limits
 - [File structure](docs/FILE-STRUCTURE.md): what's where
+
+## Credits
+
+The handshake icon between the Hans Zimmer and Chris Nolan cards on What I try to live by is from [Lucide](https://lucide.dev), under the ISC licence.

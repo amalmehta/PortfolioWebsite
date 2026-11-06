@@ -75,6 +75,11 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   }
 }
 @keyframes read-progress { to { transform: scaleX(1); } }
+/* "Evolving site" beside the name, under it on a phone where the nav links need the room */
+.nav-brand { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.6rem; min-width: 0; }
+.nav-status { font-family: var(--serif); font-style: italic; font-size: 0.92rem; color: var(--warm); white-space: nowrap; }
+@media (max-width: 640px) { .nav-brand { flex-direction: column; row-gap: 0; line-height: 1.2; } .nav-status { font-size: 0.8rem; } }
+@media (max-width: 420px) { .nav-updated { display: none; } }  /* the nav links need the room on a phone */
 .site-header {
   position: sticky; top: 0; z-index: 10;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
@@ -500,6 +505,14 @@ picture { display: contents; }
 .inspo-group { margin-top: 3rem; }
 /* Inspiration: a card per person or thing, with a drawing, in a grid like the photos */
 .inspo:has(.inspo-card) { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+/* Collaborators share a row on the same columns as the other cards, a small handshake over the gap between their drawings */
+.inspo-pair { position: relative; grid-column: 1 / -1; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.handshake { display: flex; justify-content: center; }
+.handshake svg { box-sizing: border-box; width: 2rem; height: 2rem; padding: 0.38rem; border-radius: 50%; background: var(--warm-soft); color: var(--warm); box-shadow: 0 0 0 3px var(--bg); }
+@media (min-width: 576px) {
+  .handshake { position: absolute; z-index: 1; top: 0; left: 0; width: calc((100% - 1.5rem) / 2); aspect-ratio: 3 / 2; align-items: center; justify-content: flex-end; pointer-events: none; }  /* as tall as the first drawing */
+  .handshake svg { transform: translateX(calc(50% + 0.75rem)); }
+}
 .inspo-link { display: block; margin-top: 0.3rem; font-weight: 500; }
 .media, .watching, .tools { margin-top: 3rem; }
 .media-kind { display: inline-block; margin-right: 0.4rem; padding: 0 0.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 8px; background: var(--warm-soft); color: var(--warm); vertical-align: 0.1em; }
@@ -1000,6 +1013,8 @@ body { hanging-punctuation: first last; }
 .topic:nth-child(even) .skill-icon { background: var(--warm-soft); color: var(--warm); }
 
 /* Travel: a trip's stops as a timeline. timeline.js draws the line down and lights each stop in turn. */
+.trip-stops > summary { margin-top: 0.8rem; font-size: 0.88rem; color: var(--accent); cursor: pointer; width: fit-content; }
+.trip-stops > summary:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 .trip-timeline { --dot: 0.7rem; position: relative; list-style: none; margin: 1rem 0 0; padding: 0 0 0 1.6rem; font-size: 0.9rem; line-height: 1.45; color: var(--muted); }
 .trip-timeline::before { content: ""; position: absolute; left: calc(var(--dot) / 2 - 1px); top: 0.45rem; bottom: 0.6rem; width: 2px; border-radius: 2px;
   background: linear-gradient(var(--warm), color-mix(in srgb, var(--accent) 70%, var(--warm))); transform-origin: top; }

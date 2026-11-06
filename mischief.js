@@ -2,7 +2,7 @@
 // live by: "It's not that serious." knocks the Ways list out of place, and it settles back.
 // Without JavaScript the line stays plain text; with reduced motion it stays still.
 (() => {
-  console.log("Oh, you read the console too.\nThe site is plain HTML. The source is on GitHub: https://github.com/amalmehta/PortfolioWebsite\nIt's not that serious.");
+  console.log("Oh, you read the console too.\nThe site is plain HTML. The source is on GitHub: https://github.com/amalmehta/PortfolioWebsite");
 
   const button = document.querySelector(".serious-egg");
   if (!button) return;

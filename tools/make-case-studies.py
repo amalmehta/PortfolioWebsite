@@ -227,7 +227,7 @@ def page(p, i):
   <a class="skip" href="#top">Skip to content</a>
   <header class="site-header">
     <nav class="wrap nav">
-      <a class="nav-name" href="index.html">Amal Mehta</a>
+      <span class="nav-brand"><a class="nav-name" href="index.html">Amal Mehta</a><span class="nav-status">Evolving site<span class="nav-updated"> · updated <time datetime="2026-11">Nov 2026</time></span></span></span>
       <div class="nav-links">
         <a href="index.html">Profile</a>
         <a href="index.html#featured" aria-current="true">Projects</a>

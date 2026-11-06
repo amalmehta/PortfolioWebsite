@@ -886,12 +886,281 @@ def waymo():
         body.append(f'<rect x="{px + dx}" y="{py - 16}" width="6" height="22" fill="#a57a48"/>')
     return wrap(defs, body)
 
+def zimmer():
+    """Hans Zimmer draws you into his world: alone at a great pipe organ in the dark, the pipes rising either
+    side and parting on a black hole ringed with light, the sound spreading out into it."""
+    rng = random.Random(2014)
+    defs = ('<radialGradient id="zspace" cx="0.5" cy="0.36" r="0.75">'
+            '<stop offset="0" stop-color="#3c2a4d"/><stop offset="0.5" stop-color="#150f28"/><stop offset="1" stop-color="#05060d"/></radialGradient>'
+            '<linearGradient id="zpipe" x1="0" y1="0" x2="1" y2="0">'
+            '<stop offset="0" stop-color="#4e4a4c"/><stop offset="0.38" stop-color="#d9c7a0"/><stop offset="0.55" stop-color="#f6e7c4"/><stop offset="1" stop-color="#5b4f44"/></linearGradient>'
+            '<linearGradient id="zdisk" x1="0" y1="0" x2="1" y2="0">'
+            '<stop offset="0" stop-color="#ff8a3c" stop-opacity="0"/><stop offset="0.2" stop-color="#ffb35c"/><stop offset="0.5" stop-color="#fff3cf"/>'
+            '<stop offset="0.8" stop-color="#ffb35c"/><stop offset="1" stop-color="#ff8a3c" stop-opacity="0"/></linearGradient>'
+            '<radialGradient id="zhalo" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0.3" stop-color="#ffc98a" stop-opacity="0.65"/><stop offset="1" stop-color="#ffc98a" stop-opacity="0"/></radialGradient>'
+            '<radialGradient id="zlamp" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0" stop-color="#ffd596" stop-opacity="0.9"/><stop offset="1" stop-color="#ffd596" stop-opacity="0"/></radialGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#zspace)"/>']
+    for _ in range(190):
+        x, y = rng.uniform(0, W), rng.uniform(0, 560)
+        body.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{rng.uniform(0.7, 2.2):.1f}" fill="#fff6dc" opacity="{rng.uniform(0.3, 0.95):.2f}"/>')
+    # The black hole: a halo, the disk passing in front, and its light bent up over the top
+    cx, cy, r = 600, 262, 118
+    body.append(f'<circle cx="{cx}" cy="{cy}" r="{r * 2.6:.0f}" fill="url(#zhalo)"/>')
+    body.append(f'<circle cx="{cx}" cy="{cy}" r="{r + 15}" fill="none" stroke="#ffdca6" stroke-width="13"/>')
+    body.append(f'<circle cx="{cx}" cy="{cy}" r="{r + 3}" fill="none" stroke="#fff6df" stroke-width="5"/>')
+    body.append(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="#020204"/>')
+    body.append(f'<ellipse cx="{cx}" cy="{cy + 6}" rx="330" ry="23" fill="url(#zdisk)"/>')
+    body.append(f'<ellipse cx="{cx}" cy="{cy + 6}" rx="245" ry="9" fill="#fffdf0" opacity="0.8"/>')
+    # The sound, spreading out from the console in faint arcs
+    for k in range(1, 7):
+        rx = 110 + k * 92
+        body.append(f'<path d="M{600 - rx} 640 A{rx} {rx * 0.72:.0f} 0 0 1 {600 + rx} 640" fill="none" stroke="#ffe3b0" stroke-width="2.5" opacity="{0.5 - k * 0.06:.2f}"/>')
+    # The pipes: ranks climbing toward the edges, leaving the middle open on the sky
+    for side in (-1, 1):
+        for rank, (y0, shade) in enumerate(((610, 0.62), (640, 1.0))):
+            for i in range(11):
+                w = 48 - i * 1.6 if rank else 40 - i
+                x = 600 + side * (292 + i * (w + 5) + rank * 12)
+                top = 345 - i * 34 - rank * -46 + (i % 2) * 18
+                left = x - w / 2
+                body.append(f'<rect x="{left:.0f}" y="{top}" width="{w:.0f}" height="{y0 - top}" fill="url(#zpipe)" opacity="{shade}"/>')
+                body.append(f'<path d="M{left:.0f} {top} a{w / 2:.0f} {w / 5:.0f} 0 0 1 {w:.0f} 0" fill="#f6e7c4" opacity="{shade}"/>')
+                mouth = y0 - 74
+                body.append(f'<path d="M{left + 3:.0f} {mouth} h{w - 6:.0f} l-{(w - 6) / 2:.0f} -18 Z" fill="#1a1512" opacity="{shade}"/>')
+    # The case the pipes stand in, and the floor
+    body.append(f'<rect y="630" width="{W}" height="170" fill="#120c09"/>')
+    body.append(f'<rect y="630" width="{W}" height="9" fill="#5c3f26"/>')
+    # The console, lit by one lamp: three banks of keys, side on
+    body.append('<ellipse cx="620" cy="600" rx="290" ry="165" fill="url(#zlamp)" opacity="0.55"/>')
+    body.append('<path d="M640 740 V520 Q640 500 660 500 H830 Q850 500 850 520 V740 Z" fill="#3a2415"/>')
+    body.append('<rect x="650" y="514" width="190" height="56" rx="4" fill="#efe7d3"/>')
+    for y in (526, 538, 550, 560):
+        body.append(f'<path d="M662 {y} H828" stroke="#6d6250" stroke-width="1.5"/>')
+    for i, y in enumerate((588, 612, 636)):
+        body.append(f'<rect x="{596 - i * 12}" y="{y}" width="{62 + i * 12}" height="15" rx="2" fill="#f4efe2"/>')
+        body.append(f'<rect x="{596 - i * 12}" y="{y + 15}" width="{62 + i * 12}" height="6" fill="#16100c"/>')
+    body.append('<rect x="812" y="430" width="8" height="72" fill="#7c5b34"/>')
+    body.append('<path d="M780 432 H852 L838 404 H794 Z" fill="#d9a441"/>')
+    # Him, side on at the bench: dark shirt, longish grey hair, leaning in with his hands on the keys
+    body.append('<rect x="372" y="668" width="184" height="24" rx="6" fill="#4a2e1a"/>')
+    for x in (386, 528):
+        body.append(f'<rect x="{x}" y="690" width="14" height="60" fill="#2a1a0f"/>')
+    body.append('<path d="M440 662 C480 650 540 654 564 670 L588 742 H558 L534 690 C498 690 462 690 438 688 Z" fill="#14151c"/>')
+    body.append('<path d="M410 672 C402 610 426 530 488 516 C532 512 552 546 540 588 L508 672 Z" fill="#1d1f29"/>')
+    body.append('<path d="M500 556 C530 572 560 586 600 594" fill="none" stroke="#1d1f29" stroke-width="29" stroke-linecap="round"/>')
+    body.append(f'<circle cx="606" cy="596" r="12" fill="{SKIN}"/>')
+    body.append(f'<rect x="490" y="490" width="28" height="36" fill="{SKIN_SHADE}" transform="rotate(14 504 508)"/>')
+    body.append(f'<circle cx="518" cy="462" r="38" fill="{SKIN}"/>')
+    body.append('<path d="M550 470 l12 8 -13 5 Z" fill="#c08a66"/>')
+    body.append('<path d="M478 476 C466 416 530 402 556 442 C530 436 516 446 510 470 C508 492 498 514 484 516 C474 510 476 490 478 476 Z" fill="#c9c6c0"/>')
+    return wrap(defs, body)
+
+
+def nolan():
+    """Chris Nolan uses life to inspire art: a city street bending up and folding over itself, a director and a
+    film camera in the foreground, and a spinning top still going on the ground beside them."""
+    rng = random.Random(2010)
+    vx, vy, ground = 600, 395, 330
+    defs = ('<linearGradient id="nsky" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#4d6072"/><stop offset="0.5" stop-color="#f6e6c9"/><stop offset="1" stop-color="#4d6072"/></linearGradient>'
+            '<linearGradient id="nroad" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#b9b3a6"/><stop offset="0.3" stop-color="#6c6c6e"/><stop offset="1" stop-color="#2d2f35"/></linearGradient>'
+            '<linearGradient id="ntop" x1="0" y1="0" x2="1" y2="0">'
+            '<stop offset="0" stop-color="#7c5a22"/><stop offset="0.45" stop-color="#f3d27c"/><stop offset="1" stop-color="#8d6527"/></linearGradient>')
+    def lean(x, height, d):
+        s = 1 / d
+        return (vx + x * s, vy + (ground - height) * s)
+    def side(sign):
+        """One side of the street, drawn far to near so nearer buildings overlap."""
+        out = []
+        d = 9.0
+        while d > 0.9:
+            d2 = max(d * rng.uniform(0.62, 0.74), 0.86)
+            height = rng.uniform(170, 318)
+            x0 = 300 * sign
+            wall = rng.choice(("#a79a86", "#8f8778", "#b5a78e", "#7f7a72", "#9b8c7c", "#c2b49b"))
+            haze = min(0.85, 0.12 + d / 12)
+            far_bottom, near_bottom = lean(x0, 0, d), lean(x0, 0, d2)
+            far_top, near_top = lean(x0, height, d), lean(x0, height, d2)
+            out.append(f'<polygon points="{pts([far_bottom, near_bottom, near_top, far_top])}" fill="{wall}"/>')
+            windows = {True: [], False: []}  # lit and dark, each drawn as one path to keep the file small
+            # The facade facing the viewer's way, out to the edge of the frame
+            edge = -60 if sign < 0 else W + 60
+            out.append(f'<polygon points="{pts([near_bottom, (edge, near_bottom[1]), (edge, near_top[1]), near_top])}" fill="{wall}"/>')
+            for row in range(1, 5):
+                h0, h1 = height * row / 5.2, height * (row + 0.55) / 5.2
+                for col in range(6):
+                    t0, t1 = (col + 0.2) / 6, (col + 0.72) / 6
+                    i0, i1 = 1 / d + (1 / d2 - 1 / d) * t0, 1 / d + (1 / d2 - 1 / d) * t1
+                    a, b, c, e = lean(x0, h0, 1 / i0), lean(x0, h0, 1 / i1), lean(x0, h1, 1 / i1), lean(x0, h1, 1 / i0)
+                    lit = rng.random() < 0.3
+                    windows[lit].append("M" + "L".join(f"{x:.0f} {y:.0f}" for x, y in (a, b, c, e)) + "Z")
+                y = near_bottom[1] + (near_top[1] - near_bottom[1]) * (row + 0.1) / 5.2
+                y2 = near_bottom[1] + (near_top[1] - near_bottom[1]) * (row + 0.65) / 5.2
+                x = near_bottom[0] + sign * 18
+                while (x < edge - 20) if sign > 0 else (x > edge + 20):
+                    lit = rng.random() < 0.3
+                    w = 24 / d2
+                    bx = x if sign > 0 else x - w
+                    windows[lit].append(f"M{bx:.0f} {min(y, y2):.0f}h{w:.0f}v{abs(y2 - y):.0f}h{-w:.0f}Z")
+                    x += sign * 46 / d2
+            for lit, colour in ((False, "#3a3f49"), (True, "#ffd98e")):
+                out.append(f'<path d="{"".join(windows[lit])}" fill="{colour}"/>')
+            out.append(f'<polygon points="{pts([far_bottom, near_bottom, near_top, far_top])}" fill="#f6e6c9" opacity="{haze * 0.55:.2f}"/>')
+            d = d2
+        return "".join(out)
+    road = [(vx, vy), lean(320, 0, 0.72), lean(-320, 0, 0.72)]
+    street = f'<polygon points="{pts(road)}" fill="url(#nroad)"/>'
+    for k in range(9):
+        d0 = 7 * 0.72 ** k
+        a, b = lean(-5, 0, d0), lean(5, 0, d0)
+        c, e = lean(5, 0, d0 * 0.86), lean(-5, 0, d0 * 0.86)
+        street += f'<polygon points="{pts([a, b, c, e])}" fill="#ece6d6" opacity="0.8"/>'
+    half = street + side(-1) + side(1)
+    body = [f'<rect width="{W}" height="{H}" fill="url(#nsky)"/>']
+    # The same city folded over: the street above is this street, mirrored about the horizon
+    body.append(f'<g transform="translate(0,{2 * vy}) scale(1,-1)" opacity="0.92">{half}</g>')
+    body.append(half)
+    body.append(f'<ellipse cx="{vx}" cy="{vy}" rx="170" ry="32" fill="#fff4dc" opacity="0.8"/>')
+    # The spinning top, on the road in front: a little gold cone, its blur and its shadow
+    tx, ty = 900, 742
+    body.append(f'<ellipse cx="{tx}" cy="{ty + 4}" rx="56" ry="10" fill="#101114" opacity="0.55"/>')
+    body.append(f'<path d="M{tx} {ty} L{tx - 40} {ty - 58} A40 13 0 0 1 {tx + 40} {ty - 58} Z" fill="url(#ntop)" transform="rotate(6 {tx} {ty})"/>')
+    body.append(f'<rect x="{tx + 2}" y="{ty - 96}" width="7" height="30" rx="3" fill="#a87d33" transform="rotate(6 {tx} {ty})"/>')
+    for r, op in ((52, 0.55), (64, 0.35), (78, 0.2)):
+        body.append(f'<path d="M{tx - r} {ty - 60} A{r} {r * 0.3:.0f} 0 0 0 {tx + r} {ty - 60}" fill="none" stroke="#f3d27c" stroke-width="3" opacity="{op}" transform="rotate(6 {tx} {ty})"/>')
+    # The director and his camera, dark against all of it, at the left of the frame
+    cam, base = 410, 800
+    for dx in (-78, 6, 84):
+        body.append(f'<path d="M{cam} 572 L{cam + dx} {base}" stroke="#0d0e12" stroke-width="11"/>')
+    body.append(f'<rect x="{cam - 80}" y="492" width="166" height="88" rx="8" fill="#0f1014"/>')
+    for ox in (-34, 40):
+        body.append(f'<circle cx="{cam + ox}" cy="452" r="42" fill="#17181d"/><circle cx="{cam + ox}" cy="452" r="12" fill="#5e6068"/>')
+    body.append(f'<rect x="{cam + 84}" y="512" width="72" height="46" rx="4" fill="#1b1c22"/>')
+    body.append(f'<rect x="{cam + 150}" y="500" width="24" height="70" rx="5" fill="#0d0e12"/>')
+    body.append(f'<ellipse cx="{cam + 170}" cy="535" rx="7" ry="28" fill="#6fa6c8"/>')
+    px = 205
+    body.append(f'<path d="M{px - 62} 800 L{px - 72} 500 C{px - 74} 410 {px - 42} 368 {px} 366 C{px + 44} 368 {px + 74} 410 {px + 72} 500 L{px + 62} 800 Z" fill="#0d0e12"/>')
+    body.append(f'<path d="M{px - 8} 372 L{px + 8} 440 L{px + 24} 372 Z" fill="#d8d6cf"/>')
+    body.append(f'<path d="M{px + 60} 420 C{px + 92} 462 {px + 120} 490 {px + 142} 504" fill="none" stroke="#0d0e12" stroke-width="30" stroke-linecap="round"/>')
+    body.append(f'<rect x="{px - 14}" y="330" width="34" height="46" fill="{SKIN_SHADE}"/>')
+    body.append(f'<circle cx="{px + 8}" cy="300" r="42" fill="{SKIN}"/>')
+    body.append(f'<path d="M{px + 46} 304 l14 9 -15 4 Z" fill="{SKIN_SHADE}"/>')
+    body.append(f'<path d="M{px - 36} 322 C{px - 58} 256 {px + 16} 232 {px + 54} 276 C{px + 26} 268 {px + 8} 280 {px - 4} 298 C{px - 12} 316 {px - 22} 332 {px - 36} 322 Z" fill="#b89f73"/>')
+    return wrap(defs, body)
+
+def finn():
+    """Chelsea Finn helped machines learn how to learn: a robot arm in a bright lab, shown a task once (the faint
+    dotted path) and managing it on a new object, with the earlier tries set aside along the bench."""
+    defs = ('<linearGradient id="fwall" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#eef2f5"/><stop offset="1" stop-color="#d5dde3"/></linearGradient>'
+            '<linearGradient id="fbench" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#b98f63"/><stop offset="1" stop-color="#7f5c3d"/></linearGradient>'
+            '<linearGradient id="farm" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9c3cc"/></linearGradient>'
+            '<radialGradient id="flight" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0" stop-color="#fff8e6" stop-opacity="0.9"/><stop offset="1" stop-color="#fff8e6" stop-opacity="0"/></radialGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="url(#fwall)"/>']
+    # A window of daylight, and a whiteboard with an inner and an outer loop on it
+    body.append('<rect x="60" y="60" width="300" height="290" rx="6" fill="#bcdcf2"/><path d="M210 60v290M60 205h300" stroke="#f4f6f8" stroke-width="10"/>')
+    body.append('<ellipse cx="210" cy="205" rx="330" ry="310" fill="url(#flight)" opacity="0.5"/>')
+    body.append('<rect x="760" y="70" width="380" height="250" rx="6" fill="#fbfcfd" stroke="#aeb7bf" stroke-width="5"/>')
+    body.append('<circle cx="880" cy="190" r="74" fill="none" stroke="#3f7fd9" stroke-width="5"/>')
+    body.append('<path d="M954 186 l-12 16 M954 186 l15 13" stroke="#3f7fd9" stroke-width="5" fill="none" stroke-linecap="round"/>')
+    body.append('<circle cx="880" cy="190" r="34" fill="none" stroke="#c8452f" stroke-width="5"/>')
+    body.append('<path d="M914 188 l-9 11 M914 188 l11 9" stroke="#c8452f" stroke-width="4" fill="none" stroke-linecap="round"/>')
+    for y, w in ((130, 120), (170, 90), (210, 130), (250, 70)):
+        body.append(f'<path d="M985 {y} h{w}" stroke="#8d97a0" stroke-width="5" stroke-linecap="round"/>')
+    # The bench
+    body.append(f'<rect y="560" width="{W}" height="240" fill="url(#fbench)"/>')
+    body.append(f'<rect y="552" width="{W}" height="14" fill="#d3ad80"/>')
+    # Objects from earlier tasks, set aside
+    for x, col in ((110, "#d9a441"), (190, "#6fa58a"), (270, "#c8583f")):
+        body.append(f'<rect x="{x - 28}" y="498" width="56" height="58" rx="6" fill="{col}"/><rect x="{x - 28}" y="498" width="56" height="12" rx="4" fill="#ffffff" opacity="0.3"/>')
+    # The task: the mug goes on the coaster. A dotted path shows the one demonstration
+    body.append('<ellipse cx="1000" cy="596" rx="82" ry="20" fill="#2e6fa8"/><ellipse cx="1000" cy="592" rx="82" ry="20" fill="#3f8ac9"/>')
+    body.append('<path d="M1000 588 C960 380 760 340 660 480" fill="none" stroke="#3f7fd9" stroke-width="5" stroke-dasharray="4 16" stroke-linecap="round"/>')
+    # The arm: base, shoulder, elbow, wrist, gripper, holding the new mug
+    body.append('<ellipse cx="500" cy="640" rx="130" ry="26" fill="#5a3f28" opacity="0.5"/>')
+    body.append('<path d="M410 636 L430 556 H570 L590 636 Z" fill="#39424d"/>')
+    body.append('<rect x="455" y="470" width="90" height="100" rx="26" fill="url(#farm)" stroke="#8d97a0" stroke-width="3"/>')
+    body.append('<path d="M500 498 L392 278" stroke="#8d97a0" stroke-width="76" stroke-linecap="round"/><path d="M500 498 L392 278" stroke="#eef2f5" stroke-width="68" stroke-linecap="round"/>')
+    body.append('<circle cx="500" cy="498" r="42" fill="#39424d"/><circle cx="500" cy="498" r="18" fill="#7fe0d4"/>')
+    body.append('<path d="M392 278 L690 330" stroke="#8d97a0" stroke-width="62" stroke-linecap="round"/><path d="M392 278 L690 330" stroke="#ffffff" stroke-width="54" stroke-linecap="round"/>')
+    body.append('<circle cx="392" cy="278" r="38" fill="#39424d"/><circle cx="392" cy="278" r="16" fill="#7fe0d4"/>')
+    body.append('<circle cx="690" cy="330" r="30" fill="#39424d"/><circle cx="690" cy="330" r="12" fill="#7fe0d4"/>')
+    body.append('<rect x="662" y="346" width="56" height="60" rx="8" fill="#d7dde3" stroke="#8d97a0" stroke-width="3"/>')
+    body.append('<rect x="646" y="400" width="88" height="20" rx="5" fill="#39424d"/>')
+    body.append('<path d="M650 420 V486 h14 V432 Z" fill="#39424d"/><path d="M730 420 V486 h-14 V432 Z" fill="#39424d"/>')
+    body.append('<rect x="664" y="430" width="52" height="66" rx="5" fill="#c8452f"/><rect x="664" y="430" width="52" height="10" rx="4" fill="#e7694f"/>')
+    body.append('<path d="M716 444 h12 a12 12 0 0 1 0 28 h-12" fill="none" stroke="#c8452f" stroke-width="7"/>')
+    return wrap(defs, body)
+
+
+def kalanithi():
+    """Paul Kalanithi asked what makes a life worth living, and kept writing: a desk by a window at dusk, an open
+    notebook with the page half written, a stethoscope set down beside it and the hospital lit up outside."""
+    rng = random.Random(1977)
+    defs = ('<linearGradient id="kdusk" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#2c3a68"/><stop offset="0.55" stop-color="#b76f7c"/><stop offset="1" stop-color="#f4bd8d"/></linearGradient>'
+            '<linearGradient id="kdesk" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#6d452a"/><stop offset="1" stop-color="#37220f"/></linearGradient>'
+            '<radialGradient id="klamp" cx="0.5" cy="0.5" r="0.5">'
+            '<stop offset="0" stop-color="#ffe0a3" stop-opacity="0.95"/><stop offset="1" stop-color="#ffe0a3" stop-opacity="0"/></radialGradient>')
+    body = [f'<rect width="{W}" height="{H}" fill="#2a2029"/>']
+    # The window, dusk outside, the hospital's lit floors, and a low sun's last light
+    body.append('<rect x="170" y="44" width="860" height="440" rx="4" fill="url(#kdusk)"/>')
+    body.append('<circle cx="330" cy="400" r="46" fill="#ffe2ae" opacity="0.9"/>')
+    body.append('<path d="M170 430 C320 392 430 420 540 398 C670 372 840 410 1030 382 V484 H170 Z" fill="#40364f"/>')
+    body.append('<rect x="620" y="210" width="290" height="274" fill="#3a3550"/><rect x="705" y="165" width="120" height="50" fill="#3a3550"/>')
+    for y in range(226, 470, 28):
+        for x in range(634, 896, 28):
+            body.append(f'<rect x="{x}" y="{y}" width="16" height="17" fill="{"#ffdf9b" if rng.random() < 0.55 else "#2a2840"}"/>')
+    body.append('<path d="M600 44v440M170 200h860" stroke="#20181f" stroke-width="16"/>')
+    body.append('<rect x="170" y="44" width="860" height="440" rx="4" fill="none" stroke="#20181f" stroke-width="20"/>')
+    # The desk, with lamplight pooled on it
+    body.append(f'<rect y="500" width="{W}" height="300" fill="url(#kdesk)"/>')
+    body.append(f'<rect y="492" width="{W}" height="14" fill="#8a5c3a"/>')
+    body.append('<ellipse cx="610" cy="620" rx="620" ry="220" fill="url(#klamp)" opacity="0.65"/>')
+    # The lamp
+    body.append('<ellipse cx="1010" cy="580" rx="72" ry="16" fill="#1f160e"/>')
+    body.append('<path d="M1010 576 C1010 470 1020 380 960 338" fill="none" stroke="#2b2118" stroke-width="10"/>')
+    body.append('<path d="M892 362 L990 306 L1022 362 L948 410 Z" fill="#2f5d50"/>')
+    body.append('<path d="M916 400 L948 410 L1022 362 L1010 348" fill="#ffe7b0" opacity="0.8"/>')
+    # A small stack of books, and a mug
+    for i, (w, col) in enumerate(((210, "#a0523d"), (186, "#3f6a78"), (160, "#cfb074"))):
+        body.append(f'<rect x="{98 + i * 8}" y="{566 - i * 32}" width="{w}" height="30" rx="3" fill="{col}"/><path d="M{114 + i * 8} {581 - i * 32} h{w - 50}" stroke="#f4ecd9" stroke-width="2" opacity="0.5"/>')
+    body.append('<rect x="172" y="442" width="72" height="62" rx="7" fill="#efe7d6"/><path d="M244 456 h13 a13 13 0 0 1 0 28 h-13" fill="none" stroke="#efe7d6" stroke-width="7"/>')
+    # The notebook, open, the left page full and the right page half written, a pen resting on it
+    body.append('<path d="M360 730 L420 560 L602 548 L606 742 Z" fill="#fbf5e6"/>')
+    body.append('<path d="M852 730 L796 560 L614 548 L606 742 Z" fill="#fff9ec"/>')
+    body.append('<path d="M360 730 L606 742 L852 730 L858 744 L606 758 L354 744 Z" fill="#6b3d2a"/>')
+    body.append('<path d="M606 546 V744" stroke="#cfc4aa" stroke-width="3"/>')
+    for i in range(9):
+        y0, y1 = 580 + i * 17, 572 + i * 18
+        x0 = 416 - i * 6
+        body.append(f'<path d="M{x0} {y0} C{x0 + 50} {y0 - 5} {x0 + 110} {y0 + 3} {586} {y1 + 3}" fill="none" stroke="#45505e" stroke-width="2.4" opacity="0.8"/>')
+    for i in range(5):
+        y = 572 + i * 18
+        x1 = 790 + i * 6 - (150 if i == 4 else 0)
+        body.append(f'<path d="M628 {y} C680 {y - 4} 730 {y + 4} {x1} {y + 6}" fill="none" stroke="#45505e" stroke-width="2.4" opacity="0.8"/>')
+    body.append('<path d="M700 672 L790 616" stroke="#20242c" stroke-width="10" stroke-linecap="round"/><path d="M700 672 l-12 9 3 -15 Z" fill="#c6a65c"/>')
+    # The stethoscope, set down for now
+    body.append('<path d="M900 700 C950 670 1000 700 1030 690 C1100 668 1100 610 1050 610 C1000 610 960 640 930 620" fill="none" stroke="#14161a" stroke-width="9" stroke-linecap="round"/>')
+    body.append('<circle cx="895" cy="704" r="24" fill="#b7bcc3"/><circle cx="895" cy="704" r="13" fill="#6d7278"/>')
+    body.append('<path d="M930 620 l-28 -18 M930 620 l-10 -32" stroke="#b7bcc3" stroke-width="7" stroke-linecap="round"/>')
+    return wrap(defs, body)
+
 DRAWINGS = {"messi-world-cup": messi, "alphago-lee-sedol": alphago, "feynman-blackboard": feynman,
             "kipchoge-vienna": kipchoge, "honnold-el-capitan": honnold, "alcaraz-wimbledon": alcaraz,
             "neuralink-chess": neuralink, "jobs-empty-room": jobs,
             "original-iphone": iphone, "coding-agent": coding_agent,
             "suzuki-zendo": suzuki, "spreadsheet-grid": spreadsheet, "ramanujan-slate": ramanujan,
-            "maps-earth": maps_earth, "grateful-garden": grateful_garden, "waymo-crosswalk": waymo}
+            "maps-earth": maps_earth, "grateful-garden": grateful_garden, "waymo-crosswalk": waymo,
+            "zimmer-studio": zimmer, "nolan-folding-city": nolan,
+            "finn-robot-arm": finn, "kalanithi-desk": kalanithi}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)

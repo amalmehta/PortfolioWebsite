@@ -508,7 +508,7 @@ class ProjectsTest(unittest.TestCase):
         self.assertNotIn("$", sec, "no prices while the apps are free")
         for app in apps:
             with self.subTest(app=re.search(r"<h3>(.*?)</h3>", app).group(1)):
-                dl = re.search(r'<a class="download" href="https://github\.com/amalmehta/([A-Za-z0-9_.-]+)/releases/latest/download/[^"]+\.zip">Download for Mac · free</a>', app)
+                dl = re.search(r'<a class="download" href="https://github\.com/amalmehta/([A-Za-z0-9_.-]+)/releases/latest(?:/download/[^"]+\.zip)?">Download for Mac · free</a>', app)
                 if dl:
                     self.assertIn(f'<a href="https://github.com/amalmehta/{dl.group(1)}">Code →</a>', app)
                     self.assertIn('<p class="app-note apps-note">macOS will warn you because these apps aren’t notarized yet.', sec)
@@ -937,6 +937,14 @@ class LinkingTest(unittest.TestCase):
         values = values[:values.index("</ul>")]
         for line in lines:
             self.assertIn(line, unescape(values))
+
+    def test_header_says_when_the_site_last_changed(self):
+        # "Evolving site · updated <month>" in every header matches the newest page in the sitemap.
+        newest = max(re.findall(r"<lastmod>(\d{4}-\d{2})", (ROOT / "sitemap.xml").read_text(encoding="utf-8")))
+        for page in sorted(ROOT.glob("*.html")):
+            with self.subTest(page=page.name):
+                html = page.read_text(encoding="utf-8")
+                self.assertIn(f'<span class="nav-status">Evolving site<span class="nav-updated"> · updated <time datetime="{newest}">', html)
 
     def test_places_im_going_is_a_reel(self):
         # reel.js rolls Places I'm going past on its own; without it the row still scrolls by hand.
